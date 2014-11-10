@@ -1,0 +1,59 @@
+<ul>
+	<li>
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<a href="/account" {% if page.slug == 'wishlist' or page.slug == 'outfits' or page.slug == 'account/update-details' or page.slug == 'account/change-password' or page.slug == 'account' %}class="active"{% endif %}>My Account</a>
+			<ul>
+				{% if is_granted('ROLE_ADMIN') %}
+				  	<li><a href="/admin">Admin Dashboard</a></li>
+				{% endif %}
+				<li><a href="/wishlist">My Wishlist</a></li>
+				<li><a href="/account">Manage Account</a></li>
+				<li><a href="/logout">Sign Out</a></li>
+			</ul>
+		{% else %}
+			<a href="/register">Register</a>
+		{% endif %}
+	</li>
+	<li>
+		<a href="/social" {% if page.slug == 'social' or page.slug == 'social/{source}' or page.slug == 'social/category/{category}' %}class="active"{% endif %}>The Social Circle</a>
+		<ul>
+			<li><a href="/social/category/blog">Blogs</a></li>
+			<li><a href="/social/category/brand">Brands</a></li>
+			<li><a href="/social/category/magazine">Magazines</a></li>
+			<li><a href="/social/category/model">Models</a></li>
+			<li><a href="/social/category/store">Stores</a></li>
+			<li><a href="/social/category/street-style">Street Style</a></li>
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<li><a href="/social/my-circle">My Social Circle</a></li>
+			{% endif %}
+		</ul>
+	</li>
+	<li>
+		<a href="/street-chic" {% if page.slug == 'street-chic' %}class="active"{% endif %}>Street Chic</a>
+	</li>
+	<li>
+		<a href="/beauty/new-in" {% if page.slug == 'beauty/new-in' or page.slug == 'beauty/sale' or page.slug == 'beauty/stores' %}class="active"{% endif %}>Beauty</a>
+		<ul>
+			<li><a href="/beauty/new-in">New In</a></li>
+			<li><a href="/beauty/sale">Sale</a></li>
+			<li><a href="/beauty/stores">Stores</a></li>
+		</ul>
+	</li>
+	<li>
+		<a href="/latest-additions" {% if page.slug == 'fashion' or page.slug == 'latest-additions' or page.slug == 'sale-items' %}class="active"{% endif %}>Fashion</a>
+		<ul>
+			<li><a href="/latest-additions">New In</a></li>
+			<li><a href="/sale-items">Sale</a></li>
+			<li><a href="/fashion/stores">Stores</a></li>
+			{# <li><a href="/designers">Designers</a></li> #}
+		</ul>
+	</li>
+	<li>
+		<a href="/blog" {% if page.slug == 'blog' or page.slug == 'blog/{post}' %}class="active"{% endif %}>Blog</a>
+	{# 	<ul>
+			<li><a href="/blog">Latest Edits</a></li>
+		</ul> #}
+	</li>	
+</ul>
+
+<br class="clear">

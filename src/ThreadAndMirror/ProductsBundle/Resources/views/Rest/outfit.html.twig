@@ -1,0 +1,13 @@
+<div class="outfit {% if outfit.picks|length < 2 %}one-item{% elseif outfit.picks|length < 5 %}four-items{% else %}nine-items{% endif %}" data-id="{{ outfit.id }}">
+	<a href="/outfits/{{ outfit.id }}">
+		<h2>{{ outfit.title }}</h2>
+		{% for pick in outfit.picks %}
+			<div class="product" data-pid="{{ pick.product.pid }}">
+				<img src="{{ pick.product.thumbnail }}" {% if outfit.picks|length < 2 %}width="{{ 185 * pick.product.shop.imageRatio }}" height="280"{% elseif outfit.picks|length < 5 %}width="{{ 80 * pick.product.shop.imageRatio }}" height="120"{% else %}width="{{ 53 * pick.product.shop.imageRatio }}" height="80"{% endif %} />
+			</div>
+		{% endfor %}
+		{% if outfit.caption is not empty %}
+			<p>{{ outfit.caption }}</p>
+		{% endif %}
+	</a>
+</div>

@@ -1,0 +1,22 @@
+<div class="social-controls">
+	<p>Style and beauty social media from across the web, in one place.</p>
+	<div class="source-links options">
+		<h5><span>Filter by Social Network</span></h5>
+		<ul>
+			<li><a href="/social/instagram"><i class="fa fa-fw fa-instagram"></i></a></li>
+			<li><a href="/social/twitter"><i class="fa fa-fw fa-twitter"></i></a></li>
+			<li><a href="/social/tumblr"><i class="fa fa-fw fa-tumblr"></i></a></li>
+			{# <li><a href="/social/pinterest"><i class="fa fa-fw fa-pinterest"></i></a></li> #}
+			{# <li><a href="/social/facebook"><i class="fa fa-fw fa-facebook"></i> Facebook</a></li> #}
+		</ul>
+	</div>
+	<div class="category-links options">
+		<h5><span>Filter by Category</span></h5>
+		<ul>
+			{% for category,name in categories %}
+				<li><a href="/social/category/{{ category }}">{{ name }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	<br class="clear">
+</div>

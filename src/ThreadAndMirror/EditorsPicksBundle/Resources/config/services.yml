@@ -1,0 +1,7 @@
+parameters:
+#    thread_and_mirror_alert.example.class: ThreadAndMirror\EditorsPicksBundle\Example
+
+services:
+#    thread_and_mirror_alert.example:
+#        class: %thread_and_mirror_alert.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

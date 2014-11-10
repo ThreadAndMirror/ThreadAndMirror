@@ -1,0 +1,131 @@
+### ADMIN ROUTES ####################################################
+
+stems_admin_core_developer_generate_product_sitemaps:
+    pattern:  /admin/developer/sitemap/products
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Admin:productSitemaps }
+
+### FRONTEND ROUTES ####################################################
+
+thread_products_front_index:
+    pattern:  /all-products
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:index }
+
+thread_products_front_product:
+    pattern:  /product/{slug}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:product }
+
+thread_products_front_product_buy:
+    pattern:  /product/buy/{slug}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:redirectBuyFromStore }
+
+thread_products_front_latest_additions:
+    pattern:  /latest-additions
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:latestAdditions }
+
+thread_products_front_sale_items:
+    pattern:  /sale-items
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:saleItems }
+
+thread_products_front_picks:
+    pattern:  /wishlist
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:wishlist }
+
+thread_products_front_outfits:
+    pattern:  /outfits
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:outfits }
+
+thread_products_front_outfit:
+    pattern:  /outfits/{id}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:outfit }
+
+thread_products_front_fashion_stores:
+    pattern:  fashion/stores
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:fashionStores }
+
+thread_products_front_store:
+    pattern:  /stores/{slug}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:store }
+
+thread_products_front_designers:
+    pattern:  /designers
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:designers }
+
+thread_products_front_designer:
+    pattern:  /designers/{slug}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:designer }
+
+thread_products_front_designer_category:
+    pattern:  /designers/{slug}/{category}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:designerCategory }
+
+thread_products_front_beauty_stores:
+    pattern:  beauty/stores
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:beautyStores }
+
+thread_products_front_beauty_new_in:
+    pattern:  beauty/new-in
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:beautyNewIn }
+
+thread_products_front_beauty_sale:
+    pattern:  beauty/sale
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:beautySale }
+
+### DATA ROUTES ####################################################
+
+thread_products_data_update_new_products:
+    pattern:  /operations/update-new-products/{type}/{shop}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Data:updateNewProducts }
+
+thread_products_data_update_wishlist_alerts:
+    pattern:  /operations/update-wishlist-alerts/
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Data:updateWishlistAlerts }
+
+thread_products_data_cleanup_latest_additions:
+    pattern:  /operations/cleanup-latest-additions/
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Data:cleanupLatestAdditions }
+
+thread_products_data_check_single_products:
+    pattern:  /operations/check-single-products/{limit}/{offset}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Data:checkSingleProducts }
+
+thread_products_data_cleanup_duplicate_products:
+    pattern:  /operations/cleanup-duplicate-products/{limit}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Data:cleanupDuplicateProducts }
+
+### REST ROUTES ####################################################
+
+thread_products_rest_add_to_wishlist:
+    pattern:  /rest/add-to-wishlist/{id}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:addToWishlist }
+
+thread_products_rest_remove_from_wishlist:
+    pattern:  /rest/remove-from-wishlist/{id}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:removeFromWishlist }
+
+thread_products_rest_save_favourite_filters:
+    pattern:  /rest/save-favourite-filters
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:saveFavouriteFilters }
+
+thread_products_rest_add_product_from_url:
+    pattern:  /rest/add-product-from-url
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:addProductFromUrl }
+
+thread_products_rest_add_to_outfit:
+    pattern:  /rest/add-to-outfit/{id}/{outfit}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:addToOutfit }
+
+thread_products_rest_set_outfit_featured:
+    pattern:  /rest/set-outfit-featured/{id}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:setOutfitFeatured }
+
+thread_products_rest_view_product:
+    pattern:  /rest/view-product/{id}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:viewProduct }
+
+thread_products_rest_add_new_outfit:
+    pattern:  /rest/add-new-outfit
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:addNewOutfit }
+
+thread_products_rest_parse_productgalleryproduct:
+    pattern:  /admin/products/rest/parse-product-gallery-product/{id}
+    defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:parseProductGalleryProduct }

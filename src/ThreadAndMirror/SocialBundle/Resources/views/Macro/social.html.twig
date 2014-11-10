@@ -1,0 +1,9 @@
+{% spaceless %}
+	{% macro sourceIcon(post) %}
+		{% if post.source == 'instagram' %}
+			<a class="social" href="http://www.instagram.com/{{ post.Feed.instagramHandle }}" target="_blank" rel="nofollow"><i class="fa fa-instagram"></i></a>
+		{% elseif  post.source == 'twitter' %}
+			<a class="social" href="http://www.twitter.com/{{ post.Feed.twitterHandle }}" target="_blank" rel="nofollow"><i class="fa fa-twitter"></i></a>
+		{% endif %}
+	{% endmacro %}
+{% endspaceless %}

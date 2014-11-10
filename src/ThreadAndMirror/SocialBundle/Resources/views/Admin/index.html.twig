@@ -1,0 +1,60 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Social Feeds{% endblock %}
+
+{% block content %}
+	<h1 class="pages">Social Feeds</h1>
+	<div class="controls">
+	{# <a href="/admin/threadandmirror/social/facebook/update-feeds" class="btn btn-primary right"><i class="fa faw-fw fa-refresh"></i> Facebook</a> #}
+	{# <a href="/admin/threadandmirror/social/pintrest/update-feeds" class="btn btn-primary right"><i class="fa faw-fw fa-refresh"></i> Pintrest</a> #}
+	<a href="/admin/threadandmirror/social/twitter/update-feeds" class="btn btn-primary right"><i class="fa faw-fw fa-refresh"></i> Twitter</a>
+	<a href="/admin/threadandmirror/social/instagram/update-feeds" class="btn btn-primary right"><i class="fa faw-fw fa-refresh"></i> Instagram</a>
+	<a href="/admin/threadandmirror/social/tumblr/update-feeds" class="btn btn-primary right"><i class="fa faw-fw fa-refresh"></i> Tumblr</a>
+		{# <a href="/admin/social/instagram/feed/create" class="btn btn-primary right"><i class="fa faw-fw fa-plus"></i> Add New Owner</a> #}
+		<br class="clear"/>
+	</div>
+
+	<table>
+		<thead>
+			<tr>
+				<th><a>Owner</a></th>
+				<th><a>Feeds</a></th>
+				<th width="100px">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for owner in owners %}
+				<tr>
+					<td>
+						<h4>{{ owner.name }}</h4>
+						<p class="subtext">{{ owner.website }}</p>
+					</td>
+					<td>
+						<p>
+							{% if owner.instagramHandle is not empty %}<i class="feed-icon fa faw-fw fa-instagram" title="{{ owner.instagramHandle }}"></i>{% endif %} 
+							{% if owner.tumblrHandle is not empty %}<i class="feed-icon fa faw-fw fa-tumblr" title="{{ owner.tumblrHandle }}"></i>{% endif %}
+							{% if owner.facebookHandle is not empty %}<i class="feed-icon fa faw-fw fa-facebook" title="{{ owner.facebookHandle }}"></i>{% endif %}
+							{% if owner.twitterHandle is not empty %}<i class="feed-icon fa faw-fw fa-twitter" title="{{ owner.twitterHandle }}"></i>{% endif %}
+							{% if owner.pintrestHandle is not empty %}<i class="feed-icon fa faw-fw fa-pintrest" title="{{ owner.pintrestHandle }}"></i>{% endif %}
+						</p>
+					</td>
+					<td>
+						<a href="/admin/social/instagram/feed/{{ owner.id }}/update" class="btn btn-circle btn-small" title="Update Feed"><i class="fa faw-fw fa-repeat"></i></a> 
+						<a href="/admin/social/instagram/feed/{{ owner.id }}/delete" class="btn btn-danger btn-circle btn-small" title="Delete Feed" onclick="return confirm('Are you sure you want to delete this feed?');"><i class="fa faw-fw fa-times"></i></a> 
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6"><p>There are no feeds</p></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<th><a>Owner</a></th>
+				<th><a>Feeds</a></th>
+				<th width="100px">Actions</th>
+			</tr>
+		</tfoot>
+	</table>
+{% endblock %}

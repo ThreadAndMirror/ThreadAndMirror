@@ -1,0 +1,25 @@
+{% extends 'StemsPageBundle:Layout:' ~ page.layout.slug ~ '.html.twig' %}
+
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+
+{% block twitterCard %}
+	<meta name="twitter:card" content="photo">
+	<meta name="twitter:url" content="{{ app.request.uri }}">
+	<meta name="twitter:description" content="{{ product.description }}">
+	<meta name="twitter:image" content="{{ product.image }}">
+	<meta name="twitter:site" content="@threadandmirror">
+	<meta name="twitter:creator" content="@threadandmirror">
+	<meta name="twitter:title" content="{{ product.name }}">
+	<meta name="twitter:domain" content="http://www.threadandmirror.com">
+{% endblock %}
+
+{% block breadcrumbs %}<a href="/product/{{ product.id }}">Product Overview: {{ product.name }}</a>{% endblock %}
+{% block title %}{% endblock %}
+
+{% block dynamic %}
+	{% embed 'ThreadAndMirrorProductsBundle:Rest:product.html.twig' %}{% endembed %}
+	{% if app.user %}{% else %}
+		{% embed 'ThreadAndMirrorProductsBundle:Embed:login.html.twig' %}{% endembed %}
+	{% endif %}
+	<br class="clear">
+{% endblock %}

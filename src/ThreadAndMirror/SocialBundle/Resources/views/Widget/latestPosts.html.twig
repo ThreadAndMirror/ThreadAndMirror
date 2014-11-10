@@ -1,0 +1,8 @@
+<div class="widget widget-instagram-slider auto-slider-fading">
+	<h5><span>Social Circle</span></h5>
+	<div class="slides">
+		{% for post in posts if post.image is not empty %}
+			<a href="/social/all" class="slide" style="background:url('{{ post.image }}') center center;background-size: cover"></a>
+		{% endfor %}
+	</div>
+</div>

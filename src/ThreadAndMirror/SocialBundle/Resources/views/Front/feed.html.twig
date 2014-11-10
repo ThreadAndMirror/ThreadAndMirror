@@ -1,0 +1,15 @@
+{% extends 'StemsPageBundle:Layout:' ~ page.layout.slug ~ '.html.twig' %}
+
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+
+{% block dynamic %}
+	{% embed 'ThreadAndMirrorSocialBundle:Embed:controls.html.twig' %}{% endembed %}
+	<div class="social-feed">
+		{% for post in posts %}
+			{% embed 'ThreadAndMirrorSocialBundle:Embed:post.html.twig' %}{% endembed %}
+		{% endfor %}
+	</div>
+	{% if posts|length == 50 %}
+		<div class="rest-load-more" data-offset="50" data-url="/rest/social/get-more-feed-posts/{{ feed.id }}/"></div>
+	{% endif %}
+{% endblock %}

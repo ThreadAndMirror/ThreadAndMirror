@@ -1,0 +1,208 @@
+<div class="section-product-gallery gallery-layout-{{ section.style }}" data-max-images="{{ section.products|length }}">
+	
+	{# Carousel Layout #}
+	{% if section.style == 'carousel' %}
+		{% if section.heading is not empty %}<h2>{{ section.heading }}</h2>{% endif %}
+		{{ section.caption|raw }}
+		<div class="gallery-thumbnails">
+			{% for product in section.products %}
+				<div class="product" data-image="{{ loop.index }}">
+					<img src="{{ product.image }}" width="{{ 128 * product.ratio }}" height="200" alt="{{ product.heading }} {{ product.caption }}" />
+				</div>
+			{% endfor %}
+		</div>	
+
+	{# Feature Layout #}
+	{% elseif section.style == 'feature' %}
+		{% if section.heading is not empty %}<h2>{{ section.heading }}</h2>{% endif %}
+		<p>{{ section.caption|raw }}</p>
+		<button class="prev"><i class="fa fa-angle-left"></i></button>
+		<button class="next"><i class="fa fa-angle-right"></i></button>
+		<div class="feature-image">
+			{% for product in section.products %}
+				<div class="product" {% if loop.index != 1 %}style="display:none"{% endif %} data-image="{{ loop.index }}">
+					<img src="{{ product.image }}" height="400" alt="{{ product.heading }} {{ product.caption }}" />
+					<div class="caption">
+						{% if product.heading is not empty %}<h6>{{ product.heading }}</h6>{% endif %}
+						{% if product.caption is not empty %}<p>{{ product.caption }}</p>{% endif %}
+					</div>
+					<a href="{{ product.url }}" target="_blank" rel="nofollow"></a>	
+				</div>
+			{% endfor %}
+		</div>
+		<div class="gallery-thumbnails">
+			{% for product in section.products %}
+				<div class="product" data-image="{{ loop.index }}">
+					<img src="{{ product.thumbnail }}" height="50" alt="{{ product.heading }} {{ product.caption }}" />
+				</div>
+			{% endfor %}
+		</div>		
+
+	{# Radial Layout #}
+	{% elseif section.style == 'radial' %}
+		<div class="container {% if section.products|length > 8 %}smaller{% endif %}">
+			<div class="top-images">
+				{% if section.products|length >= 1 %}
+					<div class="product">
+						<img src="{{ section.products[0].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[0].ratio }}{% else %}{{ 128 * section.products[0].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[0].heading }} {{ section.products[0].caption }}" />
+						{% if section.products[0].caption is not empty %}<div class="description"><p>{{ section.products[0].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[0].heading is not empty %}<h6>{{ section.products[0].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[0].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				{% if section.products|length >= 5 %}
+					<div class="product">
+						<img src="{{ section.products[4].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[4].ratio }}{% else %}{{ 128 * section.products[4].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[4].heading }} {{ section.products[4].caption }}" />
+						{% if section.products[4].caption is not empty %}<div class="description"><p>{{ section.products[4].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[4].heading is not empty %}<h6>{{ section.products[4].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[4].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				{% if section.products|length >= 7 %}
+					<div class="product">
+						<img src="{{ section.products[6].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[6].ratio }}{% else %}{{ 128 * section.products[6].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[6].heading }} {{ section.products[6].caption }}" />
+						{% if section.products[6].caption is not empty %}<div class="description"><p>{{ section.products[6].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[6].heading is not empty %}<h6>{{ section.products[6].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[6].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				{% if section.products|length >= 11 %}
+					<div class="product">
+						<img src="{{ section.products[10].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[10].ratio }}{% else %}{{ 128 * section.products[10].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[10].heading }} {{ section.products[10].caption }}" />
+						{% if section.products[10].caption is not empty %}<div class="description"><p>{{ section.products[10].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[10].heading is not empty %}<h6>{{ section.products[10].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[10].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				<br class="clear">
+			</div>
+			<div class="left-images">
+				{% if section.products|length >= 3 %}
+					<div class="product">
+						<img src="{{ section.products[2].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[2].ratio }}{% else %}{{ 128 * section.products[2].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[2].heading }} {{ section.products[2].caption }}" />
+						{% if section.products[2].caption is not empty %}<div class="description"><p>{{ section.products[2].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[2].heading is not empty %}<h6>{{ section.products[2].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[2].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				{% if section.products|length >= 9 %}
+					<div class="product">
+						<img src="{{ section.products[8].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[8].ratio }}{% else %}{{ 128 * section.products[8].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[8].heading }} {{ section.products[8].caption }}" />
+						{% if section.products[8].caption is not empty %}<div class="description"><p>{{ section.products[8].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[8].heading is not empty %}<h6>{{ section.products[8].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[8].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				<br class="clear">
+			</div>
+			<div class="center-caption">
+				<div class="wrapper">
+					{% if section.heading is not empty %}<h2>{{ section.heading }}</h2>{% endif %}
+					<p>{{ section.caption|raw }}</p>
+				</div>
+			</div>
+			<div class="right-images">
+				{% if section.products|length >= 4 %}
+					<div class="product">
+						<img src="{{ section.products[3].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[3].ratio }}{% else %}{{ 128 * section.products[3].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[3].heading }} {{ section.products[3].caption }}" />
+						{% if section.products[3].caption is not empty %}<div class="description"><p>{{ section.products[3].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[3].heading is not empty %}<h6>{{ section.products[3].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[3].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				{% if section.products|length >= 10 %}
+					<div class="product">
+						<img src="{{ section.products[9].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[9].ratio }}{% else %}{{ 128 * section.products[9].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[9].heading }} {{ section.products[9].caption }}" />
+						{% if section.products[9].caption is not empty %}<div class="description"><p>{{ section.products[9].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[9].heading is not empty %}<h6>{{ section.products[9].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[9].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				<br class="clear">
+			</div>
+			<br class="clear">
+			<div class="bottom-images">
+				{% if section.products|length >= 2 %}
+					<div class="product">
+						<img src="{{ section.products[1].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[1].ratio }}{% else %}{{ 128 * section.products[1].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[1].heading }} {{ section.products[1].caption }}" />
+						{% if section.products[1].caption is not empty %}<div class="description"><p>{{ section.products[1].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[1].heading is not empty %}<h6>{{ section.products[1].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[1].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				{% if section.products|length >= 6 %}
+					<div class="product">
+						<img src="{{ section.products[5].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[5].ratio }}{% else %}{{ 128 * section.products[5].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[5].heading }} {{ section.products[5].caption }}" />
+						{% if section.products[5].caption is not empty %}<div class="description"><p>{{ section.products[5].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[5].heading is not empty %}<h6>{{ section.products[5].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[5].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				{% if section.products|length >= 8 %}
+					<div class="product">
+						<img src="{{ section.products[7].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[7].ratio }}{% else %}{{ 128 * section.products[7].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[7].heading }} {{ section.products[7].caption }}" />
+						{% if section.products[7].caption is not empty %}<div class="description"><p>{{ section.products[7].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[7].heading is not empty %}<h6>{{ section.products[7].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[7].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				{% if section.products|length >= 12 %}
+					<div class="product">
+						<img src="{{ section.products[11].image }}" width="{% if section.products|length > 8 %}{{ 96 * section.products[11].ratio }}{% else %}{{ 128 * section.products[11].ratio }}{% endif %}" height="{% if section.products|length > 8 %}175{% else %}200{% endif %}" alt="{{ section.products[11].heading }} {{ section.products[11].caption }}" />
+						{% if section.products[11].caption is not empty %}<div class="description"><p>{{ section.products[11].caption }}</p></div>{% endif %}
+						<div class="caption">
+							{% if section.products[11].heading is not empty %}<h6>{{ section.products[11].heading }}</h6>{% endif %}
+						</div>
+						<a href="{{ section.products[11].url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endif %}
+				<br class="clear">
+			</div>
+		</div>
+
+	{# Collection Layout #}
+	{% elseif section.style == 'collection' %}
+		{% if section.products|length < 5 %}
+
+
+		{% else %}
+			{% if section.heading is not empty %}<h2>{{ section.heading }}</h2>{% endif %}
+			<p>{{ section.caption|raw }}</p>
+			<div class="gallery-collection">
+				{% for product in section.products %}
+					<div class="product {% if loop.index == 1 or loop.index == 6 or loop.index == 11 %}collection-offset{% endif %}" data-image="{{ loop.index }}">
+						<img src="{{ product.image }}" width="{{ 128 * product.ratio }}" height="200" alt="{{ product.heading }} {{ product.caption }}" />
+						<div class="caption">
+							{% if product.heading is not empty %}<h6>{{ product.heading }}</h6>{% endif %}
+							{% if product.caption is not empty %}<hr><p>{{ product.caption }}</p>{% endif %}
+						</div>
+						<a href="{{ product.url }}" target="_blank" rel="nofollow"></a>	
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+	{% endif %}
+	<br class="clear">
+</div>

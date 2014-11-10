@@ -1,0 +1,46 @@
+{% extends 'StemsPageBundle:Layout:' ~ page.layout.slug ~ '.html.twig' %}
+
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+
+{% block breadcrumbs %}<a href="/outfits">My Outfits</a>{% endblock %}
+
+{% block dynamic %}
+	<div class="pagination">
+		{{ macros.pagination(outfits.currentPage, outfits.maxPages, outfits.maxPerPage) }}
+	</div>
+	<div id="add-new-outfit" class="left-control" title="Add a New Outfit">
+		<i class="fa fa-plus"></i>
+	</div>
+	<div class="outfit-grid">
+		{% for outfit in outfits.records %}
+			<div class="outfit {% if outfit.picks|length < 2 %}one-item{% elseif outfit.picks|length < 5 %}four-items{% else %}nine-items{% endif %}" data-id="{{ outfit.id }}">
+				<a href="/outfits/{{ outfit.id }}">
+					<h2>{{ outfit.title }}</h2>
+					{% for pick in outfit.picks %}
+						<div class="product" data-pid="{{ pick.product.pid }}">
+							<img src="{{ pick.product.thumbnail }}" {% if outfit.picks|length < 2 %}width="{{ 185 * pick.product.shop.imageRatio }}" height="280"{% elseif outfit.picks|length < 5 %}width="{{ 80 * pick.product.shop.imageRatio }}" height="120"{% else %}width="{{ 53 * pick.product.shop.imageRatio }}" height="80"{% endif %} />
+						</div>
+					{% endfor %}
+					{% if outfit.caption is not empty %}
+						<p>{{ outfit.caption }}</p>
+					{% endif %}
+				</a>
+			</div>
+		{% endfor %}
+		<br class="clear">
+	</div>
+	<div class="add-outfit-dialogue fading-dialogue">
+		<h2>Add a New Outfit</h2>
+		<div>
+			<label>Outfit Name <span class="required">*</span>:</label><input name="outfit-name" type="text">
+			<label>Caption:</label><input name="outfit-description" type="text">
+		</div>
+		<div>
+			<input type="submit" class="submit" value="Add Outfit">
+		</div>
+	</div>
+	<br class="clear">
+	<div class="pagination">
+		{{ macros.pagination(outfits.currentPage, outfits.maxPages, outfits.maxPerPage) }}
+	</div>
+{% endblock %}

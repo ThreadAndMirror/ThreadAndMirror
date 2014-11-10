@@ -1,0 +1,7 @@
+parameters:
+#    thread_and_mirror_street_chic.example.class: ThreadAndMirror\StreetChicBundle\Example
+
+services:
+#    thread_and_mirror_street_chic.example:
+#        class: %thread_and_mirror_street_chic.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

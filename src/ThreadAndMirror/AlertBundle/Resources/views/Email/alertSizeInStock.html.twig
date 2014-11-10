@@ -1,0 +1,7 @@
+{% extends 'StemsUserBundle:Email:base.html.twig' %}
+
+{% block title %}Your Size of {{ product.name }} Back in Stock{% endblock %}
+
+{% block body %}
+	<p><a href="{{ product.frontendUrl }}">Click here</a> to visit the store and make your purchase, before somebody else does!</p>
+{% endblock %}

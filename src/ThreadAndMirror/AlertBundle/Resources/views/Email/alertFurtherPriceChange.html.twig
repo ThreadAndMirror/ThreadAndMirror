@@ -1,0 +1,7 @@
+{% extends 'StemsUserBundle:Email:base.html.twig' %}
+
+{% block title %}{{ product.name }} has been Reduced Further{% endblock %}
+
+{% block body %}
+	<p>At this price it won't be around for long, so <a href="{{ product.frontendUrl }}">click here</a> to visit the store.</p>
+{% endblock %}

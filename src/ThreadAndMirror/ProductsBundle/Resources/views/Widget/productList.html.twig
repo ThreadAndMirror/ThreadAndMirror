@@ -1,0 +1,11 @@
+<div class="product-grid product-grid-small {% if products|length > 4 %}product-grid-nine{% endif %}">
+	{% for product in products %}
+		<div class="product" itemscope itemtype="http://schema.org/Product" data-id="{{ product.id }}">
+			<a class="buy" href="{{ product.frontendUrl }}" target="_blank" rel="nofollow" title="{{ product.name }} {{ product.shop.name }}" onClick="ga('send', 'event', 'Referrals', 'Buy', '{{ product.shop.slug }}', {{ (product.now * (product.shop.affiliateRate / 100))|number_format(0, '.', '') }});" style="background:url('{{ product.thumbnail }}') center center no-repeat;background-size:contain">
+				<h3 class="name" itemprop="name"><span>{{ product.name|raw }}</span></h3>
+			</a>
+			<div itemprop="description" class="description">{{ product.description|raw }}</div>
+		</div>
+	{% endfor %}
+	<br class="clear">
+</div>

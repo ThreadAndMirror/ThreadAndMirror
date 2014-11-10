@@ -1,0 +1,21 @@
+<form method="post">
+	<div class="admin-editor">
+		<div class="admin-editors-pick-editor left-panel">
+			{{ form_row(form.designer) }}
+			{{ form_row(form.name) }}
+			{{ form_row(form.description) }}
+			{{ form_row(form.url) }}
+			{{ form_row(form.image) }}
+			{{ form_row(form.product) }}
+		</div>
+		<div class="admin-editors-pick-image right-panel">
+			<img src="{{ pick.image }}" height="440">
+		</div>
+	</div>
+	<br class="clear">
+	<div class="admin-editor-controls">
+		<input class="btn btn-success" type="submit" value="Save">
+		<a href="{{ path('thread_admin_editorspicks_create') }}"class="btn" >Cancel</a>
+	</div>
+	{{ form_widget(form._token) }}
+</form>

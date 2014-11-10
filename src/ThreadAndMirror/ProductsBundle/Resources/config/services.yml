@@ -1,0 +1,14 @@
+services:
+    stems.siren.saleparser:
+       class: ThreadAndMirror\ProductsBundle\Service\SaleParser
+
+    threadandmirror.affiliate_window.api:
+        class: ThreadAndMirror\ProductsBundle\Service\AffiliateWindowApiService
+        arguments: 
+            client: "@buzz"
+            parameters: 
+                user_type:          %aw_user_type%
+                publisher_username: %aw_publisher_username%
+                publisher_password: %aw_publisher_password%
+                publisher_password: %aw_api_key%
+

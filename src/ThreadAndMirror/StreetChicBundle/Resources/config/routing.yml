@@ -1,0 +1,3 @@
+thread_and_mirror_street_chic_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: ThreadAndMirrorStreetChicBundle:Default:index }

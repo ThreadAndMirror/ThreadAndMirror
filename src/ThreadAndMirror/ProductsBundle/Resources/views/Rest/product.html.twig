@@ -1,0 +1,97 @@
+{% import 'StemsSocialBundle:Macro:share.html.twig' as share %}
+
+<div class="product-view" itemscope itemtype="http://schema.org/Product" data-pid="{{ product.id }}">
+	<div class="product-section">
+		<h1 itemprop="name">{{ product.name }}</h1>
+		<div class="images">
+			{% if product.image is empty %}
+				<img src="{{ product.image }}" width="{{ 256 * product.shop.imageRatio }}" height="400" itemprop="image" alt="{{ product.name }}" title="{{ product.name }}"/>
+			{% else %}
+				<img src="{{ product.image }}" width="{{ 256 * product.shop.imageRatio }}" height="400" itemprop="image" alt="{{ product.name }}" title="{{ product.name }}"/>
+			{% endif %}
+			{% if product.styleWith is not empty %}
+				<div class="style-it-with">
+					<h5><span>Complete the Look</span></h5>
+					{{ render(controller('ThreadAndMirrorProductsBundle:Widget:productList', { 'pids' : product.styleWith })) }}
+				</div>
+			{% endif %}
+			{% if product.feature is not empty %}
+				<div class="featured-in">
+					<h5><span>Featured In</span></h5>
+					{{ render(controller('StemsBlogBundle:Widget:featuredIn', { 'id' : product.feature })) }}
+				</div>
+			{% endif %}
+		</div>
+		<div class="details">
+			<h3 itemprop="brand" itemprop="manufacturer"><span>{{ product.shop.name }}</span></h3>
+			<a style="position:absolute;opacity:0;height:0px;width:0px" itemprop="url">/product/{{ product.slug }}</a>
+			<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+				{% if product.sale %}
+					<p class="price sale"><span class="smaller fade">WAS</span> <span class="fade">£{{ product.was }}</span> &nbsp; <span class="smaller">NOW</span> £<span itemprop="price">{{ product.now }}</span></p>
+				{% else %}
+					<p class="price">£<span itemprop="price">{{ product.now }}</span></p>
+				{% endif %}
+			</div>
+			<div class="actions">
+				{% if product.available and product.expired == null %}
+					<a href="{{ path('thread_products_front_product_buy', { slug : product.slug }) }}" title="Buy {{ product.name }} from {{ product.shop.name }}" rel="nofollow" class="buy button" target="_blank" onClick="ga('send', 'event', 'Referrals', 'Buy', '{{ product.shop.slug }}', {{ (product.now * (product.shop.affiliateRate / 100))|number_format(0, '.', '') }});">Buy from Store</a>
+				{% else %}
+					{% if product.expired is not null %}
+						<a href="{{ path('thread_products_front_product_buy', { slug : product.slug }) }}" class="out-of-stock button">No Longer Available</a>
+					{% else %}
+						<a href="{{ path('thread_products_front_product_buy', { slug : product.slug }) }}" class="out-of-stock button">Out of Stock</a>
+					{% endif %}
+				{% endif %}
+				{% if app.user %}
+					<button class="add-to-wishlist" title="Add {{ product.name }} to your Wishlist" data-id="{{ product.id }}">Add to Wishlist<i class="fa fa-heart"></i></button>
+				{% else %}
+					<a class="add-to-wishlist button" title="Add {{ product.name }} to your Wishlist" href="/login" >Add to Wishlist<i class="fa fa-heart"></i></a>
+				{% endif %}
+				<br class="clear">
+			</div>
+			{% if product.availableSizes is not empty %}
+				<div class="sizes subsection">
+					<h5><span>Available Sizes</span></h5>
+					<ul class="sizes">
+						{% for size in product.availableSizes %}
+							{% if size in product.stockedSizes %}
+								<li class="available" title="Add Size {{ size }} to your Wishlist" data-size="{{ size }}">{{ size }}</li>
+							{% else %}
+								<li class="unavailable" title="{{ size }} (Not in Stock)" data-size="{{ size }}">
+									<span class="cross">&times;</span>
+									<span>{{ size }}</span>
+								</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+					<br class="clear">
+					<p>If your size is out of stock, click on it and we'll notify you by e-mail as soon as it comes back in.</p>
+				</div>
+			{% endif %}
+			<div class="description subsection">
+				<h5><span>Details</span></h5>
+				<div itemprop="description">
+					{% if product.description|length > 10 %}
+						{{ product.description|raw }}
+					{% else %}
+						<p>{{ product.name }}</p>
+					{% endif %}
+				</div>
+			</div>
+			<div class="share subsection">
+				<h5><span>Share</span></h5>
+				{{ share.sharePinterest(product.sharer('pinterest')) }}
+				{{ share.shareTwitter(product.sharer('twitter')) }}
+				{{ share.shareFacebook(product.sharer('facebook')) }}
+				{{ share.shareGoogleplus(product.sharer('googleplus')) }}
+				{{ share.shareEmail(product.sharer('email')) }}
+				<br class="clear">
+			</div>
+		</div>
+		<br class="clear">
+	</div>
+{# 		<div class="comparison product-section">
+		<h5>Compare Prices</h5>
+		<p>Not in stock in any of our other stores</p>
+	</div> #}
+</div>

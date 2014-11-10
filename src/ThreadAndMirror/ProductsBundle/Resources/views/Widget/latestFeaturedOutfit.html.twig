@@ -1,0 +1,13 @@
+<div class="widget widget-editors-pick">
+	{% for pick in outfit.picks %}
+		<a href="{{ pick.product.url }}">
+			<div class="product" data-pid="{{ pick.product.pid }}">
+				<img src="{{ pick.product.thumbnail }}" {% if outfit.picks|length < 2 %}width="{{ 185 * pick.product.shop.imageRatio }}" height="280"{% elseif outfit.picks|length < 5 %}width="{{ 80 * pick.product.shop.imageRatio }}" height="120"{% else %}width="{{ 53 * pick.product.shop.imageRatio }}" height="80"{% endif %} />
+			</div>
+			<div class="description">
+				<h2>Editors Pick:</h2>
+				<p>{{ outfit.title }}</p>
+			</div>
+		</a>
+	{% endfor %}
+</div>

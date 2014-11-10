@@ -1,0 +1,19 @@
+<div class="widget widget-social-boxes">
+	<h5><a href="/social/all">Latest in The Social Circle</a></h5>
+	<div>
+		{% for post in posts %}
+			{% if post.source == 'instagram' %}
+				<figure class="instagram" style="background:url('{{ post.image }}') center center;background-size: cover">
+					<p>{{ post.caption|raw }}</p>
+					<a href="{{ post.url }}" rel="nofollow" target="_blank"></a>
+				</figure>
+			{% else %}
+				<figure class="twitter {% if post.image is not empty %}twitter-image" style="background:url('{{ post.image }}') center center;background-size: cover{% endif %}"	>
+					<p>{{ post.caption|raw }}</p>
+					<a href="{{ post.url }}" rel="nofollow" target="_blank"></a>
+				</figure>
+			{% endif %}
+		{% endfor %}
+	</div>
+	<br class="clear">
+</div>

@@ -1,0 +1,50 @@
+{% extends 'StemsPageBundle:Layout:' ~ page.layout.slug ~ '.html.twig' %}
+
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+
+{% block breadcrumbs %}<a href="/all-products">Product Index</a>{% endblock %}
+
+{% block dynamic %}
+	<div class="product-grid">
+		{% for product in products %}
+			<div class="product" itemscope itemtype="http://schema.org/Product" data-id="{{ product.id }}">
+				<h3 class="shop" itemprop="brand" itemprop="manufacturer">{{ product.shop.name }}</h3>
+				<a class="buy" style="display:none" href="{{ product.url }}" target="_blank" rel="nofollow" onClick="ga('send', 'event', 'Referrals', 'Buy', '{{ product.shop.slug }}', {{ (product.now * (product.shop.affiliateRate / 100))|number_format(0, '.', '') }});"><i class="fa fa-shopping-cart"></i></a>
+				<a href="/product/{{ product.slug }}" style="position:absolute;opacity:0;height:0px;width:0px" itemprop="url">/product/{{ product.slug }}</a>
+				<h2 class="name" itemprop="name">{{ product.name|raw }}</h2>
+				{% if product.sale %}
+					<p class="price sale" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="smaller fade">WAS</span> <span class="fade">£{{ product.was }}</span> &nbsp; <span class="smaller">NOW</span> £<span itemprop="price">{{ product.now }}</span></p>
+				{% else %}
+					<p class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">£<span itemprop="price">{{ product.now }}</span></p>
+				{% endif %}
+				<a 
+					{% if product.available %}
+						class="view" title="View Details" data-pid="{{ product.id }}"
+					{% else %}
+						class="view unavailable" 
+						{% if product.expired is not null %}
+							title="No Longer Available"
+						{% else %}
+							title="Out of Stock"
+						{% endif %}
+					{% endif %}
+					>
+					{% if product.expired is not null %}
+						<p class="out-of-stock">No Longer Available</p>
+					{% elseif product.available == false %}
+						<p class="out-of-stock">Out of Stock</p>
+					{% endif %}
+				</a>
+				<p class="add-to-wishlist {% if app.user %}logged-in{% endif %}" title="Add to Wishlist" data-id="{{ product.id }}"><i class="fa fa-heart"></i></p>
+			</div>
+		{% endfor %}
+		<br class="clear">
+	</div>
+	<br class="clear">
+	<div class="view-product-dialogue fading-dialogue-inverted">
+		<button class="close"><span>Close</span> &times;</button>
+		<div class="container ajax-loader">
+
+		</div>
+	</div>
+{% endblock %}

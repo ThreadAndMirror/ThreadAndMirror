@@ -1,0 +1,14 @@
+<div id="instagram-slider">
+	<div class="slides">
+		{% for post in posts %}
+			<div class="slide">
+				<a href="{{ post['url'] }}" rel="nofollow" ><img src="{{ post['src'] }}" width="79" height="79" alt="{{ post['caption'] }}" title="{{ post['caption'] }}"/></a>
+			</div>
+			{% if loop.index == 5 %}
+				<div class="slide">
+					<a class="follow" href="http://instagram.com/ThreadAndMirror" title="Follow us on Instagram" rel="nofollow" ><span><i class="fa fa-instagram"></i></span></a>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+</div>

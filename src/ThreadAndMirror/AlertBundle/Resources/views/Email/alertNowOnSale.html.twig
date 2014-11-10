@@ -1,0 +1,7 @@
+{% extends 'StemsUserBundle:Email:base.html.twig' %}
+
+{% block title %}{{ product.name }} Now on Sale{% endblock %}
+
+{% block body %}
+	<p><a href="{{ product.frontendUrl }}">Click here</a> to visit the store and get this style steal while there's still stock.</p>
+{% endblock %}

@@ -1,0 +1,25 @@
+<h4>Product Gallery Section</h4>
+<button class="remove-section btn btn-small btn-danger" data-id="{{ link.id }}"><i class="fa fa-times"></i> Remove</button>
+<input type="hidden" name="sections[]" value="{{ link.id }}">
+<div class="section-product-gallery" data-id="{{ link.id }}">
+	{{ form_row(form.style) }}
+	{{ form_row(form.heading) }}
+	{{ form_row(form.caption) }}
+	<label>Attached Products</label>
+	<div class="add-product-to-gallery">
+		<ul class="sortable">
+			{% for product in section.products %}
+				{% embed 'StemsBlogBundle:Rest:productGalleryProduct.html.twig' %}{% endembed %}
+			{% endfor %}
+		</ul>
+		<div class="add-product" data-productgallery-id="{{ section.id }}">
+			<input type="text" placeholder="Product Link">
+			<a class="btn btn-small btn-primary from-link"><i class="fa fa-plus"></i> Add Product From Link</a>
+			<label>or</label> 
+			<a href="/admin/products/popup/add-product-gallery-product/{{ section.id }}" class="btn btn-small btn-primary rest-get-popup"><i class="fa fa-plus"></i> Add Product Manually</a>
+			<img class="loader" src="/images/admin/icons/loader-add-to-gallery.gif" width="32" height="32">
+		</div>
+		<br class="clear">
+	</div>
+	<br class="clear">
+</div>

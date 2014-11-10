@@ -1,0 +1,22 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Add New Editors Pick{% endblock %}
+
+{% block content %}
+	<h1 class="pages">Add New Editors Pick</h1>
+	{% if method != 'POST' %}
+		<div class="admin-inline-editor feature-top-controls">
+			<label>Load product using ID </label>
+			<input type="text" class="pid" placeholder="Product ID">
+			<label>or using web link </label>
+			<input type="text" class="url" placeholder="Link">
+			<button class="btn btn-primary load-editors-pick"><i class="fa faw-fw fa-plus"></i> Load</button>
+		</div>
+	{% endif %}
+	<div class="form-container">
+		{# form gets loaded via ajax here, but we render it if a submission was attempted #}
+		{% if method == 'POST' %}
+			{% embed 'ThreadAndMirrorEditorsPicksBundle:Rest:form.html.twig' %}{% endembed %}
+		{% endif %}
+	</div>
+{% endblock %}

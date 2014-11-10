@@ -1,0 +1,20 @@
+{% extends 'StemsPageBundle:Layout:' ~ page.layout.slug ~ '.html.twig' %}
+
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+
+{% block dynamic %}
+	{% embed 'ThreadAndMirrorProductsBundle:Embed:textSearch.html.twig' %}{% endembed %}
+	<hr class="splitter">
+	<div class="pagination">
+		{{ macros.pagination(products.currentPage, products.maxPages, products.maxPerPage) }}
+	</div>
+	{# <div id="show-product-filter" class="left-control" title="Show Filters">
+		<i class="fa fa-search"></i>
+	</div>
+	{% if app.user %}
+		<div id="save-favourite-filters" class="left-control" title="Save Favourite Filters">
+			<i class="fa fa-star"></i>
+		</div>
+	{% endif %} #}
+	{% embed 'ThreadAndMirrorProductsBundle:Front:products.html.twig' %}{% endembed %}
+{% endblock %}

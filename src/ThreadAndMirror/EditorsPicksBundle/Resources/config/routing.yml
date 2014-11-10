@@ -1,0 +1,7 @@
+thread_admin_editorspicks_create:
+    pattern:  /admin/editors-picks/add
+    defaults: { _controller: ThreadAndMirrorEditorsPicksBundle:Admin:create }
+
+thread_admin_editorspicks_generate_pick:
+    pattern: /admin/editors-picks/rest/generate-pick
+    defaults: { _controller: ThreadAndMirrorEditorsPicksBundle:Rest:generatePick }

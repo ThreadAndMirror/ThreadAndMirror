@@ -1,0 +1,16 @@
+<div class="add-size-to-wishlist-dialogue fading-dialogue">
+	<button class="close">close x</button>
+	<h2>Setup Email Alert for My Size</h2>
+	<div>
+		<p>Select your size below. We'll e-mail you as soon as it comes back in stock and we check all products regularly to ensure you won't miss out.</p>
+		<ul class="sizes" data-pid="{{ product.id }}">
+			{% for size in product.availableSizes %}
+				{% if size in product.stockedSizes %}
+					<li>{{ size }}</li>
+				{% else %}
+					<li class="unavailable" data-size="{{ size }}">{{ size }}</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+</div>

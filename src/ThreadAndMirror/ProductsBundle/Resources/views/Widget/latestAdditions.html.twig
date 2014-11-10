@@ -1,0 +1,12 @@
+<div class="widget-latest-additions">
+	{% for product in products %}
+		<div class="product" data-pid="{{ product.pid }}">
+			{# <p class="shop">{{ product.shop.name }}</p> #}
+			<img src="{{ product.thumbnail }}" width="{{ 80 * product.shop.imageRatio }}" height="125" />
+			{# <p class="name">{{ product.name }}</p> #}
+			{# <p class="price">WAS £{{ product.was }} &nbsp; <span>NOW £{{ product.now }}</span></p> #}
+			<a href="{{ product.url }}" target="_blank" title="{{ product.name }}"></a>
+		</div>
+	{% endfor %}
+	<br class="clear">
+</div>

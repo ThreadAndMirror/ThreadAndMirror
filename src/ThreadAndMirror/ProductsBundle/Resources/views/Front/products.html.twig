@@ -1,0 +1,55 @@
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+{% if filters is defined %}
+	{# <div class="product-filter">
+		<form method="post">
+			<h3>Filter Results</h3>
+			<div>
+				<h5 class="minimised">Shops <i class="fa fa-angle-right"></i></h5>
+				<div class="filter-options">
+					{% for shop in filters.availableShops %}
+						<div class="field">
+							<label>{{ shop.name }}</label>
+							{% set checked = false %}
+							{% for selectedShop in filters.shops %}{% if selectedShop.id == shop.id %}{% set checked = true %}{% endif %}{% endfor %}
+							<input type="checkbox" name="filter-shop-{{ shop.slug }}" {% if checked %}checked="checked"{% endif %} />
+						</div>
+					{% endfor %}
+					<button class="clear-all">Clear All</button><button class="select-all">Select All</button>
+				</div>
+			</div>
+			<div>
+			 	<h5 class="minimised">Categories <i class="fa fa-angle-right"></i></h5>
+			 	<div class="filter-options">
+					{% for name,category in filters.availableCategories %}
+						<div class="field">
+							<label>{{ name }}</label>
+							{% set checked = false %}
+							{% for selectedCategory in filters.categories %}{% if selectedCategory == category %}{% set checked = true %}{% endif %}{% endfor %}
+							<input type="checkbox" name="filter-category-{{ name|lower }}" {% if checked %}checked="checked"{% endif %} />
+						</div>
+					{% endfor %}
+					<button class="clear-all">Clear All</button><button class="select-all">Select All</button>
+				</div>
+			</div>
+			<input type="submit" value="Update Results" />
+		</form>
+	</div> #}
+{% endif %}
+<div class="product-grid">
+	{% for product in products.records %}
+		{% embed 'ThreadAndMirrorProductsBundle:Embed:product.html.twig' %}{% endembed %}
+	{% else %}
+		<p class="no-results">No products were found</p>
+	{% endfor %}
+	<br class="clear">
+</div>
+<br class="clear">
+<div class="view-product-dialogue fading-dialogue-inverted">
+	<button class="close">Close &times;</button>
+	<div class="container ajax-loader">
+
+	</div>
+</div>
+<div class="pagination">
+	{{ macros.pagination(products.currentPage, products.maxPages, products.maxPerPage) }}
+</div>

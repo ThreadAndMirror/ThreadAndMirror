@@ -1,0 +1,14 @@
+<div class="login-dialogue fading-dialogue">
+	<button class="close">close x</button>
+	<h2>Sign In</h2>
+	<div class="login">
+		<form action="/login_check" class="small-form" method="post">
+			<input type="text" id="username" name="_username" placeholder="Email Address" /><br />
+			<input type="password" id="password" name="_password"  placeholder="Password" /><br />
+			<input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}" />
+			<input type="submit" value="Sign In" class="form-button no-icon"/>
+			<p>Not registered? <a href="/register">Click here</a> to create an account.</p>
+		</form>
+	 </div><!--login-->
+	 <br class="clear">
+</div>

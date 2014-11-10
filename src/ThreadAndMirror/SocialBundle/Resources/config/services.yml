@@ -1,0 +1,12 @@
+services:
+    threadandmirror.social.twig.social_extension:
+            class: ThreadAndMirror\SocialBundle\Twig\SocialExtension
+            arguments: 
+                em: "@doctrine.orm.entity_manager"
+            tags:
+                - { name: twig.extension }
+
+    threadandmirror.social.feeds:
+        class:      ThreadAndMirror\SocialBundle\Service\FeedManagerService
+        calls:
+          - [ setContainer,[ @service_container ] ]

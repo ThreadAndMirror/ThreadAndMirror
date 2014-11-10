@@ -1,0 +1,74 @@
+{% extends 'StemsPageBundle:Layout:' ~ page.layout.slug ~ '.html.twig' %}
+
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+
+{% block breadcrumbs %}<a href="/wishlist">My Wishlist</a>{% endblock %}
+
+{% block dynamic %}
+	<div class="pagination">
+		{{ macros.pagination(picks.currentPage, picks.maxPages, picks.maxPerPage) }}
+	</div>
+	<div id="add-from-url" class="left-control" title="Add Product from Web Link">
+		<i class="fa fa-link"></i>
+	</div>
+	<div class="product-grid">
+		{% for pick in picks.records %}
+			<div class="product" data-id="{{ pick.product.id }}">
+				<p class="shop">{{ pick.product.shop.name }}</p>
+				
+				<img src="{{ pick.product.thumbnail }}" height="210" />
+				<h3 class="name">
+					{{ pick.product.name }}
+					{% if pick.sizes is not empty %}
+					<span class="sizes">Size: {{ pick.sizes[0] }}</span>
+				{% endif %}
+				</h3>
+				{% if pick.product.sale %}
+					<p class="price sale"><span class="smaller fade">WAS</span> <span class="fade">£{{ pick.product.was }}</span> &nbsp; <span class="smaller">NOW</span> £{{ pick.product.now }}</p>
+				{% else %}
+					<p class="price">£{{ pick.product.now }}</p>
+				{% endif %}
+				<a class="wishlist-view" href="{{ pick.product.frontendUrl }}" target="_blank" rel="nofollow" 
+					{% if pick.product.available %}
+						title="Buy From Store"
+					{% else %}
+						class="unavailable" 
+						{% if pick.product.expired is not null %}
+							title="No Longer Available"
+						{% else %}
+							title="Out of Stock"
+						{% endif %}
+					{% endif %}
+					>
+					{% if pick.product.expired is not null %}
+						<p class="out-of-stock">No Longer Available</p>
+					{% elseif pick.product.available == false %}
+						<p class="out-of-stock">Out of Stock</p>
+					{% endif %}
+				</a>	
+				{# <div class="add-to-outfit-options">
+					<p class="add-to-outfit" title="Add to Outfit" data-id="{{ pick.product.id }}"><i class="fa fa-plus"></i></p>
+					<ul>
+						{% for outfit in outfits %}
+							<li><a href="/rest/add-to-outfit/{{ pick.product.id }}/{{ outfit.id }}">{{ outfit.title }}</a></li>
+						{% endfor %}
+					</ul>
+				</div> #}
+				<p class="remove-from-wishlist" title="Remove from Wishlist" data-id="{{ pick.id }}"><i class="fa">&times;</i></p>
+			</div>
+		{% endfor %}
+		<br class="clear">
+	</div>
+	<div class="add-from-url-dialogue fading-dialogue">
+		<h2>Add a Product Using a Weblink</h2>
+		<div>
+			<p>Enter weblink of the product you wish to add in the box below and then click on "Add Product".</p>
+			<input type="text" class="full" id="add-from-url-url" >
+			<button id="add-from-url-submit">Add Product</button>
+		</div>
+	</div>
+	<br class="clear">
+	<div class="pagination">
+		{{ macros.pagination(picks.currentPage, picks.maxPages, picks.maxPerPage) }}
+	</div>
+{% endblock %}

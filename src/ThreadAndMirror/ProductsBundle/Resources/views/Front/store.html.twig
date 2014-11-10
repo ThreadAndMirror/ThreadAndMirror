@@ -1,0 +1,28 @@
+{% extends 'StemsPageBundle:Layout:' ~ page.layout.slug ~ '.html.twig' %}
+
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+
+{% block dynamic %}
+	{# <form class="text-search" method="post">
+		{% if filters.keywords is not empty %}
+			<input type="text" name="filter-keywords" value="{{ filters.keywords }}" />
+		{% else %}
+			<input type="text" name="filter-keywords" placeholder="Search..." />
+		{% endif %}
+		<button><i class="fa fa-search"></i></button>
+	</form>#}
+	<p class="introduction">{{ shop.description }}</p>
+	<hr class="splitter">
+	<div class="pagination">
+		{{ macros.pagination(products.currentPage, products.maxPages, products.maxPerPage) }}
+	</div>
+	{# <div id="show-product-filter" class="left-control" title="Show Filters">
+		<i class="fa fa-search"></i>
+	</div>
+	{% if app.user %}
+		<div id="save-favourite-filters" class="left-control" title="Save Favourite Filters">
+			<i class="fa fa-star"></i>
+		</div>
+	{% endif %} #}
+	{% embed 'ThreadAndMirrorProductsBundle:Front:products.html.twig' %}{% endembed %}
+{% endblock %}

@@ -1,0 +1,9 @@
+<form class="text-search" method="post">
+	<div class="clear-text"><i class="fa">×</i></div>
+	{% if filters.keywords is not empty %}
+		<input type="text" name="filter-keywords" value="{{ filters.keywords }}" />
+	{% else %}
+		<input type="text" name="filter-keywords" placeholder="Search..." />
+	{% endif %}
+	<button class="search"><i class="fa fa-search"></i></button>
+</form>

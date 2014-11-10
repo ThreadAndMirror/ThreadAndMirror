@@ -1,0 +1,11 @@
+{% spaceless %}
+	<?xml version="1.0" encoding="UTF-8"?>
+	<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+		{% for product in products %}
+			<url>
+				<loc>{{ site_url }}/product/{{ product['slug'] }}</loc>
+				<changefreq>weekly</changefreq>
+			</url>
+		{% endfor %}
+	</urlset>
+{% endspaceless %}

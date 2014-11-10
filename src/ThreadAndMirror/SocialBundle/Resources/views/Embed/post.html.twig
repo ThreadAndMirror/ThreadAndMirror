@@ -1,0 +1,49 @@
+{% import 'ThreadAndMirrorSocialBundle:Macro:social.html.twig' as macros %}
+
+{% if post.image is not empty %}
+	<figure class="{{ post.source }} image-post {% if post.imageRatio < 0.75 %}portrait{% elseif post.imageRatio > 1.4 %}landscape{% endif %}">
+		<div class="image" style="background-image:url('{{ post.image }}');"></div>	
+			<figcaption>
+				<h6>
+					<a class="owner" href="{{ post.feed.website }}" target="_blank" rel="nofollow">{{ post.feed.name }}</a>
+					{% if post.source == 'instagram' %}
+					<a class="social" href="http://www.instagram.com/{{ post.feed.instagramHandle }}" target="_blank" rel="nofollow"><i class="fa fa-instagram"></i></a>
+				{% elseif  post.source == 'twitter' %}
+					<a class="social" href="http://www.twitter.com/{{ post.feed.twitterHandle }}" target="_blank" rel="nofollow"><i class="fa fa-twitter"></i></a>
+				{% elseif  post.source == 'tumblr' %}
+						<a class="social" href="http://{{ post.feed.tumblrHandle }}.tumblr.com/" target="_blank" rel="nofollow"><i class="fa fa-tumblr"></i></a>
+				{% endif %}
+					<a class="add-to-my-circle {% if post.feed.id|isFavouriteFeed(app.user) %}favourite-feed{% endif %}" title="Add {{ post.feed.name }} to your Social Circle" data-id="{{ post.feed.id }}"><i class="fa fa-heart"></i></a>
+				</h6>
+				{% if post.caption is not empty %}<p>{{ post.caption|raw }}</p>{% endif %}
+			</figcaption>
+		<a href="{{ post.url }}" rel="nofollow" target="_blank"></a>
+	</figure>
+{% else %}
+	<figure class="{{ post.source }} text-post">
+		<figcaption>
+			<div>
+				<h6>
+					<a class="owner" href="{{ post.feed.website }}" target="_blank" rel="nofollow">{{ post.feed.name }}</a>
+					{% if post.source == 'instagram' %}
+						<a class="social" href="http://www.instagram.com/{{ post.feed.instagramHandle }}" target="_blank" rel="nofollow"><i class="fa fa-instagram"></i></a>
+					{% elseif  post.source == 'twitter' %}
+						<a class="social" href="http://www.twitter.com/{{ post.feed.twitterHandle }}" target="_blank" rel="nofollow"><i class="fa fa-twitter"></i></a>
+					{% elseif  post.source == 'tumblr' %}
+						<a class="social" href="http://{{ post.feed.tumblrHandle }}.tumblr.com/" target="_blank" rel="nofollow"><i class="fa fa-tumblr"></i></a>
+					{% endif %}
+
+					<a class="add-to-my-circle 
+						{% if post.feed.id|isFavouriteFeed(app.user) %}
+							favourite-feed" title="{{ post.feed.name }} is in your Social Circle" 
+						{% else %}
+							" title="Add {{ post.feed.name }} to your Social Circle" 
+						{% endif %}
+					data-id="{{ post.feed.id }}"><i class="fa fa-heart"></i></a>
+				</h6>
+				<p>{{ post.caption|raw }}</p>
+			</div>
+		</figcaption>
+		<a href="{{ post.url }}" rel="nofollow" target="_blank"></a>
+	</figure>
+{% endif %}
