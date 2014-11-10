@@ -1,0 +1,21 @@
+[submodule "Stems-CoreBundle"]
+	path = Stems-CoreBundle
+	url = git@github.com:ScragLabs/Stems-CoreBundle.git
+[submodule "src/Stems/CoreBundle"]
+	path = src/Stems/CoreBundle
+	url = git@github.com:ScragLabs/Stems-CoreBundle.git
+[submodule "src/Stems/PageBundle"]
+	path = src/Stems/PageBundle
+	url = git@github.com:ScragLabs/Stems-PageBundle.git
+[submodule "src/Stems/BlogBundle"]
+	path = src/Stems/BlogBundle
+	url = git@github.com:ScragLabs/Stems-BlogBundle.git
+[submodule "src/Stems/MediaBundle"]
+	path = src/Stems/MediaBundle
+	url = git@github.com:ScragLabs/Stems-MediaBundle.git
+[submodule "src/Stems/SocialBundle"]
+	path = src/Stems/SocialBundle
+	url = git@github.com:ScragLabs/Stems-SocialBundle.git
+[submodule "src/Stems/UserBundle"]
+	path = src/Stems/UserBundle
+	url = git@github.com:ScragLabs/Stems-UserBundle.git
