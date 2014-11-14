@@ -29,7 +29,7 @@ class UpdateProductsCommand extends ContainerAwareCommand
 
         // Get the product list
         if ($shop->getAffiliateName() !== null) {
-            $products = $this->getContainer()->get('threadandmirror.affiliate_window.api')->setMode('productServe')->setMerchant($this->getAffiliateId())->getMerchantProducts();
+            $products = $this->getContainer()->get('threadandmirror.affiliate_window.api')->setMerchant($shop->getAffiliateId())->getMerchantProducts();
         }
 
         var_dump($products);

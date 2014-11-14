@@ -17,7 +17,14 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "stof/doctrine-extensions-bundle": "1.1.*@dev",
+        "ijanki/ftp-bundle": "~1.0",
+        "gedmo/doctrine-extensions": "2.3.*@dev",
+        "sensio/buzz-bundle": "~1.0",
+        "liip/imagine-bundle": "dev-master",
+        "ircmaxell/password-compat": "*",
+        "ekino/newrelic-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

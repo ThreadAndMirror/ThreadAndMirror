@@ -16,6 +16,22 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Stems\CoreBundle\StemsCoreBundle(),
+            new Stems\BlogBundle\StemsBlogBundle(),
+            new Stems\PageBundle\StemsPageBundle(),
+            new Stems\UserBundle\StemsUserBundle(),
+            new Stems\SocialBundle\StemsSocialBundle(),
+            new Stems\MediaBundle\StemsMediaBundle(),
+            new Stems\PollBundle\StemsPollBundle(),
+            new ThreadAndMirror\AlertBundle\ThreadAndMirrorAlertBundle(),
+            new ThreadAndMirror\EditorsPicksBundle\ThreadAndMirrorEditorsPicksBundle(),
+            new ThreadAndMirror\StreetChicBundle\ThreadAndMirrorStreetChicBundle(),
+            new ThreadAndMirror\SocialBundle\ThreadAndMirrorSocialBundle(),
+            new ThreadAndMirror\ProductsBundle\ThreadAndMirrorProductsBundle(),
+            new Ijanki\Bundle\FtpBundle\IjankiFtpBundle(),
+            new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new Ekino\Bundle\NewRelicBundle\EkinoNewRelicBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

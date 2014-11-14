@@ -1,24 +1,30 @@
-# This file is a "template" of what your parameters.yml file should look like
 parameters:
-    database_driver:   pdo_mysql
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
-    # You should uncomment this if you want use pdo_sqlite
-    # database_path: "%kernel.root_dir%/data.db3"
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: 3306
+    database_name: threadandmirror
+    database_user: threadandmirror
+    database_password: ???
 
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_user:       ~
-    mailer_password:   ~
+    mailer_transport: smtp
+    mailer_host: 134.213.55.18
+    mailer_user: notify@threadandmirror.com
+    mailer_password: ???
+    mailer_auth_mode:  login
 
-    locale:            en
-
-    # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
-
-    debug_toolbar:          true
-    debug_redirects:        false
+    locale: en
+    secret: bkjsadiasdjkas
+    debug_toolbar: true
+    debug_redirects: false
     use_assetic_controller: true
+
+    aw_user_type:           affiliate
+    aw_publisher_username:  213707
+    aw_publisher_password:  ???
+    aw_api_key:             9ef4bc95b428aecc0d24c5d810524a8f
+
+    newrelic_application_name: 'Thread and Mirror'
+    newrelic_api_key: e7f98a1be3616d3aee990c449b1c79b327904381b7276b4
+    newrelic_license_key: d8da1bf508edbecfa229f05f00edb7428b7276b4
+
+    

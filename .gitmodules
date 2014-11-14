@@ -19,3 +19,6 @@
 [submodule "src/Stems/UserBundle"]
 	path = src/Stems/UserBundle
 	url = git@github.com:ScragLabs/Stems-UserBundle.git
+[submodule "src/Stems/PollBundle"]
+	path = src/Stems/PollBundle
+	url = git@github.com:ScragLabs/Stems-PollBundle.git

@@ -72,7 +72,7 @@ class AdminController extends BaseAdminController
 			$sitemaps++;
 		}
 
-		$request->getSession()->setFlash('success', $sitemaps.' product sitemaps have been updated.');
+		$request->getSession()->getFlashBag()->set('success', $sitemaps.' product sitemaps have been updated.');
 		return $this->redirect($this->generateUrl('stems_admin_core_developer_overview'));
 	}
 

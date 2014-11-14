@@ -1,0 +1,55 @@
+<!DOCTYPE XHTML 1.0 Transitional>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type"  content="text/html;charset=UTF-8" />
+        <title> {% block title %}{% endblock %} &middot; Stems Admin </title>
+        {% stylesheets '@admin_css' filter="cssrewrite" filter='uglifycss' output='css/admin.css' %}<link rel="stylesheet" href="{{ asset_url }}" />{% endstylesheets %}
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div id="header">
+            <div class="wrap">
+                {{ render(controller('StemsCoreBundle:Admin:bar')) }}
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="content">
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    <div class="flash flash-error">
+                        <p>{{ flashMessage|raw }}</p>
+                        <i class="fa faw-fw fa-times close"></i>
+                    </div>
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('warning') %}
+                    <div class="flash flash-warning">
+                        <p>{{ flashMessage|raw }}</p>
+                        <i class="fa faw-fw fa-times close"></i>
+                    </div>
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="flash flash-success">
+                        <p>{{ flashMessage|raw }}</p>
+                        <i class="fa faw-fw fa-times close"></i>
+                    </div>
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('debug') %}
+                    <div class="flash flash-debug">
+                        <p>{{ flashMessage|raw }}</p>
+                        <i class="fa faw-fw fa-times close"></i>
+                    </div>
+                {% endfor %}
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        <div id="footer">
+            <div class="wrap">
+                <p class="stems-logo">
+                    Ste<span class="stems-m">m</span><span class="stems-s">s</span>
+                    <span class="stems-powered">Powered</span>
+                </p>
+            </div>
+        </div>
+        {% javascripts '@admin_js' filter='?uglifyjs2' output='js/admin.js' %}<script src="{{ asset_url }}"></script>{% endjavascripts %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

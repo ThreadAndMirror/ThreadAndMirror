@@ -10,5 +10,5 @@ services:
                 user_type:          %aw_user_type%
                 publisher_username: %aw_publisher_username%
                 publisher_password: %aw_publisher_password%
-                publisher_password: %aw_api_key%
+                api_key:            %aw_api_key%
 

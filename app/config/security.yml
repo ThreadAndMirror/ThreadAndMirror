@@ -1,12 +1,60 @@
 security:
+    encoders:
+        Stems\UserBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    access_control:
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/account, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/wishlist, roles: ROLE_USER }
+        - { path: ^/outfits, roles: ROLE_USER }
+        - { path: ^/social/my-circle, roles: ROLE_USER }
+
     providers:
-        in_memory:
-            memory: ~
+        main:
+            entity: { class: Stems\UserBundle\Entity\User, property: username }
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        default:
+        main:
             anonymous: ~
+            pattern:   ^/
+            form_login:
+                # the user is redirected here when he/she needs to login
+                login_path:                     /login
+
+                # if true, forward the user to the login form instead of redirecting
+                use_forward:                    false
+
+                # submit the login form here
+                check_path:                     /login_check
+
+                # by default, the login form *must* be a POST, not a GET
+                post_only:                      true
+
+                # login success redirecting options (read further below)
+                always_use_default_target_path: false
+                default_target_path:            /
+                target_path_parameter:          _target_path
+                use_referer:                    true
+
+                # login failure redirecting options (read further below)
+                failure_path:                   /login
+                failure_forward:                false
+
+                # field names for the username and password fields
+                username_parameter:             _username
+                password_parameter:             _password
+
+                # csrf token options
+                csrf_parameter:                 _csrf_token
+                intention:                      authenticate

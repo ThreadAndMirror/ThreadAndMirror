@@ -38,9 +38,9 @@ class AdminController extends BaseAdminController
 
 		// set the completion message and redirect to the social overview
 		if ($errors) {
-			$request->getSession()->setFlash('warning', 'Some '.ucfirst($type).' feeds were updated, but there were '.$errors.' failures');
+			$request->getSession()->getFlashBag()->set('warning', 'Some '.ucfirst($type).' feeds were updated, but there were '.$errors.' failures');
 		} else {
-			$request->getSession()->setFlash('success', 'All '.ucfirst($type).' feeds were updated');
+			$request->getSession()->getFlashBag()->set('success', 'All '.ucfirst($type).' feeds were updated');
 		}
 		
 		return $this->redirect($this->generateUrl($this->home));

@@ -2,7 +2,9 @@
 
 namespace ThreadAndMirror\ProductsBundle\Service;
 
-class AffiliateWindowApiService extends SoapClient
+use Buzz\Browser;
+
+class AffiliateWindowApiService extends \SoapClient
 {
 	/**
 	 * @var The Client for making requests
@@ -22,7 +24,7 @@ class AffiliateWindowApiService extends SoapClient
 	/**
 	 * @var The base url for the api
 	 */
-	protected $host = 'http://api.affiliatewindow.com/';
+	protected $host = 'http://v3.core.com.productserve.com/ProductServeService.wsdl';
 
 	/**
 	 * @var The version of the API to call
@@ -34,7 +36,7 @@ class AffiliateWindowApiService extends SoapClient
 	 */
 	protected $merchant = null;
 
-	public function __construct(Client $client, $parameters)
+	public function __construct(Browser $client, $parameters)
 	{
 		$this->client     = $client;
 		$this->parameters = $parameters;
@@ -84,23 +86,6 @@ class AffiliateWindowApiService extends SoapClient
 	public function call($function, $parameters = '')
 	{
 		return $this->$function($parameters);
-	}
-
-	/**
-	 * Switch between the two API types
-	 *
-	 * @param 	string 		$function 		The name of the function to be executed
-	 * @return 	self 						For chaining
-	 */
-	public function setMode($mode)
-	{
-		if ($mode === 'productServe') {
-			$this->host = 'http://v'.$this->version.'.core.com.productserve.com/ProductServeService.wsdl';
-		} else {
-			$this->host = 'http://api.affiliatewindow.com/';
-		}
-
-		return $this;
 	}
 
 	/**

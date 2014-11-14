@@ -29,7 +29,7 @@ class AdminController extends BaseAdminController
 		if ($request->getMethod() == 'POST') {
 
 			// validate the submitted values
-			$form->bindRequest($request);
+			$form->bind($request);
 
 			if ($form->isValid()) {
 
@@ -38,14 +38,14 @@ class AdminController extends BaseAdminController
 				$em->persist($pick);
 				$em->flush();
 
-				$request->getSession()->setFlash('success', 'The editor\'s pick "'.$pick->getName().'" has been added.');
+				$request->getSession()->getFlashBag()->set('success', 'The editor\'s pick "'.$pick->getName().'" has been added.');
 			} else {
 				// display the error messages
 				$message = 'There was a error handling your submission:<br><br>';
 				foreach ($form->getErrors() as $error) {
 					$message .= $error.'<br>';
 				}
-				$request->getSession()->setFlash('error', $message);
+				$request->getSession()->getFlashBag()->set('error', $message);
 			}
 		}
 
