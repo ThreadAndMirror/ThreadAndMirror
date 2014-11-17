@@ -52,6 +52,15 @@ class AffiliateWindowService implements AffiliateInterface
 	}
 
 	/**
+	 * Updates the shops using affiliate window
+	 */
+	public function updateShops() 
+	{ 
+		// Because they both use the same data
+		$this->updateDiscountCodes();
+	}
+
+	/**
 	 * Updates the discount codes for the given merchant
 	 */
 	public function updateDiscountCodes() 
@@ -64,7 +73,7 @@ class AffiliateWindowService implements AffiliateInterface
 
 		while ($page < 1) {
 			// $results = array_merge($results, $this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100));
-						var_dump($this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100));
+			var_dump($this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100));
 
 			$page++;
 		}
@@ -88,7 +97,6 @@ class AffiliateWindowService implements AffiliateInterface
 		$results = array();
 
 		while ($page < 1) {
-			// var_dump($this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100));
 			$data = $this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100);
 			$results = array_merge($results, $data->oProduct);
 			$page++;

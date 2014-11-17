@@ -10,6 +10,7 @@ use Stems\SocialBundle\Service\Sharer;
  * @ORM\Table(name="tam_product", indexes={
  *    @ORM\Index(name="brand_index", columns={"brand"}),
  *    @ORM\Index(name="pid_index", columns={"pid"}),
+ * 	  @ORM\Index(name="area_index", columns={"area"}),
  * })
  * @ORM\Entity(repositoryClass="ThreadAndMirror\ProductsBundle\Repository\ProductRepository")
  *
@@ -109,6 +110,11 @@ class Product
 	 * @ORM\Column(type="array", nullable=true)
 	 */
 	protected $styleWith = array();
+
+	/** 
+	 * @ORM\Column(type="string")
+	 */
+	protected $area = 'other';
 
 	/** 
 	 * @ORM\Column(type="boolean")
@@ -648,6 +654,29 @@ class Product
 	public function getNew()
 	{
 		return $this->new;
+	}
+
+	/**
+	 * Set area
+	 *
+	 * @param string $area
+	 * @return Product
+	 */
+	public function setArea($area)
+	{
+		$this->area = $area;
+	
+		return $this;
+	}
+
+	/**
+	 * Get area
+	 *
+	 * @return string 
+	 */
+	public function getArea()
+	{
+		return $this->area;
 	}
 
 	/**
