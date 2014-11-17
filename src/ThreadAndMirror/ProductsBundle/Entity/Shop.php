@@ -42,6 +42,11 @@ class Shop
     /** 
      * @ORM\Column(type="string")
      */
+    protected $affiliateUrl;
+
+    /** 
+     * @ORM\Column(type="string")
+     */
     protected $logo;
 
     /** 
@@ -215,6 +220,29 @@ class Shop
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Set affiliateUrl
+     *
+     * @param string $affiliateUrl
+     * @return Shop
+     */
+    public function setAffiliateUrl($affiliateUrl)
+    {
+        $this->affiliateUrl = $affiliateUrl;
+    
+        return $this;
+    }
+
+    /**
+     * Get affiliateUrl
+     *
+     * @return string 
+     */
+    public function getAffiliateUrl()
+    {
+        return $this->affiliateUrl;
     }
 
     /**
