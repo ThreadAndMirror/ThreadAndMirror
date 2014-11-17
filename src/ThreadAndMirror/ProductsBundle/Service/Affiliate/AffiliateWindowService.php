@@ -128,7 +128,7 @@ class AffiliateWindowService implements AffiliateInterface
 		$product->setThumbnail($data['sMerchantThumbUrl']);
 		$product->setImage($data['sMerchantImageUrl']);
 		$product->setNow($data['fPrice']);
-		$product->setWas(null);
+		$product->setWas($data['fRrpPrice']);
 		$product->setSale(null);
 		$product->setLatest(true);
 
@@ -184,37 +184,3 @@ class AffiliateWindowService implements AffiliateInterface
 	}
 }
 
-object(stdClass)#680 (16) {
-      ["iId"]=>
-      int(3108649405)
-      ["iCategoryId"]=>
-      int(201)
-      ["iMerchantId"]=>
-      int(5678)
-      ["sMerchantProductId"]=>
-      string(7) "2252980"
-      ["iAdult"]=>
-      int(0)
-      ["sName"]=>
-      string(66) "ASOS Rivington High Waist Denim Jeggings in Light Wash Blue - blue"
-      ["sDescription"]=>
-      string(851) "Jeggings by ASOS Collection Made from a cotton-blend denim Stretch added for comfort and fit Flattering high rise Concealed zip fly Back patch pockets Skinny fit ABOUT ASOS COLLECTION Directional, exciting and diverse, the ASOS Collection makes and breaks the fashion rules. Scouring the globe for inspiration, our London based Design Team is inspired by fashion's most covetable trends; providing you with a cutting edge wardrobe season upon season. This garment is also available in our ASOS TALL collection.ABOUT ME Main: 61% Cotton, 37% Polyester, 2% Elastane. Short inside leg measures 30in (76cm) Regular inside leg measures 32in (81cm) Long inside leg measures 34in (86cm) SIZE & FIT Model wears: UK 8/ EU 36/ US 4 Model's height: 168 cm/5'6?        LOOK AFTER ME Machine Wash According To Instructions On Care Label        Product Code: 406496"
-      ["sBrand"]=>
-      string(4) "ASOS"
-      ["sModel"]=>
-      string(7) "2252980"
-      ["sAwDeepLink"]=>
-      string(72) "http://www.awin1.com/pclick.php?p=3108649405&a=213707&m=5678&platform=cs"
-      ["sAwThumbUrl"]=>
-      string(56) "http://images.productserve.com/thumb/5678/3108649405.jpg"
-      ["sMerchantImageUrl"]=>
-      string(72) "http://images.asos-media.com/inv/media/9/8/8/3/3583889/blue/image1xl.jpg"
-      ["fPrice"]=>
-      float(11)
-      ["sCurrency"]=>
-      string(3) "GBP"
-      ["fStorePrice"]=>
-      float(0)
-      ["fRrpPrice"]=>
-      float(28)
-    }

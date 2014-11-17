@@ -17,6 +17,7 @@ services:
         arguments: 
             api:                @threadandmirror.api.affiliate_window
             productRepository:  @threadandmirror.repository.product
+            em:                 @doctrine.orm.entity_manager
 
     threadandmirror.repository.product:
         class:           ThreadAndMirror\ProductsBundle\Repository\ProductRepository
