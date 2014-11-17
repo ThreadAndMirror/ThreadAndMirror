@@ -13,7 +13,7 @@ class UpdateProductsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('products:affiliate:update')
+            ->setName('affiliate:products:update')
             ->setDescription('Update products from the shops\'s affiliate API')
             ->addArgument('slug', InputArgument::REQUIRED, 'The shop to update products for.')
         ;
@@ -27,12 +27,15 @@ class UpdateProductsCommand extends ContainerAwareCommand
         // Get the shop
         $shop = $em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findOneBySlug($input->getArgument('slug'));
 
-        // Get the product list
+        // Get the product data
         if ($shop->getAffiliateName() !== null) {
-            $products = $this->getContainer()->get('threadandmirror.affiliate_window.api')->setMerchant($shop->getAffiliateId())->getMerchantProducts();
-        }
 
-        var_dump($products);
+            // Load the revelevant affiliate manager
+            $affiliate = $this->getContainer()->get('threadandmirror.affiliate.'.$shop->getAffiliateName());
+
+            // Run the product updater for the given shop
+            $products = $affiliate->setShop($shop)->updateProducts();
+        }
 
         $output->writeln('done.');
     }

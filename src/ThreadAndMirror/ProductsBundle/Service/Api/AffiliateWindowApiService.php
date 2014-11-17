@@ -4,7 +4,7 @@ namespace ThreadAndMirror\ProductsBundle\Service\Api;
 
 use Buzz\Browser;
 
-class AffiliateWindowService extends \SoapClient
+class AffiliateWindowApiService extends \SoapClient
 {
 	/**
 	 * @var The Client for making requests
@@ -101,12 +101,12 @@ class AffiliateWindowService extends \SoapClient
 	/**
 	 * ProductServe API endpoint - get a list of products based on the given parameters
 	 *
-	 * @param  integer  	$limit 		Maximum amount of products to receive
-	 * @param  offset 		$offset 	Offset of the result set
-	 * @return array 					Results JSON
-	 * @param  integer   	$merchant 	The merchant to filter the results by
+	 * @param  integer   	$merchant 		The merchant to filter the results by
+	 * @param  offset 		$offset 		Offset of the result set
+	 * @param  integer  	$limit 			Maximum amount of products to receive
+	 * @return array 						Results JSON
 	 */
-	public function getMerchantProducts($merchant, $limit = 100, $offset = 0) 
+	public function getMerchantProducts($merchant, $offset = 0, $limit = 100) 
 	{
 		$oRefineBy = $this->getFilterByMerchant($merchant);
 

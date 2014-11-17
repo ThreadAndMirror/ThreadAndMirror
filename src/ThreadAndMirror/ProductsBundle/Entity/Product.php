@@ -7,8 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Stems\SocialBundle\Service\Sharer;
 
 /** 
- * @ORM\Table(name="tam_product")
+ * @ORM\Table(name="tam_product", indexes={
+ *    @ORM\Index(name="brand_index", columns={"brand"}),
+ *    @ORM\Index(name="pid_index", columns={"pid"}),
+ * })
  * @ORM\Entity(repositoryClass="ThreadAndMirror\ProductsBundle\Repository\ProductRepository")
+ *
  */
 class Product
 {
@@ -25,10 +29,11 @@ class Product
 	 */
 	protected $shop;
 
-	/** 
-	 * @ORM\Column(type="integer", nullable=true)
+	/**
+	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
+	 * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
 	 */
-	protected $category = 0;
+	protected $category;
 
 	/** 
 	 * @ORM\Column(type="string")
@@ -41,19 +46,14 @@ class Product
 	protected $description;
 
 	/** 
-	 * @ORM\Column(type="text", nullable=true)
+	 * @ORM\Column(type="text", nullable=true, length=512)
 	 */
-	protected $designer;
+	protected $shortDescription;
 
 	/** 
-	 * @ORM\Column(type="text", nullable=true)
+	 * @ORM\Column(type="string", nullable=true, length=64)
 	 */
-	protected $type;
-
-	/** 
-	 * @ORM\Column(type="string", nullable=true)
-	 */
-	protected $editorsNotes = '';
+	protected $brand;
 
 	/** 
 	 * @ORM\Column(type="string")
@@ -182,7 +182,7 @@ class Product
 
 	public function __construct()
 	{
-		$this->added = new \DateTime;
+		$this->added   = new \DateTime;
 		$this->updated = new \DateTime;
 		$this->checked = new \DateTime;
 	}
@@ -292,20 +292,17 @@ class Product
 	/**
 	 * Set category
 	 *
-	 * @param integer $category
-	 * @return Product
+	 * @param ThreadAndMirror\ProductsBundle\Entity\Category $category
 	 */
-	public function setCategory($category)
+	public function setCategory(\ThreadAndMirror\ProductsBundle\Entity\Category $category)
 	{
 		$this->category = $category;
-	
-		return $this;
 	}
 
 	/**
 	 * Get category
 	 *
-	 * @return integer 
+	 * @return ThreadAndMirror\ProductsBundle\Entity\Category 
 	 */
 	public function getCategory()
 	{
@@ -355,12 +352,41 @@ class Product
 	 */
 	public function getDescription()
 	{
-		// add p tags if they don't exist, for now.
-		if (stristr($this->description, '<p>') !== false) {
-			return $this->description;
+		// Return the short description if there's no long one
+		if ($this->description === null) {
+			return $this->shortDescription;
 		} else {
-			return '<p>'.$this->description.'<p>';
+			// Add p tags if they don't exist, for now.
+			if (stristr($this->description, '<p>') !== false) {
+				return $this->description;
+			} else {
+				return '<p>'.$this->description.'<p>';
+			}
 		}
+			
+	}
+
+	/**
+	 * Set shortDescription
+	 *
+	 * @param string $shortDescription
+	 * @return Product
+	 */
+	public function setShortDescription($shortDescription)
+	{
+		$this->shortDescription = $shortDescription;
+	
+		return $this;
+	}
+
+	/**
+	 * Get shortDescription
+	 *
+	 * @return string 
+	 */
+	public function getShortDescription()
+	{
+		return $this->shortDescription;
 	}
 
 	/**
@@ -382,29 +408,6 @@ class Product
 		} else {
 			return $this->name.' at '.$this->getShop()->getName();
 		}
-	}
-
-	/**
-	 * Get editorsNotes
-	 *
-	 * @return string 
-	 */
-	public function getEditorsNotes()
-	{
-		return $this->editorsNotes;
-	}
-
-	/**
-	 * Set editorsNotes
-	 *
-	 * @param string $editorsNotes
-	 * @return Product
-	 */
-	public function setEditorsNotes($editorsNotes)
-	{
-		$this->editorsNotes = $editorsNotes;
-	
-		return $this;
 	}
 
 	/**
@@ -989,50 +992,27 @@ class Product
 		return $this->metaDescription;
 	}
 
-   /**
-	 * Set designer
-	 *
-	 * @param string $designer
-	 * @return Product
-	 */
-	public function setDesigner($designer)
-	{
-		$this->designer = $designer;
-	
-		return $this;
-	}
-
-	/**
-	 * Get designer
-	 *
-	 * @return string 
-	 */
-	public function getDesigner()
-	{
-		return $this->designer;
-	}
-
     /**
-	 * Set type
+	 * Set brand
 	 *
-	 * @param string $type
+	 * @param string $brand
 	 * @return Product
 	 */
-	public function setType($type)
+	public function setBrand($brand)
 	{
-		$this->type = $type;
+		$this->brand = $brand;
 	
 		return $this;
 	}
 
 	/**
-	 * Get type
+	 * Get brand
 	 *
 	 * @return string 
 	 */
-	public function getType()
+	public function getBrand()
 	{
-		return $this->type;
+		return $this->brand;
 	}
 
     /**

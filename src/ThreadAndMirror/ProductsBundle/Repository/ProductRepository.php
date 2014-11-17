@@ -304,4 +304,35 @@ class ProductRepository extends EntityRepository
 
 		return $product;
 	}
+
+	public function findExistingProductIdsByMerchant($merchant) 
+	{
+		$qb = $this->getEntityManager()->createQueryBuilder();
+		$qb->addSelect('product');
+		$qb->from('ThreadAndMirrorProductsBundle:Product', 'product');
+		$qb->innerJoin('product.shop', 'shop');
+
+		// Only search for newly added products
+		$qb->andWhere('product.deleted = :deleted');
+		$qb->andWhere($qb->expr()->isNull('product.expired'));
+		$qb->setParameter('deleted', '0');
+
+		// Filter by shops
+		$qb->andWhere('shop.affiliateId = :affiliateId');
+		$qb->setParameter('affiliateId', $merchant);
+		
+		// Get the products in an array to save on memory
+		$results = $qb->getQuery()->getScalarResult();
+
+		// Build an array with just pids
+		$pids = array();
+		foreach ($results as $product) {
+			$pids[] = $product['product_pid'];
+		}
+
+		// Clear the results array to save memory further
+		unset($results);
+
+		return $pids; 
+	}
 }

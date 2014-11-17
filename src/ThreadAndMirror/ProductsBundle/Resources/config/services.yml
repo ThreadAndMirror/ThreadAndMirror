@@ -2,13 +2,25 @@ services:
     stems.siren.saleparser:
        class: ThreadAndMirror\ProductsBundle\Service\SaleParser
 
-    threadandmirror.affiliate_window.api:
-        class: ThreadAndMirror\ProductsBundle\Service\AffiliateWindowApiService
+    threadandmirror.api.affiliate_window:
+        class: ThreadAndMirror\ProductsBundle\Service\Api\AffiliateWindowApiService
         arguments: 
-            client: "@buzz"
+            client: @buzz
             parameters: 
                 user_type:          %aw_user_type%
                 publisher_username: %aw_publisher_username%
                 publisher_password: %aw_publisher_password%
                 api_key:            %aw_api_key%
 
+    threadandmirror.affiliate.affiliate_window:
+        class: ThreadAndMirror\ProductsBundle\Service\Affiliate\AffiliateWindowService
+        arguments: 
+            api:                @threadandmirror.api.affiliate_window
+            productRepository:  @threadandmirror.repository.product
+
+    threadandmirror.repository.product:
+        class:           ThreadAndMirror\ProductsBundle\Repository\ProductRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method:  getRepository
+        arguments:
+            - 'ThreadAndMirrorProductsBundle:Product'

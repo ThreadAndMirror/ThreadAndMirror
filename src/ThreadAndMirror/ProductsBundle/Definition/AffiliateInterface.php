@@ -4,8 +4,18 @@ namespace ThreadAndMirror\ProductsBundle\Definition;
 
 interface AffiliateInterface
 {
-	public function getAffiliateLink($url)
-	{
+	/**
+	 * Convert a url string into an affiliate link
+	 */
+	public function getAffiliateLink($url);
 
-	}
+	/**
+	 * Update products for the active merchant
+	 */
+	public function updateProducts();
+
+	/**
+	 * Set the active shop
+	 */
+	public function setShop($merchant);
 } 
