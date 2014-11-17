@@ -34,11 +34,13 @@ class AffiliateWindowApiService extends \SoapClient
 	/**
 	 * @var The extra product data we want to receive
 	 */
-	protected $productColumns = array (
+	protected $productColumns = array(
 		'sBrand', 
 		'sModel',
 		'sMerchantThumbUrl', 
-		'sMerchantImageUrl', 
+		'sMerchantImageUrl',
+		'sAwThumbUrl',
+		'sAwImageUrl', 
 		'sDescription', 
 		'sMerchantProductId',
 		'sCurrency',

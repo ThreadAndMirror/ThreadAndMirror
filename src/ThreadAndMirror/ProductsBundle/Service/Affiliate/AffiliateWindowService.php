@@ -52,6 +52,28 @@ class AffiliateWindowService implements AffiliateInterface
 	}
 
 	/**
+	 * Updates the discount codes for the given merchant
+	 */
+	public function updateDiscountCodes() 
+	{ 
+		$this->validateMerchant();
+
+		// Pull through new unchanged products
+		$page    = 0;
+		$results = array();
+
+		while ($page < 1) {
+			// $results = array_merge($results, $this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100));
+						var_dump($this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100));
+
+			$page++;
+		}
+
+		// Add the new products
+		$this->addNewProducts($data, $existing);
+	}
+
+	/**
 	 * Updates the product listings for the given merchant
 	 */
 	public function updateProducts() 
@@ -66,12 +88,14 @@ class AffiliateWindowService implements AffiliateInterface
 		$results = array();
 
 		while ($page < 1) {
-			$results = array_merge($results, $this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100));
+			// var_dump($this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100));
+			$data = $this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100);
+			$results = array_merge($results, $data->oProduct);
 			$page++;
 		}
 
 		// Add the new products
-		$this->addNewProducts($data, $existing);
+		$this->addNewProducts($results, $existing);
 	}
 
 	/**
@@ -84,21 +108,19 @@ class AffiliateWindowService implements AffiliateInterface
 	public function addNewProducts($data, $existing) 
 	{
 		// Identify any new products
-		$new = array_filter($data, function($product) {
+		foreach ($data as $key => $product) {
 			if (in_array($product->sMerchantProductId, $existing)) {
-				return false;
-			} else {
-				return true;
+				unset($data[$key]);
 			}
-		});
+		}
 
 		// Create product entities and track those that were added
 		$added = array();
 
-		foreach ($new as $productData) {
-			$productEntity = $this->createProduct($productData);
-			$this->em->persist($productEntity);
-			$added[] = $productEntity->getPid();
+		foreach ($data as $product) {
+			$entity = $this->createProduct($product);
+			$this->em->persist($entity);
+			$added[] = $entity->getPid();
 		}
 
 		$this->em->flush();
@@ -116,21 +138,34 @@ class AffiliateWindowService implements AffiliateInterface
 	{
 		$product = new Product();
 
-		$product->setShop($shop);
-		$product->setCategory($this->getCategory($data['iCategoryId']));
-		$product->setPid($data['sMerchantProductId']);
-		$product->setName($data['sName']);
-		$product->setBrand($data['sBrand']);
-		$product->setDescription('<p>'.$data['sDescription'].'</p>');
-		$product->setShortDescription($data['sDescription']);
-		$product->setUrl($data['sAwDeepLink']);
-		$product->setAffiliateUrl($data['sAwDeepLink']);
-		$product->setThumbnail($data['sMerchantThumbUrl']);
-		$product->setImage($data['sMerchantImageUrl']);
-		$product->setNow($data['fPrice']);
-		$product->setWas($data['fRrpPrice']);
+		// For some reason AW likes to stick the colour in the name...
+		$name = substr($data->sName, 0, strpos($data->sName, ' - '));
+
+		$product->setShop($this->shop);
+		$product->setCategory($this->getCategory($data->iCategoryId));
+		$product->setPid($data->sMerchantProductId);
+		$product->setName($name);
+		$product->setBrand($data->sBrand);
+		$product->setDescription('<p>'.$data->sDescription.'</p>');
+		$product->setShortDescription($data->sDescription);
+		$product->setUrl($data->sAwDeepLink);
+		$product->setAffiliateUrl($data->sAwDeepLink);
+		$product->setNow($data->fPrice);
+		$product->setWas($data->fRrpPrice);
 		$product->setSale(null);
-		$product->setLatest(true);
+		$product->setNew(true);
+
+		// Images
+		if (property_exists($data, 'sMerchantThumbUrl')) {
+			$product->setThumbnail($data->sMerchantThumbUrl);
+		} else {
+			$product->setThumbnail($data->sAwThumbUrl);
+		}
+		if (property_exists($data, 'sMerchantImageUrl')) {
+			$product->setThumbnail($data->sMerchantImageUrl);
+		} else {
+			$product->setThumbnail($data->sAwImageUrl);
+		}
 
 		return $product;
 	}

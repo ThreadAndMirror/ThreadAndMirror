@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /** 
  * @ORM\Table(name="tam_category", indexes={
@@ -27,9 +28,10 @@ class Category
     /** 
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $name;
+    protected $name = 'category';
 
     /** 
+     * @Gedmo\Slug(fields={"name"}, updatable=true, separator="-")
      * @ORM\Column(type="string")
      */
     protected $slug;
@@ -44,4 +46,123 @@ class Category
      * @ORM\OrderBy({"added" = "DESC"})
      */
     protected $products; 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Category
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Category
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set affiliateWindowId
+     *
+     * @param integer $affiliateWindowId
+     * @return Category
+     */
+    public function setAffiliateWindowId($affiliateWindowId)
+    {
+        $this->affiliateWindowId = $affiliateWindowId;
+
+        return $this;
+    }
+
+    /**
+     * Get affiliateWindowId
+     *
+     * @return integer 
+     */
+    public function getAffiliateWindowId()
+    {
+        return $this->affiliateWindowId;
+    }
+
+    /**
+     * Add products
+     *
+     * @param \ThreadAndMirror\ProductsBundle\Entity\Product $products
+     * @return Category
+     */
+    public function addProduct(\ThreadAndMirror\ProductsBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \ThreadAndMirror\ProductsBundle\Entity\Product $products
+     */
+    public function removeProduct(\ThreadAndMirror\ProductsBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
 }
