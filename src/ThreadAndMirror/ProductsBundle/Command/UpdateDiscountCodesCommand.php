@@ -14,28 +14,18 @@ class UpdateDiscountCodesCommand extends ContainerAwareCommand
     {
         $this
             ->setName('affiliate:discounts:update')
-            ->setDescription('Update discount codes from the shops\'s affiliate API')
-            ->addArgument('slug', InputArgument::REQUIRED, 'The shop to update discounts for.')
+            ->setDescription('Update discount codes from the affiliate\'s API')
+            ->addArgument('affiliate', InputArgument::REQUIRED, 'The affiliate program to update discounts for.')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // Load the necessary services
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        // Load the relevant affiliate manager
+        $affiliate = $this->getContainer()->get('threadandmirror.affiliate.'.$input->getArgument('affiliate'));
 
-        // Get the shop
-        $shop = $em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findOneBySlug($input->getArgument('slug'));
-
-        // Get the discount data
-        if ($shop->getAffiliateName() !== null) {
-
-            // Load the revelevant affiliate manager
-            $affiliate = $this->getContainer()->get('threadandmirror.affiliate.'.$shop->getAffiliateName());
-
-            // Run the discount code updater for the given shop
-            $products = $affiliate->setShop($shop)->updateDiscountCodes();
-        }
+        // Run the discount code updater
+        $affiliate->updateDiscountCodes();
 
         $output->writeln('done.');
     }

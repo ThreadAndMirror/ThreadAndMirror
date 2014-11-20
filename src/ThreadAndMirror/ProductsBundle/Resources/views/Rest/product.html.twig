@@ -5,9 +5,9 @@
 		<h1 itemprop="name">{{ product.name }}</h1>
 		<div class="images">
 			{% if product.image is empty %}
-				<img src="{{ product.image }}" width="{{ 256 * product.shop.imageRatio }}" height="400" itemprop="image" alt="{{ product.name }}" title="{{ product.name }}"/>
+				<img src="{{ product.image }}" height="400" itemprop="image" alt="{{ product.name }}" title="{{ product.name }}"/>
 			{% else %}
-				<img src="{{ product.image }}" width="{{ 256 * product.shop.imageRatio }}" height="400" itemprop="image" alt="{{ product.name }}" title="{{ product.name }}"/>
+				<img src="{{ product.image }}" height="400" itemprop="image" alt="{{ product.name }}" title="{{ product.name }}"/>
 			{% endif %}
 			{% if product.styleWith is not empty %}
 				<div class="style-it-with">

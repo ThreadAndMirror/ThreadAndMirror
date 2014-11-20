@@ -5,13 +5,7 @@
 {% block dynamic %}
 	<div class="stores-grid">
 		{% for store in stores %}
-			<div class="store">
-				<a href="/stores/{{ store.slug }}">
-					<h3 class="name"><span>{{ store.name }}</span></h3>
-					<div class="logo" style="background:url('{{ store.logo }}') 100% 100%"></div>
-					<p class="description">{{ store.description }}</p>
-				</a>
-			</div>
+			{% embed 'ThreadAndMirrorProductsBundle:Embed:storeItem.html.twig' %}{% endembed %}
 		{% endfor %}
 		<br class="clear">
 	</div>

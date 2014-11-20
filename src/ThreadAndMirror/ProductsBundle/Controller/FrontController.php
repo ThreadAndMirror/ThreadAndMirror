@@ -144,7 +144,7 @@ class FrontController extends Controller
 		$page = $em->getRepository('StemsPageBundle:Page')->load('fashion/stores');
 
 		// get the filtered products
-		$stores = $em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('attire' => true, 'deleted' => false), array('name' => 'ASC'));
+		$stores = $em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('hasFashion' => true, 'deleted' => false), array('name' => 'ASC'));
 
 		return $this->render('ThreadAndMirrorProductsBundle:Front:stores.html.twig', array(
 			'stores' 		=> $stores,
@@ -215,7 +215,7 @@ class FrontController extends Controller
 		$page = $em->getRepository('StemsPageBundle:Page')->load('beauty/stores');
 
 		// get the filtered products
-		$stores = $em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('beauty' => true, 'deleted' => false));
+		$stores = $em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('hasBeauty' => true, 'deleted' => false));
 
 		return $this->render('ThreadAndMirrorProductsBundle:Front:stores.html.twig', array(
 			'stores' 		=> $stores,

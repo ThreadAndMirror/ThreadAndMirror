@@ -12,10 +12,5 @@ interface AffiliateInterface
 	/**
 	 * Update products for the active merchant
 	 */
-	public function updateProducts();
-
-	/**
-	 * Set the active shop
-	 */
-	public function setShop($merchant);
+	public function updateProducts($shop);
 } 

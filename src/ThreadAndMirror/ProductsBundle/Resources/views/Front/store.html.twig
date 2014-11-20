@@ -11,7 +11,7 @@
 		{% endif %}
 		<button><i class="fa fa-search"></i></button>
 	</form>#}
-	<p class="introduction">{{ shop.description }}</p>
+	<p class="introduction">{{ shop.description|raw }}</p>
 	<hr class="splitter">
 	<div class="pagination">
 		{{ macros.pagination(products.currentPage, products.maxPages, products.maxPerPage) }}

@@ -20,19 +20,24 @@ class Shop
     protected $id;
 
     /** 
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=true, length=32)
      */
     protected $name;
 
     /** 
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=32)
      */
     protected $slug;
 
     /** 
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $description;
+
+    /** 
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $slogan;
 
     /** 
      * @ORM\Column(type="string")
@@ -62,27 +67,27 @@ class Shop
     /** 
      * @ORM\Column(type="boolean")
      */
-    protected $deleted = false; 
+    protected $deleted = false;
 
     /** 
      * @ORM\Column(type="boolean")
      */
-    protected $attire = false; 
+    protected $hasFashion = false;
 
     /** 
      * @ORM\Column(type="boolean")
      */
-    protected $beauty = false; 
+    protected $hasBeauty = false;
 
     /** 
      * @ORM\Column(type="boolean")
      */
-    protected $linkshare = false; 
+    protected $linkshare = false;
 
     /** 
      * @ORM\Column(type="boolean")
      */
-    protected $hasFeed = false; 
+    protected $hasFeed = false;
 
     /** 
      * @ORM\Column(type="datetime", nullable=true)
@@ -95,6 +100,11 @@ class Shop
     protected $feedParsed;
 
     /** 
+     * @ORM\Column(type="string", nullable=true, length=32)
+     */
+    protected $parserClass = null;
+
+    /** 
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      */
     protected $affiliateRate = 6.00;
@@ -105,7 +115,7 @@ class Shop
     protected $affiliateId = null; 
 
     /** 
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=true, length=32)
      */
     protected $affiliateName = null; 
 
@@ -114,6 +124,12 @@ class Shop
      * @ORM\OrderBy({"added" = "DESC"})
      */
     protected $products; 
+
+    /**
+     * @ORM\OneToMany(targetEntity="Offer", mappedBy="shop")
+     * @ORM\OrderBy({"end" = "DESC"})
+     */
+    protected $offers;
 
     public function __construct()
     {
@@ -197,6 +213,29 @@ class Shop
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set slogan
+     *
+     * @param string $slogan
+     * @return Shop
+     */
+    public function setSlogan($slogan)
+    {
+        $this->slogan = $slogan;
+    
+        return $this;
+    }
+
+    /**
+     * Get slogan
+     *
+     * @return string 
+     */
+    public function getSlogan()
+    {
+        return $this->slogan;
     }
 
     /**
@@ -315,49 +354,49 @@ class Shop
     }
 
     /**
-     * Set beauty
+     * Set hasBeauty
      *
-     * @param boolean $beauty
+     * @param boolean $hasBeauty
      * @return Shop
      */
-    public function setBeauty($beauty)
+    public function setHasBeauty($hasBeauty)
     {
-        $this->beauty = $beauty;
+        $this->hasBeauty = $hasBeauty;
     
         return $this;
     }
 
     /**
-     * Get beauty
+     * Get hasBeauty
      *
      * @return boolean 
      */
-    public function getBeauty()
+    public function getHasBeauty()
     {
-        return $this->beauty;
+        return $this->hasBeauty;
     }
 
     /**
-     * Set attire
+     * Set hasFashion
      *
-     * @param boolean $attire
+     * @param boolean $hasFashion
      * @return Shop
      */
-    public function setAttire($attire)
+    public function setHasFashion($hasFashion)
     {
-        $this->attire = $attire;
+        $this->hasFashion = $hasFashion;
     
         return $this;
     }
 
     /**
-     * Get attire
+     * Get hasFashion
      *
      * @return boolean 
      */
-    public function getAttire()
+    public function getHasFashion()
     {
-        return $this->attire;
+        return $this->hasFashion;
     }
 
     /**
@@ -455,7 +494,7 @@ class Shop
     /**
      * Set affiliateName
      *
-     * @param integer $affiliateName
+     * @param string $affiliateName
      * @return Shop
      */
     public function setAffiliateName($affiliateName)
@@ -468,11 +507,34 @@ class Shop
     /**
      * Get affiliateName
      *
-     * @return integer 
+     * @return string 
      */
     public function getAffiliateName()
     {
         return $this->affiliateName;
+    }
+
+    /**
+     * Set parserClass
+     *
+     * @param string $parserClass
+     * @return Shop
+     */
+    public function setParserClass($parserClass)
+    {
+        $this->parserClass = $parserClass;
+    
+        return $this;
+    }
+
+    /**
+     * Get parserClass
+     *
+     * @return string 
+     */
+    public function getParserClass()
+    {
+        return $this->parserClass;
     }
 
     /**
@@ -516,6 +578,26 @@ class Shop
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * Add offer
+     *
+     * @param ThreadAndMirror\ProductsBundle\Entity\Offer $offer
+     */
+    public function addOffer(\ThreadAndMirror\ProductsBundle\Entity\Offer $offer)
+    {
+        $this->offers[] = $offer;
+    }
+
+    /**
+     * Get offers
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getOffers()
+    {
+        return $this->offers;
     }
 
     /**

@@ -34,7 +34,7 @@ class UpdateProductsCommand extends ContainerAwareCommand
             $affiliate = $this->getContainer()->get('threadandmirror.affiliate.'.$shop->getAffiliateName());
 
             // Run the product updater for the given shop
-            $products = $affiliate->setShop($shop)->updateProducts();
+            $products = $affiliate->updateProducts($shop);
         }
 
         $output->writeln('done.');

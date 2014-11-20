@@ -4,9 +4,11 @@ namespace ThreadAndMirror\ProductsBundle\Service\Affiliate;
 
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Entity\Category;
+use ThreadAndMirror\ProductsBundle\Entity\Offer;
 use ThreadAndMirror\ProductsBundle\Definition\AffiliateInterface;
 use ThreadAndMirror\ProductsBundle\Service\Api\AffiliateWindowApiService;
 use ThreadAndMirror\ProductsBundle\Repository\ProductRepository;
+use ThreadAndMirror\ProductsBundle\Service\Parser\BaseParser;
 use Doctrine\ORM\EntityManager;
 
 class AffiliateWindowService implements AffiliateInterface 
@@ -27,15 +29,16 @@ class AffiliateWindowService implements AffiliateInterface
 	protected $em;
 
 	/**
-     * @var The shop to perform actions for
+     * @var For storing loaded parsers
      */
-	protected $shop = null;
+	protected $parsers = array();
 
 	public function __construct(AffiliateWindowApiService $api, ProductRepository $productRepository, EntityManager $em)
 	{
-		$this->productRepository = $productRepository;
-		$this->api 				 = $api;
-		$this->em 				 = $em;
+		$this->productRepository  = $productRepository;
+		$this->api 				  = $api;
+		$this->em 				  = $em;
+		$this->parsers['default'] = new BaseParser();
 	}
 
 	/**
@@ -46,9 +49,7 @@ class AffiliateWindowService implements AffiliateInterface
 	 */
 	public function getAffiliateLink($url)
 	{
-		$this->validateMerchant();
-
-		return 'http://www.awin1.com/awclick.php?mid='.$this->shop->getAffiliateId().'&id=45628&clickref=123456&p='.rawurlencode($url);
+		return 'http://www.awin1.com/awclick.php?mid='.$shop->getAffiliateId().'&id=45628&clickref=123456&p='.rawurlencode($url);
 	}
 
 	/**
@@ -65,45 +66,70 @@ class AffiliateWindowService implements AffiliateInterface
 	 */
 	public function updateDiscountCodes() 
 	{ 
-		$this->validateMerchant();
+		$data = $this->api->getMerchantList();
 
-		// Pull through new unchanged products
-		$page    = 0;
-		$results = array();
+		$shops = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('affiliateName' => 'affiliate_window'));
 
-		while ($page < 1) {
-			// $results = array_merge($results, $this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100));
-			var_dump($this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100));
+		foreach ($shops as $shop) {
+			foreach ($data->oMerchant as $merchant) {
+				if ($shop->getAffiliateId() == $merchant->iId) {
 
-			$page++;
+					$shop->setLogo($merchant->sLogoUrl);
+					$shop->setUrl($merchant->sDisplayUrl);
+					$shop->setAffiliateUrl($merchant->sClickThroughUrl);
+
+					if (property_exists($merchant, 'sDescription')) {
+						$shop->setDescription($merchant->sDescription);
+					}
+					if (property_exists($merchant, 'sStrapline')) {
+						$shop->setSlogan($merchant->sStrapline);
+					}
+
+					$this->em->persist($shop);
+
+					// Update the offers
+					if (property_exists($merchant, 'oDiscountCode')) {
+						if (is_array($merchant->oDiscountCode)) {
+							foreach ($merchant->oDiscountCode as $code) {
+								$offer = $this->createOffer($code);
+								$offer->setShop($shop);
+								$this->em->persist($offer);
+							}
+						} else {
+							$offer = $this->createOffer($merchant->oDiscountCode);
+							$offer->setShop($shop);
+							$this->em->persist($offer);
+						}
+					}
+				}
+			}
 		}
 
-		// Add the new products
-		$this->addNewProducts($data, $existing);
+		$this->em->flush();
 	}
 
 	/**
 	 * Updates the product listings for the given merchant
+	 *
+	 * @param  Shop 	$shop 		The shop to add update products for
 	 */
-	public function updateProducts() 
+	public function updateProducts($shop) 
 	{ 
-		$this->validateMerchant();
-
 		// Get the existing product IDs
-		$existing = $this->productRepository->findExistingProductIdsByMerchant($this->shop->getAffiliateId());
+		$existing = $this->productRepository->findExistingProductIdsByMerchant($shop->getAffiliateId());
 
 		// Pull through new unchanged products
 		$page    = 0;
 		$results = array();
 
 		while ($page < 1) {
-			$data = $this->api->getMerchantProducts($this->shop->getAffiliateId(), $page * 100);
+			$data = $this->api->getMerchantProducts($shop->getAffiliateId(), $page * 100);
 			$results = array_merge($results, $data->oProduct);
 			$page++;
 		}
 
 		// Add the new products
-		$this->addNewProducts($results, $existing);
+		$this->addNewProducts($results, $existing, $shop);
 	}
 
 	/**
@@ -111,9 +137,10 @@ class AffiliateWindowService implements AffiliateInterface
 	 * 
 	 * @param  array 	$data 		Product data from the API
 	 * @param  array 	$existing   An list of existing product IDs
+	 * @param  Shop 	$shop 		The shop to add new products to
 	 * @return 						The product IDs that were added
 	 */
-	public function addNewProducts($data, $existing) 
+	public function addNewProducts($data, $existing, $shop) 
 	{
 		// Identify any new products
 		foreach ($data as $key => $product) {
@@ -126,7 +153,7 @@ class AffiliateWindowService implements AffiliateInterface
 		$added = array();
 
 		foreach ($data as $product) {
-			$entity = $this->createProduct($product);
+			$entity = $this->createProduct($product, $shop);
 			$this->em->persist($entity);
 			$added[] = $entity->getPid();
 		}
@@ -140,20 +167,17 @@ class AffiliateWindowService implements AffiliateInterface
 	 * Create a new product entity from the given data
 	 *
 	 * @param  array 	$data  		Data for an individual product
+	 * @param  Shop 	$shop 		The shop to add the product to
 	 * @return Product 				The resulting product entity
 	 */
-	protected function createProduct($data)
+	protected function createProduct($data, $shop)
 	{
 		$product = new Product();
 
-		// For some reason AW likes to stick the colour in the name...
-		$name = substr($data->sName, 0, strpos($data->sName, ' - '));
-
-		$product->setShop($this->shop);
+		$product->setShop($shop);
 		$product->setCategory($this->getCategory($data->iCategoryId));
 		$product->setPid($data->sMerchantProductId);
-		$product->setName($name);
-		$product->setBrand($data->sBrand);
+		$product->setName($data->sName);
 		$product->setDescription('<p>'.$data->sDescription.'</p>');
 		$product->setShortDescription($data->sDescription);
 		$product->setUrl($data->sAwDeepLink);
@@ -163,19 +187,56 @@ class AffiliateWindowService implements AffiliateInterface
 		$product->setSale(null);
 		$product->setNew(true);
 
+		// Details
+		if (property_exists($data, 'sBrand')) {
+			$product->setBrand($data->sBrand);
+		} else {
+			$product->setBrand($shop->getName());
+		}
+
 		// Images
 		if (property_exists($data, 'sMerchantThumbUrl')) {
 			$product->setThumbnail($data->sMerchantThumbUrl);
 		} else {
-			$product->setThumbnail($data->sAwThumbUrl);
-		}
-		if (property_exists($data, 'sMerchantImageUrl')) {
-			$product->setThumbnail($data->sMerchantImageUrl);
-		} else {
 			$product->setThumbnail($data->sAwImageUrl);
 		}
+		if (property_exists($data, 'sMerchantImageUrl')) {
+			$product->setImage($data->sMerchantImageUrl);
+		} else {
+			$product->setImage($data->sAwImageUrl);
+		}
+
+		// Cleanup any irregular data
+		$this->getParser($shop)->cleanupFeedProduct($product);
 
 		return $product;
+	}
+
+	/**
+	 * Create a new offer entity from the given data
+	 *
+	 * @param  array 	$data  		Data for an individual product
+	 * @return Offer 				The resulting offer entity
+	 */
+	protected function createOffer($data)
+	{
+		$offer = new Offer();
+
+		// Offer code
+		if ($data->sCode !== 'N/A') {
+			$offer->setCode($data->sCode);
+		}
+
+		// Url
+		if (property_exists($data, 'sUrl')) {
+			$offer->setUrl($data->sUrl);
+		}
+
+		$offer->setDescription($data->sDescription);
+		$offer->setStart(new \DateTime($data->sStartDate));
+		$offer->setEnd(new \DateTime($data->sEndDate));
+
+		return $offer;
 	}
 
 	/**
@@ -197,33 +258,37 @@ class AffiliateWindowService implements AffiliateInterface
 			$category = new Category();
 			$category->setAffiliateWindowId($id);
 			$this->em->persist($category);
+
 			return $category;
 		}
 	}
 
 	/**
-	 * Set the active shop
+	 * Gets the parser for the relevant shop
 	 *
-	 * @param  integer 		$shop 		The shop entity
-	 * @return self 					For chaining
+	 * @param  Shop 	$shop 		The shop to load the parser for  	
 	 */
-	public function setShop($shop) 
+	protected function getParser($shop) 
 	{
-		$this->shop = $shop;
+		if ($shop->getParserClass() !== null) {
 
-		return $this;
-	}
+			// Check if the parser has already been loaded
+			if (array_key_exists($shop->getAffiliateName(), $this->parsers)) {
+				return $this->parsers[$shop->getAffiliateName()];
+			}
+			
+			// Otherwise load and store for later use
+			$class = 'ThreadAndMirror\\ProductsBundle\\Service\\Parser\\'.$shop->getParserClass();
+			$parser = new $class();
+			$this->parsers[$shop->getAffiliateName()] = $parser;
 
-	/** 
-	 * Ensure a vaid merchant is set
-	 *
-	 * @throws \Exception
-	 */
-	protected function validateMerchant()
-	{
-		if ($this->shop === null) {
-			throw new \Exception('The shop has not been set for this action.');
+			return $parser;
+
+		} else {
+			// Default parser if one doesn't exist for the shop
+			return $this->parsers['default'];
 		}
+		
 	}
 }
 

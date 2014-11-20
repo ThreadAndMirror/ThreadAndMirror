@@ -1567,14 +1567,14 @@ div+.pagination {
 	margin: 20px 0;
 }
 
-.stores-grid .store {
+.store-item  {
 	margin: 10px;
 	width: 460px;
-	height: 20px;
+	/*height: 20px;*/
 	float: left;
 }
 
-.stores-grid .store h3 {
+.store-item h3 {
 	font-size: 18px;
 	color: #111111;
 	position: relative;
@@ -1585,18 +1585,25 @@ div+.pagination {
 	letter-spacing: 2px;
 }
 
-.stores-grid .store h3:hover {
+.store-item h3:hover {
 	color: #f93124;
 }
 
-.stores-grid .store h3 span {
-	background: #FFFFFF;
-	position: relative;
-	top: -9px;
-	padding: 0 10px;
+.store-item .logo {
+	height: 40px;
+	width: 50px;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;
 }
 
 /* --- PRODUCT GRID --- */
+
+p.introduction {
+	text-align: center;
+	padding: 15px 50px;
+}
 
 .text-search {
 	position: relative;
