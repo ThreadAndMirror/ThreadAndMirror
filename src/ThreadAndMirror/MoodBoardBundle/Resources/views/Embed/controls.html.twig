@@ -1,0 +1,22 @@
+<div class="MoodBoard-controls">
+	<p>Style and beauty MoodBoard media from across the web, in one place.</p>
+	<div class="source-links options">
+		<h5><span>Filter by MoodBoard Network</span></h5>
+		<ul>
+			<li><a href="/MoodBoard/instagram"><i class="fa fa-fw fa-instagram"></i></a></li>
+			<li><a href="/MoodBoard/twitter"><i class="fa fa-fw fa-twitter"></i></a></li>
+			{# <li><a href="/MoodBoard/tumblr"><i class="fa fa-fw fa-tumblr"></i></a></li> #}
+			{# <li><a href="/MoodBoard/pinterest"><i class="fa fa-fw fa-pinterest"></i></a></li> #}
+			{# <li><a href="/MoodBoard/facebook"><i class="fa fa-fw fa-facebook"></i> Facebook</a></li> #}
+		</ul>
+	</div>
+	<div class="category-links options">
+		<h5><span>Filter by Category</span></h5>
+		<ul>
+			{% for category,name in categories %}
+				<li><a href="/MoodBoard/category/{{ category }}">{{ name }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	<br class="clear">
+</div>

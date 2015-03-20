@@ -2,43 +2,35 @@
 
 namespace ThreadAndMirror\ProductsBundle\Controller;
 
-// Symfony Components
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-	Symfony\Component\Security\Core\SecurityContext,
-	Symfony\Component\HttpFoundation\RedirectResponse,
-	Symfony\Component\HttpFoundation\Response,
-	Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Stems\CoreBundle\Controller\BaseFrontController;
+use ThreadAndMirror\ProductsBundle\Entity\Brand;
 
-class FrontController extends Controller
+class FrontController extends BaseFrontController
 {
 	/**
 	 * Embeds the contextual main menu on the site
 	 *
-	 * @param $page Page The page entity for the view requesting the menu
+	 * @Template()
 	 */
 	public function menuAction($page)
 	{
-		$em = $this->getDoctrine()->getManager();
-
-		// manually grab the pages we want for the main menu
-		$items = array(
-			$em->getRepository('StemsPageBundle:Page')->findOneBySlug('latest-additions'),
-			$em->getRepository('StemsPageBundle:Page')->findOneBySlug('wishlist'),
-			$em->getRepository('StemsPageBundle:Page')->findOneBySlug('blog'),
-			$em->getRepository('StemsPageBundle:Page')->findOneBySlug('street-chic'),
-			$em->getRepository('StemsPageBundle:Page')->findOneBySlug('style-exchange'),
+		return array(
+			'page'	=> $page,
 		);
-
-		return $this->render('ThreadAndMirrorProductsBundle:Front:menu.html.twig', array(
-			'items' 		=> $items,
-			'page'			=> $page,
-		));
 	}
 
 	/**
 	 * Display a single product
 	 *
-	 * @param  string 		$slug  	The slug of the product
+	 * @Route("/product/{slug}", name="thread_products_front_product_view")
+	 * @Template()
 	 */
 	public function productAction($slug)
 	{
@@ -47,46 +39,45 @@ class FrontController extends Controller
 		$id = end($id);
 
 		// Get the product
-		$em = $this->getDoctrine()->getManager();
-		$product = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->find($id);
-
-		// Escape if it not longer exists
-		if (!$product) {
-			return $this->redirect('/latest-additions');
-		}
+		$product = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->find($id);
 
 		// Temporary 301s setup whilst google/users access old url format
 		if (!stristr($slug, '-')) {
 			return $this->redirect('/product/'.$product->getSlug(), 301);
 		}
 
-		// If the product hasn't been fully parsed yet then do it before displaying (turn back on when the product doesn't error)
+		// If the product hasn't been fully parsed or was last checked over 60 minutes ago then force an update
 		$refresh = new \DateTime();
-		$refresh->modify('-15 minutes');
+		$refresh->modify('-60 minutes');
 
-		// If the product hasn't been fully parsed or was last checked over 15 minutes ago then force an update
-		if (!$product->getFullyParsed() || $refresh > $product->getChecked()) {
-			$product = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->forceUpdate($product);
+		if ($product->getChecked() == null || $refresh > $product->getChecked()) {
+			if ($product->getShop()->getHasCrawler()) {
+				$this->get($product->getShop()->getUpdaterName())->updateProductFromCrawl($product);
+				$this->em->persist($product);
+				$this->em->flush();
+			} else {
+				// $product = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->forceUpdate($product);
+			}
 		} 
 
 		// Load the page object from the CMS
-		$page = $em->getRepository('StemsPageBundle:Page')->load('product/{id}', array(
+		$this->loadPage('product/{id}', array(
 			'title' 			=> 'Product View',
 			'windowTitle' 		=> $product->getName(),
 			'metaKeywords' 		=> $product->getName().', '.$product->getShop()->getName(),
 			'metaDescription' 	=> $product->getRawDescription(),
 		));
 
-		return $this->render('ThreadAndMirrorProductsBundle:Front:product.html.twig', array(
-			'product' 		=> $product,
-			'page'			=> $page,
-		));
+		return array(
+			'product' => $product,
+			'page'	  => $this->page,
+		);
 	}
 
 	/**
 	 * Redirect to the product's affiliate link, or to their store link as a fallback
 	 *
-	 * @param  string 		$slug  	The slug of the product
+	 * @Route("/product/buy/{slug}", name="thread_products_front_product_buy")
 	 */
 	public function redirectBuyFromStoreAction($slug)
 	{
@@ -95,363 +86,318 @@ class FrontController extends Controller
 		$id = end($id);
 
 		// Get the product
-		$em = $this->getDoctrine()->getManager();
-		$product = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->find($id);
-
-		// Escape if it not longer exists
-		if (!$product) {
-			return $this->redirect('/latest-additions');
-		}
+		$product = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->find($id);
 
 		return $this->redirect($product->getFrontendUrl());
 	}
 
 	/**
-	 * Lists all fashion products
-	 *
-	 * @param  Request 	$request
-	 */
-	public function fashionAction(Request $request)
-	{
-		// load the page object from the CMS
-		$em = $this->getDoctrine()->getManager();
-		$page = $em->getRepository('StemsPageBundle:Page')->load('fashion');
-
-		// get and process requested filters
-		$filters = $this->get('threadandmirror.product.filter')->process($request);
-
-		// get the filtered products
-		$products = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->getAllFashion($filters);
-
-		// paginate the result
-		$data = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));
-
-		return $this->render('ThreadAndMirrorProductsBundle:Front:fashion.html.twig', array(
-			'filters'		=> $filters,
-			'products' 		=> $data,
-			'page'			=> $page,
-		));
-	}
-
-	/**
-	 * Lists all stores that have fashion products
-	 * @param $request Request
-	 */
-	public function fashionStoresAction(Request $request)
-	{
-		// load the page object from the CMS
-		$em = $this->getDoctrine()->getManager();
-		$page = $em->getRepository('StemsPageBundle:Page')->load('fashion/stores');
-
-		// get the filtered products
-		$stores = $em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('hasFashion' => true, 'deleted' => false), array('name' => 'ASC'));
-
-		return $this->render('ThreadAndMirrorProductsBundle:Front:stores.html.twig', array(
-			'stores' 		=> $stores,
-			'page'			=> $page,
-		));
-	}
-
-	/**
 	 * Lists new fashion products based on the requested filters
-	 * @param $request Request
+	 *
+ 	 * @Route("/{area}/new-in", name="thread_products_front_new_in")
+	 * @Template()
 	 */
-	public function latestAdditionsAction(Request $request)
+	public function newInAction(Request $request, $area)
 	{
-		// load the page object from the CMS
-		$em = $this->getDoctrine()->getManager();
-		$page = $em->getRepository('StemsPageBundle:Page')->load('latest-additions');
-
-		// get and process requested filters
+		// Process requested filters
 		$filters = $this->get('threadandmirror.product.filter')->process($request);
 
-		// get the filtered products
-		$products = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->getLatestAdditions($filters);
+		// Execute the elasticsearch query
+		// $es          = $this->get('fos_elastica.manager');
+		// $currentPage = 1;
+    	// $products    = $es->getRepository('ThreadAndMirrorProductsBundle:Product')->findNewIn($filters, $area, $currentPage);
+		// $query = new \Elastica\Query\QueryString($filters->getKeywords());
+		// $term = new \Elastica\Filter\Term(array('area' => $area));
 
-		// paginate the result
-		$data = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));
+		// $filteredQuery = new \Elastica\Query\Filtered($query, $term);
+		// $products = $this->get('fos_elastica.finder.search.product')->findPaginated($filteredQuery);
 
-		return $this->render('ThreadAndMirrorProductsBundle:Front:newIn.html.twig', array(
-			'filters'		=> $filters,
-			'products' 		=> $data,
-			'page'			=> $page,
-		));
-	}
-
-	/**
-	 * Lists the fashion sale products based on the requested filters
-	 * @param $request Request
-	 */
-	public function saleItemsAction(Request $request)
-	{
-		// load the page object from the CMS
-		$em = $this->getDoctrine()->getManager();
-		$page = $em->getRepository('StemsPageBundle:Page')->load('sale-items');
-
-		// get and process requested filters
+		// Get and process requested filters
 		$filters = $this->get('threadandmirror.product.filter')->process($request);
 
-		// get the filtered products
-		$products = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->getSaleItems($filters);
+		// Get the filtered products
+		$products = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findNewIn($filters, $area);
 
-		// paginate the result
+		// Paginate the result
+		$products = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));
+
+    	// Load the page object from the CMS
+		$this->loadPage('{area}/new-in', array(
+			'title'       => ucwords($area).' New In',
+			'windowTitle' => ucwords($area).' New In',
+		));
+
+		// Load the page object from the CMS
+		return array(
+			'filters' 	=> $filters,
+			'products' 	=> $products,
+			'page'		=> $this->page,
+		);
+	}
+
+	/**
+	 * Lists all stores that have products in the specified area
+	 *
+	 * @Route("/{area}/stores", name="thread_products_front_stores")
+	 * @Template()
+	 */
+	public function storesAction(Request $request, $area)
+	{
+		// Get the stores
+		if ($area === 'fashion') {
+			$stores = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('hasFashion' => true), array('name' => 'ASC'));
+		} else {
+			$stores = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('hasBeauty' => true), array('name' => 'ASC'));
+		}
+
+		// Load the page object from the CMS
+		$this->loadPage('{area}/stores', array(
+			'title'       => ucwords($area).' Stores',
+			'windowTitle' => ucwords($area).' Stores',
+		));
+
+		return array(
+			'area'		=> $area,
+			'stores' 	=> $stores,
+			'page'		=> $this->page,
+		);
+	}
+
+	/**
+	 * Show all products for a specific store in a specific area
+	 *
+	 * @Route("/{area}/stores/{slug}/products", name="thread_products_front_stores_products")
+	 * @Template()
+	 */
+	public function storeAction(Request $request, $slug, $area)
+	{
+		// Get the products
+		$shop     = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findOneBySlug($slug);
+		$products = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findBy(array('shop' => $shop, 'area' => $area), array('added' => 'DESC'), 3000);
+
+		// Paginate the result
 		$data = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));
 
-		return $this->render('ThreadAndMirrorProductsBundle:Front:saleItems.html.twig', array(
-			'filters'		=> $filters,
-			'products' 		=> $data,
-			'page'			=> $page,
+		// Load the page object from the CMS
+		$this->loadPage('{area}/stores/{slug}/products', array(
+			'title' 	  => ucfirst($area).' at '.$shop->getName(),
+			'windowTitle' => ucfirst($area).' at '.$shop->getName(),
 		));
+
+		// Load the page object from the CMS
+		return array(
+			'products' 	=> $data,
+			'page'		=> $this->page,
+			'shop'		=> $shop,
+		);
 	}
 
 	/**
-	 * Lists all stores that have beauty products
-	 * @param $request Request
+	 * Forward to the homepage of a given shop, using the affiliate link if possible
+	 *
+	 * @Route("/stores/{slug}/website", name="thread_products_front_store_website")
 	 */
-	public function beautyStoresAction(Request $request)
+	public function storeWebsiteAction(Request $request, $slug)
 	{
-		// load the page object from the CMS
-		$em = $this->getDoctrine()->getManager();
-		$page = $em->getRepository('StemsPageBundle:Page')->load('beauty/stores');
+		// Get the stores
+		$shop = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findOneBySlug($slug);
 
-		// get the filtered products
-		$stores = $em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('hasBeauty' => true, 'deleted' => false));
-
-		return $this->render('ThreadAndMirrorProductsBundle:Front:stores.html.twig', array(
-			'stores' 		=> $stores,
-			'page'			=> $page,
-		));
+		// Redirect to their site
+		return $this->redirect($shop->getFrontendUrl());
 	}
 
 	/**
-	 * Lists the latest beauty products based on the requested filters
-	 * @param $request Request
+	 * Lists all brands that have products in the specified area
+	 *
+	 * @Route("/{area}/brands", name="thread_products_front_brands")
+	 * @Template()
 	 */
-	public function beautyNewInAction(Request $request)
+	public function brandsAction(Request $request, $area)
 	{
-		// load the page object from the CMS
-		$em = $this->getDoctrine()->getManager();
-		$page = $em->getRepository('StemsPageBundle:Page')->load('beauty/new-in');
+		// Get the brands
+		if ($area === 'fashion') {
+			$brands = $this->em->getRepository('ThreadAndMirrorProductsBundle:Brand')->findBy(array('hasFashion' => true), array('name' => 'ASC'));
+		} else {
+			$brands = $this->em->getRepository('ThreadAndMirrorProductsBundle:Brand')->findBy(array('hasBeauty' => true), array('name' => 'ASC'));
+		}
 
-		// get and process requested filters
+		// Load the page object from the CMS
+		$this->loadPage('{area}/brands', array(
+			'title'       => ucwords($area).' Brands',
+			'windowTitle' => ucwords($area).' Brands',
+		));
+
+		return array(
+			'area'		=> $area,
+			'brands' 	=> $brands,
+			'page'		=> $this->page,
+		);
+	}
+
+	/**
+	 * Show all products for a specific brand in a specific area
+	 *
+	 * @Route("/{area}/brands/{slug}/products", name="thread_products_front_brands_products")
+	 * @Template()
+	 */
+	public function brandAction(Request $request, Brand $brand, $area)
+	{
+		// Get the products
+		$products = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findBy(array('brand' => $brand, 'area' => $area), array('added' => 'DESC'), 3000);
+
+		// Paginate the result
+		$data = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));
+
+		// Load the page object from the CMS
+		$this->loadPage('{area}/brands/{slug}/products', array(
+			'title' 	  => ucfirst($area).' by '.$brand->getName(),
+			'windowTitle' => ucfirst($area).' by '.$brand->getName(),
+		));
+
+		return array(
+			'products' 	=> $data,
+			'page'		=> $this->page,
+			'brand'		=> $brand,
+		);
+	}
+
+	/**
+	 * Show all products for a specific brand and category
+	 *
+	 * @Route("/brands/{slug}/{category}", name="thread_products_front_brands_category")
+	 * @Template()
+	 */
+	public function brandCategoryAction(Request $request, Brand $brand, $category)
+	{
+		// Get the product
+		$category = $this->em->getRepository('ThreadAndMirrorProductsBundle:Category')->findOneBy(array('slug' => $category));
+		$products = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findBy(array('brand' => $brand, 'category' => $category), array('added' => 'DESC'), 3000);
+
+		// Paginate the result
+		$data = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));
+
+		// Load the page object from the CMS
+		$this->loadPage('brands/{slug}/{category}', array(
+			'title' 	  => $brand->getName().' '.$category->getName(),
+			'windowTitle' => $brand->getName().' '.$category->getName(),
+		));
+
+		return array(
+			'products' 	=> $data,
+			'page'		=> $this->page,
+			'brand'		=> $brand,
+			'category'	=> $category,
+		);
+	}
+
+	/**
+	 * Lists all products from the specified area
+	 *
+	 * @Route("/{area}/products", name="thread_products_front_products")
+	 * @Template()
+	 */
+	public function productsAction(Request $request, $area)
+	{
+		// Get the stores
+		if ($area === 'fashion') {
+			$stores = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('hasFashion' => true), array('name' => 'ASC'));
+		} else {
+			$stores = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('hasBeauty' => true), array('name' => 'ASC'));
+		}
+
+		// Load the page object from the CMS
+		$this->loadPage('{area}/products', array(
+			'title'       => ucwords($area),
+			'windowTitle' => ucwords($area),
+		));
+
+		return array(
+			'stores' => $stores,
+			'page'	 => $this->page,
+		);
+	}
+
+	/**
+	 * Lists all sale products from the specified area
+	 *
+	 * @Route("/{area}/sale", name="thread_products_front_sale")
+	 * @Template()
+	 */
+	public function saleAction(Request $request, $area)
+	{
+		// Get and process requested filters
 		$filters = $this->get('threadandmirror.product.filter')->process($request);
 
-		// get the filtered products
-		$products = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->getBeauty($filters, 'new');
+		// Get the filtered products
+		$products = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findSale($filters, $area);
 
-		// paginate the result
+		// Paginate the result
 		$data = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));
 
-		return $this->render('ThreadAndMirrorProductsBundle:Front:beautyNewIn.html.twig', array(
-			'filters'		=> $filters,
-			'products' 		=> $data,
-			'page'			=> $page,
-		));
-	}
-
-	/**
-	 * Lists the latest sale beauty products based on the requested filters
-	 * @param $request Request
-	 */
-	public function beautySaleAction(Request $request)
-	{
-		// load the page object from the CMS
-		$em = $this->getDoctrine()->getManager();
-		$page = $em->getRepository('StemsPageBundle:Page')->load('beauty/sale');
-
-		// get and process requested filters
-		$filters = $this->get('threadandmirror.product.filter')->process($request);
-
-		// get the filtered products
-		$products = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->getBeauty($filters, 'sale');
-
-		// paginate the result
-		$data = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));
-
-		return $this->render('ThreadAndMirrorProductsBundle:Front:beautyNewIn.html.twig', array(
-			'filters'		=> $filters,
-			'products' 		=> $data,
-			'page'			=> $page,
-		));
-	}
-
-
-	/**
-	 * Show all products for a specific store
-	 * @param $request Request
-	 */
-	public function storeAction($slug, Request $request)
-	{
-		// load the page object from the CMS
-		$em = $this->getDoctrine()->getManager();
-		$page = $em->getRepository('StemsPageBundle:Page')->load('stores/{slug}');
-
-		// get the filtered products
-		$filters = array();
-		$shop = $em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findOneBySlug($slug);
-		$products = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->findBy(array('shop' => $shop), array('added' => 'DESC'), 3000);
-
-		// paginate the result
-		$data = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));
-
-		// load the page object from the CMS
-		$page = $em->getRepository('StemsPageBundle:Page')->load('product/{id}', array(
-			'title' 			=> 'Products at '.$shop->getName(),
-			'windowTitle' 		=> 'Products at '.$shop->getName(),
+		// Load the page object from the CMS
+		$this->loadPage('{area}/sale', array(
+			'title' 	  => ucfirst($area).' Sale Products',
+			'windowTitle' => ucfirst($area).' Sale Products',
 		));
 
-		return $this->render('ThreadAndMirrorProductsBundle:Front:store.html.twig', array(
-			'products' 		=> $data,
-			'page'			=> $page,
-			'shop'			=> $shop,
-		));
+		return array(
+			'filters'	=> $filters,
+			'products' 	=> $data,
+			'page'		=> $this->page,
+		);
 	}
 
 	/**
 	 * Display the user's wishlist
-	 * @param $request Request
+	 *
+	 * @Route("/wishlist", name="thread_products_front_wishlist")
+	 * @Template()
 	 */
 	public function wishlistAction(Request $request)
 	{
-		// load the page object from the CMS
-		$em = $this->getDoctrine()->getManager();
-		$page = $em->getRepository('StemsPageBundle:Page')->load('wishlist', array(
+		// Get the user's monitored wishlist
+		$wishlist = $this->em->getRepository('ThreadAndMirrorProductsBundle:Wishlist')->findOneByOwner($this->getUser()->getId());
+
+		// Get the user's outfits for the adder menu
+		$outfits = $this->em->getRepository('ThreadAndMirrorProductsBundle:Outfit')->findBy(array('owner' => $this->getUser()->getId(), 'deleted' => false));
+
+		// Paginate the result 
+		$data = $this->get('stems.core.pagination')->paginate($wishlist->getPicks()->toArray(), $request, array('maxPerPage' => 100));
+
+		// Load the page object from the CMS
+		$this->loadPage('wishlist', array(
 			'title' 	=> $this->getUser()->getFullname().'\'s Wishlist',
 		));
 
-		// get the user's monitored wishlist
-		$wishlist = $em->getRepository('ThreadAndMirrorProductsBundle:Wishlist')->findOneByOwner($this->getUser()->getId());
-
-		// get the user's outfits for the adder menu
-		$outfits = $em->getRepository('ThreadAndMirrorProductsBundle:Outfit')->findBy(array('owner' => $this->getUser()->getId(), 'deleted' => false));
-
-		// paginate the result 
-		$data = $this->get('stems.core.pagination')->paginate($wishlist->getPicks()->toArray(), $request, array('maxPerPage' => 100));
-
-		return $this->render('ThreadAndMirrorProductsBundle:Front:wishlist.html.twig', array(
+		return array(
 			'outfits'	=> $outfits,
 			'picks'		=> $data,
-			'page'		=> $page,
-		));
+			'page'		=> $this->page,
+		);
 	}
 
 	/**
-	 * List all of the user's outfits
-	 * @param $request Request
+	 * Display the user's outfits
+	 *
+	 * @Route("/outfits", name="thread_products_front_outfits")
+	 * @Template()
 	 */
 	public function outfitsAction(Request $request)
 	{
-		// load the page object from the CMS
-		$em = $this->getDoctrine()->getManager();
-		$page = $em->getRepository('StemsPageBundle:Page')->load('outfits', array(
-			'title' 	=> $this->getUser()->getFullname().'\'s Outfits',
-		));
-
 		// get the user's outfits
-		$outfits = $em->getRepository('ThreadAndMirrorProductsBundle:Outfit')->findBy(array('owner' => $this->getUser()->getId(), 'deleted' => false));
+		$outfits = $this->em->getRepository('ThreadAndMirrorProductsBundle:Outfit')->findBy(array('owner' => $this->getUser()->getId(), 'deleted' => false));
 
 		// paginate the result
 		$data = $this->get('stems.core.pagination')->paginate($outfits, $request, array('maxPerPage' => 18));
 
-		return $this->render('ThreadAndMirrorProductsBundle:Front:outfits.html.twig', array(
-			'outfits'	=> $data,
-			'page'		=> $page,
-		));
-	}
-
-	/**
-	 * List the designers
-	 */
-	public function designersAction()
-	{
-		// get the designers
-		$em = $this->getDoctrine()->getManager();
-		$designers = $em->getRepository('ThreadAndMirrorProductsBundle:Designer')->findBy(array('deleted' => false), array('name' => 'DESC'));
-
-		// load the page object from the CMS
-		$page = $em->getRepository('StemsPageBundle:Page')->load('designers');
-
-		return $this->render('ThreadAndMirrorProductsBundle:Front:designers.html.twig', array(
-			'designers' 	=> $designers,
-			'page'			=> $page,
-		));
-	}
-
-	/**
-	 * Display products for a designer
-	 * @param $slug string   The slug of the designer
-	 */
-	public function designerAction($slug)
-	{
-		// get the designer
-		$em = $this->getDoctrine()->getManager();
-		$designer = $em->getRepository('ThreadAndMirrorProductsBundle:designer')->findOneBySlug($slug);
-
-		// escape if it not longer exists
-		if (!$designer) {
-			return $this->redirect('/designers');
-		}
-
-		// find products belonging to the designer
-		$products = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->findBy(array('designer' => $designer->getId()), array('added' => 'DESC'));
-
-		// load the page object from the CMS
-		$page = $em->getRepository('StemsPageBundle:Page')->load('designer/{name}', array(
-			'title' 			=> $product->getName(),
-			'windowTitle' 		=> $designer->getName(),
-			'metaKeywords' 		=> $designer->getName().', '.implode(', ', $designer->getCategoryNames()),
-			'metaDescription' 	=> $designer->getDescription(),
+		// Load the page object from the CMS
+		$this->loadPage('outfits', array(
+			'title' 	=> $this->getUser()->getFullname().'\'s Outfits',
 		));
 
-		return $this->render('ThreadAndMirrorProductsBundle:Front:designer.html.twig', array(
-			'products' 		=> $products,
-			'page'			=> $page,
-		));
-	}
-
-	/**
-	 * Display a category of products for a designer
-	 * @param $slug string   	The slug of the designer
-	 * @param $category string  The slug of the category
-	 */
-	public function designerCategoryAction($slug, $category)
-	{
-
-		// clean the category from the slug
-
-
-		// get the designer
-		$em = $this->getDoctrine()->getManager();
-		$designer = $em->getRepository('ThreadAndMirrorProductsBundle:designer')->findOneBySlug($slug);
-
-		// escape if the designer no longer exists
-		if (!$designer) {
-			return $this->redirect('/designers');
-		}
-
-		// get the category
-
-		// ....
-
-		// go to the designers page if they don't have that category
-		if (!$category) {
-			return $this->redirect('/designer/'.$designer->getSlug());
-		}
-
-		// find products belonging to the designer
-		$products = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->findBy(array('designer' => $designer->getId()), array('added' => 'DESC'));
-
-		// load the page object from the CMS
-		$page = $em->getRepository('StemsPageBundle:Page')->load('designer/{name}/{category}', array(
-			'title' 			=> $product->getName(),
-			'windowTitle' 		=> $designer->getName(),
-			'metaKeywords' 		=> $designer->getName().', '.implode(', ', $designer->getCategoryNames()),
-			'metaDescription' 	=> $designer->getDescription(),
-		));
-
-		return $this->render('ThreadAndMirrorProductsBundle:Front:designerCategory.html.twig', array(
-			'products' 		=> $products,
-			'page'			=> $page,
-		));
+		return array(
+			'outfits' => $data,
+			'page'	  => $this->page,
+		);
 	}
 }

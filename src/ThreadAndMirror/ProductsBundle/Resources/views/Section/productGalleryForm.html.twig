@@ -1,25 +1,59 @@
-<h4>Product Gallery Section</h4>
-<button class="remove-section btn btn-small btn-danger" data-id="{{ link.id }}"><i class="fa fa-times"></i> Remove</button>
-<input type="hidden" name="sections[]" value="{{ link.id }}">
-<div class="section-product-gallery" data-id="{{ link.id }}">
+
+{% extends 'StemsPageBundle:Section:baseForm.html.twig' %}
+
+{# {% block classes %}
+	{% spaceless %}text-align-{{ form.vars.value.alignment }}{% endspaceless %}
+{% endblock %} #}
+
+{% block tools %}
+
+{% endblock %}
+
+{% block form %}
 	{{ form_row(form.style) }}
 	{{ form_row(form.heading) }}
 	{{ form_row(form.caption) }}
 	<label>Attached Products</label>
 	<div class="add-product-to-gallery">
 		<ul class="sortable">
-			{% for product in section.products %}
+			{% for product in form.vars.value.products %}
 				{% embed 'StemsBlogBundle:Rest:productGalleryProduct.html.twig' %}{% endembed %}
 			{% endfor %}
 		</ul>
-		<div class="add-product" data-productgallery-id="{{ section.id }}">
+		<div class="add-product" data-productgallery-id="{{ form.vars.value.id }}">
 			<input type="text" placeholder="Product Link">
 			<a class="btn btn-small btn-primary from-link"><i class="fa fa-plus"></i> Add Product From Link</a>
 			<label>or</label> 
-			<a href="/admin/products/popup/add-product-gallery-product/{{ section.id }}" class="btn btn-small btn-primary rest-get-popup"><i class="fa fa-plus"></i> Add Product Manually</a>
+			<a href="/admin/products/popup/add-product-gallery-product/{{ form.vars.value.id }}" class="btn btn-small btn-primary rest-get-popup"><i class="fa fa-plus"></i> Add Product Manually</a>
 			<img class="loader" src="/images/admin/icons/loader-add-to-gallery.gif" width="32" height="32">
 		</div>
 		<br class="clear">
 	</div>
 	<br class="clear">
-</div>
+{% endblock %}
+
+{% block preview %}
+	{% if form.vars.value.heading is not empty %}<h2>{{ form.vars.value.heading }}</h2>{% endif %}
+	<p>{{ form.vars.value.caption|raw }}</p>
+	<button class="prev"><i class="fa fa-angle-left"></i></button>
+	<button class="next"><i class="fa fa-angle-right"></i></button>
+	<div class="feature-image">
+		{% for product in form.vars.value.products %}
+			<div class="product" {% if loop.index != 1 %}style="display:none"{% endif %} data-image="{{ loop.index }}">
+				<img src="{{ product.image }}" height="400" alt="{{ product.heading }} {{ product.caption }}" />
+				<div class="caption">
+					{% if product.heading is not empty %}<h6>{{ product.heading }}</h6>{% endif %}
+					{% if product.caption is not empty %}<p>{{ product.caption }}</p>{% endif %}
+				</div>
+				<a href="{{ product.url }}" target="_blank" rel="nofollow"></a>	
+			</div>
+		{% endfor %}
+	</div>
+	<div class="gallery-thumbnails">
+		{% for product in form.vars.value.products %}
+			<div class="product" data-image="{{ loop.index }}">
+				<img src="{{ product.thumbnail }}" height="50" alt="{{ product.heading }} {{ product.caption }}" />
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

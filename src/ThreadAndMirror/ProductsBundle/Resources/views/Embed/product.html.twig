@@ -1,9 +1,8 @@
 <div class="product" itemscope itemtype="http://schema.org/Product" data-id="{{ product.id }}">
 	<p class="shop" itemprop="brand" itemprop="manufacturer">{{ product.shop.name }}</p>
 	<a class="buy" style="display:none" href="{{ path('thread_products_front_product_buy', { slug : product.slug }) }}" target="_blank" rel="nofollow" onClick="ga('send', 'event', 'Referrals', 'Buy', '{{ product.shop.slug }}', {{ (product.now * (product.shop.affiliateRate / 100))|number_format(0, '.', '') }});"><i class="fa fa-shopping-cart"></i></a>
-	<a href="/product/{{ product.slug }}" style="position:absolute;opacity:0;height:0px;width:0px" itemprop="url">/product/{{ product.slug }}</a>
 	<div class="placeholder"></div>
-	<div class="image" style="background-image:url('{{ product.thumbnail }}')"></div>
+	<div class="image" style="background-image:url('{{ product.gridImage }}')"></div>
 	<h3 class="name" itemprop="name">{{ product.name|raw }}</h3>
 	<div itemprop="description" class="description">{{ product.description|raw }}</div>
 	{% if product.sale and product.was > 0 %}
@@ -11,7 +10,7 @@
 	{% else %}
 		<p class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">£<span itemprop="price">{{ product.now|number_format(0, '.', '') }}</span></p>
 	{% endif %}
-	<a data-pid="{{ product.id }}"
+	<a href="/product/{{ product.slug }}" data-pid="{{ product.id }}" itemprop="url" 
 		{% if product.available %}
 			class="view" title="View Details"
 		{% else %}
@@ -30,4 +29,8 @@
 		{% endif %}
 	</a>
 	<p class="add-to-wishlist {% if app.user %}logged-in{% endif %}" title="Add to Wishlist" data-id="{{ product.id }}"><i class="fa fa-heart"></i></p>
+	{# For enabling brand/category crawling #}
+	{% if brand is defined and product.category is not empty %}
+		<a href="{{ path('thread_products_front_brands_category', { 'slug' : brand.slug, 'category' : product.category.slug }) }}" style="visiblity:invisible"></a>
+	{% endif %}
 </div>

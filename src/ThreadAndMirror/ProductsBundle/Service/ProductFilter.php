@@ -3,11 +3,10 @@
 namespace ThreadAndMirror\ProductsBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  *	Handles requested and stored filter paramters for the product search pages
- *
- *
  */
 
 class ProductFilter
@@ -102,7 +101,7 @@ class ProductFilter
 	/**
 	 * update the filtered shops based on the request
 	 */
-	protected function updateShopFilters($request)
+	protected function updateShopFilters(Request $request)
 	{
 		$requestedShops = array();
 
@@ -135,7 +134,7 @@ class ProductFilter
 	/**
 	 * update the filtered categories based on the request
 	 */
-	protected function updateCategoryFilters($request)
+	protected function updateCategoryFilters(Request $request)
 	{
 		$requestedCategories = array();
 
@@ -173,19 +172,15 @@ class ProductFilter
 
 	/**
 	 * Clean the requested keywords string and store it in the fitler
+	 *
+	 * @param  Request 		$request
 	 */
-	public function processKeywords($request) 
+	public function processKeywords(Request $request) 
 	{
-		// get the keyword string from the request
+		// Get the keyword string from the request
 		$keywords = $request->request->get('filter-keywords');
 
-		// remove special characters
-		$keywords = preg_replace('/[^A-Za-z0-9\s]/', '', $keywords);
-
-		// remove multiple spaces
-		$keywords = preg_replace('/\s+/', ' ', $keywords);
-
-		// update the keyword string regardless (to clear when empty)
+		// Update the keyword string regardless (to clear when empty)
 		$this->keywords = $keywords;
 	}
 
@@ -195,6 +190,10 @@ class ProductFilter
 	public function getNoResultMessage()
 	{
 		$message = 'We\'re sorry, but your search ';
+
+		if ($this->keywords !== null) {
+			$message .= 'for "'.$this->keywords.'" ';
+		}
 
 		$message .= 'returned no results.';
 

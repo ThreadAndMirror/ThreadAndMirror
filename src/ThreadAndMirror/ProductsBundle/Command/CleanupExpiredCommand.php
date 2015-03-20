@@ -24,7 +24,7 @@ class CleanupExpiredCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         // get the products that have been out of stock for over a month and are not marked as expired
-        $expiring = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->getExpiringProducts();
+        $expiring = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->findExpiringProducts();
 
         // mark as expired
         foreach ($expiring as $product) {

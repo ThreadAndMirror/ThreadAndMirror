@@ -1,0 +1,97 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}
+	{% if moodboard.id is not empty %}
+		Edit moodboard &middot; {{ moodboard.header }}
+	{% else %}
+		Create New moodboard
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	{% if moodboard.id is not empty %}
+		<h1 class="pages">Edit moodboard: <span>{{ moodboard.header }}</span></h1>
+	{% else %}
+		<h1 class="pages">Create New moodboard</h1>
+	{% endif %}
+	<form method="post">
+		<div class="admin-editor admin-editorspicks-editor">
+			<div class="moodboard">
+				<div class="canvas" style="width:960px;height:480px;border: 1px dashed #DDDDDD;">
+					<div class="element">
+						<img src="http://images.mytheresa.com/media/catalog/product/cache/common/small_image/420x475/e4fd640afe025ac10030253b3e7f2dee/P/0/P00121938--STANDARD.jpg">
+					</div>
+				</div>
+			</div>
+			{# <div class="edit-tabs">
+				<ul>
+					<li></li>
+					<li><a href="#" data-tab="edit-moodboard-layout" class="active">Layout <i class="fa fa-th-large fa-fw"></i></a></li>
+					<li><a href="#" data-tab="edit-moodboard-seo">SEO <i class="fa fa-bar-chart-o fa-fw"></i></a></li>
+					<li></li>
+				</ul>
+			</div>
+			<div class="edit-panels">
+				<div class="edit-panel" id="edit-moodboard-layout">
+					{{ form_row(form._token) }}
+					{{ form_row(form.header) }}
+					{{ form_row(form.caption) }}
+					{% include 'StemsMediaBundle:Include:featureImage.html.twig' with { 'article' : moodboard, 'form' : form, 'category' : 'editors-pick' } %}
+					<div class="horizontal-radio">
+						{{ form_row(form.layout) }}
+					</div>
+					<label>Attached Products</label>
+					<div class="add-item-to-gallery">
+						<ul class="sortable">
+							{% for offset,pick in moodboard.picks %}
+								{% embed 'ThreadAndMirrorEditorsPicksBundle:Rest:pick.html.twig' %}{% endembed %}
+							{% endfor %}
+						</ul>
+						<div class="add-item" data-offset="{{ moodboard.picks|length }}">
+							<input type="text" id="add-pick-url" placeholder="Product Link">
+							<a href="{{ path('thread_editorspicks_popup_moodboard_addpick') }}" id="add-pick-from-url" class="btn btn-small btn-primary"><i class="fa fa-plus"></i> Add Product From Url</a>
+							<label>or</label> 
+							<a href="{{ path('thread_editorspicks_popup_moodboard_addpick') }}" id="add-pick-manually" class="btn btn-small btn-primary"><i class="fa fa-plus"></i> Add Product Manually</a>
+							<img class="loader" src="/images/admin/icons/loader-add-to-gallery.gif" width="32" height="32">
+						</div>
+						<br class="clear">
+					</div>
+					<br class="clear">
+				</div>
+				<div class="edit-panel" id="edit-moodboard-seo" style="height:0px">
+					{{ form_row(form.metaTitle) }}
+					{{ form_row(form.metaKeywords) }}
+					{{ form_row(form.metaDescription) }}
+				</div>
+			</div> #}
+		</div>
+		<br class="clear">
+		<div class="admin-editor-controls">
+			{# <input class="btn btn-success" type="submit" value="Save">
+			{% if moodboard.id is not empty %}
+				{% if moodboard.status == 'Published' %}
+					<a href="{{ path('thread_editorspicks_admin_moodboards_publish', { 'id' : moodboard.id }) }}" class="btn btn-warning" >Unpublish</a>
+				{% else %}
+					<a href="{{ path('thread_editorspicks_admin_moodboards_publish', { 'id' : moodboard.id }) }}" class="btn btn-success" >Publish</a>
+				{% endif %}
+				<a href="{{ path('thread_editorspicks_admin_moodboards_delete', { 'id' : moodboard.id }) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this moodboard?" >Delete</a>
+			{% endif %}
+			<a href="{{ path('thread_editorspicks_admin_moodboards') }}"class="btn" >Cancel</a> #}
+		</div>
+	</form>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		$( ".moodboard .canvas .element" ).resizable({
+			  aspectRatio: true,
+			  ghost: true,
+			  handles: "nw, ne, se, sw"
+		});
+
+		$( ".moodboard .canvas .element" ).draggable({
+			
+		});
+		</script>
+{% endblock %}

@@ -12,6 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="tam_category", indexes={
  *    @ORM\Index(name="name_index", columns={"name"}),
  *    @ORM\Index(name="slug_index", columns={"slug"}),
+ *    @ORM\Index(name="area_index", columns={"area"}),
  *    @ORM\Index(name="affiliate_window_id_index", columns={"affiliateWindowId"})
  * })
  * @ORM\Entity()
@@ -46,9 +47,12 @@ class Category
      * @ORM\OrderBy({"added" = "DESC"})
      */
     protected $products; 
-    /**
-     * Constructor
+
+    /** 
+     * @ORM\Column(type="string", nullable=true, length=32)
      */
+    protected $area;
+
     public function __construct()
     {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
@@ -164,5 +168,28 @@ class Category
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * Set area
+     *
+     * @param string $area
+     * @return Category
+     */
+    public function setArea($area)
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
+    /**
+     * Get area
+     *
+     * @return string 
+     */
+    public function getArea()
+    {
+        return $this->area;
     }
 }

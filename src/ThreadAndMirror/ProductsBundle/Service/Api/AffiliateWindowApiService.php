@@ -63,10 +63,48 @@ class AffiliateWindowApiService extends \SoapClient
 	);
 
 	/**
-	 * @var The categories we want to pull products for
+	 * @var The extra feed data we want to receive
 	 */
-	protected $allowedCategories = array(
-		595,149,135,163,168,159,169,161,167,170,194,141,205,198,206,203,208,199,204,201,110,111,113,114,546,547
+	protected $feedColumns = array(		
+		'aw_product_id',
+		'merchant_product_id',
+		'merchant_category',
+		'aw_deep_link',
+		'merchant_image_url',
+		'search_price',
+		'description',
+		'product_name',
+		'merchant_deep_link',
+		'aw_image_url',
+		'merchant_name',
+		'merchant_id',
+		'category_name',
+		'category_id',
+		'delivery_cost',
+		'currency',
+		'store_price',
+		'display_price',
+		'data_feed_id',
+		'colour',
+		'last_updated',
+		'stock_quantity',
+		'in_stock',
+		'is_for_sale',
+		'brand_name',
+		'aw_thumb_url',
+		'merchant_thumb_url',
+		'rrp_price',
+		'specifications',
+		'product_type',
+		'model_number',
+		'parent_product_id',
+		'keywords',
+		'reviews',
+		'number_available',
+		'large_image',
+		'average_rating',
+		'alternate_image',
+		'upc'
 	);
 
 	public function __construct(Browser $client, $parameters)
@@ -122,21 +160,70 @@ class AffiliateWindowApiService extends \SoapClient
 	}
 		
 	/**
+	 * Gets CSV feed for the specified parameters 
+	 *
+	 * @param  array 	$merchants  	A list of merchant IDs to filter by
+	 * @param  array 	$categories 	A list of product categories to filer by
+	 * @return string 					The resulting products in CSV format
+	 */
+	public function getDataFeed($merchants = array(), $categories = array()) 
+	{
+		// Base url
+		$url = 'http://datafeed.api.productserve.com/datafeed/download/apikey/'.$this->parameters['api_key'];
+
+		// Add the categories
+		if (count($categories) > 0) {
+			$url .= '/cid/';
+			foreach ($categories as $category) {
+				$url .= $category.',';
+			}
+			$url = rtrim($url, ',');
+		}
+		
+		// Add the merchants
+		if (count($merchants) > 0) {
+			$url .= '/fid/';
+			foreach ($merchants as $merchant) {
+				$url .= $merchant.',';
+			}
+			$url = rtrim($url, ',');
+		}
+
+		// Add the data columns
+		$url .= '/columns/';
+
+		foreach ($this->feedColumns as $column) {
+			$url .= $column.',';
+		}
+		$url = rtrim($url, ',');
+		
+		// Complete the url
+		$url .= '/format/csv/delimiter/,/compression/gzip/adultcontent/1/';
+
+		return $this->client->get($url);
+	}
+
+	/**
 	 * API endpoint - get a list of products based on the given parameters
 	 *
-	 * @param  integer   	$id 		The merchant ID to filter the results by
-	 * @param  offset 		$offset 	Offset of the result set
-	 * @param  integer  	$limit 		Maximum amount of products to receive
-	 * @return array 					Results JSON
+	 * @param  integer   	$id 			The merchant ID to filter the results
+	 * @param  array   		$categories 	Category IDs to filter the results by
+	 * @param  offset 		$offset 		Offset of the result set
+	 * @param  integer  	$limit 			Maximum amount of products to receive
+	 * @return array 						Results JSON
 	 */
-	public function getMerchantProducts($id, $offset = 0, $limit = 100)
+	public function getMerchantProducts($id, $categories = array(), $offset = 0, $limit = 100)
 	{
-		// Filters
-		$merchantFilter = $this->getFilterByMerchant($id);
-		$categoryFilter = $this->getFilterByAllowedCategories();
+		// Set the merchant filter 
+		$filters = array($this->getFilterByMerchant($id));
+
+		// If categories are provided, then add them to the filters
+		if (count($categories) > 0) {
+			$filters[] = $this->getFilterByAllowedCategories($categories);
+		}
 
 		return $this->call('getProductList', array(
-			'oActiveRefineByGroup' => array($merchantFilter, $categoryFilter),
+			'oActiveRefineByGroup' => $filters,
 			'iLimit'			   => $limit,
 			'iOffset'			   => $offset,
 			'sColumnToReturn'	   => $this->productColumns
@@ -194,24 +281,24 @@ class AffiliateWindowApiService extends \SoapClient
 	/**
 	 * Build a filter object for getting results for the allowed categories
 	 *
-	 * @return stdClass 					The resulting filter object
+	 * @return stdClass 				The resulting filter object
 	 */
-	public function getFilterByAllowedCategories() 
+	public function getFilterByAllowedCategories($categories) 
 	{
 		$oRefineBy = new \stdClass();
 		$oRefineBy->iId = 4;
 		$oRefineBy->sName = 'Category';
 
-		$categories = array();
+		$refineBys = array();
 		 
-		foreach ($this->allowedCategories as $id) {
-			$category = new \stdClass();
-			$category->sId = strval($id);
-			$category->sName = '';
-			$categories[] = $category;
+		foreach ($categories as $id) {
+			$refineBy = new \stdClass();
+			$refineBy->sId = strval($id);
+			$refineBy->sName = '';
+			$refineBys[] = $refineBy;
 		}
 		
-		$oRefineBy->oRefineByDefinition = $categories;
+		$oRefineBy->oRefineByDefinition = $refineBys;
 
 		return $oRefineBy;
 	}

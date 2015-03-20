@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Stems\CoreBundle\Controller\BaseRestController;
-
 use ThreadAndMirror\ProductsBundle\Entity\Pick;
 use ThreadAndMirror\ProductsBundle\Entity\Outfit;
 use ThreadAndMirror\ProductsBundle\Entity\Product;

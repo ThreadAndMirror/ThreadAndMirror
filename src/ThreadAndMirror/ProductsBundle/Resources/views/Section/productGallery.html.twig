@@ -1,4 +1,10 @@
-<div class="section-product-gallery gallery-layout-{{ section.style }}" data-max-images="{{ section.products|length }}">
+{% extends 'StemsPageBundle:Section:base.html.twig' %}
+
+{% block classes %}gallery-layout-{{ section.style }}{% endblock %}
+
+{% block attributes %} data-max-images="{{ section.products|length }}" {% endblock %}
+
+{% block content %}
 	
 	{# Carousel Layout #}
 	{% if section.style == 'carousel' %}
@@ -205,4 +211,4 @@
 		{% endif %}
 	{% endif %}
 	<br class="clear">
-</div>
+{% endblock %}

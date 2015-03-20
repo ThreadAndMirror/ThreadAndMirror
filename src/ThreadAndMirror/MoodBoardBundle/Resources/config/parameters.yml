@@ -1,0 +1,14 @@
+parameters:
+    threadandmirror.MoodBoard.feed_types: ['twitter', 'instagram', 'tumblr']
+    threadandmirror.MoodBoard.feed_categories:
+        store:        'Store'
+        magazine:     'Magazine'
+        model:        'Model'
+        street-style: 'Street Style'
+        blog:         'Blog'
+        brand:        'Brand'
+    threadandmirror.MoodBoard.twitter.token: 'AAAAAAAAAAAAAAAAAAAAABamYAAAAAAAimUzKzfVq%%2B2qGaW%%2Fgv3DKhIQLhM%%3D7SzmadMyUwPiyrAE0pldbb0tTljSZCrXoCBxLSBHVXKm1Ejjxh'
+    threadandmirror.MoodBoard.instagram.token: '1083901020.9cbc254.e7ee623c03a84528821c521ea0b008b8'
+    threadandmirror.MoodBoard.instagram.count: 64
+    threadandmirror.MoodBoard.instagram.client: '1083901020'
+    threadandmirror.MoodBoard.tumblr.token: 'wvv5HYLOwstCxpxLo0I8Mv8UoMDfBrhmc3W4EoeSAwH8RtbA3C'

@@ -5,8 +5,8 @@ namespace ThreadAndMirror\EditorsPicksBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
-
-
+use ThreadAndMirror\ProductsBundle\Entity\Product;
+use Gedmo\Mapping\Annotation as Gedmo;
 /** 
  * @ORM\Table(name="tam_editorspicks_pick")
  * @ORM\Entity()
@@ -22,11 +22,13 @@ class Pick
 
     /** 
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
      */
     protected $designer;
 
     /** 
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
      */
     protected $name;
 
@@ -36,17 +38,24 @@ class Pick
     protected $description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $product;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $position = 99;
+
     /** 
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank
      */
     protected $url;
 
     /** 
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
      */
     protected $image;
 
@@ -55,35 +64,30 @@ class Pick
      */
     protected $deleted = false;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $author;
-
     /** 
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     protected $added;
 
     /** 
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
      */
     protected $updated;
 
     /**
      * @ORM\ManyToOne(targetEntity="Collection", inversedBy="picks")
-     * @ORM\JoinColumn(name="wishlist_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="collection_id", referencedColumnName="id")
      */
     protected $collection;
 
-    public function __construct($product=null)
+    public function __construct($product = null)
     {
-        $this->added = new \DateTime;
-        $this->updated = new \DateTime;
-
-        if ($product) {
+        if ($product instanceof Product) {
+            $this->designer       = $product->getBrandName();
             $this->name        = $product->getName();
-            $this->description = 'At '.$product->getShop()->getName();
+            $this->description = $product->getShop() !== null ? 'At '.$product->getShop()->getName() : $product->getShop();
             $this->url         = $product->getFrontendUrl();
             $this->image       = $product->getImage();
             $this->product     = $product->getId();
@@ -262,26 +266,26 @@ class Pick
     }
 
     /**
-     * Set author
+     * Set position
      *
-     * @param integer $author
+     * @param integer $position
      * @return Pick
      */
-    public function setAuthor($author)
+    public function setPosition($position)
     {
-        $this->author = $author;
+        $this->position = $position;
     
         return $this;
     }
 
     /**
-     * Get author
+     * Get position
      *
      * @return integer 
      */
-    public function getAuthor()
+    public function getPosition()
     {
-        return $this->author;
+        return $this->position;
     }
 
     /**

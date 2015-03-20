@@ -1,33 +1,19 @@
 <div class="widget widget-editors-picks">
-	<h5><span>Editor's Picks</span></h5>
-	<div class="previous-picks left">
-		{% for pick in picks %}
-			{% if loop.index == 2 or loop.index == 4 %}
-				<a href="{{ pick.url }}" >
-					<div style="background:url('{{ pick.image }}') center center; background-size:cover;"></div>
-					<h2>{{ pick.designer }}</h2>
-					<h3><span>{{ pick.name }}</span></h3>
-				</a>
-			{% endif %}
-		{% endfor %}
+	<div>
+		<div class="background" style="background:url('{{ getMediaImage(collection.image).src|imagine_filter('blog_homepage_main') }}') center center; background-size:cover;"></div>
+		<div class="feature-article wrap" >
+			<a href="{{ path('thread_editorspicks_front_collection', { 'slug' : collection.slug }) }}">
+				<div class="title">
+					<p>Editor's Picks</p>
+					<h2>{{ collection.header }}</h2>
+					<h4><span></span><i class="fa fa-fw fa-heart"></i><span></span></h4>
+					<button class="button-invert">Read More</button>
+				</div>
+			</a>
+			<div class="image" style="background:url('{{ getMediaImage(collection.image).src|imagine_filter('blog_homepage_circle') }}') center center; background-size:cover;"></div>
+			<div class="picks">
+				{% include 'ThreadAndMirrorEditorsPicksBundle:Include:' ~ collection.layout ~ '.html.twig' with { collection : collection } %}
+			</div>
+		</div>
 	</div>
-	<div class="latest-pick left">
-		<a href="{{ picks[0].url }}">
-			<img src="{{ picks[0].image }}" height="300">
-			<h2>{{ picks[0].name }}<span>{{ picks[0].designer }}</span></h2>
-			<p>{{ picks[0].description }}</p>
-		</a>
-	</div>
-	<div class="previous-picks left">
-		{% for pick in picks %}
-			{% if loop.index == 3 or loop.index == 5 %}
-				<a href="{{ pick.url }}" >
-					<div style="background:url('{{ pick.image }}') center center; background-size:cover;"></div>
-					<h2>{{ pick.designer }}</h2>
-					<h3><span>{{ pick.name }}</span></h3>
-				</a>
-			{% endif %}
-		{% endfor %}
-	</div>
-	<br class="clear">
 </div>

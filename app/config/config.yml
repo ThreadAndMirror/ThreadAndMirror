@@ -36,6 +36,66 @@ twig:
         stems_site_description: %stems.site.description%
         service_stems_section: '@stems.core.sections.manager'
 
+# Elastic Search
+fos_elastica:
+    clients:
+        default: { host: 127.0.0.1, port: 9200 }
+    indexes:
+        search:
+            client: default
+            types:
+                product:
+                    mappings:
+                        name: { boost: 50, analyzer: snowball }
+                        description: ~
+                        brandName: { boost: 25 }
+                        categoryName: { boost: 25 }
+                        added: ~
+                        area: ~
+                    persistence:
+                        driver: orm
+                        model: ThreadAndMirror\ProductsBundle\Entity\Product
+                        finder: ~
+                        provider: ~
+                        listener:
+                            immediate: ~
+                        repository: ThreadAndMirror\ProductsBundle\Repository\ProductFinderRepository
+
+# Snc Redis
+snc_redis:
+    clients:
+        default:
+            type: phpredis
+            alias: default
+            dsn: %redis_dsn%
+        session:
+            type: phpredis
+            alias: session
+            dsn: %redis_dsn%
+        doctrine:
+            type: phpredis
+            alias: doctrine
+            dsn: %redis_dsn%
+    session:
+        client: session
+        prefix: session:main
+        use_as_default: true
+    doctrine:
+        metadata_cache:
+            client: doctrine
+            entity_manager: default          # the name of your entity_manager connection
+            document_manager: default        # the name of your document_manager connection
+        result_cache:
+            client: doctrine
+            entity_manager: [default, read]  # you may specify multiple entity_managers
+        query_cache:
+            client: doctrine
+            entity_manager: default
+
+# Buzz config
+sensio_buzz:
+    client_timeout: 30
+
 # Liip Imagine
 liip_imagine:
     resolvers:
@@ -43,6 +103,10 @@ liip_imagine:
           web_path: ~
     filter_sets:
         cache: ~
+        page_banner:
+            quality: 50
+            filters:
+                thumbnail: { size: [1280, 400], mode: outbound }
         blog_header:
             quality: 80
             filters:
@@ -50,11 +114,11 @@ liip_imagine:
         blog_homepage_main:
             quality: 80
             filters:
-                thumbnail: { size: [690, 345], mode: outbound }
-        blog_homepage_small:
+                thumbnail: { size: [960, 450], mode: outbound }
+        blog_homepage_circle:
             quality: 80
             filters:
-                thumbnail: { size: [330, 144], mode: outbound }
+                thumbnail: { size: [240, 240], mode: outbound }
 
 # Assetic Configuration
 assetic:
@@ -74,17 +138,21 @@ assetic:
             inputs:
                 - '@StemsCoreBundle/Resources/public/css/admin/vendor/*'
                 - '@StemsCoreBundle/Resources/public/css/admin/admin.css'
-        frontend_js:
+                # - '@StemsBlogBundle/Resources/public/css/admin/stylesheet.less'
+        frontend_vendor_js:
             inputs:
                 - '@StemsCoreBundle/Resources/public/js/front/vendor/*'
-                - '@StemsCoreBundle/Resources/public/js/front/frontend.js'
+        frontend_js:
+            inputs:
                 - '@ThreadAndMirrorSocialBundle/Resources/public/js/frontend.js'
+                - '@StemsCoreBundle/Resources/public/js/front/frontend.js'
         frontend_css:
             inputs:
                 - '@StemsCoreBundle/Resources/public/css/front/vendor/*'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/stylesheet.css'
     filters:
         cssrewrite: ~
+        less: ~
         uglifycss:
             bin: /usr/bin/uglifycss
         uglifyjs2:
@@ -107,49 +175,13 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
-        # query_cache_driver:
-        #     type: memcached
-        #     class: Doctrine\Common\Cache\MemcacheCached
-        #     host: localhost
-        #     port: 11211
-        #     instance_class: Memcached
-        # metadata_cache_driver:
-        #     type: memcache
-        #     class: Doctrine\Common\Cache\MemcacheCached
-        #     host: localhost
-        #     port: 11211
-        #     instance_class: Memcached
-        # result_cache_driver:
-        #     type: memcached
-        #     class: Doctrine\Common\Cache\MemcacheCached
-        #     host: localhost
-        #     port: 11211
-        #     instance_class: Memcached
-        # mappings:
-        #     gedmo_translatable:
-        #         type: annotation
-        #         prefix: Gedmo\Translatable\Entity
-        #         dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
-        #         alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
-        #         is_bundle: false
-        #     gedmo_translator:
-        #         type: annotation
-        #         prefix: Gedmo\Translator\Entity
-        #         dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
-        #         alias: GedmoTranslator # this one is optional and will default to the name set for the mapping
-        #         is_bundle: false
-        #     gedmo_loggable:
-        #         type: annotation
-        #         prefix: Gedmo\Loggable\Entity
-        #         dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
-        #         alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
-        #         is_bundle: false
-        #     gedmo_tree:
-        #         type: annotation
-        #         prefix: Gedmo\Tree\Entity
-        #         dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
-        #         alias: GedmoTree # this one is optional and will default to the name set for the mapping
-        #         is_bundle: false
+        metadata_cache_driver: redis
+        query_cache_driver: redis
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable: true
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -203,6 +235,12 @@ parameters:
                 entity: 'StemsPageBundle:SectionText'
                 class: 'Stems\PageBundle\Entity\SectionText'
                 form: 'Stems\PageBundle\Form\SectionTextType'
+            heading:
+                name: 'Heading'
+                enabled: true
+                entity: 'StemsPageBundle:SectionHeading'
+                class: 'Stems\PageBundle\Entity\SectionHeading'
+                form: 'Stems\PageBundle\Form\SectionHeadingType'
             text_and_image:
                 name: 'Text and Image'
                 enabled: true
@@ -230,7 +268,7 @@ parameters:
         blog:
             magazine:
                 name: 'Magazine'
-                enabled: true
+                enabled: false
                 entity: 'StemsPageBundle:SectionMagazine'
                 class: 'Stems\PageBundle\Entity\SectionMagazine'
                 form: 'Stems\PageBundle\Form\SectionMagazineType'
@@ -240,9 +278,21 @@ parameters:
                 entity: 'StemsPageBundle:SectionText'
                 class: 'Stems\PageBundle\Entity\SectionText'
                 form: 'Stems\PageBundle\Form\SectionTextType'
+            heading:
+                name: 'Heading'
+                enabled: true
+                entity: 'StemsPageBundle:SectionHeading'
+                class: 'Stems\PageBundle\Entity\SectionHeading'
+                form: 'Stems\PageBundle\Form\SectionHeadingType'
+            page_break:
+                name: 'PageBreak'
+                enabled: true
+                entity: 'StemsPageBundle:SectionPageBreak'
+                class: 'Stems\PageBundle\Entity\SectionPageBreak'
+                form: 'Stems\PageBundle\Form\SectionPageBreakType'
             text_and_image:
                 name: 'Text and Image'
-                enabled: true
+                enabled: false
                 entity: 'StemsPageBundle:SectionTextAndImage'
                 class: 'Stems\PageBundle\Entity\SectionTextAndImage'
                 form: 'Stems\PageBundle\Form\SectionTextAndImageType'
@@ -359,4 +409,8 @@ monolog:
         threadandmirror:
             type: stream
             path: %kernel.root_dir%/logs/threadandmirror.log
+            level: warning
+        crawler:
+            type: stream
+            path: %kernel.root_dir%/logs/crawler.log
             level: warning

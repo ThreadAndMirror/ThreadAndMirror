@@ -24,7 +24,10 @@
         "sensio/buzz-bundle": "~1.0",
         "liip/imagine-bundle": "dev-master",
         "ircmaxell/password-compat": "*",
-        "ekino/newrelic-bundle": "dev-master"
+        "ekino/newrelic-bundle": "dev-master",
+        "snc/redis-bundle": "~1.1",
+        "friendsofsymfony/elastica-bundle": "~3.0",
+        "white-october/pagerfanta-bundle": "~1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

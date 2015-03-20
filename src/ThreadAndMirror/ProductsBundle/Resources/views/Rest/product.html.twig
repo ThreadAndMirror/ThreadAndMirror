@@ -43,7 +43,7 @@
 					{% endif %}
 				{% endif %}
 				{% if app.user %}
-					<button class="add-to-wishlist" title="Add {{ product.name }} to your Wishlist" data-id="{{ product.id }}">Add to Wishlist<i class="fa fa-heart"></i></button>
+					<a class="add-to-wishlist button" title="Add {{ product.name }} to your Wishlist" data-id="{{ product.id }}">Add to Wishlist<i class="fa fa-heart"></i></a>
 				{% else %}
 					<a class="add-to-wishlist button" title="Add {{ product.name }} to your Wishlist" href="/login" >Add to Wishlist<i class="fa fa-heart"></i></a>
 				{% endif %}

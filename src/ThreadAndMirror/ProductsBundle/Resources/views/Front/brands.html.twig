@@ -1,0 +1,12 @@
+{% extends 'StemsPageBundle:Layout:' ~ page.layout.slug ~ '.html.twig' %}
+
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+
+{% block dynamic %}
+	<div class="brands-grid">
+		{% for brand in brands %}
+			{% embed 'ThreadAndMirrorProductsBundle:Embed:brand.html.twig' %}{% endembed %}
+		{% endfor %}
+		<br class="clear">
+	</div>
+{% endblock %}

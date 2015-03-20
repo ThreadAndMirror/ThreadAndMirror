@@ -1,0 +1,27 @@
+{% extends 'StemsCoreBundle:Popup:default.html.twig' %}
+
+{% block title %}Add Product to Collection{% endblock %}
+
+{% block classes %}{% endblock %}
+
+{% block content %}
+<div class="two-column">
+	<div class="column">
+		<form action="{{ path('thread_editorspicks_rest_validate_pick', { 'offset' : offset }) }}" enctype="multipart/form-data">
+			{{ form_row(form.picks[offset].designer) }}
+			{{ form_row(form.picks[offset].name) }}
+			{{ form_row(form.picks[offset].description) }}
+			{{ form_row(form.picks[offset].url) }}
+			{{ form_row(form.picks[offset].image) }}
+			{{ form_row(form.picks[offset].product) }}
+		</form>
+	</div>
+	<div class="column">
+		<label>Current Image</label>
+		<div class="popup-image-preview" {% if pick.image is not empty %}style="background-image:url('{{ pick.image }}')"{% endif %}></div>
+	</div>
+	<button class="btn btn-success rest-validation-popup">Add Product</button>
+	<br class="clear">
+</div>
+
+{% endblock %}

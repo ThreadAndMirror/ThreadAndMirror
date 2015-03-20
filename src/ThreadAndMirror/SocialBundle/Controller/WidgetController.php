@@ -15,7 +15,7 @@ class WidgetController extends Controller
 	 *
 	 * @param  integer 	$limit  	Amount of posts to render
 	 */
-	public function homepageFeatureAction($limit=8)
+	public function homepageFeatureAction($limit=24)
 	{
 		// Get the posts
 		$em    = $this->getDoctrine()->getManager();

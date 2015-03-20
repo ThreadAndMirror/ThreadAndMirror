@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "020588fe54022bca602cf9af5d77e193",
+    "hash": "a99304c4216df24204ff022ad8d524bb",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -708,6 +708,95 @@
             "time": "2014-10-24 11:53:42"
         },
         {
+            "name": "friendsofsymfony/elastica-bundle",
+            "version": "v3.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
+                "reference": "9f5ce217dcf5e628274a7767e20a413e5e0b1197"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/9f5ce217dcf5e628274a7767e20a413e5e0b1197",
+                "reference": "9f5ce217dcf5e628274a7767e20a413e5e0b1197",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "psr/log": "~1.0",
+                "ruflin/elastica": ">=0.90.10.0, <1.4-dev",
+                "symfony/console": "~2.1",
+                "symfony/form": "~2.1",
+                "symfony/framework-bundle": "~2.3",
+                "symfony/property-access": "~2.2"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "~1.2@beta",
+                "doctrine/orm": "~2.2",
+                "jms/serializer-bundle": "@stable",
+                "knplabs/knp-components": "~1.2",
+                "knplabs/knp-paginator-bundle": "~2.4",
+                "pagerfanta/pagerfanta": "1.0.*@dev",
+                "phpunit/phpunit": "~4.1",
+                "propel/propel1": "1.6.*",
+                "symfony/browser-kit": "~2.3",
+                "symfony/expression-language": "~2.4",
+                "symfony/twig-bundle": "~2.3"
+            },
+            "suggest": {
+                "doctrine/mongodb-odm": "1.0.*@dev",
+                "doctrine/orm": "~2.2",
+                "knplabs/knp-components": "~1.2",
+                "pagerfanta/pagerfanta": "1.0.*@dev",
+                "propel/propel1": "1.6.*",
+                "symfony/expression-language": "~2.4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FOS\\ElasticaBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Nagel",
+                    "email": "tim@nagel.com.au"
+                },
+                {
+                    "name": "Richard Miller",
+                    "email": "richard.miller@limethinking.co.uk"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/contributors"
+                },
+                {
+                    "name": "Jeremy Mikola",
+                    "email": "jmikola@gmail.com"
+                }
+            ],
+            "description": "Elasticsearch PHP integration for your Symfony2 project using Elastica",
+            "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle",
+            "keywords": [
+                "doctrine2",
+                "elastica",
+                "elasticsearch",
+                "mongodb",
+                "propel",
+                "search"
+            ],
+            "time": "2015-01-04 11:08:20"
+        },
+        {
             "name": "gedmo/doctrine-extensions",
             "version": "dev-master",
             "source": {
@@ -1153,12 +1242,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "eacdae21cc9ce8e07ab64d20d5a92529ed49709d"
+                "reference": "9a7f49505741d84d78929a99c9c4c45e17d0497a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/eacdae21cc9ce8e07ab64d20d5a92529ed49709d",
-                "reference": "eacdae21cc9ce8e07ab64d20d5a92529ed49709d",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/9a7f49505741d84d78929a99c9c4c45e17d0497a",
+                "reference": "9a7f49505741d84d78929a99c9c4c45e17d0497a",
                 "shasum": ""
             },
             "require": {
@@ -1218,7 +1307,7 @@
                 "image",
                 "imagine"
             ],
-            "time": "2014-11-12 10:15:02"
+            "time": "2014-11-18 13:03:01"
         },
         {
             "name": "monolog/monolog",
@@ -1293,6 +1382,73 @@
             "time": "2014-09-30 13:30:58"
         },
         {
+            "name": "pagerfanta/pagerfanta",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whiteoctober/Pagerfanta.git",
+                "reference": "a874d3612d954dcbbb49e5ffe178890918fb76fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/a874d3612d954dcbbb49e5ffe178890918fb76fb",
+                "reference": "a874d3612d954dcbbb49e5ffe178890918fb76fb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "doctrine/orm": "~2.3",
+                "doctrine/phpcr-odm": "1.*",
+                "jackalope/jackalope-doctrine-dbal": "1.*",
+                "jmikola/geojson": "~1.0",
+                "mandango/mandango": "~1.0@dev",
+                "mandango/mondator": "~1.0@dev",
+                "phpunit/phpunit": "~4",
+                "propel/propel1": "~1.6",
+                "ruflin/elastica": "~1.3",
+                "solarium/solarium": "~3.1"
+            },
+            "suggest": {
+                "doctrine/mongodb-odm": "To use the DoctrineODMMongoDBAdapter.",
+                "doctrine/orm": "To use the DoctrineORMAdapter.",
+                "doctrine/phpcr-odm": "To use the DoctrineODMPhpcrAdapter. >= 1.1.0",
+                "mandango/mandango": "To use the MandangoAdapter.",
+                "propel/propel1": "To use the PropelAdapter",
+                "solarium/solarium": "To use the SolariumAdapter."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Pagerfanta\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pablo Díez",
+                    "email": "pablodip@gmail.com"
+                }
+            ],
+            "description": "Pagination for PHP 5.3",
+            "keywords": [
+                "page",
+                "pagination",
+                "paginator",
+                "paging"
+            ],
+            "time": "2014-10-06 10:57:25"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -1329,6 +1485,65 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "ruflin/elastica",
+            "version": "v1.3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ruflin/Elastica.git",
+                "reference": "ffbfa5dd391bd097434e1c8262d7a1df1d2555f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/ffbfa5dd391bd097434e1c8262d7a1df1d2555f8",
+                "reference": "ffbfa5dd391bd097434e1c8262d7a1df1d2555f8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "munkie/elasticsearch-thrift-php": "1.4.*",
+                "phpunit/phpunit": "4.1.*",
+                "psr/log": "~1.0",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Allow using guzzle 4.x as the http transport (requires php 5.4)",
+                "monolog/monolog": "Logging request",
+                "munkie/elasticsearch-thrift-php": "Allow using thrift transport",
+                "psr/log": "for logging"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Elastica": "lib/",
+                    "Elastica\\Test": "test/lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Ruflin",
+                    "homepage": "http://ruflin.com/"
+                }
+            ],
+            "description": "Elasticsearch Client",
+            "homepage": "http://elastica.io/",
+            "keywords": [
+                "client",
+                "search"
+            ],
+            "time": "2014-10-04 20:15:58"
         },
         {
             "name": "sensio/buzz-bundle",
@@ -1530,6 +1745,70 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2014-07-19 10:52:35"
+        },
+        {
+            "name": "snc/redis-bundle",
+            "version": "1.1.8",
+            "target-dir": "Snc/RedisBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/snc/SncRedisBundle.git",
+                "reference": "52549acbfa4dc3f1bd5e23aad3c92de6de4258d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/52549acbfa4dc3f1bd5e23aad3c92de6de4258d1",
+                "reference": "52549acbfa4dc3f1bd5e23aad3c92de6de4258d1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": ">=2.1,<3.0",
+                "symfony/yaml": ">=2.1,<3.0"
+            },
+            "require-dev": {
+                "doctrine/cache": "1.*",
+                "predis/predis": "0.8.*",
+                "symfony/console": ">=2.1,<3.0"
+            },
+            "suggest": {
+                "monolog/monolog": "If you want to use the monolog redis handler.",
+                "predis/predis": "If you want to use predis (currently only v0.8.x is supported).",
+                "symfony/console": "If you want to use commands to interact with the redis database"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Snc\\RedisBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Henrik Westphal",
+                    "email": "henrik.westphal@gmail.com"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/snc/SncRedisBundle/contributors"
+                }
+            ],
+            "description": "A Redis bundle for Symfony2",
+            "homepage": "https://github.com/snc/SncRedisBundle",
+            "keywords": [
+                "nosql",
+                "redis",
+                "symfony"
+            ],
+            "time": "2014-02-01 09:46:23"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -2046,6 +2325,60 @@
                 "templating"
             ],
             "time": "2014-10-17 12:53:44"
+        },
+        {
+            "name": "white-october/pagerfanta-bundle",
+            "version": "v1.0.2",
+            "target-dir": "WhiteOctober/PagerfantaBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whiteoctober/WhiteOctoberPagerfantaBundle.git",
+                "reference": "10403c1db34983f81d8c106cd1c47f3139641455"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/10403c1db34983f81d8c106cd1c47f3139641455",
+                "reference": "10403c1db34983f81d8c106cd1c47f3139641455",
+                "shasum": ""
+            },
+            "require": {
+                "pagerfanta/pagerfanta": "1.0.*",
+                "symfony/framework-bundle": "~2.2",
+                "symfony/property-access": "~2.2",
+                "symfony/twig-bundle": "~2.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7",
+                "symfony/symfony": "~2.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "WhiteOctober\\PagerfantaBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pablo Díez",
+                    "email": "pablodip@gmail.com",
+                    "homepage": "http://github.com/pablodip"
+                }
+            ],
+            "description": "Bundle to use Pagerfanta with Symfony2",
+            "keywords": [
+                "page",
+                "paging"
+            ],
+            "time": "2014-01-07 13:33:53"
         }
     ],
     "packages-dev": [
@@ -2106,6 +2439,7 @@
         "liip/imagine-bundle": 20,
         "ekino/newrelic-bundle": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
     },

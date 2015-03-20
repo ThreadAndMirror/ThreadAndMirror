@@ -30,11 +30,6 @@ class AffiliateWindowService implements AffiliateInterface
 	protected $em;
 
 	/**
-     * @var For storing loaded formatters
-     */
-	protected $formatters = array();
-
-	/**
      * @var For storing product updater
      */
 	protected $updater;
@@ -99,7 +94,7 @@ class AffiliateWindowService implements AffiliateInterface
 			$csv = fopen(__DIR__.'/../../../../../feeds/affiliate_window/'.$area.'.csv', 'r');
 
 			// Get the existing product IDs for the shop
-			$existing = $this->productRepository->findExistingProductIdsByMerchant($shop->getAffiliateId());
+			$existing = $this->productRepository->findExistingPidsByMerchant($shop->getAffiliateId());
 
 			// Skip the first line
 			$data = fgetcsv($csv, 10000, ',');
@@ -121,9 +116,11 @@ class AffiliateWindowService implements AffiliateInterface
 						// Create and format the product data into an entity
 						$product = $this->updater->createProductFromFeed($data);
 
-						// Add the shop and area
+						// Set the remaining product data
 						$product->setShop($shop);
 						$product->setArea($area);
+						$this->updater->updateCategoryFromAffiliateCategoryId($product, 'affiliateWindowId');
+						$this->updater->updateBrandFromBrandName($product);
 
 						// @todo check for duplicates with name etc. here
 						// Create uid field?
@@ -186,6 +183,9 @@ class AffiliateWindowService implements AffiliateInterface
 	 */
 	public function getAffiliateLink($url)
 	{
+		// Check which shop the url is from
+		$shop = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->getShopFromUrl($url);
+		
 		return 'http://www.awin1.com/awclick.php?mid='.$shop->getAffiliateId().'&id=45628&clickref=123456&p='.rawurlencode($url);
 	}
 
@@ -246,108 +246,42 @@ class AffiliateWindowService implements AffiliateInterface
 	}
 
 	/**
-	 * Updates the product listings for the given merchant
-	 *
-	 * @param  Shop 	$shop 		The shop to add update products for
-	 */
-	public function updateProductsFromApi($shop) 
-	{ 
-		// Get the existing product IDs
-		$existing = $this->productRepository->findExistingProductIdsByMerchant($shop->getAffiliateId());
-
-		// Pull through new unchanged products
-		$page    = 0;
-		$results = array();
-
-		while ($page < 1) {
-			$data = $this->api->getMerchantProducts($shop->getAffiliateId(), $categories, $page * 100);
-			$results = array_merge($results, $data->oProduct);
-			$page++;
-		}
-
-		// Add the new products
-		$this->addNewProductsFromApi($results, $existing, $shop);
-	}
-
-	/**
-	 * Processes any new products in the given data
-	 * 
-	 * @param  array 	$data 		Product data from the API
-	 * @param  array 	$existing   An list of existing product IDs
-	 * @param  Shop 	$shop 		The shop to add new products to
-	 * @return 						The product IDs that were added
-	 */
-	public function addNewProductsFromApi($data, $existing, $shop) 
-	{
-		// Identify any new products
-		foreach ($data as $key => $product) {
-			if (in_array($product->sMerchantProductId, $existing)) {
-				unset($data[$key]);
-			}
-		}
-
-		// Create product entities and track those that were added
-		$added = array();
-
-		foreach ($data as $product) {
-			$entity = $this->createProductFromApi($product, $shop);
-			$this->em->persist($entity);
-			$added[] = $entity->getPid();
-		}
-
-		$this->em->flush();
-
-		return $added;
-	}
-
-	/**
-	 * Create a new product entity from the given data
+	 * Create a new offer entity from the given data
 	 *
 	 * @param  array 	$data  		Data for an individual product
-	 * @param  Shop 	$shop 		The shop to add the product to
-	 * @return Product 				The resulting product entity
+	 * @return Offer 				The resulting offer entity
 	 */
-	protected function createProductFromApi($data, $shop)
+	protected function createOffer($data)
 	{
-		$product = new Product();
+		$offer = new Offer();
 
-		$product->setShop($shop);
-		$product->setCategory($this->getCategory($data->iCategoryId));
-		$product->setPid($data->sMerchantProductId);
-		$product->setName($data->sName);
-		$product->setDescription('<p>'.$data->sDescription.'</p>');
-		$product->setShortDescription($data->sDescription);
-		$product->setUrl($data->sAwDeepLink);
-		$product->setAffiliateUrl($data->sAwDeepLink);
-		$product->setNow($data->fPrice);
-		$product->setWas($data->fRrpPrice);
-		$product->setSale(null);
-		$product->setNew(true);
-
-		// Details
-		if (property_exists($data, 'sBrand')) {
-			$product->setBrand($data->sBrand);
-		} else {
-			$product->setBrand($shop->getName());
+		// Offer code
+		if ($data->sCode !== 'N/A') {
+			$offer->setCode($data->sCode);
 		}
 
-		// Images
-		if (property_exists($data, 'sMerchantThumbUrl')) {
-			$product->setThumbnail($data->sMerchantThumbUrl);
-		} else {
-			$product->setThumbnail($data->sAwImageUrl);
-		}
-		if (property_exists($data, 'sMerchantImageUrl')) {
-			$product->setImage($data->sMerchantImageUrl);
-		} else {
-			$product->setImage($data->sAwImageUrl);
+		// Url
+		if (property_exists($data, 'sUrl')) {
+			$offer->setUrl($data->sUrl);
 		}
 
-		// Cleanup any irregular data
-		$this->getFormatter()->cleanupFeedProduct($product);
+		$offer->setDescription($data->sDescription);
+		$offer->setStart(new \DateTime($data->sStartDate));
+		$offer->setEnd(new \DateTime($data->sEndDate));
 
-		return $product;
+		return $offer;
 	}
+
+	/**
+	 * Set the updater service
+	 *
+	 * @param  UpdaterInterface		$updater 	An updater service
+	 */
+	public function setUpdater(UpdaterInterface $updater) 
+	{
+		$this->updater = $updater;
+	}
+}
 
 // 0 aw_product_id,
 // 1 merchant_product_id,
@@ -387,67 +321,4 @@ class AffiliateWindowService implements AffiliateInterface
 // 35 large_image,
 // 36 average_rating,
 // 37 alternate_image
-
-	/**
-	 * Create a new offer entity from the given data
-	 *
-	 * @param  array 	$data  		Data for an individual product
-	 * @return Offer 				The resulting offer entity
-	 */
-	protected function createOffer($data)
-	{
-		$offer = new Offer();
-
-		// Offer code
-		if ($data->sCode !== 'N/A') {
-			$offer->setCode($data->sCode);
-		}
-
-		// Url
-		if (property_exists($data, 'sUrl')) {
-			$offer->setUrl($data->sUrl);
-		}
-
-		$offer->setDescription($data->sDescription);
-		$offer->setStart(new \DateTime($data->sStartDate));
-		$offer->setEnd(new \DateTime($data->sEndDate));
-
-		return $offer;
-	}
-
-	/**
-	 * Get a category entity based on the affiliate category id, adding if necessary
-	 *
-	 * @param  array 		$id  		Affiliate category id
-	 * @return Category 				The resulting category entity
-	 */
-	protected function getCategory($id)
-	{
-		// Find the existing category
-		$categoryRepository = $this->em->getRepository('ThreadAndMirrorProductsBundle:Category');
-		$category           = $categoryRepository->findOneBy(array('affiliateWindowId' => $id));
-
-		// Create a new category if it doesn't exist already
-		if ($category !== null) {
-			return $category;
-		} else {
-			$category = new Category();
-			$category->setAffiliateWindowId($id);
-			$this->em->persist($category);
-			$this->em->flush();
-
-			return $category;
-		}
-	}
-
-	/**
-	 * Set the updater service
-	 *
-	 * @param  UpdaterInterface		$updater 	An updater service
-	 */
-	public function setUpdater(UpdaterInterface $updater) 
-	{
-		$this->updater = $updater;
-	}
-}
 

@@ -12,6 +12,7 @@ class PickType extends AbstractType
     {
     	$builder->add('designer', null, array(
 			'label'     		=> 'Designer',
+			'required'			=> false,
 			'error_bubbling' 	=> true,
 		));	
 
@@ -40,6 +41,13 @@ class PickType extends AbstractType
 			'error_bubbling' 	=> true,
 		));	
 	}
+
+	public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'ThreadAndMirror\EditorsPicksBundle\Entity\Pick',
+        ));
+    }
 
 	public function getName()
 	{

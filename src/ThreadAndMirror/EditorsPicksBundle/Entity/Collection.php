@@ -5,6 +5,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Stems\SocialBundle\Service\Sharer;
 
 /** 
  * @ORM\Table(name="tam_editorspicks_collection")
@@ -24,8 +26,15 @@ class Collection
      */
     protected $owner;
 
+    /**
+     * @ORM\Column(type="text", length=64)
+     * @Gedmo\Slug(fields={"header"})
+     */
+    protected $slug;
+
     /** 
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(groups={"full"})
      */
     protected $header;
 
@@ -35,9 +44,14 @@ class Collection
     protected $caption;
 
     /** 
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
-    protected $layout = 1;
+    protected $image;
+
+    /** 
+     * @ORM\Column(type="string", length=32)
+     */
+    protected $layout = 'outfits';
 
     /** 
      * @ORM\Column(type="text")
@@ -56,29 +70,64 @@ class Collection
 
     /** 
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     protected $created;
 
     /** 
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
      */
     protected $updated;
 
     /** 
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $published;
 
+    /** 
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $metaTitle;
+
+    /** 
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $metaKeywords;
+
+    /** 
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $metaDescription;
+
     /**
-     * @ORM\OneToMany(targetEntity="Pick", mappedBy="collection")
+     * @ORM\OneToMany(targetEntity="Pick", mappedBy="collection", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $picks; 
 
-    public function __construct($user)
+    public function __construct()
     {
-        $this->owner = $user->getId();
-        $this->created = new \DateTime;
+        $this->picks = new ArrayCollection();
+    }
+
+    /**
+     * Create the social sharer object for this collection
+     *
+     * @param  string   $platform       The social media platform to generate the sharer for
+     * @return Sharer                   The generated sharer
+     */
+    public function getSharer($platform=null)
+    {
+        $sharer = new Sharer($platform);
+
+        $sharer->setTitle($this->header);
+        $sharer->setText($this->header);
+        $sharer->setUrl('http://www.threadandmirror.com/editors-picks/'.$this->slug);
+        $sharer->setImage('http://www.threadandmirror.com/'.$this->picks[0]->getImage());
+        $sharer->setTags(array('threadandmirror'));
+
+        return $sharer;
     }
 
     /**
@@ -158,6 +207,52 @@ class Collection
     public function getHeader()
     {
         return $this->header;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Collection
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set image
+     *
+     * @param integer $image
+     * @return Collection
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return integer 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 
     /**
@@ -322,22 +417,124 @@ class Collection
     }
 
     /**
+     * Set metaTitle
+     *
+     * @param string $metaTitle
+     * @return Collection
+     */
+    public function setMetaTitle($metaTitle)
+    {
+        $this->metaTitle = $metaTitle;
+    
+        return $this;
+    }
+
+    /**
+     * Get metaTitle
+     *
+     * @return string 
+     */
+    public function getMetaTitle()
+    {
+        return $this->metaTitle === null ? $this->header : $this->metaTitle;
+    }
+
+    /**
+     * Set metaKeywords
+     *
+     * @param string $metaKeywords
+     * @return Collection
+     */
+    public function setMetaKeywords($metaKeywords)
+    {
+        $this->metaKeywords = $metaKeywords;
+    
+        return $this;
+    }
+
+    /**
+     * Get metaKeywords
+     *
+     * @return string 
+     */
+    public function getMetaKeywords()
+    {
+        return $this->metaKeywords;
+    }
+
+    /**
+     * Set metaDescription
+     *
+     * @param string $metaDescription
+     * @return Collection
+     */
+    public function setMetaDescription($metaDescription)
+    {
+        $this->metaDescription = $metaDescription;
+    
+        return $this;
+    }
+
+    /**
+     * Get metaDescription
+     *
+     * @return string 
+     */
+    public function getMetaDescription()
+    {
+        return $this->metaDescription;
+    }
+
+    /**
      * Add pick
      *
-     * @param ThreadAndMirror\EditorsPicksBundle\Entity\Pick $pick
+     * @param \ThreadAndMirror\EditorsPicksBundle\Entity\Pick $pick
+     * @return ArrayCollection
      */
     public function addPick(\ThreadAndMirror\EditorsPicksBundle\Entity\Pick $pick)
     {
-        $this->picks[] = $pick;
+        $this->picks->add($pick);
+
+        $pick->setCollection($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove pick
+     *
+     * @param \ThreadAndMirror\EditorsPicksBundle\Entity\Pick $pick
+     */
+    public function removePick(\ThreadAndMirror\EditorsPicksBundle\Entity\Pick $pick)
+    {
+        $this->picks->removeElement($pick);
     }
 
     /**
      * Get picks
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\ArrayCollection 
      */
     public function getPicks()
     {
         return $this->picks;
+    }
+
+    /**
+     * Add a pick at a specific collection offset by filling it with dummy picks
+     *
+     * @param  Pick     $pick
+     * @param  integer  $offset
+     */
+    public function addPickAtOffset($pick, $offset)
+    {
+        $count = 0;
+
+        while ($count < $offset) {
+            $this->addPick(new Pick());
+            $count++;
+        }
+
+        $this->addPick($pick);
     }
 }

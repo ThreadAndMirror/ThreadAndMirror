@@ -110,7 +110,7 @@ class BaseParser
 		// get the product details and return as failed if it can't be parsed
 		if (!$this->getDetails()) {
 			$this->services->getLogger()->error('Parsing product details failed for '.$this->url);
-			echo 'Parsing product details failed for '.$this->url;
+			// echo 'Parsing product details failed for '.$this->url;
 			return false;
 		}
 
@@ -126,8 +126,8 @@ class BaseParser
 		}
 
 		// set the type of product we're handling
-		$this->product->setAttire($shop->getAttire());
-		$this->product->setBeauty($shop->getBeauty());
+		$this->product->setAttire($shop->getHasFashion());
+		$this->product->setBeauty($shop->getHasBeauty());
 
 		// check if the product is in stock
 		$this->getAvailability();
@@ -136,13 +136,13 @@ class BaseParser
 		if (!$this->getSalePrices()) {
 			if (!$this->getPrices()) {
 				$this->services->getLogger()->error('Parsing product prices failed for '.$this->url);
-				echo 'Parsing product prices failed for '.$this->url;
+				// echo 'Parsing product prices failed for '.$this->url;
 				return false;
 			}
 		}
 
 		// get the affiliate link if we can
-		$this->product->setAffiliateUrl($this->parseAffiliateLink($url, $this->product));
+		$this->product->setAffiliateUrl($this->parseAffiliateLink($this->product, $url));
 
 		// markup the description field
 		$this->product->setDescription($this->markupDescription($this->product->getDescription()));
@@ -641,17 +641,11 @@ class BaseParser
 			// if a url isn't passed (ie. for individual updates) we can get it from the parser
 			!$url and $url = $this->url;
 		
-			$token = 'a252e06b15d22698a35fa865c247924cfc1ef382bda0968e81f273f69562744d';
-			$mid = $shop->getAffiliateId();
-			$requestUrl = 'http://getdeeplink.linksynergy.com/createcustomlink.shtml?token='.$token.'&mid='.$mid.'&murl='.$url;
-			$crawler = $this->services->crawlCustomUrl($requestUrl);
-			$response = $crawler->text();
+			$token = '2B31muHJqQI';
+			$affiliateUrl = 'http://click.linksynergy.com/deeplink?id='.$token.'&mid='.$shop->getAffiliateId().'&murl='.rawurlencode($url);
 			
-			// triple equals to avoid false results
-			if (strpos($response, 'http://') === 0) {
-				$this->product->setAffiliateUrl($response);
-				return true;
-			}
+			$this->product->setAffiliateUrl($affiliateUrl);
+			return true;
 		}
 			
 		return false;
@@ -668,16 +662,10 @@ class BaseParser
 	{
 		if (is_object($product) && $product->getShop()->getLinkshare()) {
 
-			$token = 'a252e06b15d22698a35fa865c247924cfc1ef382bda0968e81f273f69562744d';
-			$mid = $product->getShop()->getAffiliateId();
-			$requestUrl = 'http://getdeeplink.linksynergy.com/createcustomlink.shtml?token='.$token.'&mid='.$mid.'&murl='.$url;
-			$crawler = $this->services->crawlCustomUrl($requestUrl);
-			$response = $crawler->text();
-			
-			// triple equals to avoid false results
-			if (strpos($response, 'http://') === 0) {
-				return $response;
-			}
+			$token = '2B31muHJqQI';
+			$affiliateUrl = 'http://click.linksynergy.com/deeplink?id='.$token.'&mid='.$product->getShop()->getAffiliateId().'&murl='.rawurlencode($url);
+
+			return $affiliateUrl;
 		}
 
 		return false;

@@ -46,7 +46,7 @@
 	</head>
 	<body class="{% if app.user %}logged-in{% else %}not-logged-in{% endif %}" data-cms-slug="{{ page.slug }}">
 		<header>
-			<h2><a href="/">THREAD<span>&amp;</span>MIRROR</a></h2>
+			<h2><a href="/">T<span>&amp;</span>M</a></h2>
 
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 				<a class="login" href="/logout" title="Sign Out"><i class="fa fa-key"></i></a>
@@ -99,27 +99,28 @@
 					<li><a href="/privacy-policy">Privacy Policy</a></li>
 				</ul>
 				<ul>
-					<li><h6><a href="/latest-additions">Fashion</a></h6></li>
+					<li><h6><a href="{{ path('thread_products_front_new_in', { 'area' : 'fashion' }) }}">Fashion</a></h6></li>
 					<li><hr></li>
-					<li><a href="/latest-additions">New In</a></li>
-					<li><a href="/sale-items">Sale</a></li>
-					{# <li><a href="/fashion/outlet">Outlet</a></li> #}
-					<li><a href="/fashion/stores">Stores</a></li>
+					<li><a href="{{ path('thread_products_front_new_in', { 'area' : 'beauty' }) }}">New In</a></li>
+					<li><a href="{{ path('thread_products_front_sale', { 'area' : 'beauty' }) }}">Sale</a></li>
+					<li><a href="{{ path('thread_products_front_stores', { 'area' : 'beauty' }) }}">Stores</a></li>
+					<li><a href="{{ path('thread_products_front_brands', { 'area' : 'beauty' }) }}">Brands</a></li>
 					{# <li><a href="/fashion/offers">Offers &amp; Discounts</a></li> #}
 				</ul>
 				<ul>
-					<li><h6><a href="/beauty/new-in">Beauty</a></h6></li>
+					<li><h6><a href="{{ path('thread_products_front_new_in', { 'area' : 'fashion' }) }}">Beauty</a></h6></li>
 					<li><hr></li>
-					<li><a href="/beauty/new-in">New In</a></li>
-					<li><a href="/beauty/sale">Sale</a></li>
-					<li><a href="/beauty/stores">Stores</a></li>
+					<li><a href="{{ path('thread_products_front_new_in', { 'area' : 'fashion' }) }}">New In</a></li>
+					<li><a href="{{ path('thread_products_front_sale', { 'area' : 'fashion' }) }}">Sale</a></li>
+					<li><a href="{{ path('thread_products_front_stores', { 'area' : 'fashion' }) }}">Stores</a></li>
+					<li><a href="{{ path('thread_products_front_brands', { 'area' : 'fashion' }) }}">Brands</a></li>
 					{# <li><a href="/beauty/offers">Offers &amp; Discounts</a></li> #}
 				</ul>
 				<ul>
 					<li><h6><a href="/magazine">Magazine &amp; Media</a></h6></li>
 					<li><hr></li>
 					<li><a href="/magazine">Magazine</a></li>
-					<li><a href="/street-chic">Street Chic</a></li>
+					<li><a href="/style-file">Style File</a></li>
 					<li><a href="/social">The Social Circle</a></li>
 					{# <li><a href="/editors-picks">Editors Picks</a></li> #}
 				</ul>
@@ -143,11 +144,12 @@
 						<a href="http://www.twitter.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-twitter"></i></a>
 						<a href="http://www.facebook.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-facebook"></i></a>
 					</li>
-					<li><br><br><br><br><p class="small">&copy; Thread &amp; Mirror 2014</p></li>
+					<li><br><br><br><br><p class="small">&copy; Thread &amp; Mirror {{ 'now'|date('Y') }}</p></li>
 				</ul> 
 			</div>
 		</div>
-	 	<script src="/js/plugins/isotope/isotope.pkgd.min.js"></script>
+	 	<script src="/js/plugins/packery/packery.pkgd.min.js"></script>
+	 	{% javascripts '@frontend_vendor_js' filter='uglifyjs2' output='js/front/vendor.js' %}<script src="{{ asset_url }}"></script>{% endjavascripts %}
         {% javascripts '@frontend_js' filter='uglifyjs2' output='js/front/frontend.js' %}<script src="{{ asset_url }}"></script>{% endjavascripts %}
 		{% block javascripts %}{% endblock %}
 	</body>

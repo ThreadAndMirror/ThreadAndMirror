@@ -1,0 +1,15 @@
+thread_moodboard_admin:
+    resource: "@ThreadAndMirrorMoodBoardBundle/Controller/AdminController.php"
+    type:     annotation
+
+# thread_moodboard_front:
+#     resource: "@ThreadAndMirrorMoodBoardBundle/Controller/FrontController.php"
+#     type:     annotation
+
+# thread_moodboard_popup:
+#     resource: "@ThreadAndMirrorMoodBoardBundle/Controller/PopupController.php"
+#     type:     annotation
+
+# thread_moodboard_rest:
+#     resource: "@ThreadAndMirrorMoodBoardBundle/Controller/RestController.php"
+#     type:     annotation

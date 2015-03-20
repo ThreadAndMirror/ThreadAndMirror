@@ -2,56 +2,55 @@
 
 namespace ThreadAndMirror\EditorsPicksBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-	Symfony\Component\HttpFoundation\RedirectResponse,
-	Symfony\Component\HttpFoundation\JsonResponse,
-	Symfony\Component\HttpFoundation\Request;
-
+use Stems\CoreBundle\Controller\BaseRestController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use ThreadAndMirror\EditorsPicksBundle\Entity\Collection;
 use ThreadAndMirror\EditorsPicksBundle\Entity\Pick;
+use ThreadAndMirror\EditorsPicksBundle\Form\CollectionType;
 
-use ThreadAndMirror\EditorsPicksBundle\Form\PickType;
-
-class RestController extends Controller
+class RestController extends BaseRestController
 {
 	/**
-	 * Generate the pick form based on whether a url or pid was passed
+	 * Validate a pick form
+	 *
+	 * @Route("/admin/rest/editors-picks/validate/pick/{offset}", name="thread_editorspicks_rest_validate_pick")
 	 */
-	public function generatePickAction(Request $request)
+	public function validatePick(Request $request, $offset)
 	{
-		$em = $this->getDoctrine()->getManager();
+		// Create a dummy collection so we can validate the child pick
+		$collection = new Collection();
 
-		// try to find the product based on the passed param
-		if ($request->get('pid')) {
-			$product = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->find($request->get('pid'));
-		} else {
-			$product = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->getProductFromUrl($request->get('url'));
-		}
+		// Turn off validation on the collection, including the CSRF token
+		$form = $this->createForm(new CollectionType(true), $collection, array(
+			'validation_groups' => array('picks_only'),
+			'csrf_protection'   => false,
+		));
 
-		// if we manage to find a product then build a new pick form
-		if (is_object($product)) {
+		// Handle the form submission
+		if ($request->getMethod() == 'POST') {
 
-			// create the pick and form
-			$pick = new Pick($product);
-			$form = $this->createForm(new PickType(), $pick);
+			// Validate the submitted values
+			$form->bind($request);
 
-			// get the html for the pick editor form
-			$html = $this->renderView('ThreadAndMirrorEditorsPicksBundle:Rest:form.html.twig', array(
-				'form'		=> $form->createView(),
-				'pick'		=> $pick,
-			));
+			if ($form->isValid()) {
 
-			// success response
-			return new JsonResponse(array(
-				'html'		=> $html,
-				'success'   => true,
-				'message' 	=> 'The pick form has been created.'
-			));
-		} else {
-			// error response
-			return new JsonResponse(array(
-				'success'   => false,
-				'message' 	=> 'We could not load a product using that link or product ID.'
-			));
+				// Get the html for the pick editor form
+				$html = $this->renderView('ThreadAndMirrorEditorsPicksBundle:Rest:pick.html.twig', array(
+					'form'		=> $form->createView(),
+					'offset'	=> $offset
+				));
+
+				return $this->addHtml($html)->setCallback('addEditorsPickCallback')->success()->sendResponse();
+
+			} else {
+				// Add the validation errors to the response
+				$this->addValidationErrors($form);
+				
+				return $this->error('There was an error submitting your form.')->sendResponse();
+			}
 		}
 	}
 }

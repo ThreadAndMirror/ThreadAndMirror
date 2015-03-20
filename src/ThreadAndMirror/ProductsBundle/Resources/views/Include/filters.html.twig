@@ -1,0 +1,20 @@
+<div id="product-filters">
+	<form class="text-search" method="post">
+		<div class="clear-text"><i class="fa">×</i></div>
+		{% if filters.keywords is not empty %}
+			<input type="text" name="filter-keywords" value="{{ filters.keywords }}" />
+		{% else %}
+			<input type="text" name="filter-keywords" placeholder="Search..." />
+		{% endif %}
+		{# <i class="fa fa-fw fa-filter"></i> #}
+		<button class="search"><i class="fa fa-search"></i></button>
+	</form>
+	{# <div id="show-product-filter" class="left-control" title="Show Filters">
+		<i class="fa fa-search"></i>
+	</div>
+	{% if app.user %}
+		<div id="save-favourite-filters" class="left-control" title="Save Favourite Filters">
+			<i class="fa fa-star"></i>
+		</div>
+	{% endif %} #}
+</div>

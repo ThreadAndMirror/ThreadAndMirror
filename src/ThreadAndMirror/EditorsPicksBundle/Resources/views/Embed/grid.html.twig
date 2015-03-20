@@ -1,0 +1,10 @@
+<div class="editors-picks-grid" itemprop="articleBody">
+	{% for pick in collection.picks %}
+		<a class="pick" href="{{ pick.url }}" >
+			<div style="background:url('{{ pick.image }}') center center; background-size: contain; background-repeat: no-repeat;"></div>
+			<h2>{{ pick.designer }}</h2>
+			<h3><span>{{ pick.name }}</span></h3>
+		</a>
+	{% endfor %}
+	<br class="clear">
+</div>

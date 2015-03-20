@@ -1,0 +1,59 @@
+<?php
+namespace ThreadAndMirror\MoodBoardBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\ORM\Mapping as ORM;
+
+
+/** 
+ * @ORM\Entity()
+ * @ORM\Table(name="tam_moodboard_element")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="discriminator", type="string")
+ * @ORM\DiscriminatorMap({
+ *      "image"   = "ImageElement", 
+ * 		"text"    = "TextElement"
+ * })
+ */
+class Element
+{
+	/** 
+	 * @ORM\Id
+	 * @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	protected $id;
+
+	/** 
+	 * @ORM\Column(type="integer")
+	 */
+	protected $x = 0;
+
+	/** 
+	 * @ORM\Column(type="integer")
+	 */
+	protected $y = 0;
+
+	/** 
+     * @ORM\Column(type="decimal", precision=10, scale=2)
+     */
+    protected $scale = 1;
+
+	/** 
+	 * @ORM\Column(type="integer")
+	 */
+	protected $rotation = 0;
+
+	/** 
+	 * @ORM\Column(type="integer")
+	 */
+	protected $position = 1;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="MoodBoard", inversedBy="elements")
+	 * @ORM\JoinColumn(name="moodboard_id", referencedColumnName="id")
+	 */
+	protected $moodboard;
+}

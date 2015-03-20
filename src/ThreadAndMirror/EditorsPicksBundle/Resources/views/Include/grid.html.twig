@@ -1,0 +1,14 @@
+<div class="editors-picks-grid">
+	{% for pick in collection.picks %}
+		{% if loop.index <= 8 %}
+			<a class="pick" href="{{ pick.url }}" >
+				<h3><span>{{ pick.designer }}</span>{{ pick.name }}</h3>
+				{% if pick.description is not empty %}
+					<p>{{ pick.description }}</p>
+				{% endif %}
+				<div style="background:url('{{ pick.image }}') center center; background-size: contain; background-repeat: no-repeat;"></div>
+			</a>
+		{% endif %}
+	{% endfor %}
+	<br class="clear">
+</div>

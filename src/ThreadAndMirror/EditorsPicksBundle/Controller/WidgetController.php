@@ -12,31 +12,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 class WidgetController extends Controller
 {
 	/**
-	 * Renders a block with the latest editors pick
+	 * Renders a block with the latest editors pick collection that's a single item
 	 */
-	public function latestEditorsPickAction()
+	public function latestFeaturedPickAction()
 	{
 		// get the latest editors pick
 		$em = $this->getDoctrine()->getEntityManager();
-		$picks = $em->getRepository('ThreadAndMirrorEditorsPicksBundle:Pick')->findBy(array('deleted' => false), array('added' => 'DESC'), 1);
-		$pick = reset($picks);
+		$collection = $em->getRepository('ThreadAndMirrorEditorsPicksBundle:Collection')->findBy(array('deleted' => false, 'status' => 'Published', 'status' => 'single'), array('created' => 'DESC'), 1);
 
-		return $this->render('ThreadAndMirrorEditorsPicksBundle:Widget:latestEditorsPick.html.twig', array(
-			'pick' 	=> $pick,
+		return $this->render('ThreadAndMirrorEditorsPicksBundle:Widget:editorsPicks.html.twig', array(
+			'collection' 	=> reset($collection)
 		));
 	}
 
 	/**
-	 * Renders a block with the latest pick as a feature and four other picks
+	 * Renders a block with the latest collection
 	 */
 	public function editorsPicksAction()
 	{
 		// get the latest editors pick
 		$em = $this->getDoctrine()->getEntityManager();
-		$picks = $em->getRepository('ThreadAndMirrorEditorsPicksBundle:Pick')->findBy(array('deleted' => false), array('added' => 'DESC'), 5);
+		$collection = $em->getRepository('ThreadAndMirrorEditorsPicksBundle:Collection')->findBy(array('deleted' => false, 'status' => 'Published'), array('created' => 'DESC'), 1);
 
 		return $this->render('ThreadAndMirrorEditorsPicksBundle:Widget:editorsPicks.html.twig', array(
-			'picks' 	=> $picks,
+			'collection' 	=> reset($collection)
 		));
 	}
 }

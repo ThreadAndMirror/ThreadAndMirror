@@ -12,5 +12,10 @@ interface AffiliateInterface
 	/**
 	 * Update products for the active merchant
 	 */
-	public function updateProducts($shop);
+	public function createProductsFromFeed($shop);
+
+	/**
+     * Homogenise data for updaters
+     */
+	public function homogeniseProductData($data);
 } 

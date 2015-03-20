@@ -100,9 +100,14 @@ class Shop
     protected $feedParsed;
 
     /** 
+     * @ORM\Column(type="boolean")
+     */
+    protected $hasCrawler = false;
+
+    /** 
      * @ORM\Column(type="string", nullable=true, length=32)
      */
-    protected $parserClass = null;
+    protected $serviceName = null; 
 
     /** 
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
@@ -259,6 +264,16 @@ class Shop
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Get frontend url
+     *
+     * @return string 
+     */
+    public function getFrontendUrl()
+    {
+        return $this->affiliateUrl !== null ? $this->affiliateUrl : $this->url;
     }
 
     /**
@@ -515,26 +530,59 @@ class Shop
     }
 
     /**
-     * Set parserClass
+     * Set hasCrawler
      *
-     * @param string $parserClass
+     * @param boolean $hasCrawler
      * @return Shop
      */
-    public function setParserClass($parserClass)
+    public function setHasCrawler($hasCrawler)
     {
-        $this->parserClass = $parserClass;
+        $this->hasCrawler = $hasCrawler;
     
         return $this;
     }
 
     /**
-     * Get parserClass
+     * Get hasCrawler
+     *
+     * @return boolean 
+     */
+    public function getHasCrawler()
+    {
+        return $this->hasCrawler;
+    }
+
+    /**
+     * Does this shop have a crawler set up
+     *
+     * @return boolean 
+     */
+    public function isCrawlable()
+    {
+        return $this->hasCrawler;
+    }
+
+    /**
+     * Set serviceName
+     *
+     * @param string $serviceName
+     * @return Shop
+     */
+    public function setServiceName($serviceName)
+    {
+        $this->serviceName = $serviceName;
+    
+        return $this;
+    }
+
+    /**
+     * Get serviceName
      *
      * @return string 
      */
-    public function getParserClass()
+    public function getServiceName()
     {
-        return $this->parserClass;
+        return $this->serviceName;
     }
 
     /**
@@ -644,5 +692,35 @@ class Shop
     public function getFeedParsed()
     {
         return $this->feedParsed;
+    }
+
+    /**
+     * Get Updater service name for this shop
+     *
+     * @return string
+     */
+    public function getUpdaterName()
+    {
+        return 'threadandmirror.products.updater.'.$this->serviceName;
+    }
+
+    /**
+     * Get Crawler service name for this shop
+     *
+     * @return string
+     */
+    public function getCrawlerName()
+    {
+        return 'threadandmirror.products.crawler.'.$this->serviceName;
+    }
+
+    /**
+     * Get Formatter service name for this shop
+     *
+     * @return string
+     */
+    public function getFormatterName()
+    {
+        return 'threadandmirror.products.formatter.'.$this->serviceName;
     }
 }

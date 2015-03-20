@@ -28,10 +28,14 @@ class AppKernel extends Kernel
             new ThreadAndMirror\StreetChicBundle\ThreadAndMirrorStreetChicBundle(),
             new ThreadAndMirror\SocialBundle\ThreadAndMirrorSocialBundle(),
             new ThreadAndMirror\ProductsBundle\ThreadAndMirrorProductsBundle(),
+            new ThreadAndMirror\MoodBoardBundle\ThreadAndMirrorMoodBoardBundle(),
             new Ijanki\Bundle\FtpBundle\IjankiFtpBundle(),
             new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Ekino\Bundle\NewRelicBundle\EkinoNewRelicBundle(),
+            new Snc\RedisBundle\SncRedisBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

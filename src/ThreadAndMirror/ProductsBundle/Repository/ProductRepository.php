@@ -2,337 +2,244 @@
 
 namespace ThreadAndMirror\ProductsBundle\Repository;
 
-use Doctrine\ORM\EntityRepository,
-	ThreadAndMirror\ProductsBundle\Entity\Product,
-	ThreadAndMirror\ProductsBundle\Service\SaleParser,
-	Symfony\Component\DomCrawler\Crawler;
-
-use ThreadAndMirror\ProductsBundle\Service\ProductParser;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use	Symfony\Component\DomCrawler\Crawler;
+use	ThreadAndMirror\ProductsBundle\Entity\Product;
+use	ThreadAndMirror\ProductsBundle\Service\SaleParser;
+use ThreadAndMirror\ProductsBundle\Service\ProductFilter;
 
 class ProductRepository extends EntityRepository
 {
-	public function getUpdateable($limit, $shop)
+	/**
+	 * Add the essential components for a product query
+	 *
+	 * @param  ProductFilter 	$filters 	Requested filters
+	 * @param  string 			$area  		The product area
+	 * @param  integer 			$limit 		A limit to apply to the result set
+	 * @return QueryBuilder
+	 */
+	protected function startProductQuery(ProductFilter $filters = null, $area = null, $limit = 3000) 
 	{
+		// Select
 		$qb = $this->getEntityManager()->createQueryBuilder();
 		$qb->addSelect('product');
 		$qb->from('ThreadAndMirrorProductsBundle:Product', 'product');
-		
-		// get unexpired products for the specified shop
+		$qb->innerJoin('product.shop', 'shop');
+
+		// Ignore deleted and expired
 		$qb->where('product.deleted = :deleted');
-		$qb->andWhere('product.shop = :shop');
-		$qb->andWhere($qb->expr()->isNull('product.expired'));
 		$qb->setParameter('deleted', '0');
+		$qb->andWhere($qb->expr()->isNull('product.expired'));
+
+		// Limit by area
+		if ($area !== null) {
+			$qb->andWhere('product.area = :area');
+			$qb->setParameter('area', $area);
+		}
+
+		// Filter by keywords if the filter allows it
+		if ($filters !== null && !$filters->getIgnoreKeywords()) {
+			$qb->andWhere($qb->expr()->like('product.name', ':keywords'));
+			$qb->setParameter('keywords', '%'.$filters->getKeywords().'%');
+		}
+
+		// Default to ordering newest first
+		$qb->orderBy('product.id', 'DESC');	
+
+		// Limit results 
+		if ($limit !== null) {
+			$qb->setMaxResults($limit);
+		}
+
+		return $qb;
+	}
+
+	/**
+	 * Get a list of values from a scalar query result
+	 *
+	 * @param  QueryBuilder 	$qb 		The query builder
+	 * @param  string 			$property 	The property to take the value from
+	 * @return array  						An un-indexed array of extracted values
+	 */
+	protected function getList(QueryBuilder $qb, $property)
+	{
+		$results = $qb->getQuery()->getScalarResult();
+		$values  = array();
+
+		foreach ($results as $result) {
+			$values[] = $result[$property];
+		}
+
+		return $values;
+	}
+
+	/**
+	 * Find all products in the specified area
+	 *
+	 * @param  ProductFilter 	$filters 	Requested filters
+	 * @param  string 			$area  		The product area
+	 * @return array 						The resulting Products
+	 */
+	public function findProducts(ProductFilter $filters, $area)
+	{
+		$qb = $this->startProductQuery($filters, $area);
+
+		return $qb->getQuery()->getResult();
+	}
+
+	/**
+	 * Find all new-in products in the specified area
+	 *
+	 * @param  ProductFilter 	$filters 	Requested filters
+	 * @param  string 			$area  		The product area
+	 * @return array 						The resulting Products
+	 */
+	public function findNewIn(ProductFilter $filters, $area)
+	{
+		$qb = $this->startProductQuery($filters, $area);
+
+		// Only flagged as new in
+		$qb->andWhere('product.new = :new');
+		$qb->setParameter('new', '1');
+
+		return $qb->getQuery()->getResult();
+	}
+
+	/**
+	 * Find all sale products in the specified area
+	 *
+	 * @param  ProductFilter 	$filters 	Requested filters
+	 * @param  string 			$area  		The product area
+	 * @return array 						The resulting Products
+	 */
+	public function findSale(ProductFilter $filters, $area)
+	{
+		$qb = $this->startProductQuery($filters, $area);
+
+		// Only flagged as on sale
+		$qb->andWhere($qb->expr()->isNotNull('product.sale'));
+
+		return $qb->getQuery()->getResult();
+	}
+
+	/**
+	 * Find all products in the specified area belonging to the specified shop
+	 *
+	 * @param  ProductFilter 	$filters 	Requested filters
+	 * @param  string 			$area  		The product area
+	 * @param  string 			$shop 		The slug of the shop to match
+	 * @return array 						The resulting Products
+	 */
+	public function findShopProducts(ProductFilter $filters, $area, $shop)
+	{
+		$qb = $this->startProductQuery($filters, $area);
+
+		// Only from the given shop
+		$qb->andWhere('shop.slug = :shop');
 		$qb->setParameter('shop', $shop);
-
-		// order by most recently added
-		$qb->orderBy('product.checked', 'ASC');	
-
-		return $qb->setMaxResults($limit)->getQuery()->getResult();
-	}
-
-	public function getAllFashion($filters=null)
-	{
-		$qb = $this->getEntityManager()->createQueryBuilder();
-		$qb->addSelect('product');
-		$qb->from('ThreadAndMirrorProductsBundle:Product', 'product');
-		
-		// only search for newly added products
-		$qb->where('product.deleted = :deleted');
-		$qb->andWhere('product.attire = :attire');
-		$qb->andWhere($qb->expr()->isNull('product.expired'));
-		$qb->setParameter('deleted', '0');
-		$qb->setParameter('attire', '1');
-
-		// filter by shops if the filter allows it
-		// if (!$filters->getIgnoreShops()) {
-		// 	$qb->andWhere($qb->expr()->in('product.shop', ':shops'));
-		// 	$qb->setParameter('shops', $filters->getShops());
-		// }
-			
-		// // filter by categories if the filter allows it
-		// if (!$filters->getIgnoreCategories()) {
-		// 	$qb->andWhere($qb->expr()->in('product.category', ':categories'));
-		// 	$qb->setParameter('categories', $filters->getCategories());
-		// }
-
-		// filter by keywords if the filter allows it
-		if (!$filters->getIgnoreKeywords()) {
-			$qb->andWhere($qb->expr()->like('product.name', ':keywords'));
-			$qb->setParameter('keywords', '%'.$filters->getKeywords().'%');
-		}
-
-		// order by most recently added
-		$qb->orderBy('product.id', 'DESC');	
-
-		// show the most recent 3000 items by default
-		return $qb->setMaxResults(3000)->getQuery()->getResult();
-	}
-
-	public function getLatestAdditions($filters=null, $type='attire')
-	{
-		$qb = $this->getEntityManager()->createQueryBuilder();
-		$qb->addSelect('product');
-		$qb->from('ThreadAndMirrorProductsBundle:Product', 'product');
-		
-		// only search for newly added products
-		$qb->where('product.new = :new');
-		$qb->andWhere('product.deleted = :deleted');
-		$qb->andWhere($qb->expr()->isNull('product.expired'));
-		$qb->setParameter('new', '1');
-		$qb->setParameter('deleted', '0');
-
-		// pick the product type
-		if ($type == 'attire') {
-			$qb->andWhere('product.attire = :attire');
-			$qb->setParameter('attire', '1');
-		} else {
-			$qb->andWhere('product.attire = :attire');
-			$qb->setParameter('attire', '0');
-		}
-		if ($type == 'beauty') {
-			$qb->andWhere('product.beauty = :beauty');
-			$qb->setParameter('beauty', '1');
-		} else {
-			$qb->andWhere('product.beauty = :beauty');
-			$qb->setParameter('beauty', '0');
-		}
-
-		// filter by shops if the filter allows it
-		// if (!$filters->getIgnoreShops()) {
-		// 	$qb->andWhere($qb->expr()->in('product.shop', ':shops'));
-		// 	$qb->setParameter('shops', $filters->getShops());
-		// }
-			
-		// // filter by categories if the filter allows it
-		// if (!$filters->getIgnoreCategories()) {
-		// 	$qb->andWhere($qb->expr()->in('product.category', ':categories'));
-		// 	$qb->setParameter('categories', $filters->getCategories());
-		// }
-
-		// filter by keywords if the filter allows it
-		if (!$filters->getIgnoreKeywords()) {
-			$qb->andWhere($qb->expr()->like('product.name', ':keywords'));
-			$qb->setParameter('keywords', '%'.$filters->getKeywords().'%');
-		}
-
-		// order by most recently added
-		$qb->orderBy('product.id', 'DESC');	
-
-		// show the most recent 3000 items by default
-		return $qb->setMaxResults(3000)->getQuery()->getResult();
-	}
-
-	public function getSaleItems($filters=null)
-	{
-		$qb = $this->getEntityManager()->createQueryBuilder();
-		$qb->addSelect('product');
-		$qb->from('ThreadAndMirrorProductsBundle:Product', 'product');
-
-		// only search for sale products
-		$qb->where($qb->expr()->isNotNull('product.sale'));
-		$qb->andWhere($qb->expr()->isNull('product.expired'));
-		$qb->andWhere('product.attire = :attire');
-		$qb->andWhere('product.deleted = :deleted');
-		$qb->setParameter('deleted', '0');
-		$qb->setParameter('attire', '1');
-
-		// filter by shops if the filter allows it
-		// if (!$filters->getIgnoreShops()) {
-		// 	$qb->andWhere($qb->expr()->in('product.shop', ':shops'));
-		// 	$qb->setParameter('shops', $filters->getShops());
-		// }
-
-		// filter by categories if the filter allows it
-		// if (!$filters->getIgnoreCategories()) {
-		// 	$qb->andWhere($qb->expr()->in('product.category', ':categories'));
-		// 	$qb->setParameter('categories', $filters->getCategories());
-		// }
-
-		// filter by keywords if the filter allows it
-		if (!$filters->getIgnoreKeywords()) {
-			$qb->andWhere($qb->expr()->like('product.name', ':keywords'));
-			$qb->setParameter('keywords', '%'.$filters->getKeywords().'%');
-		}
-
-		// order by most recently added
-		$qb->orderBy('product.sale', 'DESC');
-
-		// show the most recent 3000 items by default
-		return $qb->setMaxResults(3000)->getQuery()->getResult();
-	}
-
-	/**
-	 * All in one product query for getting beauty products
-	 */
-	public function getBeauty($filters=null, $mode='all')
-	{
-		$qb = $this->getEntityManager()->createQueryBuilder();
-		$qb->addSelect('product');
-		$qb->from('ThreadAndMirrorProductsBundle:Product', 'product');
-		
-		// only search for valid beauty products
-		$qb->where('product.beauty = :beauty');
-		$qb->andWhere('product.deleted = :deleted');
-		$qb->andWhere($qb->expr()->isNull('product.expired'));
-		$qb->setParameter('deleted', '0');
-		$qb->setParameter('beauty', '1');
-
-		// new products
-		if ($mode == 'new') {
-			$qb->andWhere('product.new = :new');
-			$qb->setParameter('new', '1');
-		}
-
-		// sale products
-		if ($mode == 'sale') {
-			$qb->andWhere($qb->expr()->isNotNull('product.sale'));
-		}
-
-		// filter by keywords if the filter allows it
-		if (isset($filters) && !$filters->getIgnoreKeywords()) {
-			$qb->andWhere($qb->expr()->like('product.name', ':keywords'));
-			$qb->setParameter('keywords', '%'.$filters->getKeywords().'%');
-		}
-
-		// order by most recently added
-		$qb->orderBy('product.id', 'DESC');	
-
-		// show the most recent 3000 items by default
-		return $qb->setMaxResults(3000)->getQuery()->getResult();
-	}
-
-	/**
-	 * Products that have been marked as new for over 7 days
-	 */
-	public function getExpiredLatestAdditions()
-	{
-		// set the expiry date
-		$expiry = new \DateTime();
-		$expiry->modify('-7 days');
-
-		// run the query
-		$qb = $this->getEntityManager()->createQueryBuilder();
-		$qb->addSelect('product');
-		$qb->from('ThreadAndMirrorProductsBundle:Product', 'product');
-
-		$qb->where('product.new = :new');
-		$qb->andWhere('product.added < :expiry');
-		$qb->setParameter('new', '1');
-		$qb->setParameter('expiry', $expiry);
 
 		return $qb->getQuery()->getResult();
 	}
 
 	/**
 	 * Products that have been out of stock for over a month
+	 *
+	 * @return array 						The resulting Products
 	 */
-	public function getExpiringProducts()
+	public function findExpiringProducts()
 	{
-		// set the expiry date
+		$qb = $this->startProductQuery(null, null, null);
+
+		// Out of stock
+		$qb->andWhere('product.available = :available');
+		$qb->setParameter('available', '0');
+
+		// Last updated over a month ago
 		$expiry = new \DateTime();
 		$expiry->modify('-1 month');
-
-		// run the query
-		$qb = $this->getEntityManager()->createQueryBuilder();
-		$qb->addSelect('product');
-		$qb->from('ThreadAndMirrorProductsBundle:Product', 'product');
-
-		$qb->where('product.available = :available');
 		$qb->andWhere('product.updated < :expiry');
-		$qb->setParameter('available', '0');
 		$qb->setParameter('expiry', $expiry);
 		
 		return $qb->getQuery()->getResult();
 	}
 
-	public function getProductFromUrl($url)
+	/**
+	 * Products that have been marked as new for over 7 days
+	 *
+	 * @return array 						The resulting Products
+	 */
+	public function getExpiredLatestAdditions()
 	{
-		$em = $this->getEntityManager();
+		$qb = $this->startProductQuery(null, null, null);
 
-		// work out which shop we're attempting to load from
-		$shop = $em->getRepository('ThreadAndMirrorProductsBundle:Shop')->getShopFromUrl($url);
+		// Added over a week ago
+		$expiry = new \DateTime();
+		$expiry->modify('-7 days');
+		$qb->andWhere('product.added < :expiry');
+		$qb->setParameter('expiry', $expiry);
 
-		// build the method name for the parser
-		$slug = $shop->getSlug();
-		$class = 'ThreadAndMirror\\ProductsBundle\\Parser\\'.ucfirst(str_replace('-', '', $slug)).'Parser';
+		// Only if flagged as new
+		$qb->andwhere('product.new = :new');
+		$qb->setParameter('new', '1');
 
-		// load the parser service
-		$service = new ProductParser($this->getEntityManager());
-
-		// escape if the specific shop parser doesn't exist
-		if (class_exists($class)) {
-			$parser = new $class($service);
-		} else {
-			return null;
-		}
-		
-		$product = $parser->create($url);
-
-		// save it if it doesn't exist already
-		$em->persist($product);
-		$em->flush();
-
-		return $product;
+		return $qb->getQuery()->getResult();
 	}
 
-	public function forceUpdate($product)
+	/**
+	 * Get all existing product IDs for a given affiliate merchant
+	 *
+	 * @return array 						The resulting pids
+	 */
+	public function findExistingPidsByMerchant($merchant) 
 	{
-		// build the method name for the parser
-		$slug = $product->getShop()->getSlug();
-		$class = 'ThreadAndMirror\\ProductsBundle\\Parser\\'.ucfirst(str_replace('-', '', $slug)).'Parser';
+		$qb = $this->startProductQuery(null, null, null);
 
-		// load the parser service
-		$service = new ProductParser($this->getEntityManager());
-
-		// escape if the specific shop parser doesn't exist
-		if (class_exists($class)) {
-			$parser = new $class($service);
-		} else {
-			return $product;
-		}
-		
-		// parse it and force saving of new version
-		$product = $parser->update($product, true);
-
-		// mark as fully parsed and save 
-		$product->setFullyParsed(true);
-		$product->setChecked(new \DateTime());
-
-		$em = $this->getEntityManager();
-		$em->persist($product);
-		$em->flush();
-
-		return $product;
-	}
-
-	public function findExistingProductIdsByMerchant($merchant) 
-	{
-		$qb = $this->getEntityManager()->createQueryBuilder();
-		$qb->addSelect('product');
-		$qb->from('ThreadAndMirrorProductsBundle:Product', 'product');
-		$qb->innerJoin('product.shop', 'shop');
-
-		// Only search for newly added products
-		$qb->andWhere('product.deleted = :deleted');
-		$qb->andWhere($qb->expr()->isNull('product.expired'));
-		$qb->setParameter('deleted', '0');
-
-		// Filter by shops
+		// Filter by merchant
 		$qb->andWhere('shop.affiliateId = :affiliateId');
 		$qb->setParameter('affiliateId', $merchant);
 		
-		// Get the products in an array to save on memory
-		$results = $qb->getQuery()->getScalarResult();
+		return $this->getList($qb, 'product_pid');
+	}
 
-		// Build an array with just pids
-		$pids = array();
-		foreach ($results as $product) {
-			$pids[] = $product['product_pid'];
-		}
+	/**
+	 * Find updatable products for the given shop
+	 * 
+	 * @param  integer 		$limit 			Limit the amount of results
+	 * @param  string 		$slug  			The slug of the shop
+	 * @return array 						The resulting pids
+	 */
+	public function findUpdateableByShop($limit = 200, $shop)
+	{
+		$qb = $this->startProductQuery(null, null, $limit);
 
-		// Clear the results array to save memory further
-		unset($results);
+		// Get for the specified shop
+		$qb->andWhere('shop.slug = :slug');
+		$qb->setParameter('slug', $shop);
 
-		return $pids; 
+		// Order by most recently added
+		$qb->orderBy('product.checked', 'ASC');
+
+		return $qb->getQuery()->getResult();
+	}
+
+	/**
+	 * Find updatable products that have a brand name but no linked brand
+	 * 
+	 * @param  integer 		$limit 			Limit the amount of results
+	 * @return array 						The resulting products
+	 */
+	public function findUpdateableForBrands($limit = 1000)
+	{
+		$qb = $this->startProductQuery(null, null, $limit);
+
+		// Get for the specified shop
+		$qb->andWhere($qb->expr()->isNotNull('product.brandName'));
+		$qb->andWhere($qb->expr()->isNull('product.brand'));
+
+		// Order by most recently added
+		$qb->orderBy('product.checked', 'ASC');
+
+		return $qb->getQuery()->getResult();
 	}
 }

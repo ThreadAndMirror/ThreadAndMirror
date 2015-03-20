@@ -1,6 +1,14 @@
 services:
+
     stems.siren.saleparser:
        class: ThreadAndMirror\ProductsBundle\Service\SaleParser
+
+    threadandmirror.products.manager:
+        class:           ThreadAndMirror\ProductsBundle\Service\ProductManagerService
+        calls:
+            - [setContainer, ['@service_container']]
+        arguments:
+            - @doctrine.orm.entity_manager
 
     threadandmirror.api.affiliate_window:
         class: ThreadAndMirror\ProductsBundle\Service\Api\AffiliateWindowApiService
@@ -15,9 +23,17 @@ services:
     threadandmirror.affiliate.affiliate_window:
         class: ThreadAndMirror\ProductsBundle\Service\Affiliate\AffiliateWindowService
         arguments: 
-            api:                @threadandmirror.api.affiliate_window
-            productRepository:  @threadandmirror.repository.product
-            em:                 @doctrine.orm.entity_manager
+            - @threadandmirror.api.affiliate_window
+            - @threadandmirror.repository.product
+            - @doctrine.orm.entity_manager
+
+    threadandmirror.affiliate.linkshare:
+        class: ThreadAndMirror\ProductsBundle\Service\Affiliate\LinkshareService
+        arguments: 
+            - @buzz
+            - @doctrine.orm.entity_manager
+
+    # Repositories
 
     threadandmirror.repository.product:
         class:           ThreadAndMirror\ProductsBundle\Repository\ProductRepository
@@ -25,3 +41,173 @@ services:
         factory_method:  getRepository
         arguments:
             - 'ThreadAndMirrorProductsBundle:Product'
+
+    # Updaters
+
+    threadandmirror.products.updater.topshop:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\TopshopUpdater
+        arguments: 
+            - @threadandmirror.products.crawler.topshop
+            - @threadandmirror.products.formatter.topshop
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.affiliate_window
+
+    threadandmirror.products.updater.browns:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\BrownsUpdater
+        arguments: 
+            - @threadandmirror.products.crawler.browns
+            - @threadandmirror.products.formatter.browns
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.asos:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\AsosUpdater
+        arguments: 
+            - @threadandmirror.products.crawler.asos
+            - @threadandmirror.products.formatter.asos
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.affiliate_window
+
+    threadandmirror.products.updater.farfetch:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\FarfetchUpdater
+        arguments: 
+            - @threadandmirror.products.crawler.farfetch
+            - @threadandmirror.products.formatter.farfetch
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.mytheresa:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\MytheresaUpdater
+        arguments: 
+            - @threadandmirror.products.crawler.mytheresa
+            - @threadandmirror.products.formatter.mytheresa
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.lk_bennett:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\LKBennettUpdater
+        arguments: 
+            - @threadandmirror.products.crawler.lk_bennett
+            - @threadandmirror.products.formatter.lk_bennett
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.affiliate_window
+
+    threadandmirror.products.updater.french_connection:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\FrenchConnectionUpdater
+        arguments: 
+            - @threadandmirror.products.crawler.french_connection
+            - @threadandmirror.products.formatter.french_connection
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.affiliate_window
+
+    threadandmirror.products.updater.liberty_london:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\LibertyLondonUpdater
+        arguments: 
+            - @threadandmirror.products.crawler.liberty_london
+            - @threadandmirror.products.formatter.liberty_london
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.affiliate_window
+
+    threadandmirror.products.updater.look_fantastic:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\LookFantasticUpdater
+        arguments: 
+            - @threadandmirror.products.crawler.look_fantastic
+            - @threadandmirror.products.formatter.look_fantastic
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.affiliate_window
+
+    # Crawlers
+
+    threadandmirror.products.crawler.base:
+        abstract:  true
+        calls:
+            - [setClient, ['@buzz']]
+            - [setLogger, ['@logger']]
+        tags:
+            - { name: monolog.logger, channel: crawler }
+
+    threadandmirror.products.crawler.topshop:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\TopshopCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.browns:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\BrownsCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.asos:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\AsosCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.farfetch:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\FarfetchCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.mytheresa:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\MytheresaCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.lk_bennett:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\LKBennettCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.french_connection:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\FrenchConnectionCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.liberty_london:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\LibertyLondonCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.look_fantastic:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\LookFantasticCrawler
+        parent: threadandmirror.products.crawler.base
+
+    # Formatters
+
+    threadandmirror.products.formatter.base:
+        abstract:  true
+
+    threadandmirror.products.formatter.topshop:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\TopshopFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.browns:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\BrownsFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.asos:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\AsosFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.farfetch:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\FarfetchFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.mytheresa:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\MytheresaFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.lk_bennett:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\LKBennettFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.french_connection:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\FrenchConnectionFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.liberty_london:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\LibertyLondonFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.look_fantastic:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\LookFantasticFormatter
+        parent: threadandmirror.products.formatter.base

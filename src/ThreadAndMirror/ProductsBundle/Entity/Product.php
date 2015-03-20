@@ -8,12 +8,11 @@ use Stems\SocialBundle\Service\Sharer;
 
 /** 
  * @ORM\Table(name="tam_product", indexes={
- *    @ORM\Index(name="brand_index", columns={"brand"}),
  *    @ORM\Index(name="pid_index", columns={"pid"}),
+ *	  @ORM\Index(name="uid_index", columns={"uid"}),
  * 	  @ORM\Index(name="area_index", columns={"area"}),
  * })
  * @ORM\Entity(repositoryClass="ThreadAndMirror\ProductsBundle\Repository\ProductRepository")
- *
  */
 class Product
 {
@@ -37,6 +36,22 @@ class Product
 	protected $category;
 
 	/** 
+	 * @ORM\Column(type="string", length=64, nullable=true)
+	 */
+	protected $categoryName;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="Brand", inversedBy="products")
+	 * @ORM\JoinColumn(name="brand_id", referencedColumnName="id")
+	 */
+	protected $brand;
+
+	/** 
+	 * @ORM\Column(name="brand", type="string", nullable=true, length=64)
+	 */
+	protected $brandName;
+
+	/** 
 	 * @ORM\Column(type="string")
 	 */
 	protected $name;
@@ -52,14 +67,14 @@ class Product
 	protected $shortDescription;
 
 	/** 
-	 * @ORM\Column(type="string", nullable=true, length=64)
-	 */
-	protected $brand;
-
-	/** 
-	 * @ORM\Column(type="string")
+	 * @ORM\Column(type="string", length=64)
 	 */
 	protected $pid;
+
+	/** 
+	 * @ORM\Column(type="string", nullable=true, length=64)
+	 */
+	protected $uid;
 
 	/** 
 	 * @ORM\Column(type="string", nullable=true)
@@ -79,7 +94,27 @@ class Product
 	/** 
 	 * @ORM\Column(type="string", nullable=true)
 	 */
+	protected $portrait;
+
+	/** 
+	 * @ORM\Column(type="string", nullable=true)
+	 */
 	protected $image;
+
+	/** 
+	 * @ORM\Column(type="array", nullable=true)
+	 */
+	protected $thumbnails = array();
+
+	/** 
+	 * @ORM\Column(type="array", nullable=true)
+	 */
+	protected $portraits = array();
+
+	/** 
+	 * @ORM\Column(type="array", nullable=true)
+	 */
+	protected $images = array();
 
 	/** 
 	 * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
@@ -197,6 +232,7 @@ class Product
 	{
 		$this->name           = $product->getName();
 		$this->category       = $product->getCategory();
+		$this->brand          = $product->getBrand();
 		$this->url            = $product->getUrl();
 		$this->affiliateUrl   = $product->getAffiliateUrl();
 		$this->fullyParsed    = $product->getFullyParsed();
@@ -316,6 +352,72 @@ class Product
 	}
 
 	/**
+	 * Set categoryName
+	 *
+	 * @param string $categoryName
+	 * @return Product
+	 */
+	public function setCategoryName($categoryName)
+	{
+		$this->categoryName = $categoryName;
+	
+		return $this;
+	}
+
+	/**
+	 * Get categoryName
+	 *
+	 * @return string 
+	 */
+	public function getCategoryName()
+	{
+		return $this->categoryName;
+	}
+
+	/**
+	 * Set brand
+	 *
+	 * @param ThreadAndMirror\ProductsBundle\Entity\Brand $brand
+	 */
+	public function setBrand(\ThreadAndMirror\ProductsBundle\Entity\Brand $brand)
+	{
+		$this->brand = $brand;
+	}
+
+	/**
+	 * Get brand
+	 *
+	 * @return ThreadAndMirror\ProductsBundle\Entity\Brand 
+	 */
+	public function getBrand()
+	{
+		return $this->brand;
+	}
+
+	/**
+	 * Set brandName
+	 *
+	 * @param string $brandName
+	 * @return Product
+	 */
+	public function setBrandName($brandName)
+	{
+		$this->brandName = $brandName;
+	
+		return $this;
+	}
+
+	/**
+	 * Get brandName
+	 *
+	 * @return string 
+	 */
+	public function getBrandName()
+	{
+		return $this->brandName;
+	}
+
+	/**
 	 * Set name
 	 *
 	 * @param string $name
@@ -357,6 +459,16 @@ class Product
 	 * @return string 
 	 */
 	public function getDescription()
+	{
+		return $this->description;
+	}
+
+	/**
+	 * Get description
+	 *
+	 * @return string 
+	 */
+	public function getFrontDescription()
 	{
 		// Return the short description if there's no long one
 		if ($this->description === null) {
@@ -515,7 +627,76 @@ class Product
 	 */
 	public function getThumbnail()
 	{
-		return $this->thumbnail;
+		return $this->thumbnail === null && !empty($this->thumbnails) ? $this->thumbnails[0] : $this->thumbnail;
+	}
+
+	/**
+	 * Set thumbnails
+	 *
+	 * @param array $thumbnails
+	 * @return Product
+	 */
+	public function setThumbnails($thumbnails)
+	{
+		$this->thumbnails = $thumbnails;
+	
+		return $this;
+	}
+
+	/**
+	 * Get thumbnails
+	 *
+	 * @return array 
+	 */
+	public function getThumbnails()
+	{
+		return $this->thumbnails;
+	}
+
+	/**
+	 * Set portrait
+	 *
+	 * @param string $portrait
+	 * @return Product
+	 */
+	public function setPortrait($portrait)
+	{
+		$this->portrait = $portrait;
+	
+		return $this;
+	}
+
+	/**
+	 * Get portrait
+	 *
+	 * @return string 
+	 */
+	public function getPortrait()
+	{
+		return $this->portrait === null && !empty($this->portraits) ? $this->portraits[0] : $this->portrait;
+	}
+
+	/**
+	 * Set portraits
+	 *
+	 * @param array $portraits
+	 * @return Product
+	 */
+	public function setPortraits($portraits)
+	{
+		$this->portraits = $portraits;
+	
+		return $this;
+	}
+
+	/**
+	 * Get portraits
+	 *
+	 * @return array 
+	 */
+	public function getPortraits()
+	{
+		return $this->portraits;
 	}
 
 	/**
@@ -538,7 +719,30 @@ class Product
 	 */
 	public function getImage()
 	{
-		return $this->image;
+		return $this->image === null && !empty($this->images) ? $this->images[0] : $this->image;
+	}
+
+	/**
+	 * Set images
+	 *
+	 * @param array $images
+	 * @return Product
+	 */
+	public function setImages($images)
+	{
+		$this->images = $images;
+	
+		return $this;
+	}
+
+	/**
+	 * Get images
+	 *
+	 * @return array 
+	 */
+	public function getImages()
+	{
+		return $this->images;
 	}
 
 	/**
@@ -1022,29 +1226,6 @@ class Product
 	}
 
     /**
-	 * Set brand
-	 *
-	 * @param string $brand
-	 * @return Product
-	 */
-	public function setBrand($brand)
-	{
-		$this->brand = $brand;
-	
-		return $this;
-	}
-
-	/**
-	 * Get brand
-	 *
-	 * @return string 
-	 */
-	public function getBrand()
-	{
-		return $this->brand;
-	}
-
-    /**
      * Remove picks
      *
      * @param \ThreadAndMirror\ProductsBundle\Entity\Pick $picks
@@ -1053,4 +1234,32 @@ class Product
     {
         $this->picks->removeElement($picks);
     }
+
+    /**
+     * Get an image appropriate for the product grid
+     *
+     * @return string 			The image url
+     */
+    public function getGridImage()
+    {
+    	if (!empty($this->portraits) && $this->portraits[0] !== null) {
+    		return $this->portraits[0];
+    	}
+    	if ($this->portrait !== null) {
+    		return $this->portrait;
+    	}
+    	if (!empty($this->thumbnails) && $this->thumbnails[0] !== null) {
+    		return $this->thumbnails[0];
+    	}
+    	if ($this->thumbnail !== null) {
+    		return $this->thumbnail;
+    	}
+    	if (!empty($this->images) && $this->images[0] !== null) {
+    		return $this->images[0];
+    	}
+    	if ($this->image !== null) {
+    		return $this->image;
+    	}
+    }
+
 }

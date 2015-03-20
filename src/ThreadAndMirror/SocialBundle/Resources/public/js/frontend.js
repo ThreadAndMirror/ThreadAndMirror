@@ -1,22 +1,14 @@
 $(document).ready(function() {
 	
-	/**
-	 * Isotope init
-	 */
 	if ($('.social-feed').length) {
-		$('.social-feed').isotope({
+		var container = document.querySelector('.social-feed');
+		window.packery = new Packery( container, {
 			itemSelector: 'figure',
-			layoutMode: 'masonry',
+			layoutMode: 'meticulous',
 			columnWidth: 'figure.text-post',
-			getSortData: {
-			  	name: '.name',
-			  	symbol: '.symbol',
-			  	number: '.number parseInt',
-			  	category: '[data-category]',
-			}
 		});
 	}
-
+	
 	/**
 	 * Add to my social circle
      */

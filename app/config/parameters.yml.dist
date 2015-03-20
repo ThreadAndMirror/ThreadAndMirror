@@ -27,4 +27,5 @@ parameters:
     newrelic_api_key: e7f98a1be3616d3aee990c449b1c79b327904381b7276b4
     newrelic_license_key: d8da1bf508edbecfa229f05f00edb7428b7276b4
 
+    redis_dsn: 'redis://localhost'
     

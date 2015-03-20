@@ -20,9 +20,9 @@ class FrontController extends BaseFrontController
 	{
 		// get the social posts for the view
 		if ($source == 'all') {
-			$posts = $this->em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('deleted' => false), array('created' => 'DESC'), 50);
+			$posts = $this->em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('deleted' => false), array('created' => 'DESC'), 30);
 		} else {
-			$posts = $this->em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('source' => $source, 'deleted' => false), array('created' => 'DESC'), 50);
+			$posts = $this->em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('source' => $source, 'deleted' => false), array('created' => 'DESC'), 30);
 		}
 
 		return $this->render('ThreadAndMirrorSocialBundle:Front:index.html.twig', array(
@@ -43,9 +43,9 @@ class FrontController extends BaseFrontController
 	{
 		// get the social posts for the view
 		if ($source == 'all') {
-			$posts = $this->em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('deleted' => false), array('created' => 'DESC'), 50);
+			$posts = $this->em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('deleted' => false), array('created' => 'DESC'), 30);
 		} else {
-			$posts = $this->em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('source' => $source, 'deleted' => false), array('created' => 'DESC'), 50);
+			$posts = $this->em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('source' => $source, 'deleted' => false), array('created' => 'DESC'), 30);
 		}
 
 		return $this->render('ThreadAndMirrorSocialBundle:Front:index.html.twig', array(
@@ -103,7 +103,7 @@ class FrontController extends BaseFrontController
 		}
 
 		// Get the social posts for the view
-		$posts = $this->em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('feed' => $feed, 'deleted' => false), array('created' => 'DESC'), 50);
+		$posts = $this->em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('feed' => $feed, 'deleted' => false), array('created' => 'DESC'), 30);
 
 		// Set the dynamic page values
 		$this->page->setTitle($feed->getName().'\'s Feed');

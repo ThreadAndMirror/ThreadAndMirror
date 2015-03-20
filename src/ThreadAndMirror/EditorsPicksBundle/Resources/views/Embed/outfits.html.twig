@@ -1,0 +1,34 @@
+<div class="editors-picks-outfit">
+	<section>
+		<div class="previous-picks left">
+			{% for pick in collection.picks %}
+				{% if loop.index == 2 or loop.index == 4 %}
+					<a href="{{ pick.url }}" >
+						<div style="background:url('{{ pick.image }}') center center; background-size: contain; background-repeat: no-repeat;"></div>
+						<h2>{{ pick.designer }}</h2>
+						<h3><span>{{ pick.name }}</span></h3>
+					</a>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<div class="latest-pick left">
+			<a href="{{ collection.picks[0].url }}">
+				<img src="{{ collection.picks[0].image }}" height="300" alt="{{ collection.picks[0].designer }} {{ collection.picks[0].name }}">
+				<h2>{{ collection.picks[0].name }}<span>{{ collection.picks[0].designer }}</span></h2>
+				<p>{{ collection.picks[0].description }}</p>
+			</a>
+		</div>
+		<div class="previous-picks left">
+			{% for pick in collection.picks %}
+				{% if loop.index == 3 or loop.index == 5 %}
+					<a href="{{ pick.url }}" >
+						<div style="background:url('{{ pick.image }}') center center; background-size: contain; background-repeat: no-repeat;"></div>
+						<h2>{{ pick.designer }}</h2>
+						<h3><span>{{ pick.name }}</span></h3>
+					</a>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<br class="clear">
+	</section>
+</div>

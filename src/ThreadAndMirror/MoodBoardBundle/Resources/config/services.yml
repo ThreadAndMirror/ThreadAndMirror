@@ -1,0 +1,12 @@
+services:
+    threadandmirror.MoodBoard.twig.MoodBoard_extension:
+            class: ThreadAndMirror\MoodBoardBundle\Twig\MoodBoardExtension
+            arguments: 
+                em: "@doctrine.orm.entity_manager"
+            tags:
+                - { name: twig.extension }
+
+    threadandmirror.MoodBoard.feeds:
+        class:      ThreadAndMirror\MoodBoardBundle\Service\FeedManagerService
+        calls:
+          - [ setContainer,[ @service_container ] ]

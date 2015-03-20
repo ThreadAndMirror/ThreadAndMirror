@@ -7,13 +7,13 @@
 		{# <p></p> #}
 		<br class="clear">
 	</div>
-	<div class="social-feed">
+	<div class="social-feed" id="packery-loader">
 		{% for post in posts %}
 			{% embed 'ThreadAndMirrorSocialBundle:Embed:post.html.twig' %}{% endembed %}
 		{% endfor %}
 		<br class="clear">
 	</div>
-	{% if posts|length == 50 %}
-		<div class="rest-load-more" data-offset="50" data-url="/rest/social/get-more-favourite-posts/"></div>
+	{% if posts|length == 30 %}
+		<div class="rest-load-more" data-offset="30" data-url="/rest/social/get-more-favourite-posts/"></div>
 	{% endif %}
 {% endblock %}
