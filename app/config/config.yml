@@ -154,9 +154,9 @@ assetic:
         cssrewrite: ~
         less: ~
         uglifycss:
-            bin: /usr/bin/uglifycss
+            bin: /usr/local/bin/uglifycss
         uglifyjs2:
-            bin: /usr/bin/uglifyjs
+            bin: /usr/local/bin/uglifyjs
 
 # Doctrine Configuration
 doctrine:
