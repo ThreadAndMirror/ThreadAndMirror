@@ -124,6 +124,7 @@ liip_imagine:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
+    node: /usr/local/bin/node
     assets:
         admin_js:
             inputs:
@@ -266,12 +267,6 @@ parameters:
                 class: 'ThreadAndMirror\ProductsBundle\Entity\SectionProductGallery'
                 form: 'ThreadAndMirror\ProductsBundle\Form\SectionProductGalleryType'
         blog:
-            magazine:
-                name: 'Magazine'
-                enabled: false
-                entity: 'StemsPageBundle:SectionMagazine'
-                class: 'Stems\PageBundle\Entity\SectionMagazine'
-                form: 'Stems\PageBundle\Form\SectionMagazineType'
             text:
                 name: 'Text'
                 enabled: true
@@ -284,18 +279,12 @@ parameters:
                 entity: 'StemsPageBundle:SectionHeading'
                 class: 'Stems\PageBundle\Entity\SectionHeading'
                 form: 'Stems\PageBundle\Form\SectionHeadingType'
-            page_break:
-                name: 'PageBreak'
+            list:
+                name: 'List'
                 enabled: true
-                entity: 'StemsPageBundle:SectionPageBreak'
-                class: 'Stems\PageBundle\Entity\SectionPageBreak'
-                form: 'Stems\PageBundle\Form\SectionPageBreakType'
-            text_and_image:
-                name: 'Text and Image'
-                enabled: false
-                entity: 'StemsPageBundle:SectionTextAndImage'
-                class: 'Stems\PageBundle\Entity\SectionTextAndImage'
-                form: 'Stems\PageBundle\Form\SectionTextAndImageType'
+                entity: 'StemsPageBundle:SectionList'
+                class: 'Stems\PageBundle\Entity\SectionList'
+                form: 'Stems\PageBundle\Form\SectionListType'
             image:
                 name: 'Image'
                 enabled: true
@@ -308,12 +297,6 @@ parameters:
                 entity: 'StemsPollBundle:SectionPoll'
                 class: 'Stems\PollBundle\Entity\SectionPoll'
                 form: 'Stems\PollBundle\Form\SectionPollType'
-            blog_header:
-                name: 'Blog Header'
-                enabled: true
-                entity: 'StemsBlogBundle:SectionBlogHeader'
-                class: 'Stems\BlogBundle\Entity\SectionBlogHeader'
-                form: 'Stems\BlogBundle\Form\SectionBlogHeaderType'
             product_gallery:
                 name: 'Product Gallery'
                 enabled: true
