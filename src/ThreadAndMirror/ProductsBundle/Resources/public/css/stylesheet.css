@@ -1195,6 +1195,48 @@ div+.pagination {
 	padding-top: 5px;
 }
 
+@media only screen and (max-width : 768px) {
+    .layout-banner-overlay .banner-wrapper {
+        height: 330px;
+    }
+
+    .layout-banner-overlay .banner-wrapper h1 {
+        margin: 155px 0;
+    }
+
+    .layout-banner-overlay .banner-wrapper p {
+        margin: 130px 0;
+    }
+
+    .layout-banner-overlay .banner {
+        height: 390px;
+    }
+
+    .layout-banner-overlay .article {
+        border: none;
+    }
+
+    .article, .comments {
+        width: 100%;
+    }
+
+    .article section {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 90% !important;
+        padding: 0 5%;
+        margin: 0;
+        float: none;
+    }
+
+    .article section h4,
+    .article section h6 {
+        margin: 15px 0;
+        position: relative;
+    }
+}
+
 .comments {
 	padding: 30px 0;
 	width: 960px;
