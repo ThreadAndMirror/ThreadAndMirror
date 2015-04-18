@@ -124,7 +124,7 @@ liip_imagine:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    node: /usr/local/bin/node
+    node: /usr/bin/node
     assets:
         admin_js:
             inputs:
@@ -155,9 +155,9 @@ assetic:
     filters:
         cssrewrite: ~
         uglifycss:
-            bin: /usr/local/bin/uglifycss
+            bin: /usr/bin/uglifycss
         uglifyjs2:
-            bin: /usr/local/bin/uglifyjs
+            bin: /usr/bin/uglifyjs
 
 # Doctrine Configuration
 doctrine:
