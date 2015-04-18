@@ -13,6 +13,7 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
+use Symfony\Component\Validator\ConstraintViolationList;
 
 class RestController extends BaseRestController
 {
@@ -31,7 +32,7 @@ class RestController extends BaseRestController
 
 		$errors = $this->get('validator')->validateValue($email, $emailConstraint);
 
-		if (!empty($errors)) {
+		if ($errors->count() > 0) {
 			return $this->error($emailConstraint->message)->sendResponse();
 		}
 
