@@ -266,6 +266,12 @@ parameters:
                 entity: 'ThreadAndMirrorProductsBundle:SectionProductGallery'
                 class: 'ThreadAndMirror\ProductsBundle\Entity\SectionProductGallery'
                 form: 'ThreadAndMirror\ProductsBundle\Form\SectionProductGalleryType'
+            product:
+                name: 'Product'
+                enabled: true
+                entity: 'ThreadAndMirrorProductsBundle:SectionProduct'
+                class: 'ThreadAndMirror\ProductsBundle\Entity\SectionProduct'
+                form: 'ThreadAndMirror\ProductsBundle\Form\SectionProductType'
         blog:
             text:
                 name: 'Text'
@@ -303,6 +309,12 @@ parameters:
                 entity: 'ThreadAndMirrorProductsBundle:SectionProductGallery'
                 class: 'ThreadAndMirror\ProductsBundle\Entity\SectionProductGallery'
                 form: 'ThreadAndMirror\ProductsBundle\Form\SectionProductGalleryType'
+            product:
+                name: 'Product'
+                enabled: true
+                entity: 'ThreadAndMirrorProductsBundle:SectionProduct'
+                class: 'ThreadAndMirror\ProductsBundle\Entity\SectionProduct'
+                form: 'ThreadAndMirror\ProductsBundle\Form\SectionProductType'
 
 # Global Services
 services:
