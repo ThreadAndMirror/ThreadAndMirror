@@ -35,9 +35,11 @@ class FrontController extends BaseFrontController
 	public function holdingAction()
 	{
 		$feed = $this->em->getRepository('StemsSocialBundle:InstagramFeed')->find(1);
+		$images = $feed->getImages()->toArray();
+		$images = array_splice($images, 0, 50);
 
 		return array(
-			'images' => $feed->getImages()
+			'images' => $images
 		);
 	}
 
