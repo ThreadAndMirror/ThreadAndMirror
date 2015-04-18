@@ -154,7 +154,6 @@ assetic:
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/stylesheet.css'
     filters:
         cssrewrite: ~
-        less: ~
         uglifycss:
             bin: /usr/local/bin/uglifycss
         uglifyjs2:
