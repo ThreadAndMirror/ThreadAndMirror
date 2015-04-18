@@ -11,9 +11,33 @@ use ThreadAndMirror\ProductsBundle\Entity\Pick;
 use ThreadAndMirror\ProductsBundle\Entity\Outfit;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RestController extends BaseRestController
 {
+	/**
+	 * Newsletter signup
+	 *
+	 * @Route("/rest/newsletter-signup", name="thread_products_rest_newsletter")
+	 */
+	public function newsletterAction(Request $request)
+	{
+		$email = $request->request->get('email');
+
+		// Just send an email of the request for now
+		$message = \Swift_Message::newInstance()
+			->setSubject('Holding page registration request')
+			->setFrom(array('notify@threadandmirror.com' => 'Thread & Mirror'))
+			->setTo('tricia@threadandmirror.com')
+			->setContentType('text/html')
+			->setBody($email)
+		;
+
+		$this->get('mailer')->send($message);
+
+		return $this->success()->sendResponse();
+	}
+
 	/**
 	 * Adds the requested product to the current user's wishlist, including the size if it was requested
 	 */

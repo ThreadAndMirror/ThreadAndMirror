@@ -27,6 +27,21 @@ class FrontController extends BaseFrontController
 	}
 
 	/**
+	 * Holding page
+	 *
+	 * @Route("/coming-soon", name="thread_products_front_product_holding")
+	 * @Template()
+	 */
+	public function holdingAction()
+	{
+		$feed = $this->em->getRepository('StemsSocialBundle:InstagramFeed')->find(1);
+
+		return array(
+			'images' => $feed->getImages()
+		);
+	}
+
+	/**
 	 * Display a single product
 	 *
 	 * @Route("/product/{slug}", name="thread_products_front_product_view")

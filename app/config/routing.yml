@@ -34,9 +34,9 @@ stems_core:
     resource: "@StemsCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
-thread_products_front:
-    resource: "@ThreadAndMirrorProductsBundle/Controller/FrontController.php"
-    type:     annotation
+thread_products:
+    resource: "@ThreadAndMirrorProductsBundle/Resources/config/routing.yml"
+    prefix:   /
 
 thread_editorspicks:
     resource: "@ThreadAndMirrorEditorsPicksBundle/Resources/config/routing.yml"

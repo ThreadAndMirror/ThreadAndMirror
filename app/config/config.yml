@@ -147,6 +147,7 @@ assetic:
             inputs:
                 - '@ThreadAndMirrorSocialBundle/Resources/public/js/frontend.js'
                 - '@StemsCoreBundle/Resources/public/js/front/frontend.js'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/js/frontend.js'
         frontend_css:
             inputs:
                 - '@StemsCoreBundle/Resources/public/css/front/vendor/*'

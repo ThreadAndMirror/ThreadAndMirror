@@ -1,0 +1,43 @@
+{% extends 'holding.html.twig' %}
+
+{% block layout %}
+	<div class="layout-homepage">
+		<div class="homepage-banner-wrapper">
+			<div class="homepage-banner"></div>
+			<h2>Thread <span>&amp;</span> Mirror</h2>
+			<h1>Fashion and Beauty</h1>
+			<p>created for you, curated by you</p>
+		</div>
+	   	<div class="cms-page">
+			<div class="holding-page">
+                <p>We're busy giving Thread & Mirror a makeover. <br>If you want to be first to hear when the new look is ready, please enter your email below:</p>
+                <form id="newsletter-signup">
+                    <input type="text" name="email" placeholder="your email"/>
+                    <button><i class="fa fa-caret-right"></i></button>
+                </form>
+                <h4>from our instagram...</h4>
+                <br>
+                <div class="images">
+                    {% for image in images %}
+                        <figure class="instagram" style="background:url('{{ image.image }}') center center;background-size: cover">
+                            <a href="{{ image.url }}" rel="nofollow" target="_blank"></a>
+                        </figure>
+                    {% endfor %}
+                    <br class="clear">
+                </div>
+			</div>
+			<div class="widget follow-us-widget">
+				<div class="wrap">
+					<p>Follow us</p>
+					<div class="social">
+						<a href="http://www.pinterest.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-pinterest"></i></a>
+						<a href="http://instagram.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-instagram"></i></a>
+						<a href="http://www.twitter.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-twitter"></i></a>
+						<a href="http://www.facebook.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-fw fa-facebook"></i></a>
+						<br class="clear">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -813,8 +813,7 @@ div+.pagination {
 
 /* --- FORMS --- */
 
-.cms-page form input[type=text], 
-.cms-page form input[type=password] {
+.cms-page form input{
 	text-align: center;
 	border: 1px dotted #DDDDDD;
 	font-family: 'Futura PT Multilingual W01', sans-serif;
@@ -4048,4 +4047,93 @@ div.login {
 	line-height: 26px !important;
 	font-size: 17px;
 	margin-left: 1px;
+}
+
+/*--- HOLDING PAGE ---*/
+
+.holding-page p {
+    text-align: center;
+    padding-top: 60px;
+}
+
+.holding-page h4 {
+    font-family: 'Linotype Didot W01',serif;
+    font-size: 20px;
+    line-height: 20px;
+    font-style: italic;
+    font-weight: 200;
+    margin-top: 5px;
+    text-shadow: 0 0 1px #fff;
+    text-align: center;
+    margin-bottom:40px;
+}
+
+.holding-page form {
+    margin: 40px auto;
+    width: 460px;
+    position: relative;
+}
+
+.holding-page form input {
+    text-align: center;
+    border: 1px solid #ddd;
+    font-family: 'Futura PT Multilingual W01',sans-serif;
+    font-size: 14px;
+    line-height: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin: 20px 70px 10px;
+    font-weight: 200;
+    display: block;
+}
+
+.holding-page form button {
+    position: absolute;
+    right: 73px;
+    top: 3px;
+    line-height: 22px;
+    height: 22px;
+    width: 22px;
+    border-radius: 23px;
+    border: none;
+    font-size: 16px;
+
+}
+
+.holding-page form button:hover {
+    background: none
+}
+
+.holding-page form p {
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 13px;
+    line-height:30px;
+    margin: 0;
+    opacity: .7;
+    padding: 0;
+}
+
+.holding-page .images {
+    margin: 0 -240px;
+    width: calc(100% + 480px);
+    height: 1200px;
+    overflow: hidden;
+}
+
+.holding-page .images figure {
+    position:relative;
+    width: 240px;
+    height: 240px;
+    float: left;
+    margin: 0;
+}
+
+.holding-page .images figure a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

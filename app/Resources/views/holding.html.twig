@@ -1,0 +1,42 @@
+<!DOCTYPE XHTML 1.0 Transitional>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	{# Metadata #}
+		<title>Thread &amp; Mirror &middot; Fashion, Beauty, Blog, Street Chic, The Social Circle and Sale Alerts.</title>
+		<meta http-equiv="Content-Type"  content="text/html;charset=UTF-8" />
+		<meta name="robots" content="noindex" />
+		<meta name="p:domain_verify" content="365a3fd68ee25f112944be3892208ba0"/>
+		<meta name="google-site-verification" content="dXihq8Jt3LO5JRItWHODoHiMBlNSv4QhqsSpOtGZIZ4" />
+		<script type="text/javascript" src="http://fast.fonts.net/jsapi/5d90cee9-3c49-45f3-ab44-db38581300cd.js"></script>
+		<link rel="stylesheet" href="/css/font-awesome.min.css">
+		{% stylesheets '@frontend_css' filter="cssrewrite" filter="uglifycss" output='css/frontend.css' %}<link rel="stylesheet" href="{{ asset_url }}" />{% endstylesheets %}
+		{% block stylesheets %}{% endblock %}
+	{# Icons #}
+	   	<link rel="icon" href="/favicon.png?nocache=070514" type="image/x-icon" />
+	{# Other Shit #}
+		{# Analytics #}
+		{% if app.environment == 'prod' %}
+			<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-48018519-1', 'threadandmirror.com');
+			  ga('send', 'pageview');
+
+			</script>
+		{% endif %}
+		{# WebGains Affiliate Code #}
+		<!-- WGCC163 --> 
+	</head>
+	<body class="{% if app.user %}logged-in{% else %}not-logged-in{% endif %}" data-cms-slug="coming-soon">
+		<header>
+			<h2><a href="/">T<span>&amp;</span>M</a></h2>
+		</header>
+		{% block layout %}{% endblock %}
+	 	{% javascripts '@frontend_vendor_js' filter='uglifyjs2' output='js/front/vendor.js' %}<script src="{{ asset_url }}"></script>{% endjavascripts %}
+        {% javascripts '@frontend_js' filter='uglifyjs2' output='js/front/frontend.js' %}<script src="{{ asset_url }}"></script>{% endjavascripts %}
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>

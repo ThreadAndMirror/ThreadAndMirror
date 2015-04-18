@@ -4,71 +4,17 @@ stems_admin_core_developer_generate_product_sitemaps:
     pattern:  /admin/developer/sitemap/products
     defaults: { _controller: ThreadAndMirrorProductsBundle:Admin:productSitemaps }
 
-### FRONTEND ROUTES ####################################################
 
-thread_products_front_index:
-    pattern:  /all-products
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:index }
 
-thread_products_front_product:
-    pattern:  /product/{slug}
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:product }
 
-thread_products_front_product_buy:
-    pattern:  /product/buy/{slug}
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:redirectBuyFromStore }
+thread_products_front:
+    resource: "@ThreadAndMirrorProductsBundle/Controller/FrontController.php"
+    type:     annotation
 
-thread_products_front_latest_additions:
-    pattern:  /latest-additions
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:latestAdditions }
+thread_products_rest:
+    resource: "@ThreadAndMirrorProductsBundle/Controller/RestController.php"
+    type:     annotation
 
-thread_products_front_sale_items:
-    pattern:  /sale-items
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:saleItems }
-
-thread_products_front_picks:
-    pattern:  /wishlist
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:wishlist }
-
-thread_products_front_outfits:
-    pattern:  /outfits
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:outfits }
-
-thread_products_front_outfit:
-    pattern:  /outfits/{id}
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:outfit }
-
-thread_products_front_fashion_stores:
-    pattern:  fashion/stores
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:fashionStores }
-
-thread_products_front_store:
-    pattern:  /stores/{slug}
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:store }
-
-thread_products_front_designers:
-    pattern:  /designers
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:designers }
-
-thread_products_front_designer:
-    pattern:  /designers/{slug}
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:designer }
-
-thread_products_front_designer_category:
-    pattern:  /designers/{slug}/{category}
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:designerCategory }
-
-thread_products_front_beauty_stores:
-    pattern:  beauty/stores
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:beautyStores }
-
-thread_products_front_beauty_new_in:
-    pattern:  beauty/new-in
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:beautyNewIn }
-
-thread_products_front_beauty_sale:
-    pattern:  beauty/sale
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Front:beautySale }
 
 ### DATA ROUTES ####################################################
 
@@ -129,3 +75,4 @@ thread_products_rest_add_new_outfit:
 thread_products_rest_parse_productgalleryproduct:
     pattern:  /admin/products/rest/parse-product-gallery-product/{id}
     defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:parseProductGalleryProduct }
+
