@@ -15,7 +15,8 @@ $(document).ready(function() {
                 button.addClass('favourited');
                 $('#newsletter-signup').html('<p>Thanks for registering your interest!</p>');
             } else {
-                alert('Please enter a valid e-mail address!')
+                button.siblings('input[name=email]').css('border-color', '#AA0000');
+                alert('Please enter a valid e-mail address!');
             }
         });
 	});

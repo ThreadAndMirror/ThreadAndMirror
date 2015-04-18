@@ -12,6 +12,7 @@ use ThreadAndMirror\ProductsBundle\Entity\Outfit;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 
 class RestController extends BaseRestController
 {
@@ -23,6 +24,16 @@ class RestController extends BaseRestController
 	public function newsletterAction(Request $request)
 	{
 		$email = $request->request->get('email');
+
+		// Checked the email address is valid
+		$emailConstraint = new EmailConstraint();
+		$emailConstraint->message = 'Invalid e-mail address.';
+
+		$errors = $this->get('validator')->validateValue($email, $emailConstraint);
+
+		if (!empty($errors)) {
+			return $this->error($emailConstraint->message)->sendResponse();
+		}
 
 		// Just send an email of the request for now
 		$message = \Swift_Message::newInstance()
