@@ -4051,6 +4051,10 @@ div.login {
 
 /*--- HOLDING PAGE ---*/
 
+.holding-page {
+    overflow: hidden;
+}
+
 .holding-page p {
     text-align: center;
     padding-top: 60px;
@@ -4116,10 +4120,9 @@ div.login {
 }
 
 .holding-page .images {
-    margin: 0 -240px;
+    margin: 0 -120px;
     width: calc(100% + 480px);
     height: 1200px;
-    overflow: hidden;
 }
 
 .holding-page .images figure {
