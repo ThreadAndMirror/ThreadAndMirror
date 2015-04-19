@@ -28,4 +28,7 @@ parameters:
     newrelic_license_key: d8da1bf508edbecfa229f05f00edb7428b7276b4
 
     redis_dsn: 'redis://localhost'
-    
+
+    assetic_node_bin: /usr/bin/node
+    assetic_uglifyjs_bin: /usr/bin/uglifyjs
+    assetic_uglifycss_bin: /usr/bin/uglifycss

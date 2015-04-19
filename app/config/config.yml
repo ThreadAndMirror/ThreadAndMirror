@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -119,12 +120,21 @@ liip_imagine:
             quality: 80
             filters:
                 thumbnail: { size: [240, 240], mode: outbound }
+        section_image_medium:
+            quality: 80
+            filters:
+                thumbnail: { size: [450, 450], mode: inset }
+        section_image_medium_cutout:
+            quality: 100
+            filters:
+                thumbnail: { size: [450, 450], mode: inset}
+
 
 # Assetic Configuration
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    node: /usr/local/bin/node
+    node: %assetic_node_bin%
     assets:
         admin_js:
             inputs:
@@ -155,9 +165,9 @@ assetic:
         cssrewrite: ~
         less: ~
         uglifycss:
-            bin: /usr/local/bin/uglifycss
+            bin: %assetic_uglifycss_bin%
         uglifyjs2:
-            bin: /usr/local/bin/uglifyjs
+            bin: %assetic_uglifyjs_bin%
 
 # Doctrine Configuration
 doctrine:
@@ -315,84 +325,6 @@ parameters:
                 entity: 'ThreadAndMirrorProductsBundle:SectionProduct'
                 class: 'ThreadAndMirror\ProductsBundle\Entity\SectionProduct'
                 form: 'ThreadAndMirror\ProductsBundle\Form\SectionProductType'
-
-# Global Services
-services:
-    threadandmirror.logger:
-        class: Symfony\Bridge\Monolog\Logger
-
-    threadandmirror.product.parser:
-        class: ThreadAndMirror\ProductsBundle\Service\ProductParser
-        arguments: 
-            em: "@doctrine.orm.entity_manager"
-
-    threadandmirror.linkshare:
-        class: ThreadAndMirror\ProductsBundle\Service\Linkshare
-        arguments: 
-            em: "@doctrine.orm.entity_manager"
-            ProductParser: "@threadandmirror.product.parser"
-
-    threadandmirror.product.filter:
-        class: ThreadAndMirror\ProductsBundle\Service\ProductFilter
-        arguments: 
-            em: "@doctrine.orm.entity_manager"
-            services:
-
-    # KernelRequest listener
-    # extension.listener:
-    #     class: Acme\DemoBundle\Listener\DoctrineExtensionListener
-    #     calls:
-    #         - [ setContainer, [ @service_container ] ]
-    #     tags:
-    #         # translatable sets locale after router processing
-    #         - { name: kernel.event_listener, event: kernel.request, method: onLateKernelRequest, priority: -10 }
-    #         # loggable hooks user username if one is in security context
-    #         - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-
-    # Doctrine Extension listeners to handle behaviors
-    gedmo.listener.tree:
-        class: Gedmo\Tree\TreeListener
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-        calls:
-            - [ setAnnotationReader, [ @annotation_reader ] ]
-
-    gedmo.listener.translatable:
-        class: Gedmo\Translatable\TranslatableListener
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-        calls:
-            - [ setAnnotationReader, [ @annotation_reader ] ]
-            - [ setDefaultLocale, [ %locale% ] ]
-            - [ setTranslationFallback, [ false ] ]
-
-    gedmo.listener.timestampable:
-        class: Gedmo\Timestampable\TimestampableListener
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-        calls:
-            - [ setAnnotationReader, [ @annotation_reader ] ]
-
-    gedmo.listener.sluggable:
-        class: Gedmo\Sluggable\SluggableListener
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-        calls:
-            - [ setAnnotationReader, [ @annotation_reader ] ]
-
-    gedmo.listener.sortable:
-        class: Gedmo\Sortable\SortableListener
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-        calls:
-            - [ setAnnotationReader, [ @annotation_reader ] ]
-
-    gedmo.listener.loggable:
-        class: Gedmo\Loggable\LoggableListener
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-        calls:
-            - [ setAnnotationReader, [ @annotation_reader ] ]
 
 # Logging
 monolog:

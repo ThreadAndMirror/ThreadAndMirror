@@ -4049,3 +4049,15 @@ div.login {
 	font-size: 17px;
 	margin-left: 1px;
 }
+
+/*--- CSS FILTERS ---*/
+
+.css-filter-grayscale img {
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+}
+
+.css-filter-sepia img {
+    filter: sepia(1);
+    -webkit-filter: sepia(1);
+}
