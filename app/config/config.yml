@@ -127,7 +127,15 @@ liip_imagine:
         section_image_medium_cutout:
             quality: 100
             filters:
-                thumbnail: { size: [450, 450], mode: inset}
+                thumbnail: { size: [450, 450], mode: inset }
+        section_image_large:
+            quality: 80
+            filters:
+                thumbnail: { size: [930, 930], mode: inset }
+        section_image_large_cutout:
+            quality: 100
+            filters:
+                thumbnail: { size: [930, 930], mode: inset }
 
 
 # Assetic Configuration
