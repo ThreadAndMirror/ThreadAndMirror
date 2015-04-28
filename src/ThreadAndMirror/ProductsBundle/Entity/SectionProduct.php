@@ -22,14 +22,12 @@ class SectionProduct
     protected $id;
 
     /** 
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $designer;
 
     /** 
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $name;
 
@@ -44,36 +42,34 @@ class SectionProduct
     protected $pid;
 
     /** 
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", nullable=true, length=1024)
      */
     protected $url;
 
     /** 
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $image;
 
 	/**
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	protected $link;
-
-	/**
-	 * @ORM\Column(type="text", nullable=true)
+	 * @ORM\Column(type="text")
 	 */
 	protected $position = 'squared';
+
+	/**
+	 * @ORM\Column(type="text")
+	 */
+	protected $effect = 'cutout';
 
     public function __construct($product = null)
     {
         if ($product instanceof Product) {
-            $this->designer    = $product->getBrandName();
+            $this->designer    = $product->getBrand() !== null ? $product->getBrand()->getName() : null;
             $this->name        = $product->getName();
             $this->description = $product->getShop() !== null ? 'At '.$product->getShop()->getName() : '';
             $this->url         = $product->getFrontendUrl();
             $this->image       = $product->getImage();
-            $this->product     = $product->getId();
+            $this->pid         = $product->getId();
         }
     }
 
@@ -130,9 +126,25 @@ class SectionProduct
 		$this->setImage($parameters['image']);
 		$this->setUrl($parameters['url']);
 		$this->setPid($parameters['pid']);
-		$this->setLink($parameters['link']);
+		$this->setPosition($parameters['position']);
+		$this->setEffect($parameters['effect']);
 
 		$services->getManager()->persist($this);
+	}
+
+	/**
+	 * Update the product data using a product entity
+	 *
+	 * @param  Product $product
+	 */
+	public function updateFromProduct(Product $product)
+	{
+		$this->designer    = $product->getBrand() !== null ? $product->getBrand()->getName() : null;
+		$this->name        = $product->getName();
+		$this->description = $product->getShop() !== null ? 'At '.$product->getShop()->getName() : '';
+		$this->url         = $product->getFrontendUrl();
+		$this->image       = $product->getImage();
+		$this->pid         = $product->getId();
 	}
 
     /**
@@ -283,7 +295,30 @@ class SectionProduct
         return $this->image;
     }
 
-    /**
+	/**
+	 * Set effect
+	 *
+	 * @param string $effect
+	 * @return SectionProduct
+	 */
+	public function setEffect($effect)
+	{
+		$this->effect = $effect;
+
+		return $this;
+	}
+
+	/**
+	 * Get effect
+	 *
+	 * @return string
+	 */
+	public function getEffect()
+	{
+		return $this->effect;
+	}
+
+	/**
      * Set deleted
      *
      * @param boolean $deleted

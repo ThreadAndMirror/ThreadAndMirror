@@ -1,3 +1,20 @@
+thread_products_admin:
+    resource: "@ThreadAndMirrorProductsBundle/Controller/AdminController.php"
+    type:     annotation
+
+thread_products_front:
+    resource: "@ThreadAndMirrorProductsBundle/Controller/FrontController.php"
+    type:     annotation
+
+thread_products_popup:
+    resource: "@ThreadAndMirrorProductsBundle/Controller/PopupController.php"
+    type:     annotation
+
+thread_products_rest:
+    resource: "@ThreadAndMirrorProductsBundle/Controller/RestController.php"
+    type:     annotation
+
+
 ### ADMIN ROUTES ####################################################
 
 stems_admin_core_developer_generate_product_sitemaps:

@@ -1,0 +1,14 @@
+{% extends 'StemsPageBundle:Section:baseForm.html.twig' %}
+
+{% block tools %}
+    {% include 'StemsPageBundle:Toolbox:sectionPin.html.twig' %}
+    {% include 'StemsPageBundle:Toolbox:sectionImageEffect.html.twig' %}
+{% endblock %}
+
+{% block form %}
+    {% include 'ThreadAndMirrorProductsBundle:Section:productHiddenForm.html.twig' with { form: form } %}
+{% endblock %}
+
+{% block preview %}
+    {% include 'ThreadAndMirrorProductsBundle:Section:productPreview.html.twig' with { section: section } %}
+{% endblock %}

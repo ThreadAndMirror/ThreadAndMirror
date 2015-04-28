@@ -10,7 +10,11 @@ use Stems\CoreBundle\Controller\BaseRestController;
 use ThreadAndMirror\ProductsBundle\Entity\Pick;
 use ThreadAndMirror\ProductsBundle\Entity\Outfit;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
+use ThreadAndMirror\ProductsBundle\Entity\SectionProduct;
 use ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use ThreadAndMirror\ProductsBundle\Form\SectionProductType;
 
 class RestController extends BaseRestController
 {
@@ -21,7 +25,7 @@ class RestController extends BaseRestController
 	{
 		$em = $this->getDoctrine()->getManager();
 		$size = $request->get('size');
-		
+
 		// get the user's wishlist and the requested product
 		$wishlist = $em->getRepository('ThreadAndMirrorProductsBundle:Wishlist')->findOneByOwner($this->getUser()->getId());
 		$product = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->find($id);
@@ -38,15 +42,15 @@ class RestController extends BaseRestController
 
 			$em->persist($pick);
 			$em->flush();
-			
+
 			return new JsonResponse(array(
-				'success'   => true,
-				'message' 	=> $product->getName().' has been added to your wishlist!',
+				'success' => true,
+				'message' => $product->getName() . ' has been added to your wishlist!',
 			));
 		} else {
 			return new JsonResponse(array(
-				'success'   => false,
-				'message' 	=> $product->getName().' is already on your wishlist!',
+				'success' => false,
+				'message' => $product->getName() . ' is already on your wishlist!',
 			));
 		}
 	}
@@ -61,22 +65,19 @@ class RestController extends BaseRestController
 		// get the pick
 		$pick = $em->getRepository('ThreadAndMirrorProductsBundle:Pick')->find($id);
 
-		try
-		{
+		try {
 			// fail if the pick doesn't belong to the current user
 			if ($pick->getWishlist()->getOwner() != $this->getUser()->getId()) {
 				return new JsonResponse(array(
-					'success'   => false,
-					'message' 	=> 'The requested wishlist item wasn\'t found.'
+					'success' => false,
+					'message' => 'The requested wishlist item wasn\'t found.'
 				));
 			}
-		}
-		catch (\Exception $e) 
-		{
+		} catch (\Exception $e) {
 			// fail if the pick wasn't found or any other error occurred
 			return new JsonResponse(array(
-				'success'   => false,
-				'message' 	=> 'The requested wishlist item wasn\'t found.'
+				'success' => false,
+				'message' => 'The requested wishlist item wasn\'t found.'
 			));
 		}
 
@@ -84,8 +85,8 @@ class RestController extends BaseRestController
 		$em->flush();
 
 		return new JsonResponse(array(
-			'success'   => true,
-			'message' 	=> $pick->getProduct()->getName().' has been removed from your wishlist!',
+			'success' => true,
+			'message' => $pick->getProduct()->getName() . ' has been removed from your wishlist!',
 		));
 	}
 
@@ -103,8 +104,8 @@ class RestController extends BaseRestController
 		// fail if the pick doesn't belong to the current user
 		if ($outfit->getOwner() != $this->getUser()->getId()) {
 			return new JsonResponse(array(
-				'success'   => false,
-				'message' 	=> 'The requested outfit doesn\'t belong to you.'
+				'success' => false,
+				'message' => 'The requested outfit doesn\'t belong to you.'
 			));
 		}
 
@@ -123,10 +124,10 @@ class RestController extends BaseRestController
 
 		$em->persist($pick);
 		$em->flush();
-		
+
 		return new JsonResponse(array(
-			'success'   => true,
-			'message' 	=> $product->getName().' has been added to your outfit '.$outfit->getTitle().'.',
+			'success' => true,
+			'message' => $product->getName() . ' has been added to your outfit ' . $outfit->getTitle() . '.',
 		));
 	}
 
@@ -141,8 +142,8 @@ class RestController extends BaseRestController
 		// return error if the user isn't logged in
 		if (!$profile) {
 			return new JsonResponse(array(
-				'success'   => false,
-				'message' 	=> 'You need to be signed in to save your favourite filters.'
+				'success' => false,
+				'message' => 'You need to be signed in to save your favourite filters.'
 			));
 		} else {
 			// get the filter config that's stored in the session
@@ -154,14 +155,14 @@ class RestController extends BaseRestController
 			$em->flush();
 
 			return new JsonResponse(array(
-				'success'   => true,
-				'message' 	=> 'Your favourite filters have been saved.',
+				'success' => true,
+				'message' => 'Your favourite filters have been saved.',
 			));
 		}
 	}
 
 	/**
-	 * Attempt to add a product to the user's wishlist using the URL provided 
+	 * Attempt to add a product to the user's wishlist using the URL provided
 	 */
 	public function addProductFromUrlAction(Request $request)
 	{
@@ -190,14 +191,14 @@ class RestController extends BaseRestController
 
 			// success response
 			return new JsonResponse(array(
-				'success'   => true,
-				'message' 	=> 'The product was successfully saved to your wishlist.'
+				'success' => true,
+				'message' => 'The product was successfully saved to your wishlist.'
 			));
 		} else {
 			// error response
 			return new JsonResponse(array(
-				'success'   => false,
-				'message' 	=> 'We could not load a product using that link.'
+				'success' => false,
+				'message' => 'We could not load a product using that link.'
 			));
 		}
 	}
@@ -211,8 +212,8 @@ class RestController extends BaseRestController
 		// fail if the user is not admin level or higher
 		if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
 			return new JsonResponse(array(
-				'success'   => false,
-				'message' 	=> 'Permission denied.'
+				'success' => false,
+				'message' => 'Permission denied.'
 			));
 		}
 
@@ -223,8 +224,8 @@ class RestController extends BaseRestController
 		// fail if the outfit doesn't belong to the current user
 		if ($outfit->getOwner() != $this->getUser()->getId()) {
 			return new JsonResponse(array(
-				'success'   => false,
-				'message' 	=> 'The requested outfit doesn\'t belong to you.'
+				'success' => false,
+				'message' => 'The requested outfit doesn\'t belong to you.'
 			));
 		}
 
@@ -232,10 +233,10 @@ class RestController extends BaseRestController
 		$outfit->setFeatured(new \DateTime());
 		$em->persist($outfit);
 		$em->flush();
-		
+
 		return new JsonResponse(array(
-			'success'   => true,
-			'message' 	=> 'The outfit '.$outfit->getTitle().' is now marked as featured.',
+			'success' => true,
+			'message' => 'The outfit ' . $outfit->getTitle() . ' is now marked as featured.',
 		));
 	}
 
@@ -248,20 +249,20 @@ class RestController extends BaseRestController
 		// fail if the user is not logged in
 		if (!$this->get('security.context')->isGranted('ROLE_USER')) {
 			return new JsonResponse(array(
-				'success'   => false,
-				'message' 	=> 'Permission denied.',
-				'html'		=> '',
+				'success' => false,
+				'message' => 'Permission denied.',
+				'html'    => '',
 			));
-		} 
+		}
 
 		// fail if the user didn't give the outfit a name
 		$name = $request->get('name');
-		
+
 		if (empty($name)) {
 			return new JsonResponse(array(
-				'success'   => false,
-				'message' 	=> 'You need to give the outfit a name before it can be created!',
-				'html'		=> '',
+				'success' => false,
+				'message' => 'You need to give the outfit a name before it can be created!',
+				'html'    => '',
 			));
 		}
 
@@ -278,13 +279,13 @@ class RestController extends BaseRestController
 
 		// get the html for the new outfit to add to the page
 		$html = $this->renderView('ThreadAndMirrorProductsBundle:Rest:outfit.html.twig', array(
-			'outfit'	=> $outfit,
+			'outfit' => $outfit,
 		));
 
 		return new JsonResponse(array(
-			'success'   => true,
-			'message' 	=> 'The outfit '.$outfit->getTitle().' has been created.',
-			'html'		=> $html,
+			'success' => true,
+			'message' => 'The outfit ' . $outfit->getTitle() . ' has been created.',
+			'html'    => $html,
 		));
 	}
 
@@ -306,23 +307,23 @@ class RestController extends BaseRestController
 			// if the product hasn't been fully parsed then force an update
 			if (!$product->getFullyParsed() || $refresh > $product->getChecked()) {
 				$product = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->forceUpdate($product);
-			} 
+			}
 
 			// check if the product already exists before we save it
 			$html = $this->renderView('ThreadAndMirrorProductsBundle:Rest:product.html.twig', array(
-				'product'	=> $product,
+				'product' => $product,
 			));
 
 			// success response
 			return new JsonResponse(array(
-				'success'   => true,
-				'html'		=> $html,
+				'success' => true,
+				'html'    => $html,
 			));
 		} else {
 			// error response
 			return new JsonResponse(array(
-				'success'   => false,
-				'message' 	=> 'There was a problem loading the product\'s details',
+				'success' => false,
+				'message' => 'There was a problem loading the product\'s details',
 			));
 		}
 	}
@@ -330,7 +331,7 @@ class RestController extends BaseRestController
 	/**
 	 * Adds a product to a product gallery section
 	 *
-	 * @param  integer 		$id 	The ID of the Product Gallery Section to add the image to
+	 * @param  integer $id The ID of the Product Gallery Section to add the image to
 	 * @param  Request
 	 * @return JsonResponse
 	 */
@@ -368,9 +369,9 @@ class RestController extends BaseRestController
 
 			// Get the html for the new product gallery item and to add to the page
 			$html = $this->renderView('ThreadAndMirrorProductsBundle:Section:productGalleryProduct.html.twig', array(
-				'product'	=> $image,
-				'section'	=> $section,
-				'link'		=> $link,
+				'product' => $image,
+				'section' => $section,
+				'link'    => $link,
 			));
 
 			// Store the section id for use in the response handler
@@ -385,14 +386,14 @@ class RestController extends BaseRestController
 	/**
 	 * Update a product gallery product, both generated and manually added
 	 *
-	 * @param  integer 		$id 	The ID of the Product Gallery Section to update
+	 * @param  integer $id The ID of the Product Gallery Section to update
 	 * @param  Request
 	 * @return JsonResponse
 	 */
 	public function updateProductGalleryProductAction($id, Request $request)
 	{
 		// Get the url from the query parameter and attempt to parse the product
-		$em    = $this->getDoctrine()->getManager();
+		$em = $this->getDoctrine()->getManager();
 		$image = $em->getRepository('StemsBlogBundle:SectionProductGalleryProduct')->find($id);
 
 		$data = json_decode($request->getContent());
@@ -415,9 +416,9 @@ class RestController extends BaseRestController
 
 			// Get the html for the product gallery item and to add to the page
 			$html = $this->renderView('StemsBlogBundle:Rest:productGalleryProduct.html.twig', array(
-				'product'	=> $image,
-				'section'	=> $image->getSectionProductGallery(),
-				'link'		=> $link,
+				'product' => $image,
+				'section' => $image->getSectionProductGallery(),
+				'link'    => $link,
 			));
 
 			// Store the section and product id for use in the response handler
@@ -428,7 +429,57 @@ class RestController extends BaseRestController
 
 			return $this->addHtml($html)->setCallback('insertProductGalleryProduct')->success('The product was successfully updated.')->sendResponse();
 		} else {
-			return $this->addHtml($html)->error('There was a problem updating the product.', true)->sendResponse();
+			return $this->error('There was a problem updating the product.', true)->sendResponse();
+		}
+	}
+
+	/**
+	 * Adds a product to a product section using a url
+	 *
+	 * @Route("/rest/products/add-product-to-section/{id}", name="thread_products_rest_add_product_to_section")
+	 * @Security("has_role('ROLE_ADMIN')")
+	 */
+	public function addProductToSectionAction(Request $request, SectionProduct $section, $repository = 'StemsBlogBundle:Section')
+	{
+		// Get the url from the query paramter and attempt to parse the product
+		$em      = $this->getDoctrine()->getManager();
+		$link    = $em->getRepository($repository)->findOneBy(array('entity' => $section->getId(), 'type' => 'product'));
+		$product = $this->get('threadandmirror.products.manager')->getProductFromUrl($request->get('url'));
+
+		// If we manage to parse a product from the url then create the product listing for the gallery
+		if (is_object($product)) {
+
+			// Save the product as it may not already exist in the database
+			$em->persist($product);
+
+			// Update the new section with the new product data
+			$section->updateFromProduct($product);
+			$em->persist($section);
+			$em->flush();
+
+			// Rebuild the form to get new values for render
+			$form = $this->createForm(new SectionProductType($link), $section);
+
+			// Render the section form and preview html with the valid values
+			$formHtml = $this->renderView('ThreadAndMirrorProductsBundle:Section:productHiddenForm.html.twig', array(
+				'form' => $form->createView(),
+			));
+
+			$previewHtml = $this->renderView('ThreadAndMirrorProductsBundle:Section:productPreview.html.twig', array(
+				'section' => $section,
+			));
+
+			// Set the meta data for the update callback
+			$meta = array(
+				'type'        => 'product',
+				'section'     => $section->getId(),
+				'formHtml'    => $formHtml,
+				'previewHtml' => $previewHtml
+			);
+
+			return $this->addMeta($meta)->setCallback('updateSectionForm')->success('Image updated.')->sendResponse();
+		} else {
+			return $this->error('We could not load a product using that link.', true)->sendResponse();
 		}
 	}
 }

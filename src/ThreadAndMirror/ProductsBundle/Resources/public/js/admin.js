@@ -56,6 +56,37 @@ $(document).ready(function() {
 		}
 	});
 
+    /**
+     * Add product to product section
+     */
+    $('.admin-editor').on('click', 'section.section-product .add-product .from-link', function(e) {
+
+        e.preventDefault();
+        var originator = $(this);
+
+        var add_dialogue = originator.parent();
+        var add_url = add_dialogue.children('input[type=text]').val();
+
+        if (add_url.length > 3) {
+            add_dialogue.children().hide();
+            add_dialogue.children('.loader').css('display', 'block');
+
+            $.post('/rest/products/add-product-to-section/'+$(this).closest('section').data('type-id'), {
+                url:	add_url
+            }).done(function(data) {
+                if (data.status == 'success') {
+                    window[data.callback](data, originator);
+                } else {
+                    add_dialogue.children().show();
+                    add_dialogue.children('.loader').hide();
+                }
+            }).fail(function() {
+                add_dialogue.children().show();
+                add_dialogue.children('.loader').hide();
+            });
+        }
+    });
+
 	/** 
 	 * Remove product from product gallery
 	 */

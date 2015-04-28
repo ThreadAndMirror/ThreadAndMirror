@@ -46,6 +46,11 @@ class SectionProductType extends AbstractType
 		    'error_bubbling' 	=> true,
 		    'required'			=> false,
 	    ));
+
+	    $builder->add('effect', 'hidden', array(
+		    'error_bubbling' 	=> true,
+		    'required'			=> false,
+	    ));
     }
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
