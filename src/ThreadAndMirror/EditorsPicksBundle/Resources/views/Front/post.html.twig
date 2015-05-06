@@ -1,0 +1,73 @@
+{% extends 'StemsPageBundle:Layout:' ~ page.layout.slug ~ '.html.twig' %}
+
+{% import 'StemsSocialBundle:Macro:share.html.twig' as share %}
+
+{% block twitterCard %}
+	<meta name="twitter:card" content="photo">
+	<meta name="twitter:url" content="{{ app.request.uri }}">
+	<meta name="twitter:description" content="{{ post.excerpt }}">
+	<meta name="twitter:image" content="{{ getMediaImage(post.image).src|imagine_filter('page_banner') }}">
+	<meta name="twitter:site" content="@threadandmirror">
+	<meta name="twitter:creator" content="@threadandmirror">
+	<meta name="twitter:title" content="{{ post.title ~ ' - ' ~ post.subtitle }}">
+	<meta name="twitter:domain" content="http://www.threadandmirror.com">
+{% endblock %}
+
+{% block breadcrumbs %}<a href="{{ path('thread_editorspicks_front_post', { 'slug' : post.slug }) }}">Editor's Picks: {{ post.title ~ ' - ' ~ post.subtitle }}</a>{% endblock %}
+
+{% block banner %}
+	<div class="banner" style="background-image:url('{{ getMediaImage(post.image).src|imagine_filter('page_banner') }}');background-size:cover;background-position:center;"></div>
+	<div class="banner-inset">
+		<div class="banner-thumbnail" style="background-image:url('{{ getMediaImage(post.image).src|imagine_filter('page_banner') }}');background-size:cover;background-position:center;"></div>
+		<p class="date">{{ post.published|date('jS F Y') }}</p>
+		<div class="social">
+			{{ share.shareGoogleplus(post.sharer('googleplus')) }}
+			{{ share.sharePinterest(post.sharer('pinterest')) }}
+			{{ share.shareTwitter(post.sharer('twitter')) }}
+			{{ share.shareFacebook(post.sharer('facebook')) }}
+		</div>
+		{% block title %}<h1>{{ post.title }}<span>{{ post.subtitle }}</span></h1>{% endblock %}
+		<hr>
+		{% block content %}
+			{% if post.excerpt is not empty %}<p class="caption">{{ post.excerpt }}</p>{% endif %}
+		{% endblock %}
+	</div>
+{% endblock %}
+
+{% block dynamic %}
+	<article class="editors-picks" itemscope itemtype="http://schema.org/Article">
+        <div class="article col-{{ post.span }}" itemscope itemtype="http://schema.org/Article" style="height:{{ post.height }}px">
+            {% if post.content is not empty %}
+                {{ post.content|raw }}
+            {% endif %}
+            {% for section in sections %}
+                {{ section|raw }}
+            {% endfor %}
+        </div>
+	</article>
+    <div class="comments">
+        {# Comment configuration parameters #}
+        {% if 'stems.blog.comments.moderated'|parameter %}
+            {% set comments = post.moderatedComments %}
+        {% else %}
+            {% set comments = post.undeletedComments %}
+        {% endif %}
+        {% if 'stems.blog.comments.require_login'|parameter and app.user is empty %}
+            {% set authorised = false %}
+        {% else %}
+            {% set authorised = true %}
+        {% endif %}
+        {% if 'stems.blog.comments.enabled'|parameter %}
+            <script>
+                var idcomments_acct = '68806c77daa6d4bce5c5b1ef56c01258';
+                var idcomments_post_id;
+                var idcomments_post_url;
+            </script>
+            <span id="IDCommentsPostTitle" style="display:none"></span>
+            <script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+            <div class="add-comment-form">
+
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

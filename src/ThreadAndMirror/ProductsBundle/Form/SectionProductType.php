@@ -8,6 +8,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SectionProductType extends AbstractType
 {
+	protected $id;
+
+	public function __construct($link)
+	{
+		$this->id = $link->getId();
+	}
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
     	$builder->add('designer', null, array(
@@ -35,11 +42,6 @@ class SectionProductType extends AbstractType
 		$builder->add('url', null, array(
 			'label'     		=> 'Url',
 			'error_bubbling' 	=> true,
-		));	
-
-		$builder->add('pid', 'hidden', array(
-			'error_bubbling' 	=> true,
-			'required'			=> false,
 		));
 
 	    $builder->add('position', 'hidden', array(
@@ -62,6 +64,6 @@ class SectionProductType extends AbstractType
 
 	public function getName()
 	{
-		return 'section_product_type';
+		return $this->id.'_section_product_type';
 	}
 }

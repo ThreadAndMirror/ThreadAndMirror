@@ -59,7 +59,7 @@ class SectionProduct
 	/**
 	 * @ORM\Column(type="text")
 	 */
-	protected $effect = 'cutout';
+	protected $effect = 'none';
 
     public function __construct($product = null)
     {
@@ -69,7 +69,6 @@ class SectionProduct
             $this->description = $product->getShop() !== null ? 'At '.$product->getShop()->getName() : '';
             $this->url         = $product->getFrontendUrl();
             $this->image       = $product->getImage();
-            $this->pid         = $product->getId();
         }
     }
 
@@ -202,6 +201,16 @@ class SectionProduct
     {
         return $this->name;
     }
+
+	/**
+	 * Get full product name for front end
+	 *
+	 * @return string
+	 */
+	public function getfullName()
+	{
+		return $this->designer.' '.$this->name;
+	}
 
     /**
      * Set description

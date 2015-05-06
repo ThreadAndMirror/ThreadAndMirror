@@ -1,0 +1,13 @@
+{% extends 'StemsPageBundle:Section:base.html.twig' %}
+
+{% block content %}
+    <div class="{{ section.position }}" itemscope itemtype="http://schema.org/Product">
+        <a href="{{ section.url }}" itemprop="url">
+            {% if section.effect == 'cutout' %}
+                <img src="{{ getImageFromUrl(section.image).src|transparentColor }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
+            {% else %}
+                <img class="{% if section.effect != 'none' %}css-filter-{{ section.effect }}{% endif %}" src="{{ section.image|imagine_filter('section_image_large') }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
+            {% endif %}
+        </a>
+    </div>
+{% endblock %}
