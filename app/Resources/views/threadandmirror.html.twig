@@ -21,7 +21,7 @@
 			<meta name="twitter:domain" content="http://www.threadandmirror.com">
 		{% endblock %}
 	{# Fonts and styles #}
-		<script type="text/javascript" src="http://fast.fonts.net/jsapi/5d90cee9-3c49-45f3-ab44-db38581300cd.js"></script>
+        <link rel="stylesheet" href="/fonts/fonts.css">
 		<link rel="stylesheet" href="/css/font-awesome.min.css">
 		{% stylesheets '@frontend_css' filter="cssrewrite" filter="uglifycss" output='css/frontend.css' %}<link rel="stylesheet" href="{{ asset_url }}" />{% endstylesheets %}
 		{% block stylesheets %}{% endblock %}
