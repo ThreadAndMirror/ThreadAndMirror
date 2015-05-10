@@ -36,7 +36,7 @@
 
 {% block dynamic %}
 	<article class="editors-picks" itemscope itemtype="http://schema.org/Article">
-        <div class="article col-{{ post.span }}" itemscope itemtype="http://schema.org/Article" style="height:{{ post.height }}px">
+        <div class="article col-{{ post.span }}" style="height:{{ post.height }}px">
             {% if post.content is not empty %}
                 {{ post.content|raw }}
             {% endif %}
@@ -45,29 +45,34 @@
             {% endfor %}
         </div>
 	</article>
+    </div>
     <div class="comments">
-        {# Comment configuration parameters #}
-        {% if 'stems.blog.comments.moderated'|parameter %}
-            {% set comments = post.moderatedComments %}
-        {% else %}
-            {% set comments = post.undeletedComments %}
-        {% endif %}
-        {% if 'stems.blog.comments.require_login'|parameter and app.user is empty %}
-            {% set authorised = false %}
-        {% else %}
-            {% set authorised = true %}
-        {% endif %}
-        {% if 'stems.blog.comments.enabled'|parameter %}
-            <script>
-                var idcomments_acct = '68806c77daa6d4bce5c5b1ef56c01258';
-                var idcomments_post_id;
-                var idcomments_post_url;
-            </script>
-            <span id="IDCommentsPostTitle" style="display:none"></span>
-            <script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
-            <div class="add-comment-form">
+    <div class="background"></div>
+    <div class="wrapper">
+            {# Comment configuration parameters #}
+            {% if 'stems.blog.comments.moderated'|parameter %}
+        {% set comments = post.moderatedComments %}
+    {% else %}
+        {% set comments = post.undeletedComments %}
+    {% endif %}
+            {% if 'stems.blog.comments.require_login'|parameter and app.user is empty %}
+        {% set authorised = false %}
+    {% else %}
+        {% set authorised = true %}
+    {% endif %}
+            {% if 'stems.blog.comments.enabled'|parameter %}
+        <script>
+            var idcomments_acct = '68806c77daa6d4bce5c5b1ef56c01258';
+            var idcomments_post_id;
+            var idcomments_post_url;
+        </script>
+        <span id="IDCommentsPostTitle" style="display:none"></span>
+        <script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+        <div class="add-comment-form">
 
-            </div>
-        {% endif %}
+        </div>
+    {% endif %}
+</div>
+
     </div>
 {% endblock %}

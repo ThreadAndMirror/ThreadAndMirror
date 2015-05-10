@@ -1112,7 +1112,6 @@ div+.pagination {
 .article {
 	background: rgba(255,255,255,1);
 	position: relative;
-	height: 3000px;
 	width: 960px;
 	margin: 0 auto;
 }
@@ -1269,9 +1268,230 @@ div+.pagination {
 }
 
 .comments {
+    margin-top: 30px;
+    background: #333333;
+    position: relative;
+}
+
+.comments .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.1;
+    background: url(http://salon.glenrose.net/img/whispercamp.jpg) center;
+    background-size: cover;
+}
+
+
+.comments .wrapper {
 	padding: 30px 0;
 	width: 960px;
 	margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.comments hr {
+    margin: 0 100px 20px 101px;
+    border: 0;
+    border-top: 1px dotted #ddd;
+}
+
+.comments #idc-container {
+    margin: auto;
+    max-width: inherit;
+    min-width: inherit;
+    width: 630px;
+    position: relative;
+}
+
+.comments #IDCPostNav,
+.comments #IDCPostNavReply,
+.comments #IDCommentsHeadLogin,
+.comments #IDCColumnURLLabel,
+.comments #IDCColumnURLReply,
+.comments #IDCColumnURLReplyLabel,
+.comments #idc-container .idc-head_tools-share,
+#idc-container .idc-foot,
+.comments #idc-toolbar,
+.comments #IDSubscribeToThisWrapper,
+.comments #IDSubscribeToThisWrapperReply,
+.comments #idc-cover .idc-c .idc-c-b,
+.comments #idc-container .idc-a {
+    display: none !important;
+}
+
+.comments #IDCColumnURL {
+    visibility: hidden;
+}
+
+.comments #IDCommentsNoCommentsDiv {
+    background: none !important;
+    text-align: center;
+    font-weight: normal;
+}
+
+.comments #IDCommentsHead h3 {
+    text-align: center;
+    font-family: 'Linotype Didot W01',serif;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 24px;
+    color: #FFFFFF;
+    margin: 30px;
+}
+
+.comments #IDCommentsNewThreadCover h3,
+.comments #IDCColumnNameLabel label,
+.comments #IDCColumnEmailLabel label {
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 3px !important;
+    text-align: center;
+    float: none;
+    font-size: 12px;
+    padding: 10px 0;
+    opacity: .7;
+    color: #FFFFFF;
+}
+
+.comments #idc-container .idc-c-m label {
+    padding: 5px 0;
+    width: 90%;
+}
+
+.comments #idc-container .idc-c-m .idc-form-info {
+    font-weight: 200;
+    opacity: 0.7;
+    font-style: normal;
+}
+
+.comments #idc-container textarea,
+.comments #idc-container input[type=text] {
+    background: none !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    border-radius: 0 !important;
+    font: 200 14px/1.3em 'Futura PT Multilingual W01', sans-serif !important;
+    color: #EEEEEE !important;
+    text-align: left !important;
+    padding: 5px 10px;
+
+}
+
+.comments #idc-container .idc-collapselink_closed,
+.comments #idc-container .idc-collapselink {
+    background: none;
+}
+
+.comments #idc-container .idc-c .idc-c-h {
+    background: none !important;
+}
+
+.comments #idc-container-parent #idc-cover .idc-thread .idc-c {
+    background: none;
+}
+
+.comments #idc-container textarea.idc-text_noresize {
+    width: 100% !important;
+    padding: 10px;
+}
+
+.comments #idc-container .idc-btn_l .idc-r strong,
+.comments #idc-container .idc-btn_s .idc-r strong {
+    font-weight: 300 !important;
+}
+
+.comments #idc-container .idc-c .idc-i,
+#idc-container .idc-c-t {
+    color: #EEEEEE;
+    margin: 0;
+}
+
+.comments #idc-container div * {
+    font-weight: 200;
+}
+
+/*.comments #idc-container .idc-comments > .idc-thread > .idc-thread,*/
+.comments #idc-container .idc-comments > .idc-thread+.idc-thread {
+    border-top: 1px solid rgba(255,255,255,0.1) !important;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.comments #idc-container .idc-btn_l,
+.comments #idc-container .idc-btn_s {
+    font-family: 'Futura PT Multilingual W01', sans-serif;
+    display: block;
+    line-height: 26px;
+    height: 26px;
+    font-size: 12px;
+    background: none !important;
+    padding: 0 6px 0 8px !important;
+    border-radius: 4px;
+    margin: 0 !important;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.comments #idc-container .idc-btn_l:hover,
+.comments #idc-container .idc-btn_s:hover {
+    background: rgba(255,255,255,0.1) !important;
+}
+
+.comments #idc-container .idc-btn_l:hover span,
+.comments #idc-container .idc-btn_s:hover span {
+    color: #FFFFFF !important;
+}
+
+.comments #idc-container .idc-btn_l span,
+.comments #idc-container .idc-btn_s span,
+.comments #idc-container .idc-btn_l > span *,
+.comments #idc-container .idc-btn_s > span * {
+    background: none;
+    color: #FFFFFF;
+    letter-spacing: 2px !important;
+    text-align: center;
+    font-weight: 300 !important;
+}
+
+.comments #idc-container .idc-message {
+    padding: 10px 0 40px;
+}
+
+.comments #idc-container .idc-message,
+.comments #idc-container .idc-message a {
+    color: #EEEEEE;
+}
+
+.comments #idc-container .idc-btn_s {
+    line-height: 20px;
+    height: 20px;
+    font-size: 10px;
+    padding: 0 4px 0 6px !important;
+}
+
+.comments #idc-container .idc-btn_l {
+    position: absolute;
+    right: 0;
+    bottom: 47px;
+    border: 1px solid #FFFFFF !important;
+}
+
+.comments #idc-container .idc-c .idc-a img {
+    border-radius: 18px;
+    padding: 0;
+}
+
+.comments #idc-container .idc-v {
+    display: none;
+}
+.comments #idc-container .idc-c .idc-time a,
+.comments #idc-container .idc-c .idc-time {
+    color: rgba(255,255,255,0.5);
+    font-size: 12px;
+    font-style: normal;
 }
 
 .comments h4 {
