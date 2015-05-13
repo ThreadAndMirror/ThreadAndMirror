@@ -6,14 +6,14 @@
 				<div class="title">
 					<p>Editor's Picks</p>
 					<h2>{{ post.title }}</h2>
-					<h4><span></span>{{ post.subtitle }}<span></span></h4>
+					<h4><span></span> {{ post.subtitle }} <span></span></h4>
 					<button class="button-invert">Read More</button>
 				</div>
 			</a>
-			<div class="image" style="background:url('{{ getMediaImage(post.image).src|imagine_filter('blog_homepage_circle') }}') center center; background-size:cover;"></div>
-			<div class="picks">
-				{#{% include 'ThreadAndMirrorEditorsPicksBundle:Include:' ~ post.layout ~ '.html.twig' with { post : post } %}#}
-			</div>
+			<a href="{{ path('thread_editorspicks_front_post', { 'slug' : post.slug }) }}" class="image" style="background:url('{{ getMediaImage(post.image).src|imagine_filter('blog_homepage_circle') }}') center center;"></a>
+            {% for product in products %}
+                <a href="{{ product.url }}" class="product pos-{{ loop.index }}" style="background-image:url('{{ getImageFromUrl(product.image).src|imagine_filter('section_image_large') }}');"></a>
+            {% endfor %}
 		</div>
 	</div>
 </div>

@@ -117,11 +117,11 @@ liip_imagine:
             filters:
                 thumbnail: { size: [960, 450], mode: outbound }
         blog_homepage_circle:
-            quality: 80
+            quality: 95
             filters:
                 thumbnail: { size: [240, 240], mode: outbound }
         section_image_medium:
-            quality: 80
+            quality: 90
             filters:
                 thumbnail: { size: [450, 450], mode: inset }
         section_image_medium_cutout:

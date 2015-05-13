@@ -19,12 +19,25 @@ class WidgetController extends Controller
 	 */
 	public function editorsPicksAction()
 	{
-		// get the latest editors pick
-		$em = $this->getDoctrine()->getManager();
-		$posts = $em->getRepository('StemsBlogBundle:Post')->findPublishedPostsByCategory('editors-picks', 1);
+		// Get the latest editors pick article and it's products
+		$em       = $this->getDoctrine()->getManager();
+		$posts    = $em->getRepository('StemsBlogBundle:Post')->findPublishedPostsByCategory('editors-picks', 1);
+		$post     = reset($posts);
 
-		return $this->render('ThreadAndMirrorEditorsPicksBundle:Widget:editorsPicks.html.twig', array(
-			'post' 	=> reset($posts)
-		));
+		$products = [];
+
+		foreach($post->getSections() as $section) {
+			if ($section->getType() == 'product') {
+				$products[] = $em->getRepository('ThreadAndMirrorProductsBundle:SectionProduct')->find($section->getEntity());
+				if (count($products) == 4) {
+					break;
+				}
+			}
+		}
+
+		return $this->render('ThreadAndMirrorEditorsPicksBundle:Widget:editorsPicks.html.twig', [
+			'post' 	   => $post,
+			'products' => $products
+		]);
 	}
 }
