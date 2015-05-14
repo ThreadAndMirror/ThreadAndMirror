@@ -10,7 +10,7 @@
 					<button class="button-invert">Read More</button>
 				</div>
 			</a>
-			<a href="{{ path('thread_editorspicks_front_post', { 'slug' : post.slug }) }}" class="image" style="background:url('{{ getMediaImage(post.image).src|imagine_filter('blog_homepage_circle') }}') center center;"></a>
+			<a href="{{ path('thread_editorspicks_front_post', { 'slug' : post.slug }) }}" class="image" style="background-image:url('{{ getMediaImage(post.image).src|imagine_filter('blog_homepage_circle') }}');"></a>
             {% for product in products %}
                 <a href="{{ product.url }}" class="product pos-{{ loop.index }}" style="background-image:url('{{ getImageFromUrl(product.image).src|imagine_filter('section_image_large') }}');"></a>
             {% endfor %}

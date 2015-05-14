@@ -6,7 +6,7 @@
             {% if section.effect == 'cutout' %}
                 <img src="{{ getImageFromUrl(section.image).src|transparentColor }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
             {% else %}
-                <img class="{% if section.effect != 'none' %}css-filter-{{ section.effect }}{% endif %}" src="{{ section.image|imagine_filter('section_image_large') }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
+                <img class="{% if section.effect != 'none' %}css-filter-{{ section.effect }}{% endif %}" src="{{ getImageFromUrl(section.image).src|imagine_filter('section_image_large') }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
             {% endif %}
         </a>
     </div>

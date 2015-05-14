@@ -3743,6 +3743,9 @@ div.login {
 	border: 3px solid #FFFFFF;
 	border-radius: 260px;
 	position: absolute;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 	bottom: 0;
 	left: 50%;
 	margin-left: -133px;
@@ -3800,13 +3803,18 @@ div.login {
 .widget-editors-picks a.product {
 	position: absolute;
     background-color: #FFFFFF;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
     height: 144px;
     width: 144px;
     border-radius: 150px;
     bottom: 15px;
     border: 3px solid #FFF;
+}
+
+.widget-editors-picks a.product:hover {
+    border: 3px solid #111111;
 }
 
 .widget-editors-picks .product.pos-1 {
@@ -3837,13 +3845,13 @@ div.login {
     margin-top: 5px;
     text-shadow: 0 0 1px #fff;
     text-align: center;
-    margin: 150px 0 35px;
+    margin: 180px 0 85px;
 }
 
 .widget-instagram .images {
     margin: 0 -120px;
     width: calc(100% + 480px);
-    height: 240px;
+    height: 480px;
     overflow: hidden;
 }
 
@@ -3875,7 +3883,7 @@ div.login {
 }
 
 .widget-social-boxes > h4 {
-	margin: 50px auto;
+	margin: 100px auto;
 	text-align: center;
 }
 
