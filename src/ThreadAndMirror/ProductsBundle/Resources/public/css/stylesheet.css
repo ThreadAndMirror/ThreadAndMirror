@@ -3811,10 +3811,12 @@ div.login {
     border-radius: 150px;
     bottom: 15px;
     border: 3px solid #FFF;
+    -webkit-filter: saturate(1.1);
+    transition: 0.5s all;
 }
 
 .widget-editors-picks a.product:hover {
-    border: 3px solid #111111;
+    background-size: cover;
 }
 
 .widget-editors-picks .product.pos-1 {
@@ -4019,88 +4021,6 @@ div.login {
     transform: rotate(360deg);
 }
 
-
-
-.editors-picks-grid section {
-	width: 960px;
-	margin: 60px auto;
-}
-
-.editors-picks-grid a {
-	display: block;
-	height: 210px;
-	width: 210px;
-	padding: 0px;
-	margin: 15px;
-	position: relative;
-	float: left;
-	text-align: center;
-}
-
-.editors-picks-grid a:hover {
-	color: #111111;
-}
-
-.editors-picks-grid a div {
-	width: 100%;
-	height: 100%;
-	background: rgba(255,255,255,0.8);
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	z-index: 1;
-	transition: all 0.3s;
-}
-
-.editors-picks-grid a:hover div {
-	opacity: 0.7;
-	-webkit-filter: blur(10px);
-	-moz-filter: blur(10px);
-	-o-filter: blur(10px);
-	-ms-filter: blur(10px);
-	filter: blur(10px);
-}
-
-.editors-picks-grid a h3 {
-	margin: 10px;
-	width: 190px;
-	bottom: 105px;
-	left: 0;
-	position: absolute;
-	display: block;
-	font-weight: 200;
-	text-transform: uppercase;
-	font-size: 16px;
-	line-height: 16px;
-	text-align: center;
-	letter-spacing: 0;
-	font-family: 'Futura PT Multilingual W01', sans-serif;
-	opacity: 0;
-	transition: opacity 0.3s ease-in-out;
-	z-index: 2;
-}
-
-.editors-picks-grid a:hover h3, .editors-picks-grid a:hover p {
-	opacity: 1;
-}
-
-.editors-picks-grid a h3 > span {
-	display: block;	
-}
-
-.editors-picks-grid a p {
-	border-top: 1px solid rgba(16,16,16,0.4);
-	position: absolute;
-	z-index: 2;
-	top: 105px;
-	left: 0;
-	width: 190px;
-	padding: 10px;
-	opacity: 0;
-	transition: opacity 0.3s ease-in-out;
-	z-index: 2;
-}
-
 .widget-poll {
 	border: 1px solid #DDDDDD;
 	position: relative;
@@ -4183,94 +4103,6 @@ div.login {
 	background: #FFFFFF;
 	padding: 0 5px;
 	line-height: 18px;
-}
-
-/* --- SIDEBAR WIDGET - LATEST BLOG POST --- */
-
-.sidebar .snap > a {
-	text-transform: uppercase;
-	display: block;
-	text-align: center;
-	text-align: center;
-	color: #FFFFFF;
-	background: #111111;
-	line-height: 30px;
-}
-
-.sidebar .snap > a:hover {
-	color: #f93124;
-} 
-
-.sidebar .widget {
-	position: relative;
-	margin-bottom: 30px;
-	border: 1px solid rgba(16,16,16,0.4);
-}
-
-.sidebar h5 {
-	font-size: 14px;
-	color:#111111;
-	position: absolute;
-	width: 100%;
-	top: -9px;
-	text-align: center;
-	text-transform: uppercase;
-	font-weight: 200;
-	letter-spacing: 2px;
-	z-index: 5;
-}
-
-.sidebar h5 > span {
-	background: #FFFFFF;
-	padding: 0 5px;
-	line-height: 18px;
-}
-
-.widget-editors-pick {
-	padding: 15px 0 50px 0;
-}
-
-.widget-editors-pick h2 {
-	text-transform: uppercase;
-	font-weight: 400;
-	text-align: center;
-	font-size: 16px;
-	position: absolute;
-	bottom: -50px;
-	width: 178px;
-}
-
-.widget-editors-pick h2 > span {
-	display: block;
-	font-weight: 200;
-	font-size: 13px;
-}
-
-.widget-editors-pick a {
-	display: block;
-	height: 200px;
-	position: relative;
-	margin: 10px 20px;
-}
-
-.widget-editors-pick {
-	
-}
-
-/* --- SIDEBAR WIDGET - INSTAGRAM--- */
-
-.widget-instagram-slider .slides {
-	position: relative;
-	z-index: 4;
-	width: 218px;
-	height: 218px;
-}
-
-.widget-instagram-slider .slide {
-	position: absolute;
-	width: 200px;
-	height: 200px;
-	margin: 9px;
 }
 
 /* --- FOOTER --- */
