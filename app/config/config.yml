@@ -235,9 +235,10 @@ parameters:
     stems.site.theme: 'threadandmirror'
     stems.site.name: 'Thread & Mirror'
     stems.site.url: 'http://www.threadandmirror.com'
-    stems.site.description: 'All Luxury, One Site: Fashion, Beauty, Blog, Street Chic, The Social Circle and Sale Alerts'
     stems.site.email: 'info@threadandmirror.com'
+    stems.site.description: 'All Luxury, One Site: Fashion, Beauty, Blog, Street Chic, The Social Circle and Sale Alerts'
     stems.site.keywords: 'Fashion, Street Chic, Style, Clothing, Sales, Beauty, Blog, Style Exchange, Sale Alerts, Shop, Offer, High Fashion, Fashion Shows, Sample Sale, Sample Sales, Luxury'
+    stems.site.sitemap.bundles: ['StemsPageBundle', 'StemsBlogBundle', 'ThreadAndMirrorEditorsPicksBundle']
     stems.media.image.categories: 
         general: 'General'
         blog:    'Blog'
