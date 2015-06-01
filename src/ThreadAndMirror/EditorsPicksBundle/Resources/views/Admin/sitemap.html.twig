@@ -1,0 +1,16 @@
+{% spaceless %}
+	{% for pick in picks %}
+		<url>
+			<loc>{{ site_url }}/editors-picks/{{ pick.slug }}</loc>
+			<changefreq>monthly</changefreq>
+			<lastmod>{{ pick.published|date('Y-m-d') }}</lastmod>
+		</url>
+	{% endfor %}
+    {% for outfit in outfits %}
+        <url>
+            <loc>{{ site_url }}/instant-outfits/{{ outfit.slug }}</loc>
+            <changefreq>monthly</changefreq>
+            <lastmod>{{ outfit.published|date('Y-m-d') }}</lastmod>
+        </url>
+    {% endfor %}
+{% endspaceless %}

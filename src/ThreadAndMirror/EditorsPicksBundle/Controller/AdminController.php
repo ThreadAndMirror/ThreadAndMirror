@@ -20,7 +20,24 @@ use Doctrine\ORM\NoResultException;
 class AdminController extends BaseAdminController
 {
 	protected $homePath = 'thread_editorspicks_admin_collections';
-	
+
+	/**
+	 * Build the sitemap entries for the bundle
+	 */
+	public function sitemapAction()
+	{
+		// Get the posts
+		$em      = $this->getDoctrine()->getEntityManager();
+		$picks   = $em->getRepository('StemsBlogBundle:Post')->findPublishedPostsByCategory('editors-picks', 9999);
+		$outfits = $em->getRepository('StemsBlogBundle:Post')->findPublishedPostsByCategory('instant-outfits', 9999);
+
+
+		return $this->render('ThreadAndMirrorEditorsPicksBundle:Admin:sitemap.html.twig', array(
+			'picks' 	=> $picks,
+			'outfits'	=> $outfits,
+		));
+	}
+
 	/**
 	 * List editor's picks collections
 	 *
