@@ -148,7 +148,7 @@
 				</ul> 
 			</div>
 		</div>
-	 	<script src="/js/plugins/packery/packery.pkgd.min.js"></script>
+	 	<script src="/js/vendor/packery.pkgd.min.js"></script>
 	 	{% javascripts '@frontend_vendor_js' filter='uglifyjs2' output='js/front/vendor.js' %}<script src="{{ asset_url }}"></script>{% endjavascripts %}
         {% javascripts '@frontend_js' filter='uglifyjs2' output='js/front/frontend.js' %}<script src="{{ asset_url }}"></script>{% endjavascripts %}
 		{% block javascripts %}{% endblock %}

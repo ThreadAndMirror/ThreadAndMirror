@@ -5,8 +5,8 @@ $(document).ready(function() {
 		window.packery = new Packery( container, {
 			itemSelector: 'figure',
 			layoutMode: 'meticulous',
-			columnWidth: 'figure.text-post',
-		});
+			columnWidth: 'figure.text-post'
+        });
 	}
 	
 	/**

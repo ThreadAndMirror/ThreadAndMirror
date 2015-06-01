@@ -540,7 +540,9 @@ div+.pagination {
 .layout-banner-inset .banner-wrapper {
 	overflow: hidden;
 	height: 360px;
-	background-color: #333333;
+	background-color: #111111;
+    position: relative;
+    z-index: 1;
 }
 
 .layout-banner-inset .wrapper {
@@ -549,22 +551,28 @@ div+.pagination {
 }
 
 .layout-banner-inset .banner-wrapper .banner {
-	-webkit-filter: blur(10px);
-	-moz-filter: blur(10px);
-	-o-filter: blur(10px);
-	-ms-filter: blur(10px);
-	filter: blur(10px);
-	height: 380px;
+	-webkit-filter: blur(7px);
+	-moz-filter: blur(7px);
+	-o-filter: blur(7px);
+	-ms-filter: blur(7px);
+	filter: blur(7px);
 	opacity: 0.5;
+    left:-15px;
+    right:-15px;
+    top:-15px;
+    bottom:-15px;
+    position: absolute;
+    z-index: 1;
 }
 
 .layout-banner-inset .banner-wrapper .banner-inset {
-    margin: -300px auto 0;
+    margin: 100px auto 0;
     padding: 50px 0 0;
     width: 960px;
     position: relative;
     height: 230px;
-    background: #FFFFFF;
+    background: #fff;
+    z-index: 2;
 }
 
 .layout-banner-inset .banner-wrapper .banner-inset h1 {
@@ -630,6 +638,9 @@ div+.pagination {
 	line-height: 20px;
 	font-size: 12px;
 	letter-spacing: 0;
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 3px;
 }
 
 .layout-banner-inset .banner-inset .banner-thumbnail {
@@ -659,11 +670,11 @@ div+.pagination {
 .layout-banner-overlay .banner-wrapper {
 	overflow: hidden;
 	height: 200px;
-	border-bottom: 3px solid #FFF;
 	background-color: #111;
 	position: relative;
 	text-align: center;
     color: #FFFFFF;
+    z-index: 1;
 }
 
 .layout-banner-overlay .banner-wrapper h1 {
@@ -707,15 +718,17 @@ div+.pagination {
 }
 
 .layout-banner-overlay .banner {
-	-webkit-filter: blur(10px);
-	-moz-filter: blur(10px);
-	-o-filter: blur(10px);
-	-ms-filter: blur(10px);
-	filter: blur(10px);
-	height: 290px;
+	-webkit-filter: blur(7px);
+	-moz-filter: blur(7px);
+	-o-filter: blur(7px);
+	-ms-filter: blur(7px);
+	filter: blur(7px);
 	opacity: 0.3;
+    left:-15px;
+    right:-15px;
+    top:-15px;
+    bottom:-15px;
 	position: absolute;
-	width: 100%;
 	z-index: 1;
 }
 
@@ -1031,83 +1044,167 @@ div+.pagination {
 .layout-sidebar > .sidebar {
 	padding-top: 20px;
 	width: 220px;
-	position: relative;
 	float: right;
 }
 
 /* --- BLOG --- */
+.article-list {
+    padding: 0;
+}
 
 .article-snippet {
-	margin: 0 0 10px 0;
-	position: relative;
-	overflow: hidden;
-	height:200px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 320px;
+    margin: 0;
+    display: block;
+    background: #000000;
 }
 
-.article-snippet .overlay {
-	background: #F0F0F0;
-	opacity: 0;
-	position: absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	-webkit-transition: all 0.5s ease-in-out; -o-transition: all 0.5s ease-in-out; -moz-transition: all 0.5s ease-in-out; transition: all 0.5s ease-in-out;
+.article-snippet:hover {
+    color: #111111;
 }
 
-.article-snippet:hover .overlay {
-	opacity: 0.75;
+.article-snippet .background {
+    background-position: center;
+    background-size: cover;
+    left:-15px;
+    right:-15px;
+    top:-15px;
+    bottom:-15px;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -ms-filter: blur(5px);
+    -o-filter: blur(5px);
+    position: absolute;
+    opacity: 0.2;
 }
 
-.article-snippet a {
-	display: block;
-	position: absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	z-index: 5;
+.article-snippet:nth-child(2n) {
+    background: #FFFFFF;
 }
 
-.snippet-even {
-	width: 475px;
-	float: left;
-	margin-right: 10px;
-}
-
-.snippet-odd,
-.snippet-even a,
-.snippet-odd a {
-	width: 475px;
-}
-
-.snippet-even:last-child,
-.snippet-even:last-child a {
-	width: 100%;
-	float: none;
-	margin-right: 0;
+.article-snippet .wrapper {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
 }
 
 .article-snippet h2 {
-	color: #F0F0F0;
-	position: relative;
-	font-family: 'Linotype Didot W01', serif;
-	font-size: 36px;
-	z-index: 4;
-	background: rgba(0,0,0,0.75);
-	border: none;
-	margin: 30px;
-	padding: 10px 20px;
-	font-weight: 400;
-	letter-spacing: -2px;
-	max-width: 500px;
+    text-align: center;
+    font-family: 'Linotype Didot W01',serif;
+    font-size: 36px;
+    line-height: 48px;
+    z-index: 3;
+    font-weight: 400;
+    letter-spacing: -2px;
+}
+
+.article-snippet h4 {
+    font-weight: 200;
+    top: 175px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 12px;
+    opacity: .3;
+    text-align: center;
 }
 
 .article-snippet h2 > span {
-	display: block;
-	font-size: 24px;
-	letter-spacing: -1px;
+    display: block;
+    font-size: 20px;
+    line-height: 20px;
+    font-style: italic;
+    font-weight: 200;
+    margin: 5px 0 20px;
+    letter-spacing: -1px;
 }
+
+.article-snippet h2 > span > span {
+    width: 50px;
+    height: 5px;
+    border-top: 1px solid #111;
+    display: inline-block;
+    margin: 0 10px;
+    opacity: .4;
+}
+
+.article-snippet:nth-child(2n+1) h2 > span > span {
+    border-top: 1px solid #FFFFFF;
+}
+
+.article-snippet button {
+    margin: 0 auto;
+}
+
+.article-snippet .image {
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    background-clip: content-box;
+    left: 0;
+    top: 27px;
+    width: 260px;
+    height: 260px;
+    border-radius: 260px;
+    border: 3px solid rgba(255,255,255,0.2);
+}
+
+.article-snippet:nth-child(2n) .image {
+    right: 0;
+    left: auto;
+    border: 3px solid rgba(16,16,16,0.2);
+}
+
+.article-snippet .excerpt {
+    position: relative;
+    display: table;
+    width: 640px;
+    height: 320px;
+    float: right;
+}
+
+.article-snippet .excerpt .middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.article-snippet:nth-child(2n+1) .excerpt, .article-snippet:nth-child(2n+1) .excerpt p {
+    color: #FFFFFF;
+}
+
+.article-snippet:nth-child(2n) .excerpt {
+    float: left;
+}
+
+.article-snippet:nth-child(2n+1) button {
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+
+
+/*.article-snippet .excerpt {*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*width: 98%;*/
+    /*margin: 5px;*/
+    /*box-sizing: border-box;*/
+    /*border: 3px double rgba(255,255,255,0.7);*/
+/*}*/
+
+.article-snippet .excerpt p {
+    text-align: center;
+    margin: 5px 5px 25px;
+    padding: 15px;
+    box-sizing: border-box;
+    line-height: 20px;
+    /*background: rgba(255,255,255,1);*/
+}
+
+
 
 .article {
 	background: rgba(255,255,255,1);
@@ -3847,7 +3944,7 @@ div.login {
     margin-top: 5px;
     text-shadow: 0 0 1px #fff;
     text-align: center;
-    margin: 180px 0 85px;
+    margin: 160px 0 45px;
 }
 
 .widget-instagram .images {

@@ -117,9 +117,9 @@ liip_imagine:
             filters:
                 thumbnail: { size: [960, 450], mode: outbound }
         blog_homepage_circle:
-            quality: 95
+            quality: 90
             filters:
-                thumbnail: { size: [240, 240], mode: outbound }
+                thumbnail: { size: [480, 480], mode: outbound }
         section_image_medium:
             quality: 90
             filters:
@@ -165,6 +165,7 @@ assetic:
             inputs:
                 - '@ThreadAndMirrorSocialBundle/Resources/public/js/frontend.js'
                 - '@StemsCoreBundle/Resources/public/js/front/frontend.js'
+                - '@StemsBlogBundle/Resources/public/js/front/frontend.js'
         frontend_css:
             inputs:
                 - '@StemsCoreBundle/Resources/public/css/front/vendor/*'
