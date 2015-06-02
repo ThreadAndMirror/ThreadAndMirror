@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8f6697b0-6fde-4ab5-902b-7b14249fc9db" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Stems/CoreBundle/Resources/views/Admin/sitemap.html.twig" afterPath="$PROJECT_DIR$/src/Stems/CoreBundle/Resources/views/Admin/sitemap.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="8f6697b0-6fde-4ab5-902b-7b14249fc9db" name="Default" comment="" />
     <ignored path="threadandmirror.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -31,8 +28,8 @@
       <file leaf-file-name="FrontController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Controller/FrontController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.681818" vertical-offset="0" max-vertical-offset="2288">
-              <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+            <state vertical-scroll-proportion="-13.590909" vertical-offset="0" max-vertical-offset="2288">
+              <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
               <folding>
                 <marker date="1432158203000" expanded="true" signature="4138:4716" placeholder="..." />
                 <marker date="1432158203000" expanded="true" signature="4154:4716" placeholder="..." />
@@ -41,21 +38,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Stems/CoreBundle/Controller/AdminController.php">
+      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Resources/config/routing.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-23.136364" vertical-offset="648" max-vertical-offset="1482">
-              <caret line="93" column="80" selection-start-line="93" selection-start-column="80" selection-end-line="93" selection-end-column="80" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1300">
+              <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BundleManagementService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Stems/CoreBundle/Service/BundleManagementService.php">
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Resources/views/Admin/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.090909" vertical-offset="136" max-vertical-offset="754">
-              <caret line="36" column="34" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+            <state vertical-scroll-proportion="-5.909091" vertical-offset="0" max-vertical-offset="858">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Controller/AdminController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.636364" vertical-offset="754" max-vertical-offset="4238">
+              <caret line="84" column="75" selection-start-line="84" selection-start-column="75" selection-end-line="84" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PageRepository.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Stems/PageBundle/Repository/PageRepository.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.31553397" vertical-offset="104" max-vertical-offset="1508">
+              <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -66,69 +83,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="2909" max-vertical-offset="4654">
               <caret line="240" column="107" selection-start-line="240" selection-start-column="107" selection-end-line="240" selection-end-column="107" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Controller/AdminController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.818182" vertical-offset="0" max-vertical-offset="1196">
-              <caret line="20" column="95" selection-start-line="20" selection-start-column="95" selection-end-line="20" selection-end-column="95" />
-              <folding>
-                <marker date="1426886868000" expanded="true" signature="859:949" placeholder="SELECT p.id ..ThreadAndMirrorProductsBundle..." />
-                <marker date="1426886868000" expanded="true" signature="1225:1325" placeholder="SELECT p.id,..ThreadAndMirrorProductsBundle..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sitemap.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Admin/sitemap.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.909091" vertical-offset="0" max-vertical-offset="208">
-              <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sitemap.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Stems/CoreBundle/Resources/views/Admin/sitemap.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.042071197" vertical-offset="0" max-vertical-offset="618">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminPostType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Form/AdminPostType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="7.9545455" vertical-offset="175" max-vertical-offset="1118">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Controller/AdminController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.954545" vertical-offset="182" max-vertical-offset="4199">
-              <caret line="49" column="11" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PostRepository.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Repository/PostRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.318182" vertical-offset="572" max-vertical-offset="1768">
-              <caret line="77" column="37" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -163,13 +117,11 @@
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Section/product.html.twig" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/EditorsPicksBundle/Resources/views/Widget/editorsPicks.html.twig" />
         <option value="$PROJECT_DIR$/src/Stems/SocialBundle/Controller/WidgetController.php" />
-        <option value="$PROJECT_DIR$/src/Stems/PageBundle/Repository/PageRepository.php" />
         <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Resources/views/Front/list.html.twig" />
         <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Resources/config/parameters.yml" />
         <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Controller/FrontController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/threadandmirror.html.twig" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/SocialBundle/Resources/public/js/frontend.js" />
-        <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Resources/views/Front/post.html.twig" />
         <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Resources/views/Widget/homepageFeature.html.twig" />
         <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Resources/public/js/front/frontend.js" />
@@ -177,12 +129,14 @@
         <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Controller/RestController.php" />
         <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Resources/views/Front/sequential.html.twig" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/public/css/stylesheet.css" />
-        <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/EditorsPicksBundle/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/EditorsPicksBundle/Resources/views/Admin/sitemap.html.twig" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/Stems/CoreBundle/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/src/Stems/CoreBundle/Resources/views/Admin/sitemap.html.twig" />
+        <option value="$PROJECT_DIR$/src/Stems/PageBundle/Repository/PageRepository.php" />
+        <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Resources/config/routing.yml" />
+        <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Controller/AdminController.php" />
       </list>
     </option>
   </component>
@@ -467,7 +421,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="971" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24517594" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -513,13 +467,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Stems/PageBundle/Form/SectionTextType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.772727" vertical-offset="0" max-vertical-offset="546">
-          <caret line="27" column="47" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Stems/PageBundle/Form/SectionListType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.181818" vertical-offset="65" max-vertical-offset="741">
@@ -654,13 +601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Stems/PageBundle/Repository/PageRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="312" max-vertical-offset="1508">
-          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Resources/config/parameters.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1105">
@@ -687,13 +627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="640">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="182" max-vertical-offset="1300">
-          <caret line="52" column="21" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -798,14 +731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Controller/AdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.954545" vertical-offset="182" max-vertical-offset="4199">
-          <caret line="49" column="11" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/EditorsPicksBundle/Controller/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.527027" vertical-offset="52" max-vertical-offset="2119">
@@ -838,17 +763,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Controller/FrontController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.681818" vertical-offset="0" max-vertical-offset="2288">
-          <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
-          <folding>
-            <marker date="1432158203000" expanded="true" signature="4138:4716" placeholder="..." />
-            <marker date="1432158203000" expanded="true" signature="4154:4716" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2909" max-vertical-offset="4654">
@@ -870,17 +784,9 @@
         <state vertical-scroll-proportion="-11.818182" vertical-offset="0" max-vertical-offset="1196">
           <caret line="20" column="95" selection-start-line="20" selection-start-column="95" selection-end-line="20" selection-end-column="95" />
           <folding>
-            <marker date="1426886868000" expanded="true" signature="859:949" placeholder="SELECT p.id ..ThreadAndMirrorProductsBundle..." />
-            <marker date="1426886868000" expanded="true" signature="1225:1325" placeholder="SELECT p.id,..ThreadAndMirrorProductsBundle..." />
+            <marker date="1426886868000" expanded="true" signature="-1:-1" placeholder="SELECT p.id ..ThreadAndMirrorProductsBundle..." />
+            <marker date="1426886868000" expanded="true" signature="-1:-1" placeholder="SELECT p.id,..ThreadAndMirrorProductsBundle..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Stems/CoreBundle/Controller/AdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.136364" vertical-offset="648" max-vertical-offset="1482">
-          <caret line="93" column="80" selection-start-line="93" selection-start-column="80" selection-end-line="93" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -894,8 +800,59 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Stems/CoreBundle/Resources/views/Admin/sitemap.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.042071197" vertical-offset="0" max-vertical-offset="618">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        <state vertical-scroll-proportion="-2.9545455" vertical-offset="0" max-vertical-offset="143">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Controller/FrontController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.590909" vertical-offset="0" max-vertical-offset="2288">
+          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+          <folding>
+            <marker date="1432158203000" expanded="true" signature="4138:4716" placeholder="..." />
+            <marker date="1432158203000" expanded="true" signature="4154:4716" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1300">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Stems/CoreBundle/Controller/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8236246" vertical-offset="648" max-vertical-offset="1482">
+          <caret line="93" column="80" selection-start-line="93" selection-start-column="80" selection-end-line="93" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Resources/views/Admin/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.909091" vertical-offset="0" max-vertical-offset="858">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Controller/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.636364" vertical-offset="754" max-vertical-offset="4238">
+          <caret line="84" column="75" selection-start-line="84" selection-start-column="75" selection-end-line="84" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Stems/PageBundle/Repository/PageRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31553397" vertical-offset="104" max-vertical-offset="1508">
+          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
           <folding />
         </state>
       </provider>
