@@ -2,7 +2,7 @@
 
 namespace ThreadAndMirror\ProductsBundle\Service\Crawler;
 
-class LookFantasticCrawler extends AbstractCrawler
+class UrbanRetreatBeautiqueCrawler extends AbstractCrawler
 {
 	protected function getExpired(DomCrawler $crawler) 
 	{
@@ -27,41 +27,51 @@ class LookFantasticCrawler extends AbstractCrawler
 
 	protected function getName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, 'h1.product-title');
+		return $this->getTextFromElement($crawler, 'h1.brand-product');
 	}
 
-	protected function getBrandName(DomCrawler $crawler)
+	protected function getBrandName(DomCrawler $crawler) 
 	{
-		return $this->getAttributeFromElement($crawler, '.product-brand-logo img', 'alt');
+		return $this->getTextFromElement($crawler, 'h2.brand a');
 	}
 
 	protected function getCategoryName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, '#product_breadcrumb ul > li > a', -2);
+		return null;
 	}
 
 	protected function getPid(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, 'input[name=prodId]');
+		return $this->getValueFromElement($crawler, '#UR_Product_hProductId');
 	}
 
 	protected function getDescription(DomCrawler $crawler)
 	{
-		return $this->getTextFromElement($crawler, '.product-info p:first-child');
+		return $this->getTextFromList($crawler, '#UR_Product_lblProductDescription p');
 	}
 
 	protected function getNow(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, '.product-price .price');
+		return $this->getTextFromAlternatingElements($crawler, 'h3.price .price', 'h3.price .price');
 	}
 
 	protected function getWas(DomCrawler $crawler) 
 	{
-		return $this->getTextFromAlternatingElements($crawler, '.saving-percent span', null);
+//		return $this->getTextFromAlternatingElements($crawler, '#product_price .sale_price .sale', null);
 	}
 
 	protected function getImages(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '.main-product-image a img');
+		return $this->getSrcFromList($crawler, '#UR_Product_updatePanelProductImage img');
+	}
+
+	protected function getPortraits(DomCrawler $crawler) 
+	{
+		return $this->getSrcFromList($crawler, '#UR_Product_updatePanelProductImage img');
+	}
+
+	protected function getThumbnails(DomCrawler $crawler) 
+	{
+		return $this->getSrcFromList($crawler, '#UR_Product_updatePanelProductImage img');
 	}
 }

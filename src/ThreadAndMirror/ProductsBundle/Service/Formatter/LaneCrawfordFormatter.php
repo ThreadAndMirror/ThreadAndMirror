@@ -4,18 +4,8 @@ namespace ThreadAndMirror\ProductsBundle\Service\Formatter;
 
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 
-class BrownsFormatter extends AbstractFormatter
+class LaneCrawfordFormatter extends AbstractFormatter
 {
-	/**
-	 * Post-processing for feed product creation
-	 *
-	 * @param  Product 		$product 	The product to cleanup
-	 */
-	public function cleanupFeedProduct(Product $product) 
-	{
-		
-	}
-
 	protected function cleanupCrawledName(Product $product) 
 	{ 
 
@@ -31,15 +21,18 @@ class BrownsFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
-	protected function cleanupCrawledPid(Product $product) 
+	protected function cleanupCrawledCategory(Product $product)
 	{
 		$result = $this
-			->format($product->getPid())
-			->trim()
-			->sheer('REF: ')
+			->format($product->getCategoryName())
 			->result();
 
-		$product->setPid($result);
+		$product->setCategoryName($result);
+	}
+
+	protected function cleanupCrawledPid(Product $product) 
+	{ 
+
 	}
 
 	protected function cleanupCrawledDescription(Product $product) 
@@ -56,7 +49,7 @@ class BrownsFormatter extends AbstractFormatter
 	{ 
 		$result = $this
 			->format($product->getImages())
-			->replace('160x198', '670x830')
+			->replace('_normal', '_large')
 			->result();
 
 		$product->setImages($result);
@@ -66,29 +59,48 @@ class BrownsFormatter extends AbstractFormatter
 	{ 
 		$result = $this
 			->format($product->getPortraits())
-			->replace('160x198', '338x410')
 			->result();
 
 		$product->setPortraits($result);
 	}
 
 	protected function cleanupCrawledThumbnails(Product $product) 
-	{ 
+	{
+		$result = $this
+			->format($product->getThumbnails())
+			->replace('_normal', '_thumb')
+			->result();
 
+		$product->setThumbnails($result);
 	}
 
 	protected function cleanupCrawledAvailableSizes(Product $product) 
 	{
-		$product->setAvailableSizes(array_merge($product->getAvailableSizes(), $product->getStockedSizes()));
+		$sizes = $product->getAvailableSizes();
+
+		foreach ($sizes as $key => $size) {
+			if (stristr($size, 'Select Size')) {
+				unset($sizes[$key]);
+			} else {
+				$sizes[$key] = $this->format($size)->result();
+			}
+		}
+
+		$product->setAvailableSizes($sizes);
 	}
 
 	protected function cleanupCrawledStockedSizes(Product $product) 
-	{ 
+	{
+		$sizes = $product->getStockedSizes();
 
-	}
+		foreach ($sizes as $key => $size) {
+			if (stristr($size, 'Select Size')) {
+				unset($sizes[$key]);
+			} else {
+				$sizes[$key] = $this->format($size)->result();
+			}
+		}
 
-	protected function cleanupCrawledStyleWith(Product $product) 
-	{ 
-
+		$product->setStockedSizes($sizes);
 	}
 }

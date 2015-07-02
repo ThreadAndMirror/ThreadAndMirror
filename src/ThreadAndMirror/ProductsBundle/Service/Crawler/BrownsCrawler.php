@@ -27,12 +27,12 @@ class BrownsCrawler extends AbstractCrawler
 
 	protected function getCategoryName(DomCrawler $crawler) 
 	{
-		return null;
+		return $this->getTextFromElement($crawler, '.p_sc > a:first-child');
 	}
 
 	protected function getPid(DomCrawler $crawler) 
 	{
-		return $this->getDataFromElement($crawler, '#layout-content', 'event-category');
+		return $this->getTextFromElement($crawler, '.prodInfo > div > div:nth-child(2) > span');
 	}
 
 	protected function getDescription(DomCrawler $crawler) 

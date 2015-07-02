@@ -21,7 +21,6 @@ class TopshopFormatter extends AbstractFormatter
 	protected function cleanupFeedImages(Product $product) 
 	{ 
 		$result = $this->format($product->getImages())
-			->replace('_normal.jpg', '_large.jpg')
 			->result();
 
 		$product->setImages($result);
@@ -38,8 +37,8 @@ class TopshopFormatter extends AbstractFormatter
 
 	protected function cleanupFeedThumbnails(Product $product) 
 	{ 
-		$result = $this->format($product->getImagess())
-			->replace('_large.jpg', '_small.jpg')
+		$result = $this->format($product->getThumbnails())
+			->replace('_large.jpg', '_thumb.jpg')
 			->result();
 
 		$product->setThumbnails($result);
@@ -52,8 +51,21 @@ class TopshopFormatter extends AbstractFormatter
 
 	protected function cleanupCrawledBrand(Product $product) 
 	{ 
-		$result = $this->format($product->getBrandName())->name()->result();
+		$result = $this
+			->format($product->getBrandName())
+			->name()
+			->result();
+
 		$product->setBrandName($result);
+	}
+
+	protected function cleanupCrawledCategory(Product $product)
+	{
+		$result = $this
+			->format($product->getCategoryName())
+			->result();
+
+		$product->setCategoryName($result);
 	}
 
 	protected function cleanupCrawledPid(Product $product) 
@@ -63,39 +75,71 @@ class TopshopFormatter extends AbstractFormatter
 
 	protected function cleanupCrawledDescription(Product $product) 
 	{ 
-		$result = $this->format($product->getDescription())->trim()->result();
+		$result = $this
+			->format($product->getDescription())
+			->trim()
+			->result();
+
 		$product->setDescription($result);
 	}
 
 	protected function cleanupCrawledImages(Product $product) 
 	{ 
-		$result = $this->format($product->getImages())->replace('160x198', '670x830')->result();
+		$result = $this
+			->format($product->getImages())
+			->replace('_normal', '_large')
+			->result();
+
 		$product->setImages($result);
 	}
 
 	protected function cleanupCrawledPortraits(Product $product) 
 	{ 
-		$result = $this->format($product->getPortraits())->replace('160x198', '338x410')->result();
+		$result = $this
+			->format($product->getPortraits())
+			->result();
+
 		$product->setPortraits($result);
 	}
 
 	protected function cleanupCrawledThumbnails(Product $product) 
-	{ 
+	{
+		$result = $this
+			->format($product->getThumbnails())
+			->replace('_normal', '_thumb')
+			->result();
 
+		$product->setThumbnails($result);
 	}
 
 	protected function cleanupCrawledAvailableSizes(Product $product) 
 	{
-		if (is_array($product->getStockedSizes())) {
-			$product->setAvailableSizes(array_merge($product->getAvailableSizes(), $product->getStockedSizes()));
-		} else {
-			$product->getStockedSizes(array());
+		$sizes = $product->getAvailableSizes();
+
+		foreach ($sizes as $key => $size) {
+			if (stristr($size, 'Select Size')) {
+				unset($sizes[$key]);
+			} else {
+				$sizes[$key] = $this->format($size)->result();
+			}
 		}
+
+		$product->setAvailableSizes($sizes);
 	}
 
 	protected function cleanupCrawledStockedSizes(Product $product) 
-	{ 
+	{
+		$sizes = $product->getStockedSizes();
 
+		foreach ($sizes as $key => $size) {
+			if (stristr($size, 'Select Size')) {
+				unset($sizes[$key]);
+			} else {
+				$sizes[$key] = $this->format($size)->result();
+			}
+		}
+
+		$product->setStockedSizes($sizes);
 	}
 
 	protected function cleanupCrawledStyleWith(Product $product) 

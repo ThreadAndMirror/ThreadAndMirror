@@ -2,7 +2,7 @@
 
 namespace ThreadAndMirror\ProductsBundle\Service\Updater;
 
-class LookFantasticUpdater extends AbstractUpdater
+class YooxUpdater extends AbstractUpdater
 {
 
 }

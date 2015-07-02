@@ -4,21 +4,26 @@ namespace ThreadAndMirror\ProductsBundle\Service\Formatter;
 
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 
-class BrownsFormatter extends AbstractFormatter
+class CultBeautyFormatter extends AbstractFormatter
 {
-	/**
-	 * Post-processing for feed product creation
-	 *
-	 * @param  Product 		$product 	The product to cleanup
-	 */
-	public function cleanupFeedProduct(Product $product) 
+	protected function cleanupCrawledUrl(Product $product) 
 	{
-		
+		$result = $this
+			->format($product->getUrl())
+			->result();
+
+		$product->setUrl($result);
 	}
 
 	protected function cleanupCrawledName(Product $product) 
-	{ 
+	{
+		$result = $this
+			->format($product->getName())
+			->sheer('By', false)
+			->trim()
+			->result();
 
+		$product->setName($result);
 	}
 
 	protected function cleanupCrawledBrand(Product $product) 
@@ -31,32 +36,31 @@ class BrownsFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
-	protected function cleanupCrawledPid(Product $product) 
+	protected function cleanupCrawledPid(Product $product)
 	{
 		$result = $this
 			->format($product->getPid())
-			->trim()
-			->sheer('REF: ')
+			->sheer('product_id/')
+			->sheer('/uenc', false)
 			->result();
 
 		$product->setPid($result);
 	}
 
 	protected function cleanupCrawledDescription(Product $product) 
-	{ 
+	{
 		$result = $this
 			->format($product->getDescription())
-			->trim()
 			->result();
 
 		$product->setDescription($result);
 	}
 
 	protected function cleanupCrawledImages(Product $product) 
-	{ 
+	{
 		$result = $this
 			->format($product->getImages())
-			->replace('160x198', '670x830')
+			->replace('thumbnail/78x/', 'image/390x490/')
 			->result();
 
 		$product->setImages($result);
@@ -66,29 +70,18 @@ class BrownsFormatter extends AbstractFormatter
 	{ 
 		$result = $this
 			->format($product->getPortraits())
-			->replace('160x198', '338x410')
+			->replace('thumbnail/78x/', 'image/200x240/')
 			->result();
 
 		$product->setPortraits($result);
 	}
 
 	protected function cleanupCrawledThumbnails(Product $product) 
-	{ 
-
-	}
-
-	protected function cleanupCrawledAvailableSizes(Product $product) 
 	{
-		$product->setAvailableSizes(array_merge($product->getAvailableSizes(), $product->getStockedSizes()));
-	}
+		$result = $this
+			->format($product->getThumbnails())
+			->result();
 
-	protected function cleanupCrawledStockedSizes(Product $product) 
-	{ 
-
-	}
-
-	protected function cleanupCrawledStyleWith(Product $product) 
-	{ 
-
+		$product->setThumbnails($result);
 	}
 }

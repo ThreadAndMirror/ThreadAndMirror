@@ -1262,4 +1262,32 @@ class Product
     	}
     }
 
+	/**
+	 * Get JSON object of the product
+	 *
+	 * @return string
+	 */
+	public function getJSON()
+	{
+		$json = [
+			'url'               => $this->getUrl(),
+			'affiliate_url'     => $this->getAffiliateUrl(),
+			'name'              => $this->getName(),
+			'brand'             => $this->getBrandName(),
+			'category_name'     => $this->getCategoryName(),
+			'pid'               => $this->getPid(),
+			'description'       => $this->getDescription(),
+			'short_description' => $this->getShortDescription(),
+			'now'               => $this->getNow(),
+			'was'               => $this->getWas(),
+			'images'            => $this->getImages(),
+			'portraits'         => $this->getPortraits(),
+			'thumbnails'        => $this->getThumbnails(),
+			'meta_keywords'     => $this->getMetaKeywords(),
+			'available_sizes'   => $this->getAvailableSizes(),
+			'stocked_sizes'     => $this->getStockedSizes()
+		];
+
+		return json_encode($json);
+	}
 }

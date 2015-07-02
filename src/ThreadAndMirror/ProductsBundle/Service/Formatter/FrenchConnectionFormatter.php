@@ -9,19 +9,31 @@ class FrenchConnectionFormatter extends AbstractFormatter
 	public function cleanupFeedName(Product $product) 
 	{
 		// For some reason some shops stick the colour in the name...
-		$result = $this->format($product->getName())->sheer(' - ')->result();
+		$result = $this
+			->format($product->getName())
+			->sheer(' - ')
+			->result();
+
 		$product->setName($result);
 	}
 
 	protected function cleanupFeedDescription(Product $product) 
 	{ 
-		$result = $this->format($product->getDescription())->sheer(' * ')->append('.')->result();
+		$result = $this
+			->format($product->getDescription())
+			->sheer(' * ')->append('.')
+			->result();
+
 		$product->setDescription($result);
 	}
 
 	protected function cleanupCrawledUrl(Product $product) 
 	{ 
-		$result = $this->format($product->getUrl())->prepend('http://www.frenchconnection.com')->result();
+		$result = $this
+			->format($product->getUrl())
+			->prepend('http://www.frenchconnection.com')
+			->result();
+
 		$product->setUrl($result);
 	}
 
@@ -32,13 +44,21 @@ class FrenchConnectionFormatter extends AbstractFormatter
 
 	protected function cleanupCrawledBrand(Product $product) 
 	{ 
-		$result = $this->format($product->getBrandName())->name()->result();
+		$result = $this
+			->format($product->getBrandName())
+			->name()
+			->result();
+
 		$product->setBrandName($result);
 	}
 
 	protected function cleanupCrawledPid(Product $product) 
 	{ 
-		$result = $this->format($product->getPid())->trim()->result();
+		$result = $this
+			->format($product->getPid())
+			->trim()
+			->result();
+
 		$product->setPid($result);
 	}
 
@@ -50,23 +70,35 @@ class FrenchConnectionFormatter extends AbstractFormatter
 	
 	protected function cleanupCrawledImages(Product $product) 
 	{ 
-		$result = $this->format($product->getImages())->sheer('?', false)->result();
+		$result = $this
+			->format($product->getImages())
+			->sheer('?', false)
+			->result();
+
 		$product->setImages($result);
 	}
 
 	protected function cleanupCrawledPortraits(Product $product) 
 	{ 
-		$result = $this->format($product->getImages())->sheer('?', false)->replace('731/487', '384/263')->result();
+		$result = $this
+			->format($product->getImages())
+			->sheer('?', false)->replace('731/487', '384/263')
+			->result();
+
 		$product->setImages($result);
 	}
 
 	protected function cleanupCrawledThumbnails(Product $product) 
 	{ 
-		$result = $this->format($product->getImages())->sheer('?', false)->replace('731/487', '117/78')->result();
+		$result = $this
+			->format($product->getImages())
+			->sheer('?', false)->replace('731/487', '117/78')
+			->result();
+
 		$product->setImages($result);
 	}
 
-	protected function cleanupCrawledAvailableSizes(Product $product) 
+	protected function cleanupCrawledAvailableSizes(Product $product)
 	{
 		$sizes = $product->getAvailableSizes();
 
@@ -77,12 +109,12 @@ class FrenchConnectionFormatter extends AbstractFormatter
 				$sizes[$key] = $this->format($size)->decode()->remove(' ')->sheer('-', false)->trim()->result();
 			}
 		}
-		
+
 		$product->setAvailableSizes($sizes);
 	}
 
-	protected function cleanupCrawledStockedSizes(Product $product) 
-	{ 
+	protected function cleanupCrawledStockedSizes(Product $product)
+	{
 		$sizes = $product->getStockedSizes();
 
 		foreach ($sizes as $key => $size) {

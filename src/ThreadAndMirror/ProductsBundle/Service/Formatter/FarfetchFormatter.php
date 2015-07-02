@@ -13,7 +13,11 @@ class FarfetchFormatter extends AbstractFormatter
 
 	protected function cleanupCrawledName(Product $product) 
 	{ 
-		$result = $this->format($product->getName())->name()->result();
+		$result = $this
+			->format($product->getName())
+			->name()
+			->result();
+
 		$product->setName($result);
 	}
 
@@ -34,13 +38,21 @@ class FarfetchFormatter extends AbstractFormatter
 	
 	protected function cleanupCrawledImages(Product $product) 
 	{ 
-		$result = $this->format($product->getImages())->replace('_70.jpg', '_480.jpg')->result();
+		$result = $this
+			->format($product->getImages())
+			->replace('_70.jpg', '_480.jpg')
+			->result();
+
 		$product->setImages($result);
 	}
 
 	protected function cleanupCrawledPortraits(Product $product) 
 	{ 
-		$result = $this->format($product->getPortraits())->replace('_70.jpg', '_240.jpg')->result();
+		$result = $this
+			->format($product->getPortraits())
+			->replace('_70.jpg', '_240.jpg')
+			->result();
+
 		$product->setPortraits($result);
 	}
 

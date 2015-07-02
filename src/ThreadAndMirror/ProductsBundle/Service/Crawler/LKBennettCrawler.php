@@ -42,7 +42,7 @@ class LKBennettCrawler extends AbstractCrawler
 
 	protected function getCategoryName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, '.breadcrumb > ul > li > a', -2);
+		return null;
 	}
 
 	protected function getPid(DomCrawler $crawler) 
@@ -67,17 +67,17 @@ class LKBennettCrawler extends AbstractCrawler
 
 	protected function getImages(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#productvcarousel li a img');
+		return $this->getAttributeFromElement($crawler, 'meta[property="og:image"]', 'content');
 	}
 
 	protected function getPortraits(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#productvcarousel li a img');
+		return $this->getAttributeFromElement($crawler, 'meta[property="og:image"]', 'content');
 	}
 
 	protected function getThumbnails(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#productvcarousel li a img');
+		return $this->getAttributeFromElement($crawler, 'meta[property="og:image"]', 'content');
 	}
 
 	protected function getAvailableSizes(DomCrawler $crawler) 

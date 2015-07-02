@@ -4,19 +4,15 @@ namespace ThreadAndMirror\ProductsBundle\Service\Formatter;
 
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 
-class JohnLewisFormatter extends AbstractFormatter
+class SpaceNKFormatter extends AbstractFormatter
 {
-	/**
-	 * Post-processing for feed product creation
-	 *
-	 * @param  Product 		$product 	The product to cleanup
-	 */
-	public function cleanupFeedProduct(Product $product) 
+	protected function cleanupCrawledUrl(Product $product)
 	{
-		$product->setImage(str_replace('fash_product', 'prod_main', $product->getImage()));
-		$product->setThumbnail(str_replace('prod_thmb', 'prod_grid3', $product->getThumbnail()));
+		$result = $this
+			->format($product->getUrl())
+			->result();
 
-		$this->cleanupFeedProductDefaults($product);
+		$product->setUrl($result);
 	}
 
 	protected function cleanupCrawledName(Product $product)
@@ -32,35 +28,16 @@ class JohnLewisFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getBrandName())
+			->name()
 			->result();
 
 		$product->setBrandName($result);
-	}
-
-	protected function cleanupCrawledCategory(Product $product)
-	{
-		$result = $this
-			->format($product->getCategoryName())
-			->result();
-
-		$product->setCategoryName($result);
-	}
-
-	protected function cleanupCrawledPid(Product $product)
-	{
-		$result = $this
-			->format($product->getPid())
-			->result();
-
-		$product->setPid($result);
 	}
 
 	protected function cleanupCrawledDescription(Product $product)
 	{
 		$result = $this
 			->format($product->getDescription())
-			->trim()
-			->implode(' ')
 			->result();
 
 		$product->setDescription($result);
@@ -79,17 +56,16 @@ class JohnLewisFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getPortraits())
-			->replace('$prod_main$', '$prod_grid3$')
 			->result();
 
 		$product->setPortraits($result);
 	}
 
-	protected function cleanupCrawledThumbnails(Product $product)
+	protected function cleanupCrawledThumbnails(Product $product) 
 	{
 		$result = $this
 			->format($product->getThumbnails())
-			->replace('$prod_main$', '$prod_thmb2$')
+			->replace('sw=344&sh=344', 'sw=114&sh=114')
 			->result();
 
 		$product->setThumbnails($result);

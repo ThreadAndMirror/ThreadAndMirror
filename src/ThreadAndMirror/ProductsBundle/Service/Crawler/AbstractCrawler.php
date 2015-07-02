@@ -92,6 +92,11 @@ abstract class AbstractCrawler implements CrawlerInterface
 			$this->logger->error('Crawl Error getting Images - '.$url.' - '.$e->getMessage());
 		}
 		try {
+			$product->setPortraits($this->getPortraits($crawler));
+		} catch (\Exception $e) {
+			$this->logger->error('Crawl Error getting Images - '.$url.' - '.$e->getMessage());
+		}
+		try {
 			$product->setThumbnails($this->getThumbnails($crawler));
 		} catch (\Exception $e) {
 			$this->logger->error('Crawl Error getting Thumbnails - '.$url.' - '.$e->getMessage());
@@ -174,12 +179,12 @@ abstract class AbstractCrawler implements CrawlerInterface
 
 	protected function getPortraits(DomCrawler $crawler) 
 	{
-		return null;
+		return $this->getImages($crawler);
 	}
 
 	protected function getThumbnails(DomCrawler $crawler) 
 	{
-		return null;
+		return $this->getImages($crawler);
 	}
 
 	protected function getAvailableSizes(DomCrawler $crawler) 

@@ -53,11 +53,20 @@ services:
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
 
-    threadandmirror.products.updater.browns:
-        class: ThreadAndMirror\ProductsBundle\Service\Updater\BrownsUpdater
-        arguments: 
-            - @threadandmirror.products.crawler.browns
-            - @threadandmirror.products.formatter.browns
+    threadandmirror.products.updater.net_a_porter:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\NetAPorterUpdater
+        arguments:
+            - @threadandmirror.products.crawler.net_a_porter
+            - @threadandmirror.products.formatter.net_a_porter
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.affiliate_window
+
+    threadandmirror.products.updater.matchesfashion:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\MatchesFashionUpdater
+        arguments:
+            - @threadandmirror.products.crawler.matchesfashion
+            - @threadandmirror.products.formatter.matchesfashion
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
@@ -70,6 +79,15 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
+
+    threadandmirror.products.updater.browns:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\BrownsUpdater
+        arguments:
+            - @threadandmirror.products.crawler.browns
+            - @threadandmirror.products.formatter.browns
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
 
     threadandmirror.products.updater.farfetch:
         class: ThreadAndMirror\ProductsBundle\Service\Updater\FarfetchUpdater
@@ -85,6 +103,60 @@ services:
         arguments: 
             - @threadandmirror.products.crawler.mytheresa
             - @threadandmirror.products.formatter.mytheresa
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.stylebop:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\StylebopUpdater
+        arguments:
+            - @threadandmirror.products.crawler.stylebop
+            - @threadandmirror.products.formatter.stylebop
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.avenue_32:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\Avenue32Updater
+        arguments:
+            - @threadandmirror.products.crawler.avenue_32
+            - @threadandmirror.products.formatter.avenue_32
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.lane_crawford:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\LaneCrawfordUpdater
+        arguments:
+            - @threadandmirror.products.crawler.lane_crawford
+            - @threadandmirror.products.formatter.lane_crawford
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.cult_beauty:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\CultBeautyUpdater
+        arguments:
+            - @threadandmirror.products.crawler.cult_beauty
+            - @threadandmirror.products.formatter.cult_beauty
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.urban_retreat_beautique:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\UrbanRetreatBeautiqueUpdater
+        arguments:
+            - @threadandmirror.products.crawler.urban_retreat_beautique
+            - @threadandmirror.products.formatter.urban_retreat_beautique
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.space_nk:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\SpaceNKUpdater
+        arguments:
+            - @threadandmirror.products.crawler.space_nk
+            - @threadandmirror.products.formatter.space_nk
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
@@ -116,6 +188,15 @@ services:
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
 
+    threadandmirror.products.updater.john_lewis:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\JohnLewisUpdater
+        arguments:
+            - @threadandmirror.products.crawler.john_lewis
+            - @threadandmirror.products.formatter.john_lewis
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.affiliate_window
+
     threadandmirror.products.updater.look_fantastic:
         class: ThreadAndMirror\ProductsBundle\Service\Updater\LookFantasticUpdater
         arguments: 
@@ -124,6 +205,42 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
+
+    threadandmirror.products.updater.young_british_designers:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\YoungBritishDesignersUpdater
+        arguments:
+            - @threadandmirror.products.crawler.young_british_designers
+            - @threadandmirror.products.formatter.young_british_designers
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.harvey_nichols:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\HarveyNicholsUpdater
+        arguments:
+            - @threadandmirror.products.crawler.harvey_nichols
+            - @threadandmirror.products.formatter.harvey_nichols
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.the_outnet:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\TheOutnetUpdater
+        arguments:
+            - @threadandmirror.products.crawler.the_outnet
+            - @threadandmirror.products.formatter.the_outnet
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+
+    threadandmirror.products.updater.yoox:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\YooxUpdater
+        arguments:
+            - @threadandmirror.products.crawler.yoox
+            - @threadandmirror.products.formatter.yoox
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
 
     # Crawlers
 
@@ -139,12 +256,20 @@ services:
         class: ThreadAndMirror\ProductsBundle\Service\Crawler\TopshopCrawler
         parent: threadandmirror.products.crawler.base
 
-    threadandmirror.products.crawler.browns:
-        class: ThreadAndMirror\ProductsBundle\Service\Crawler\BrownsCrawler
+    threadandmirror.products.crawler.net_a_porter:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\NetAPorterCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.matchesfashion:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\MatchesFashionCrawler
         parent: threadandmirror.products.crawler.base
 
     threadandmirror.products.crawler.asos:
         class: ThreadAndMirror\ProductsBundle\Service\Crawler\AsosCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.browns:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\BrownsCrawler
         parent: threadandmirror.products.crawler.base
 
     threadandmirror.products.crawler.farfetch:
@@ -153,6 +278,30 @@ services:
 
     threadandmirror.products.crawler.mytheresa:
         class: ThreadAndMirror\ProductsBundle\Service\Crawler\MytheresaCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.stylebop:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\StylebopCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.avenue_32:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\Avenue32Crawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.lane_crawford:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\LaneCrawfordCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.cult_beauty:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\CultBeautyCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.urban_retreat_beautique:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\UrbanRetreatBeautiqueCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.space_nk:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\SpaceNKCrawler
         parent: threadandmirror.products.crawler.base
 
     threadandmirror.products.crawler.lk_bennett:
@@ -167,9 +316,29 @@ services:
         class: ThreadAndMirror\ProductsBundle\Service\Crawler\LibertyLondonCrawler
         parent: threadandmirror.products.crawler.base
 
+    threadandmirror.products.crawler.john_lewis:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\JohnLewisCrawler
+        parent: threadandmirror.products.crawler.base
+
     threadandmirror.products.crawler.look_fantastic:
         class: ThreadAndMirror\ProductsBundle\Service\Crawler\LookFantasticCrawler
         parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.young_british_designers:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\YoungBritishDesignersCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.harvey_nichols:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\HarveyNicholsCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.the_outnet:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\TheOutnetCrawler
+        parent: threadandmirror.products.crawler.base
+
+    threadandmirror.products.crawler.yoox:
+         class: ThreadAndMirror\ProductsBundle\Service\Crawler\YooxCrawler
+         parent: threadandmirror.products.crawler.base
 
     # Formatters
 
@@ -180,12 +349,20 @@ services:
         class: ThreadAndMirror\ProductsBundle\Service\Formatter\TopshopFormatter
         parent: threadandmirror.products.formatter.base
 
-    threadandmirror.products.formatter.browns:
-        class: ThreadAndMirror\ProductsBundle\Service\Formatter\BrownsFormatter
+    threadandmirror.products.formatter.net_a_porter:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\NetAPorterFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.matchesfashion:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\MatchesFashionFormatter
         parent: threadandmirror.products.formatter.base
 
     threadandmirror.products.formatter.asos:
         class: ThreadAndMirror\ProductsBundle\Service\Formatter\AsosFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.browns:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\BrownsFormatter
         parent: threadandmirror.products.formatter.base
 
     threadandmirror.products.formatter.farfetch:
@@ -194,6 +371,30 @@ services:
 
     threadandmirror.products.formatter.mytheresa:
         class: ThreadAndMirror\ProductsBundle\Service\Formatter\MytheresaFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.stylebop:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\StylebopFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.avenue_32:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\Avenue32Formatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.lane_crawford:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\LaneCrawfordFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.cult_beauty:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\CultBeautyFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.urban_retreat_beautique:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\UrbanRetreatBeautiqueFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.space_nk:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\SpaceNKFormatter
         parent: threadandmirror.products.formatter.base
 
     threadandmirror.products.formatter.lk_bennett:
@@ -208,6 +409,26 @@ services:
         class: ThreadAndMirror\ProductsBundle\Service\Formatter\LibertyLondonFormatter
         parent: threadandmirror.products.formatter.base
 
+    threadandmirror.products.formatter.john_lewis:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\JohnLewisFormatter
+        parent: threadandmirror.products.formatter.base
+
     threadandmirror.products.formatter.look_fantastic:
         class: ThreadAndMirror\ProductsBundle\Service\Formatter\LookFantasticFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.young_british_designers:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\YoungBritishDesignersFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.harvey_nichols:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\HarveyNicholsFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.the_outnet:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\TheOutnetFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.yoox:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\YooxFormatter
         parent: threadandmirror.products.formatter.base

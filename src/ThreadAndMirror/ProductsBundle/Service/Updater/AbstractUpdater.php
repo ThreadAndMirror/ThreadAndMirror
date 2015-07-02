@@ -92,7 +92,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 		// Changable properties
 		$this->updateSizes($new, $product);
 		$this->updatePrices($new, $product);
-		
+
 		// Cleanup
 		unset($new);
 	}
@@ -103,7 +103,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 	 * @param  string 	$url 		The product's url
 	 */
 	public function createProductFromCrawl($url) 
-	{ 
+	{
 		// Run the product crawler
         $product = $this->crawler->crawl($url);
 		
@@ -112,7 +112,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 
         // Add the affiliate url
         $product->setAffiliateUrl($this->affiliate->getAffiliateLink($url));
-
+		var_dump(json_decode($product->getJSON())); die();
         return $product;
 	}
 

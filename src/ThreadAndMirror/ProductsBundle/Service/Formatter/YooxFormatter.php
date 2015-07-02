@@ -4,25 +4,13 @@ namespace ThreadAndMirror\ProductsBundle\Service\Formatter;
 
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 
-class JohnLewisFormatter extends AbstractFormatter
+class YooxFormatter extends AbstractFormatter
 {
-	/**
-	 * Post-processing for feed product creation
-	 *
-	 * @param  Product 		$product 	The product to cleanup
-	 */
-	public function cleanupFeedProduct(Product $product) 
-	{
-		$product->setImage(str_replace('fash_product', 'prod_main', $product->getImage()));
-		$product->setThumbnail(str_replace('prod_thmb', 'prod_grid3', $product->getThumbnail()));
-
-		$this->cleanupFeedProductDefaults($product);
-	}
-
 	protected function cleanupCrawledName(Product $product)
 	{
 		$result = $this
 			->format($product->getName())
+			->trim()
 			->result();
 
 		$product->setName($result);
@@ -32,18 +20,10 @@ class JohnLewisFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getBrandName())
+			->name()
 			->result();
 
 		$product->setBrandName($result);
-	}
-
-	protected function cleanupCrawledCategory(Product $product)
-	{
-		$result = $this
-			->format($product->getCategoryName())
-			->result();
-
-		$product->setCategoryName($result);
 	}
 
 	protected function cleanupCrawledPid(Product $product)
@@ -60,7 +40,6 @@ class JohnLewisFormatter extends AbstractFormatter
 		$result = $this
 			->format($product->getDescription())
 			->trim()
-			->implode(' ')
 			->result();
 
 		$product->setDescription($result);
@@ -70,6 +49,7 @@ class JohnLewisFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getImages())
+			->replace('9_f', '12_f')
 			->result();
 
 		$product->setImages($result);
@@ -77,9 +57,10 @@ class JohnLewisFormatter extends AbstractFormatter
 
 	protected function cleanupCrawledPortraits(Product $product)
 	{
+
 		$result = $this
 			->format($product->getPortraits())
-			->replace('$prod_main$', '$prod_grid3$')
+			->replace('9_f', '20_f')
 			->result();
 
 		$product->setPortraits($result);
@@ -89,9 +70,33 @@ class JohnLewisFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getThumbnails())
-			->replace('$prod_main$', '$prod_thmb2$')
 			->result();
 
 		$product->setThumbnails($result);
+	}
+
+	protected function cleanupCrawledAvailableSizes(Product $product)
+	{
+		$result = $this
+			->format($product->getAvailableSizes())
+			->trim()
+			->result();
+
+		$product->setAvailableSizes($result);
+	}
+
+	protected function cleanupCrawledStockedSizes(Product $product)
+	{
+		$result = $this
+			->format($product->getStockedSizes())
+			->trim()
+			->result();
+
+		$product->setStockedSizes($result);
+	}
+
+	protected function cleanupCrawledStyleWith(Product $product)
+	{
+
 	}
 }

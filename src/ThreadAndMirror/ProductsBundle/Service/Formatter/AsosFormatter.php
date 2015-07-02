@@ -8,7 +8,8 @@ class AsosFormatter extends AbstractFormatter
 {
 	protected function cleanupFeedName(Product $product) 
 	{ 
-		$result = $this->format($product->getName())
+		$result = $this
+			->format($product->getName())
 			->remove('ASOS CURVE')
 			->remove('ASOS MATERNITY')
 			->remove('ASOS')
@@ -20,7 +21,8 @@ class AsosFormatter extends AbstractFormatter
 
 	protected function cleanupFeedDescription(Product $product) 
 	{ 
-		$result = $this->format($product->getName())
+		$result = $this
+			->format($product->getName())
 			->sheer('ABOUT')
 			->append('.')
 			->result();
@@ -35,7 +37,8 @@ class AsosFormatter extends AbstractFormatter
 
 	protected function cleanupFeedThumbnails(Product $product) 
 	{ 
-		$result = $this->format($product->getImages()[0])
+		$result = $this
+			->format($product->getImages()[0])
 			->replace('image1xl.jpg', 'image1s.jpg')
 			->result();
 

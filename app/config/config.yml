@@ -38,29 +38,29 @@ twig:
         service_stems_section: '@stems.core.sections.manager'
 
 # Elastic Search
-fos_elastica:
-    clients:
-        default: { host: 127.0.0.1, port: 9200 }
-    indexes:
-        search:
-            client: default
-            types:
-                product:
-                    mappings:
-                        name: { boost: 50, analyzer: snowball }
-                        description: ~
-                        brandName: { boost: 25 }
-                        categoryName: { boost: 25 }
-                        added: ~
-                        area: ~
-                    persistence:
-                        driver: orm
-                        model: ThreadAndMirror\ProductsBundle\Entity\Product
-                        finder: ~
-                        provider: ~
-                        listener:
-                            immediate: ~
-                        repository: ThreadAndMirror\ProductsBundle\Repository\ProductFinderRepository
+#fos_elastica:
+#    clients:
+#        default: { host: 127.0.0.1, port: 9200 }
+#    indexes:
+#        search:
+#            client: default
+#            types:
+#                product:
+#                    mappings:
+#                        name: { boost: 50, analyzer: snowball }
+#                        description: ~
+#                        brandName: { boost: 25 }
+#                        categoryName: { boost: 25 }
+#                        added: ~
+#                        area: ~
+#                    persistence:
+#                        driver: orm
+#                        model: ThreadAndMirror\ProductsBundle\Entity\Product
+#                        finder: ~
+#                        provider: ~
+#                        listener:
+#                            immediate: ~
+#                        repository: ThreadAndMirror\ProductsBundle\Repository\ProductFinderRepository
 
 # Snc Redis
 snc_redis:

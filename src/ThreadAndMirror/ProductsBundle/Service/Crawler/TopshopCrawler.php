@@ -15,14 +15,14 @@ class TopshopCrawler extends AbstractCrawler
 		return 'Topshop';
 	}
 
-	protected function getCategory(DomCrawler $crawler) 
+	protected function getCategoryName(DomCrawler $crawler)
 	{
 		return null;
 	}
 
 	protected function getPid(DomCrawler $crawler) 
 	{
-		return null;
+		return $this->getTextFromElement($crawler, '#product_tab_1 .product_code span');
 	}
 
 	protected function getDescription(DomCrawler $crawler) 
@@ -45,19 +45,14 @@ class TopshopCrawler extends AbstractCrawler
 		return $this->getSrcFromList($crawler, '#product_view_full > img');
 	}
 
-	protected function getPortraits(DomCrawler $crawler) 
-	{
-		return $this->getSrcFromList($crawler, '.product_viewer ul.menu_nav_hor > img');
-	}
-
-	protected function getThumbnails(DomCrawler $crawler) 
-	{
-		return $this->getSrcFromList($crawler, '.product_viewer ul.menu_nav_hor > img');
-	}
-
 	protected function getAvailableSizes(DomCrawler $crawler) 
 	{
-		return $this->getTextFromList($crawler, 'ul.product_size_grid > li > a');
+		return $this->getTextFromList($crawler, '.wrapper_product_size #product_size_full option');
+	}
+
+	protected function getStockedSizes(DomCrawler $crawler)
+	{
+		return $this->getTextFromList($crawler, '.wrapper_product_size #product_size_full option:not(.stock_zero)');
 	}
 
 	protected function getStyleWith(DomCrawler $crawler) 

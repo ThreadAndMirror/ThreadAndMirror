@@ -4,25 +4,22 @@ namespace ThreadAndMirror\ProductsBundle\Service\Formatter;
 
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 
-class JohnLewisFormatter extends AbstractFormatter
+class UrbanRetreatBeautiqueFormatter extends AbstractFormatter
 {
-	/**
-	 * Post-processing for feed product creation
-	 *
-	 * @param  Product 		$product 	The product to cleanup
-	 */
-	public function cleanupFeedProduct(Product $product) 
+	protected function cleanupCrawledUrl(Product $product)
 	{
-		$product->setImage(str_replace('fash_product', 'prod_main', $product->getImage()));
-		$product->setThumbnail(str_replace('prod_thmb', 'prod_grid3', $product->getThumbnail()));
+		$result = $this
+			->format($product->getUrl())
+			->result();
 
-		$this->cleanupFeedProductDefaults($product);
+		$product->setUrl($result);
 	}
 
 	protected function cleanupCrawledName(Product $product)
 	{
 		$result = $this
 			->format($product->getName())
+			->trim()
 			->result();
 
 		$product->setName($result);
@@ -32,34 +29,16 @@ class JohnLewisFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getBrandName())
+			->name()
 			->result();
 
 		$product->setBrandName($result);
-	}
-
-	protected function cleanupCrawledCategory(Product $product)
-	{
-		$result = $this
-			->format($product->getCategoryName())
-			->result();
-
-		$product->setCategoryName($result);
-	}
-
-	protected function cleanupCrawledPid(Product $product)
-	{
-		$result = $this
-			->format($product->getPid())
-			->result();
-
-		$product->setPid($result);
 	}
 
 	protected function cleanupCrawledDescription(Product $product)
 	{
 		$result = $this
 			->format($product->getDescription())
-			->trim()
 			->implode(' ')
 			->result();
 
@@ -70,6 +49,8 @@ class JohnLewisFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getImages())
+			->prepend('http://www.urbanretreat.co.uk')
+			->remove('&path=/product_images/')
 			->result();
 
 		$product->setImages($result);
@@ -79,17 +60,21 @@ class JohnLewisFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getPortraits())
-			->replace('$prod_main$', '$prod_grid3$')
+			->prepend('http://www.urbanretreat.co.uk')
+			->replace('width=900&height=900', 'width=235&height=235')
+			->remove('&path=/product_images/')
 			->result();
 
 		$product->setPortraits($result);
 	}
 
-	protected function cleanupCrawledThumbnails(Product $product)
+	protected function cleanupCrawledThumbnails(Product $product) 
 	{
 		$result = $this
 			->format($product->getThumbnails())
-			->replace('$prod_main$', '$prod_thmb2$')
+			->prepend('http://www.urbanretreat.co.uk')
+			->replace('width=900&height=900', 'width=120&height=120')
+			->remove('&path=/product_images/')
 			->result();
 
 		$product->setThumbnails($result);

@@ -46,19 +46,31 @@ abstract class AbstractFormatter implements FormatterInterface
 
 	protected function cleanupFeedDescription(Product $product) 
 	{ 
-		$result = $this->format($product->getDescription())->decode()->result();
+		$result = $this
+			->format($product->getDescription())
+			->decode()
+			->result();
+
 		$product->setDescription($result);
 	}
 
 	protected function cleanupFeedNow(Product $product) 
 	{
-		$result = $this->format($product->getNow())->currency()->result();
+		$result = $this
+			->format($product->getNow())
+			->currency()
+			->result();
+
 		$product->setNow($result);
 	}
 
 	protected function cleanupFeedWas(Product $product) 
 	{
-		$result = $this->format($product->getWas())->currency()->result();
+		$result = $this
+			->format($product->getWas())
+			->currency()
+			->result();
+
 		$product->setWas($result);
 	}
 
@@ -97,7 +109,19 @@ abstract class AbstractFormatter implements FormatterInterface
 		$this->cleanupCrawledStyleWith($product);
 	}
 
-	protected function cleanupCrawledUrl(Product $product) { }
+	/**
+	 * Use the requested URL by default
+	 *
+	 * @param Product $product
+	 */
+	protected function cleanupCrawledUrl(Product $product)
+	{
+		$result = $this
+			->format($product->getUrl())
+			->result();
+
+		$product->setUrl($result);
+	}
 
 	protected function cleanupCrawledName(Product $product) { }
 
@@ -111,13 +135,21 @@ abstract class AbstractFormatter implements FormatterInterface
 
 	protected function cleanupCrawledNow(Product $product) 
 	{
-		$result = $this->format($product->getNow())->currency()->result();
+		$result = $this
+			->format($product->getNow())
+			->currency()
+			->result();
+
 		$product->setNow($result);
 	}
 
 	protected function cleanupCrawledWas(Product $product) 
 	{
-		$result = $this->format($product->getWas())->currency()->result();
+		$result = $this
+			->format($product->getWas())
+			->currency()
+			->result();
+
 		$product->setWas($result);
 	}
 
@@ -165,8 +197,15 @@ abstract class AbstractFormatter implements FormatterInterface
 	 */
 	protected function trim($left = true, $right = true)
 	{
-		$this->subject = $left ? ltrim($this->subject) : $this->subject;
-		$this->subject = $right ? rtrim($this->subject) : $this->subject;
+		if (is_array($this->subject)) {
+			foreach ($this->subject as $key => $value) {
+				$this->subject[$key] = $left ? ltrim($value) : $value;
+				$this->subject[$key] = $right ? rtrim($value) : $value;
+			}
+		} else {
+			$this->subject = $left ? ltrim($this->subject) : $this->subject;
+			$this->subject = $right ? rtrim($this->subject) : $this->subject;
+		}
 
 		return $this;
 	}
@@ -287,7 +326,7 @@ abstract class AbstractFormatter implements FormatterInterface
 	{
 		if (is_array($this->subject)) {
 
-			$list = array();
+			$list = [];
 
 			foreach ($this->subject as $item) {
 				$list[] = str_replace($search, $replace, $item);
@@ -315,27 +354,145 @@ abstract class AbstractFormatter implements FormatterInterface
 	}
 
 	/**
-	 * Prepend text to a string
+	 * Json decode a string
 	 *
-	 * @param string 	$string 	Text to prepend
-	 * @param self
+	 * @return self
 	 */
-	protected function prepend($string)
+	protected function json()
 	{
-		$this->subject = $string.$this->subject;
+		$this->subject = json_decode($this->subject);
 
 		return $this;
 	}
 
 	/**
-	 * Append text to a string
+	 * Prepend text to a string or a collection fo strings
 	 *
-	 * @param string 	$string 	Text to append
-	 * @param self
+	 * @param  string 	    $string 	Text to prepend
+	 * @return self
+	 */
+	protected function prepend($string)
+	{
+		if (is_array($this->subject)) {
+
+			$list = [];
+
+			foreach ($this->subject as $item) {
+				$list[] = $item = $string.$item;
+			}
+
+			$this->subject = $list;
+
+		} else {
+			$this->subject = $string.$this->subject;
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Append text to a string or a collection fo strings
+	 *
+	 * @param  string 	    $string 	Text to append
+	 * @return self
 	 */
 	protected function append($string)
 	{
-		$this->subject = $this->subject.$string;
+		if (is_array($this->subject)) {
+
+			$list = [];
+
+			foreach ($this->subject as $item) {
+				$list[] = $item = $item.$string;
+			}
+
+			$this->subject = $list;
+
+		} else {
+			$this->subject = $this->subject.$string;
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Implode an array of strings into one string
+	 *
+	 * @param  string       $glue       Glue for the implode
+	 * @return self
+	 */
+	protected function implode($glue = '. ')
+	{
+		$this->subject = implode($glue, $this->subject);
+
+		return $this;
+	}
+
+	/**
+	 * Explode a string
+	 *
+	 * @param  string       $delimiter
+	 * @return self
+	 */
+	protected function explode($delimiter)
+	{
+		$this->subject = explode($delimiter, $this->subject);
+
+		return $this;
+	}
+
+	/**
+	 * Remove an item from an array by index or by content
+	 *
+	 * @param  mixed       $match
+	 * @return self
+	 */
+	protected function discard($match)
+	{
+		if (is_int($match)) {
+			if ($match < 0) {
+				unset($this->subject[count($this->subject) - $match]);
+			} else {
+				unset($this->subject[$match]);
+			}
+		} else {
+			foreach ($this->subject as $key => $item) {
+				if (stristr($item, $match)) {
+					unset($this->subject[$key]);
+				}
+			}
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Keep only the first element / property of the result array / stdClass object
+	 *
+	 * @return self
+	 */
+	protected function first()
+	{
+		if (is_array($this->subject)) {
+			$this->subject = reset($this->subject);
+		} else if ($this->subject instanceof \stdClass) {
+			$this->subject = get_object_vars($this->subject);
+			$this->subject = reset($this->subject);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Keep only the last element of the result array
+	 *
+	 * @return self
+	 */
+	protected function last()
+	{
+		if (is_array($this->subject)) {
+			$this->subject = end($this->subject);
+		}
 
 		return $this;
 	}
