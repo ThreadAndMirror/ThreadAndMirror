@@ -2,8 +2,6 @@
 
 namespace ThreadAndMirror\ProductsBundle\Service\Updater;
 
-use ThreadAndMirror\ProductsBundle\Service\Crawler\AbstractCrawler;
-use ThreadAndMirror\ProductsBundle\Service\Formatter\AbstractFormatter;
 use ThreadAndMirror\ProductsBundle\Event\ProductNewSizesInStockEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductNowOnSaleEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductFurtherReductionsEvent;
@@ -18,40 +16,26 @@ use Doctrine\ORM\EntityManager;
 
 abstract class AbstractUpdater implements UpdaterInterface
 {
-	/**
-	 * @var The crawler service for the loaded updater
-	 */
+	/** @var CrawlerInterface */
 	protected $crawler;
 
-	/**
-	 * @var The formatter service for the loaded updater
-	 */
+	/** @var FormatterInterface */
 	protected $formatter;
 
-	/**
-	 * @var The event dispatcher
-	 */
+	/** @var EventDispatcherInterface */
 	protected $dispatcher;
 
-	/**
-	 * @var The affiliate service
-	 */
+	/** @var AffiliateInterface */
 	protected $affiliate;
 
-	/**
-	 * @var The entity manager
-	 */
+	/** @var EntityManager */
 	protected $em;
 
-	/**
-	 * @var For caching any newly created categories
-	 */
-	protected $cachedCategories = array();
+	/** @var array */
+	protected $cachedCategories = [];
 
-	/**
-	 * @var For caching any newly created brands
-	 */
-	protected $cachedBrands = array();
+	/** @var array */
+	protected $cachedBrands = [];
 
 	public function __construct(CrawlerInterface $crawler, FormatterInterface $formatter, EventDispatcherInterface $dispatcher, EntityManager $em, AffiliateInterface $affiliate)
 	{
@@ -112,7 +96,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 
         // Add the affiliate url
         $product->setAffiliateUrl($this->affiliate->getAffiliateLink($url));
-		var_dump(json_decode($product->getJSON())); die();
+//		var_dump(json_decode($product->getJSON())); die();
         return $product;
 	}
 
