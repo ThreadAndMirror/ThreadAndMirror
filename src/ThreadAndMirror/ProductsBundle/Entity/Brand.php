@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *    @ORM\Index(name="slug_index", columns={"slug"}),
  *    @ORM\Index(name="affiliate_window_id_index", columns={"affiliateWindowId"})
  * })
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="ThreadAndMirror\ProductsBundle\Repository\BrandRepository")
  */
 class Brand
 {
@@ -25,9 +25,14 @@ class Brand
     protected $id;
 
     /** 
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=63)
      */
     protected $name;
+
+	/**
+	 * @ORM\Column(type="string", length=511)
+	 */
+	protected $description;
 
     /** 
      * @Gedmo\Slug(fields={"name"}, updatable=true, separator="-")
@@ -55,9 +60,18 @@ class Brand
      */
     protected $hasBeauty = false;
 
-    public function __construct()
+	/**
+	 * @ORM\Column(type="array")
+	 */
+	protected $aliases = [];
+
+    public function __construct($name = null)
     {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+
+	    if ($name === null) {
+		    $this->name = $name;
+	    }
     }
 
     /**
@@ -218,5 +232,31 @@ class Brand
         return $this->products;
     }
 
-    
+	/**
+	 * Get aliases
+	 *
+	 * @return array
+	 */
+	public function getAliases()
+	{
+		return $this->aliases;
+	}
+
+	/**
+	 * Get the brand data in json format
+	 *
+	 * @return string|array
+	 */
+	public function getJson($encoded = false)
+	{
+		$json = [
+			'id'          => $this->id,
+			'name'        => $this->name,
+			'description' => $this->description,
+			'hasFashion'  => $this->hasFashion,
+			'hasBeauty'   => $this->hasBeauty
+		];
+
+		return $encoded ? json_encode($json) : $json;
+	}
 }

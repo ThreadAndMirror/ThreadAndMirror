@@ -351,3 +351,17 @@ monolog:
             type: stream
             path: %kernel.root_dir%/logs/crawler.log
             level: warning
+
+doctrine_cache:
+    aliases:
+        doctrine.orm.default_query_cache: redis_query_cache
+        doctrine.orm.default_result_cache: redis_cache
+    providers:
+        redis_query_cache:
+            namespace: redis_query_cache
+            redis:
+                connection_id: redis.service
+        redis_cache:
+            namespace: redis_cache
+            redis:
+                connection_id: redis.service

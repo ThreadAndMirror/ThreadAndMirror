@@ -55,7 +55,8 @@ abstract class AbstractCrawler implements CrawlerInterface
 			}
 		} catch (\Exception $e) {
 			$this->logger->error('Crawl Error getting Url - '.$url.' - '.$e->getMessage());
-		} 
+		}
+
 		try {
 			$product->setName($this->getName($crawler));
 		} catch (\Exception $e) {

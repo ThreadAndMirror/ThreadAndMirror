@@ -27,7 +27,8 @@
         "ekino/newrelic-bundle": "dev-master",
         "snc/redis-bundle": "~1.1",
         "friendsofsymfony/elastica-bundle": "~3.0",
-        "white-october/pagerfanta-bundle": "~1.0"
+        "white-october/pagerfanta-bundle": "~1.0",
+        "doctrine/doctrine-cache-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

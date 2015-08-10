@@ -37,7 +37,7 @@ class ProductManagerService extends ContainerAware
 
 			// Crawl the product
 			$product = $this->container->get($shop->getUpdaterName())->createProductFromCrawl($url);
-			
+
 			if (!is_object($product)) {
 				return null;
 			}

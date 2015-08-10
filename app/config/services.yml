@@ -62,3 +62,13 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
             - [ setAnnotationReader, [ @annotation_reader ] ]
+
+    redis.service:
+        class: Redis
+        calls:
+            - [connect, [localhost, 6379]]
+
+    doctrine.cache.redis:
+        class: Doctrine\Common\Cache\RedisCache
+        calls:
+            - [setRedis, [@redis.service]]

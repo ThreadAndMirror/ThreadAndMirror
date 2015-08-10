@@ -2,24 +2,26 @@
 
 namespace ThreadAndMirror\ProductsBundle\Service\Updater;
 
+use ThreadAndMirror\ProductsBundle\Event\BrandEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductNewSizesInStockEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductNowOnSaleEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductFurtherReductionsEvent;
-use ThreadAndMirror\ProductsBundle\Definition\CrawlerInterface;
-use ThreadAndMirror\ProductsBundle\Definition\FormatterInterface;
+use ThreadAndMirror\ProductsBundle\Service\Crawler\AbstractCrawler;
+use ThreadAndMirror\ProductsBundle\Service\Formatter\AbstractFormatter;
 use ThreadAndMirror\ProductsBundle\Definition\UpdaterInterface;
 use ThreadAndMirror\ProductsBundle\Definition\AffiliateInterface;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Entity\Brand;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ORM\EntityManager;
+use ThreadAndMirror\ProductsBundle\Service\BrandService;
 
 abstract class AbstractUpdater implements UpdaterInterface
 {
-	/** @var CrawlerInterface */
+	/** @var AbstractCrawler */
 	protected $crawler;
 
-	/** @var FormatterInterface */
+	/** @var AbstractFormatter */
 	protected $formatter;
 
 	/** @var EventDispatcherInterface */
@@ -34,16 +36,23 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/** @var array */
 	protected $cachedCategories = [];
 
-	/** @var array */
-	protected $cachedBrands = [];
+	/** @var BrandService */
+	protected $brandService;
 
-	public function __construct(CrawlerInterface $crawler, FormatterInterface $formatter, EventDispatcherInterface $dispatcher, EntityManager $em, AffiliateInterface $affiliate)
-	{
-		$this->crawler    = $crawler;
-		$this->formatter  = $formatter;
-		$this->dispatcher = $dispatcher;
-		$this->affiliate  = $affiliate;
-		$this->em 		  = $em;
+	public function __construct(
+		AbstractCrawler $crawler,
+        AbstractFormatter $formatter,
+        EventDispatcherInterface $dispatcher,
+        EntityManager $em,
+        AffiliateInterface $affiliate,
+        BrandService $brandService
+	) {
+		$this->crawler      = $crawler;
+		$this->formatter    = $formatter;
+		$this->dispatcher   = $dispatcher;
+		$this->affiliate    = $affiliate;
+		$this->em 		    = $em;
+		$this->brandService = $brandService;
 	}
 
 	/**
@@ -90,13 +99,17 @@ abstract class AbstractUpdater implements UpdaterInterface
 	{
 		// Run the product crawler
         $product = $this->crawler->crawl($url);
-		
+
 		// Tidy up the crawled data
         $this->formatter->cleanupCrawledProduct($product);
 
         // Add the affiliate url
         $product->setAffiliateUrl($this->affiliate->getAffiliateLink($url));
 //		var_dump(json_decode($product->getJSON())); die();
+
+		// Set the brand from the brand name
+		$this->updateBrandFromBrandName($product);
+
         return $product;
 	}
 
@@ -232,6 +245,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 	{
 		if ($product->getBrand() === null) {
 			$product->setBrandName($new->getBrandName());
+			$this->updateBrandFromBrandName($new);
 		}
 	}
 
@@ -243,26 +257,20 @@ abstract class AbstractUpdater implements UpdaterInterface
 	public function updateBrandFromBrandName(Product $product)
 	{
 		// Get the brand name from the product
-		$name = $product->getBrandName();
-
-		if (array_key_exists($name, $this->cachedBrands)) {
-			$product->setBrand($this->cachedBrands[$name]);
-		}
-
-		$brandRepository = $this->em->getRepository('ThreadAndMirrorProductsBundle:Brand');
-		$brand = $brandRepository->findOneBy(array('name' => $name));
+		$brandName = $product->getBrandName();
+		$brandId   = $this->brandService->getExistingBrandId($brandName);
 
 		// Create a new brand if it doesn't exist already
-		if ($brand !== null) {
-			$this->cachedBrands[$name] = $brand;
-			$product->setBrand($brand);
+		if ($brandId !== null) {
+			$product->setBrand($this->em->getReference('Brand', $brandId));
 		} else {
-			$brand = new Brand();
-			$brand->setName($name);
+			// Create a new brand
+			$brand = new Brand($brandName);
 			$this->em->persist($brand);
 			$this->em->flush();
-			$this->cachedBrands[$name] = $brand;
 			$product->setBrand($brand);
+
+			$this->dispatcher->dispatch(BrandEvent::EVENT_ADD, new BrandEvent($brand));
 		}
 	}
 
@@ -296,7 +304,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 	 * Update the category
 	 *
 	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product	
+	 * @param Product 	$product 	The original product
 	 */
 	protected function updateCategory(Product $new, Product $product)
 	{
