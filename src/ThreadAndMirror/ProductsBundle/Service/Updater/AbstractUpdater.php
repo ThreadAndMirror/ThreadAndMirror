@@ -262,7 +262,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 
 		// Create a new brand if it doesn't exist already
 		if ($brandId !== null) {
-			$product->setBrand($this->em->getReference('Brand', $brandId));
+			$product->setBrand($this->em->getReference('ThreadAndMirrorProductsBundle:Brand', $brandId));
 		} else {
 			// Create a new brand
 			$brand = new Brand($brandName);

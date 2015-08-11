@@ -33,20 +33,15 @@ class BrandService
 		$brand = new Brand($name);
 
 		// Check the cache first
-		$cached = $this->cache->getData($brand->getSlug());
+		$cached = $this->cache->getData($brand->guessSlug());
 
 		if ($cached !== false) {
-			return $cached->id;
+			return $cached['id'];
 		}
 
 		// Fall back the database directly
-		try {
-			$existing = $this->brandRepository->findOneBy(['slug' => $brand->getSlug()]);
+		$existing = $this->brandRepository->findOneBy(['slug' => $brand->guessSlug()]);
 
-			return $existing->getId();
-
-		} catch (NoResultException $e) {
-			return null;
-		}
+		return $existing !== null ? $existing->getId() : null;
 	}
 }

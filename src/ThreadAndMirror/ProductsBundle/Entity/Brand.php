@@ -69,7 +69,7 @@ class Brand
     {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
 
-	    if ($name === null) {
+	    if ($name !== null) {
 		    $this->name = $name;
 	    }
     }
@@ -129,6 +129,33 @@ class Brand
     {
         return $this->slug;
     }
+
+	/**
+	 * What the brands slug is expected to be like, based on it's name
+	 *
+	 * @return string
+	 */
+	public function guessSlug()
+	{
+		$text = $this->getName();
+
+		// replace non letter or digits by -
+		$text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+		// trim
+		$text = trim($text, '-');
+
+		// transliterate
+		$text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+		// lowercase
+		$text = strtolower($text);
+
+		// remove unwanted characters
+		$text = preg_replace('~[^-\w]+~', '', $text);
+
+		return $text;
+	}
 
     /**
      * Set hasBeauty

@@ -40,14 +40,14 @@ class BrandCache
 	 * Get cached data for the brand
 	 *
 	 * @param  string           $slug
-	 * @return \stdClass|false
+	 * @return array|false
 	 */
 	public function getData($slug)
 	{
 		$index = implode('.', array(self::ROOT_KEY, self::DATA_KEY, $slug));
 
 		// Return the cache value
-		return json_decode($this->cache->fetch($index), true);
+		return $this->cache->fetch($index) !== false ? json_decode($this->cache->fetch($index), true) : false;
 	}
 
 	/**

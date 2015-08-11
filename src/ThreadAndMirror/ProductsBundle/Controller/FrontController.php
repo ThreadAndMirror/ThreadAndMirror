@@ -52,9 +52,10 @@ class FrontController extends BaseFrontController
 
 		if ($product->getChecked() == null || $refresh > $product->getChecked()) {
 			if ($product->getShop()->getHasCrawler()) {
-				$this->get($product->getShop()->getUpdaterName())->updateProductFromCrawl($product);
-				$this->em->persist($product);
-				$this->em->flush();
+				// @todo disabled for now
+//				$this->get($product->getShop()->getUpdaterName())->updateProductFromCrawl($product);
+//				$this->em->persist($product);
+//				$this->em->flush();
 			} else {
 				// $product = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->forceUpdate($product);
 			}
