@@ -1673,18 +1673,79 @@ div+.pagination {
 	height:100px;
 }
 
+/*--- SECTION LIST ---*/
+
+section.section-list > ul {
+    list-style: none;
+    padding: 0;
+}
+
+section.section-list > ul > li {
+    position:relative;
+}
+
+section.section-list > ul > li > p {
+    margin:7px 0;
+    font-size: 15px;
+}
+
+section.section-list .preview > div {
+    position: relative;
+}
+
+section.section-list .preview textarea.wysiwig-editor {
+    left:0;
+    top:0;
+}
+
+section.section-list.italics-list > h5 {
+    font-weight:400;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+section.section-list.italics-list h5,
+section.section-list.italics-list p,
+section.section-list.italics-list textarea.wysiwig-editor {
+    font-style:italic;
+}
+
+section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
+    font-weight:400;
+}
 
 /* --- SECTION - IMAGE --- */
 
 .section-image img {
 	max-width: 720px;
-	padding: 10px 0 20px 0;
+}
+
+.full-width img {
+    width: 100%;
 }
 
 .section-image .image-caption {
 	font-weight: 200;
 	text-align: center;
 	font-size: 13px;
+}
+
+.section-image.unpinned > div {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.section-product.unpinned > div {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.section-image.unpinned img {
+    height: 100% !important;
+}
+
+.section-product.unpinned img {
+    height: 100% !important;
 }
 
 /* --- SECTION - TEXT AND IMAGE --- */
