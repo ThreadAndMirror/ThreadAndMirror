@@ -761,17 +761,17 @@ div+.pagination {
 	display: none;
 }
 
-.layout-banner-overlay .feature-image {
-	height: 200px;
-	width: 200px;
-	border-radius: 101px;
-	z-index: 3;
-	border: 2px solid #FFFFFF;
-	position: relative;
-	margin: -100px auto 0;
-	background-position: center;
-	display: none;
-}
+/*.layout-banner-overlay .feature-image {*/
+	/*height: 200px;*/
+	/*width: 200px;*/
+	/*border-radius: 101px;*/
+	/*z-index: 3;*/
+	/*border: 2px solid #FFFFFF;*/
+	/*position: relative;*/
+	/*margin: -100px auto 0;*/
+	/*background-position: center;*/
+	/*display: none;*/
+/*}*/
 
 .cms-page .layout-content h5,
 .cms-page .layout-banner h5 {
@@ -1927,6 +1927,15 @@ section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
 	position: relative;
 	padding: 20px 0;
 }
+
+section.col-1.section-product-gallery {
+    height: 450px;
+}
+
+section.col-2.section-product-gallery {
+    height: 220px;
+}
+
 
 .section-product-gallery > h2,
 .section-product-gallery > p {

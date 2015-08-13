@@ -28,26 +28,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AbstractUpdater.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php">
+      <file leaf-file-name="stylesheet.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/public/css/stylesheet.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.4166665" vertical-offset="4498" max-vertical-offset="6058">
-              <caret line="366" column="45" selection-start-line="366" selection-start-column="45" selection-end-line="366" selection-end-column="45" />
-              <folding>
-                <element signature="e#66#117#0#PHP" expanded="true" />
-                <element signature="e#3577#3613#1#PHP" expanded="true" />
-                <element signature="e#8329#8366#0#PHP" expanded="true" />
-                <element signature="e#10366#10406#0#PHP" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-6.269231" vertical-offset="9678" max-vertical-offset="56914">
+              <caret line="757" column="1" selection-start-line="757" selection-start-column="1" selection-end-line="757" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stylesheet.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/public/css/stylesheet.css">
+      <file leaf-file-name="banner-overlay.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Stems/PageBundle/Resources/views/Layout/banner-overlay.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5935085" vertical-offset="17335" max-vertical-offset="56797">
-              <caret line="1363" column="21" selection-start-line="1363" selection-start-column="21" selection-end-line="1363" selection-end-column="21" />
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="377">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Resources/views/Front/post.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-20.681818" vertical-offset="0" max-vertical-offset="1027">
+              <caret line="35" column="29" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="frontend.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Stems/CoreBundle/Resources/public/js/front/frontend.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7161961" vertical-offset="7669" max-vertical-offset="8645">
+              <caret line="627" column="13" selection-start-line="627" selection-start-column="13" selection-end-line="627" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -119,28 +134,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Stems/CoreBundle/Resources/public/css/admin/admin.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="22070" max-vertical-offset="23686">
-              <caret line="1726" column="1" selection-start-line="1726" selection-start-column="1" selection-end-line="1726" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CategoryService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/CategoryService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.636364" vertical-offset="12" max-vertical-offset="663">
-              <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
-              <folding>
-                <element signature="e#58#109#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindManager">
@@ -175,8 +168,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Crawler/TheOutnetCrawler.php" />
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/TheOutnetFormatter.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/YooxUpdater.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Crawler/YooxCrawler.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/YooxFormatter.php" />
@@ -226,6 +217,8 @@
         <option value="$PROJECT_DIR$/src/Stems/PageBundle/Resources/views/Section/base.html.twig" />
         <option value="$PROJECT_DIR$/src/Stems/PageBundle/Resources/views/Section/image.html.twig" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/public/css/stylesheet.css" />
+        <option value="$PROJECT_DIR$/src/Stems/BlogBundle/Resources/views/Front/post.html.twig" />
+        <option value="$PROJECT_DIR$/src/Stems/CoreBundle/Resources/public/js/front/frontend.js" />
       </list>
     </option>
   </component>
@@ -396,6 +389,104 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="threadandmirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="threadandmirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ThreadAndMirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProductsBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Section" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="threadandmirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="threadandmirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ThreadAndMirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProductsBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="threadandmirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="threadandmirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ThreadAndMirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProductsBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -712,37 +803,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/LaneCrawfordFormatter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9110512" vertical-offset="0" max-vertical-offset="1053">
-          <caret line="52" column="23" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Crawler/LaneCrawfordCrawler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.509434" vertical-offset="64" max-vertical-offset="806">
-          <caret line="34" column="99" selection-start-line="34" selection-start-column="99" selection-end-line="34" selection-end-column="99" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Definition/CrawlerInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.1363635" vertical-offset="0" max-vertical-offset="208">
-          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Event/ProductFurtherReductionsEvent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="589">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/EventDispatcher/Event.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.90909" vertical-offset="772" max-vertical-offset="1664">
@@ -1148,8 +1208,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/public/css/stylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5935085" vertical-offset="17335" max-vertical-offset="56797">
-          <caret line="1363" column="21" selection-start-line="1363" selection-start-column="21" selection-end-line="1363" selection-end-column="21" />
+        <state vertical-scroll-proportion="-6.269231" vertical-offset="9678" max-vertical-offset="56914">
+          <caret line="757" column="1" selection-start-line="757" selection-start-column="1" selection-end-line="757" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Stems/PageBundle/Resources/views/Layout/banner-overlay.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="673">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/public/js/admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1508">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Stems/BlogBundle/Resources/views/Front/post.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.681818" vertical-offset="0" max-vertical-offset="1027">
+          <caret line="35" column="29" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Stems/CoreBundle/Resources/public/js/front/frontend.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7161961" vertical-offset="7669" max-vertical-offset="8645">
+          <caret line="627" column="13" selection-start-line="627" selection-start-column="13" selection-end-line="627" selection-end-column="13" />
           <folding />
         </state>
       </provider>
