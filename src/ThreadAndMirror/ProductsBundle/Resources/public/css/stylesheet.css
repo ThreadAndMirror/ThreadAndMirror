@@ -773,10 +773,6 @@ div+.pagination {
 	display: none;
 }
 
-.layout-banner-overlay .article {
-	border: 30px solid #FFF;
-}
-
 .cms-page .layout-content h5,
 .cms-page .layout-banner h5 {
 	font-size: 18px;

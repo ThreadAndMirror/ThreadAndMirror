@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f6697b0-6fde-4ab5-902b-7b14249fc9db" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Cache/CategoryCache.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Event/CategoryEvent.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Repository/CategoryRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/CategoryService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Event/BrandEvent.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Event/BrandEvent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Category.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Category.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump.rdb" afterPath="$PROJECT_DIR$/dump.rdb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/config/services.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/public/css/stylesheet.css" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/public/css/stylesheet.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="threadandmirror.iws" />
@@ -37,16 +29,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/config/services.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="6825">
-              <caret line="46" column="58" selection-start-line="46" selection-start-column="58" selection-end-line="46" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CategoryRepository.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Repository/CategoryRepository.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -57,17 +39,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AbstractUpdater.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AbstractUpdater.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3328" vertical-offset="4498" max-vertical-offset="6058">
-              <caret line="362" column="65" selection-start-line="362" selection-start-column="65" selection-end-line="362" selection-end-column="65" />
+            <state vertical-scroll-proportion="-5.4166665" vertical-offset="4498" max-vertical-offset="6058">
+              <caret line="366" column="45" selection-start-line="366" selection-start-column="45" selection-end-line="366" selection-end-column="45" />
               <folding>
                 <element signature="e#66#117#0#PHP" expanded="true" />
                 <element signature="e#3577#3613#1#PHP" expanded="true" />
                 <element signature="e#8329#8366#0#PHP" expanded="true" />
                 <element signature="e#10366#10406#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stylesheet.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/bundles/threadandmirrorproducts/css/stylesheet.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="9895" max-vertical-offset="55991">
+              <caret line="779" column="0" selection-start-line="779" selection-start-column="0" selection-end-line="779" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stylesheet.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/public/css/stylesheet.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3640416" vertical-offset="9817" max-vertical-offset="55939">
+              <caret line="774" column="0" selection-start-line="774" selection-start-column="0" selection-end-line="774" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -88,16 +90,6 @@
         <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Affiliate/AffiliateWindowAffiliate.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="260">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LinkshareAffiliate.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Affiliate/LinkshareAffiliate.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="169">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -181,8 +173,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/UrbanRetreatBeautiqueUpdater.php" />
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/SpaceNKFormatter.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Crawler/UrbanRetreatBeautiqueCrawler.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/UrbanRetreatBeautiqueFormatter.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/TheOutnetUpdater.php" />
@@ -232,6 +222,8 @@
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/CategoryService.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Category.php" />
+        <option value="$PROJECT_DIR$/web/bundles/threadandmirrorproducts/css/stylesheet.css" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/public/css/stylesheet.css" />
       </list>
     </option>
   </component>
@@ -613,10 +605,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="971" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20591581" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20591581" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17974971" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -686,22 +678,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/NetAPorterUpdater.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09541284" vertical-offset="0" max-vertical-offset="545">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Crawler/NetAPorterCrawler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="169" max-vertical-offset="1131">
-          <caret line="39" column="15" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/AbstractFormatter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43645084" vertical-offset="897" max-vertical-offset="6539">
@@ -1099,14 +1075,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3328" vertical-offset="4498" max-vertical-offset="6058">
-          <caret line="362" column="65" selection-start-line="362" selection-start-column="65" selection-end-line="362" selection-end-column="65" />
+        <state vertical-scroll-proportion="-5.4166665" vertical-offset="4498" max-vertical-offset="6058">
+          <caret line="366" column="45" selection-start-line="366" selection-start-column="45" selection-end-line="366" selection-end-column="45" />
           <folding>
             <element signature="e#66#117#0#PHP" expanded="true" />
             <element signature="e#3577#3613#1#PHP" expanded="true" />
             <element signature="e#8329#8366#0#PHP" expanded="true" />
             <element signature="e#10366#10406#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/bundles/threadandmirrorproducts/css/stylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9895" max-vertical-offset="55991">
+          <caret line="779" column="0" selection-start-line="779" selection-start-column="0" selection-end-line="779" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/public/css/stylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3640416" vertical-offset="9817" max-vertical-offset="55939">
+          <caret line="774" column="0" selection-start-line="774" selection-start-column="0" selection-end-line="774" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
