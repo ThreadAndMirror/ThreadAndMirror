@@ -1337,6 +1337,7 @@ div+.pagination {
 
     .layout-banner-overlay .article {
         border: none;
+        height: auto !important;
     }
 
     .article, .comments {
