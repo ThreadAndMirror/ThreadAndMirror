@@ -2,10 +2,13 @@
 
 namespace ThreadAndMirror\ProductsBundle\Service\Updater;
 
+use ThreadAndMirror\ProductsBundle\Entity\Category;
 use ThreadAndMirror\ProductsBundle\Event\BrandEvent;
+use ThreadAndMirror\ProductsBundle\Event\CategoryEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductNewSizesInStockEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductNowOnSaleEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductFurtherReductionsEvent;
+use ThreadAndMirror\ProductsBundle\Service\CategoryService;
 use ThreadAndMirror\ProductsBundle\Service\Crawler\AbstractCrawler;
 use ThreadAndMirror\ProductsBundle\Service\Formatter\AbstractFormatter;
 use ThreadAndMirror\ProductsBundle\Definition\UpdaterInterface;
@@ -39,20 +42,25 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/** @var BrandService */
 	protected $brandService;
 
+	/** @var CategoryService */
+	protected $categoryService;
+
 	public function __construct(
 		AbstractCrawler $crawler,
         AbstractFormatter $formatter,
         EventDispatcherInterface $dispatcher,
         EntityManager $em,
         AffiliateInterface $affiliate,
-        BrandService $brandService
+        BrandService $brandService,
+		CategoryService $categoryService
 	) {
-		$this->crawler      = $crawler;
-		$this->formatter    = $formatter;
-		$this->dispatcher   = $dispatcher;
-		$this->affiliate    = $affiliate;
-		$this->em 		    = $em;
-		$this->brandService = $brandService;
+		$this->crawler         = $crawler;
+		$this->formatter       = $formatter;
+		$this->dispatcher      = $dispatcher;
+		$this->affiliate       = $affiliate;
+		$this->em 		       = $em;
+		$this->brandService    = $brandService;
+		$this->categoryService = $categoryService;
 	}
 
 	/**
@@ -77,10 +85,12 @@ abstract class AbstractUpdater implements UpdaterInterface
 		// Static properties
 		// $this->updateStyleWith($new, $product);
 		$this->updateBrand($new, $product);
+		$this->updateCategory($new, $product);
 		$this->updateImages($new, $product);
 		$this->updatePid($new, $product);
 		$this->updateUrl($new, $product);
 		$this->updateName($new, $product);
+		$this->updateArea($new, $product);
 
 		// Changable properties
 		$this->updateSizes($new, $product);
@@ -105,10 +115,14 @@ abstract class AbstractUpdater implements UpdaterInterface
 
         // Add the affiliate url
         $product->setAffiliateUrl($this->affiliate->getAffiliateLink($url));
-//		var_dump(json_decode($product->getJSON())); die();
 
-		// Set the brand from the brand name
+		// Set the shop
+		$shop = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->getShopFromUrl($url);
+		$product->setShop($shop);
+
+		// Set the brand and categories from their names
 		$this->updateBrandFromBrandName($product);
+		$this->updateCategoryFromCategoryName($product);
 
         return $product;
 	}
@@ -245,7 +259,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 	{
 		if ($product->getBrand() === null) {
 			$product->setBrandName($new->getBrandName());
-			$this->updateBrandFromBrandName($new);
+			$this->updateBrandFromBrandName($product);
 		}
 	}
 
@@ -278,7 +292,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 	 * Update the pid for the product
 	 *
 	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product	
+	 * @param Product 	$product 	The original product
 	 */
 	protected function updatePid(Product $new, Product $product)
 	{
@@ -291,7 +305,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 	 * Update the name of the product
 	 *
 	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product	
+	 * @param Product 	$product 	The original product
 	 */
 	protected function updateName(Product $new, Product $product)
 	{
@@ -310,6 +324,61 @@ abstract class AbstractUpdater implements UpdaterInterface
 	{
 		if ($product->getCategory() === null) {
 			$product->setCategoryName($new->getCategoryName());
+			$this->updateCategoryFromCategoryName($product);
+		}
+	}
+
+	/**
+	 * Update the area
+	 *
+	 * @param Product 	$new 		The new product
+	 * @param Product 	$product 	The original product
+	 */
+	protected function updateArea(Product $new, Product $product)
+	{
+		if ($product->getCategory() === null) {
+			$product->setArea($new->getCategory()->getArea());
+		}
+	}
+
+
+	/**
+	 * Update a product brand based on the brand name
+	 *
+	 * @param  Product 		$product  			The product to update
+	 */
+	public function updateCategoryFromCategoryName(Product $product)
+	{
+		// Get the category name from the product
+		$categoryName = $product->getCategoryName();
+		$categoryId   = $this->categoryService->getExistingCategoryId($categoryName);
+
+		// Create a new category if it doesn't exist already
+		if ($categoryId !== null) {
+			$product->setCategory($this->em->getReference('ThreadAndMirrorProductsBundle:Category', $categoryId));
+		} else {
+			// Create a new category
+			$category = new Category($categoryName);
+
+			// Guess the area if a shop is beauty or fashion only
+			$shop = $product->getShop();
+
+			if ($shop->getHasBeauty() && !$shop->getHasFashion()) {
+				$category->setArea('beauty');
+				$product->setArea('beauty');
+			} else if (!$shop->getHasBeauty() && $shop->getHasFashion()) {
+				$category->setArea('fashion');
+				$product->setArea('fashion');
+			} else {
+				$category->setArea('other');
+				$product->setArea('other');
+			}
+
+			$this->em->persist($category);
+			$this->em->flush();
+			$product->setCategory($category);
+
+			$this->dispatcher->dispatch(CategoryEvent::EVENT_ADD, new CategoryEvent($category));
 		}
 	}
 
@@ -317,7 +386,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 	 * Update a product category based on the affiliate category id
 	 *
 	 * @param  Product 		$product  			The product to update
-	 * @param  array 		$affiliateField  	The field of the category id to match
+	 * @param  string 		$affiliateField  	The field of the category id to match
 	 */
 	public function updateCategoryFromAffiliateCategoryId(Product $product, $affiliateField)
 	{
@@ -329,7 +398,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 		}
 
 		$categoryRepository = $this->em->getRepository('ThreadAndMirrorProductsBundle:Category');
-		$category = $categoryRepository->findOneBy(array($affiliateField => $id));
+		$category = $categoryRepository->findOneBy([$affiliateField => $id]);
 
 		// Create a new category if it doesn't exist already
 		if ($category !== null) {

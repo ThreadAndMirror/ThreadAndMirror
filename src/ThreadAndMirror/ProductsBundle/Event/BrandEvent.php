@@ -4,7 +4,6 @@ namespace ThreadAndMirror\ProductsBundle\Event;
  
 use Symfony\Component\EventDispatcher\Event;
 use ThreadAndMirror\ProductsBundle\Entity\Brand;
-use ThreadAndMirror\ProductsBundle\Entity\Product;
 
 class BrandEvent extends Event
 {

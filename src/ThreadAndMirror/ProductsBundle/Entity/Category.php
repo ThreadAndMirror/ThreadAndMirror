@@ -15,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *    @ORM\Index(name="area_index", columns={"area"}),
  *    @ORM\Index(name="affiliate_window_id_index", columns={"affiliateWindowId"})
  * })
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="ThreadAndMirror\ProductsBundle\Repository\CategoryRepository")
  */
 class Category
 {
@@ -53,9 +53,13 @@ class Category
      */
     protected $area;
 
-    public function __construct()
+    public function __construct($name)
     {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+
+	    if ($name !== null) {
+		    $this->name = $name;
+	    }
     }
 
     /**
@@ -113,6 +117,33 @@ class Category
     {
         return $this->slug;
     }
+
+	/**
+	 * What the brands slug is expected to be like, based on it's name
+	 *
+	 * @return string
+	 */
+	public function guessSlug()
+	{
+		$text = $this->getName();
+
+		// replace non letter or digits by -
+		$text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+		// trim
+		$text = trim($text, '-');
+
+		// transliterate
+		$text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+		// lowercase
+		$text = strtolower($text);
+
+		// remove unwanted characters
+		$text = preg_replace('~[^-\w]+~', '', $text);
+
+		return $text;
+	}
 
     /**
      * Set affiliateWindowId

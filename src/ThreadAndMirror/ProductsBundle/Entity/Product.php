@@ -228,7 +228,13 @@ class Product
 		$this->checked = new \DateTime;
 	}
 
-	public function updateFromClone($product)
+	/**
+	 * Update from a cloned product
+	 *
+	 * @param  Product      $product
+	 * @return Product
+	 */
+	public function updateFromClone(Product $product)
 	{
 		$this->name           = $product->getName();
 		$this->category       = $product->getCategory();
@@ -284,7 +290,7 @@ class Product
 	/**
 	 * Create the social sharer object for this product, if no platform is passed we return a default configuration
 	 */
-	public function getSharer($platform=null)
+	public function getSharer($platform = null)
 	{
 		$sharer = new Sharer($platform);
 
@@ -314,9 +320,9 @@ class Product
 	/**
 	 * Set shop
 	 *
-	 * @param ThreadAndMirror\ProductsBundle\Entity\Shop $shop
+	 * @param Shop $shop
 	 */
-	public function setShop(\ThreadAndMirror\ProductsBundle\Entity\Shop $shop)
+	public function setShop(Shop $shop)
 	{
 		$this->shop = $shop;
 	}
@@ -324,7 +330,7 @@ class Product
 	/**
 	 * Get shop
 	 *
-	 * @return ThreadAndMirror\ProductsBundle\Entity\Shop 
+	 * @return Shop
 	 */
 	public function getShop()
 	{
@@ -334,9 +340,9 @@ class Product
 	/**
 	 * Set category
 	 *
-	 * @param ThreadAndMirror\ProductsBundle\Entity\Category $category
+	 * @param Category $category
 	 */
-	public function setCategory(\ThreadAndMirror\ProductsBundle\Entity\Category $category)
+	public function setCategory(Category $category)
 	{
 		$this->category = $category;
 	}
@@ -344,7 +350,7 @@ class Product
 	/**
 	 * Get category
 	 *
-	 * @return ThreadAndMirror\ProductsBundle\Entity\Category 
+	 * @return Category
 	 */
 	public function getCategory()
 	{
@@ -377,9 +383,9 @@ class Product
 	/**
 	 * Set brand
 	 *
-	 * @param ThreadAndMirror\ProductsBundle\Entity\Brand $brand
+	 * @param Brand $brand
 	 */
-	public function setBrand(\ThreadAndMirror\ProductsBundle\Entity\Brand $brand)
+	public function setBrand(Brand $brand)
 	{
 		$this->brand = $brand;
 	}
@@ -387,7 +393,7 @@ class Product
 	/**
 	 * Get brand
 	 *
-	 * @return ThreadAndMirror\ProductsBundle\Entity\Brand 
+	 * @return Brand
 	 */
 	public function getBrand()
 	{
@@ -1024,9 +1030,9 @@ class Product
 	/**
 	 * Add pick
 	 *
-	 * @param ThreadAndMirror\ProductsBundle\Entity\Pick $pick
+	 * @param Pick $pick
 	 */
-	public function addPick(\ThreadAndMirror\ProductsBundle\Entity\Pick $pick)
+	public function addPick(\Pick $pick)
 	{
 		$this->picks[] = $pick;
 	}
@@ -1228,9 +1234,9 @@ class Product
     /**
      * Remove picks
      *
-     * @param \ThreadAndMirror\ProductsBundle\Entity\Pick $picks
+     * @param \Pick $picks
      */
-    public function removePick(\ThreadAndMirror\ProductsBundle\Entity\Pick $picks)
+    public function removePick(\Pick $picks)
     {
         $this->picks->removeElement($picks);
     }
