@@ -3,13 +3,6 @@ services:
     stems.siren.saleparser:
        class: ThreadAndMirror\ProductsBundle\Service\SaleParser
 
-    threadandmirror.products.manager:
-        class:           ThreadAndMirror\ProductsBundle\Service\ProductManagerService
-        calls:
-            - [setContainer, ['@service_container']]
-        arguments:
-            - @doctrine.orm.entity_manager
-
     # Affiliates
 
     threadandmirror.api.affiliate_window:
@@ -35,6 +28,16 @@ services:
             - @buzz
             - @doctrine.orm.entity_manager
 
+    # Manager Services
+
+    threadandmirror.products.service.product:
+        class:           ThreadAndMirror\ProductsBundle\Service\ProductService
+        calls:
+            - [setContainer, ['@service_container']]
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.products.repository.product
+
     threadandmirror.products.service.brand:
         class: ThreadAndMirror\ProductsBundle\Service\BrandService
         arguments:
@@ -42,10 +45,10 @@ services:
             - @threadandmirror.products.repository.brand
 
     threadandmirror.products.service.category:
-            class: ThreadAndMirror\ProductsBundle\Service\CategoryService
-            arguments:
-                - @threadandmirror.products.cache.category
-                - @threadandmirror.products.repository.category
+        class: ThreadAndMirror\ProductsBundle\Service\CategoryService
+        arguments:
+            - @threadandmirror.products.cache.category
+            - @threadandmirror.products.repository.category
 
     # Caches
 

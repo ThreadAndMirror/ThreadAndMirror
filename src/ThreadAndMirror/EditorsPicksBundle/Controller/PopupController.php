@@ -23,7 +23,7 @@ class PopupController extends BaseRestController
 		// Try to find the product based on the passed param
 		$em      = $this->getDoctrine()->getManager();
 		$offset  = $request->get('offset', 0);
-		$product = $this->get('threadandmirror.products.manager')->getProductFromUrl($request->get('url', null));
+		$product = $this->get('threadandmirror.products.service.product')->getProductFromUrl($request->get('url', null));
 
 		// If the product couldn't be found then create a new one
 		if ($product === null) {

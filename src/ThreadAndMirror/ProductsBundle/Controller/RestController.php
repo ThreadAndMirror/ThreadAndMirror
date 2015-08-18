@@ -444,7 +444,7 @@ class RestController extends BaseRestController
 		// Get the url from the query paramter and attempt to parse the product
 		$em      = $this->getDoctrine()->getManager();
 		$link    = $em->getRepository($repository)->findOneBy(array('entity' => $section->getId(), 'type' => 'product'));
-		$product = $this->get('threadandmirror.products.manager')->getProductFromUrl($request->get('url'));
+		$product = $this->get('threadandmirror.products.service.product')->getProductFromUrl($request->get('url'));
 
 		// If we manage to parse a product from the url then create the product listing for the gallery
 		if (is_object($product)) {
