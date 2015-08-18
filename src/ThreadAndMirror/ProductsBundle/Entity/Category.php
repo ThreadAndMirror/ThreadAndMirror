@@ -53,7 +53,7 @@ class Category
      */
     protected $area;
 
-    public function __construct($name)
+    public function __construct($name = null)
     {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
 

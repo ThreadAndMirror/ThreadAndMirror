@@ -107,18 +107,25 @@ abstract class AbstractUpdater implements UpdaterInterface
 	 */
 	public function createProductFromCrawl($url) 
 	{
+		// Find the shop
+		$shop = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->getShopFromUrl($url);
+
 		// Run the product crawler
-        $product = $this->crawler->crawl($url);
+		$product = $this->crawler->crawl($url);
+		$product->setShop($shop);
 
 		// Tidy up the crawled data
         $this->formatter->cleanupCrawledProduct($product);
 
+		// Check if the product exists after cleanup
+		$existing = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findOneBy(['pid' => $product->getPid(), 'shop' => $shop]);
+
+		if ($existing !== null) {
+			return $existing;
+		}
+
         // Add the affiliate url
         $product->setAffiliateUrl($this->affiliate->getAffiliateLink($url));
-
-		// Set the shop
-		$shop = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->getShopFromUrl($url);
-		$product->setShop($shop);
 
 		// Set the brand and categories from their names
 		$this->updateBrandFromBrandName($product);
@@ -355,7 +362,9 @@ abstract class AbstractUpdater implements UpdaterInterface
 
 		// Create a new category if it doesn't exist already
 		if ($categoryId !== null) {
-			$product->setCategory($this->em->getReference('ThreadAndMirrorProductsBundle:Category', $categoryId));
+			$category = $this->em->getReference('ThreadAndMirrorProductsBundle:Category', $categoryId);
+			$product->setCategory($category);
+			$product->setArea($category->getArea());
 		} else {
 			// Create a new category
 			$category = new Category($categoryName);
