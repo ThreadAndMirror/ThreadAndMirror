@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f6697b0-6fde-4ab5-902b-7b14249fc9db" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Brand.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Brand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Controller/RestController.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Controller/RestController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump.rdb" afterPath="$PROJECT_DIR$/dump.rdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Front/wishlist.html.twig" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Front/wishlist.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="threadandmirror.iws" />
@@ -31,16 +28,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/config/services.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="325" max-vertical-offset="6864">
-              <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PopupController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/EditorsPicksBundle/Controller/PopupController.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -71,38 +58,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Product.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Product.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4384" vertical-offset="15807" max-vertical-offset="16913">
-              <caret line="1240" column="44" selection-start-line="1240" selection-start-column="44" selection-end-line="1240" selection-end-column="44" />
+            <state vertical-scroll-proportion="-6.5208335" vertical-offset="15807" max-vertical-offset="16913">
+              <caret line="1243" column="7" selection-start-line="1243" selection-start-column="7" selection-end-line="1243" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+      <file leaf-file-name="wishlist.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Front/wishlist.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="1027">
-              <caret line="60" column="13" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.32104453" vertical-offset="25" max-vertical-offset="1027">
+              <caret line="18" column="71" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AbstractUpdater.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php">
+      <file leaf-file-name="products.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Embed/products.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.5833335" vertical-offset="1027" max-vertical-offset="6175">
-              <caret line="107" column="42" selection-start-line="107" selection-start-column="20" selection-end-line="107" selection-end-column="42" />
+            <state vertical-scroll-proportion="-23.045454" vertical-offset="0" max-vertical-offset="780">
+              <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
               <folding>
-                <element signature="e#66#117#0#PHP" expanded="true" />
-                <element signature="e#3299#3335#1#PHP" expanded="true" />
-                <element signature="e#3637#3676#1#PHP" expanded="true" />
-                <element signature="e#8566#8603#0#PHP" expanded="true" />
-                <element signature="e#10593#10633#0#PHP" expanded="true" />
+                <element signature="e#11#47#0#Twig" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="product.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Embed/product.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="533">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -176,7 +169,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Crawler/LookFantasticCrawler.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/NetAPorterUpdater.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/FrenchConnectionFormatter.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Crawler/NetAPorterCrawler.php" />
@@ -227,6 +219,7 @@
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Controller/RestController.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Brand.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Front/wishlist.html.twig" />
       </list>
     </option>
   </component>
@@ -853,30 +846,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/EventListener/BrandListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.136364" vertical-offset="0" max-vertical-offset="481">
-          <caret line="29" column="55" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.272727" vertical-offset="362" max-vertical-offset="988">
-          <caret line="52" column="31" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/bootstrap.php.cache">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.7358491" vertical-offset="26309" max-vertical-offset="40378">
-          <caret line="2039" column="2" selection-start-line="2039" selection-start-column="2" selection-end-line="2039" selection-end-column="2" />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Repository/ProductRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.772727" vertical-offset="65" max-vertical-offset="3250">
@@ -1295,8 +1264,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4384" vertical-offset="15807" max-vertical-offset="16913">
-          <caret line="1240" column="44" selection-start-line="1240" selection-start-column="44" selection-end-line="1240" selection-end-column="44" />
+        <state vertical-scroll-proportion="-6.5208335" vertical-offset="15807" max-vertical-offset="16913">
+          <caret line="1243" column="7" selection-start-line="1243" selection-start-column="7" selection-end-line="1243" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Embed/products.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.045454" vertical-offset="0" max-vertical-offset="780">
+          <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+          <folding>
+            <element signature="e#11#47#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Embed/product.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="673">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Front/wishlist.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32104453" vertical-offset="25" max-vertical-offset="1027">
+          <caret line="18" column="71" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="71" />
           <folding />
         </state>
       </provider>
