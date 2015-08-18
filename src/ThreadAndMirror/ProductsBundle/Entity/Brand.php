@@ -30,7 +30,7 @@ class Brand
     protected $name;
 
 	/**
-	 * @ORM\Column(type="string", length=511)
+	 * @ORM\Column(type="string", length=511, nullable=true)
 	 */
 	protected $description;
 

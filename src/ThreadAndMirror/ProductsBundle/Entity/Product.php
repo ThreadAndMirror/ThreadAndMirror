@@ -1032,7 +1032,7 @@ class Product
 	 *
 	 * @param Pick $pick
 	 */
-	public function addPick(\Pick $pick)
+	public function addPick(Pick $pick)
 	{
 		$this->picks[] = $pick;
 	}
@@ -1234,9 +1234,9 @@ class Product
     /**
      * Remove picks
      *
-     * @param \Pick $picks
+     * @param Pick $picks
      */
-    public function removePick(\Pick $picks)
+    public function removePick(Pick $picks)
     {
         $this->picks->removeElement($picks);
     }

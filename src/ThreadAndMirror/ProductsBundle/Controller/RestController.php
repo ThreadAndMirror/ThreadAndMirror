@@ -168,16 +168,12 @@ class RestController extends BaseRestController
 	{
 		// attempt to parse the product
 		$em = $this->getDoctrine()->getManager();
-		$product = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->getProductFromUrl($request->get('url'));
+		$product = $this->get('threadandmirror.products.service.product')->getProductFromUrl($request->get('url'));
 
 		// if we manage to parse a product from the url then handle persisting
 		if (is_object($product)) {
 
-			// check if the product already exists before we save it
-			$exists = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->findOneBy(array('shop' => $product->getShop(), 'pid' => $product->getPid()));
-			is_object($exists) and $product = $exists;
-
-			// persist it
+			// Persist
 			$em->persist($product);
 
 			// create a pick from the product
