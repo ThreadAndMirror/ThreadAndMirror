@@ -51,9 +51,17 @@
 	{#</li>#}
 	<li>
 		<a href="/magazine" {% if page.slug == 'magazine' or page.slug == 'magazine/{post}' %}class="active"{% endif %}>Magazine</a>
-	{# 	<ul>
-			<li><a href="/blog">Latest Edits</a></li>
-		</ul> #}
+	    <ul>
+            <li><a href="/social/category/blog">Blogs</a></li>
+            <li><a href="/social/category/brand">Brands</a></li>
+            <li><a href="/social/category/magazine">Magazines</a></li>
+            <li><a href="/social/category/model">Models</a></li>
+            <li><a href="/social/category/store">Stores</a></li>
+            <li><a href="/social/category/street-style">Street Style</a></li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="/social/my-circle">My Social Circle</a></li>
+            {% endif %}
+        </ul>
 	</li>	
 </ul>
 

@@ -335,6 +335,18 @@ parameters:
                 entity: 'ThreadAndMirrorProductsBundle:SectionProduct'
                 class: 'ThreadAndMirror\ProductsBundle\Entity\SectionProduct'
                 form: 'ThreadAndMirror\ProductsBundle\Form\SectionProductType'
+            magazine:
+                name: 'Magazine'
+                enabled: true
+                entity: 'StemsPageBundle:SectionMagazine'
+                class: 'Stems\PageBundle\Entity\SectionMagazine'
+                form: 'Stems\PageBundle\Form\SectionMagazineType'
+            text_and_image:
+                name: 'Text and Image'
+                enabled: true
+                entity: 'StemsPageBundle:SectionTextAndImage'
+                class: 'Stems\PageBundle\Entity\SectionTextAndImage'
+                form: 'Stems\PageBundle\Form\SectionTextAndImageType'
 
 # Logging
 monolog:

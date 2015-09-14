@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Repository\ProductRepository;
-use	ThreadAndMirror\ProductsBundle\Service\ProductParser;
 
 /**
  * Class ProductService
