@@ -1,6 +1,4 @@
 services:
-    threadandmirror.logger:
-        class: Symfony\Bridge\Monolog\Logger
 
     threadandmirror.product.parser:
         class: ThreadAndMirror\ProductsBundle\Service\ProductParser

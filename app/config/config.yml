@@ -363,6 +363,9 @@ monolog:
             type: stream
             path: %kernel.root_dir%/logs/crawler.log
             level: warning
+        product_feeds:
+            type: stream
+            path: %kernel.root_dir%/logs/product_feeds.log
 
 doctrine_cache:
     aliases:
@@ -377,3 +380,33 @@ doctrine_cache:
             namespace: redis_cache
             redis:
                 connection_id: redis.service
+
+
+# RabbitMQ
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     127.0.0.1
+            port:     5672
+            user:     'guest'
+            password: 'guest'
+            vhost:    '/'
+            lazy:     false
+            connection_timeout: 3
+            read_write_timeout: 3
+
+            # requires php-amqplib v2.4.1+ and PHP5.4+
+            keepalive: false
+
+            # requires php-amqplib v2.4.1+
+            heartbeat: 0
+    producers:
+        download_feed_affiliate_window:
+            connection:       default
+            exchange_options: { name: 'download-feed-affiliate-window', type: direct }
+    consumers:
+        download_feed_affiliate_window:
+            connection:       default
+            exchange_options: { name: 'download-feed-affiliate-window', type: direct }
+            queue_options:    { name: 'download-feed-affiliate-window' }
+            callback:         'threadandmirror.products.consumer.download_feed_affiliate_window'

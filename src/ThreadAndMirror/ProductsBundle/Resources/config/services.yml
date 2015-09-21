@@ -21,6 +21,10 @@ services:
             - @threadandmirror.api.affiliate_window
             - @threadandmirror.products.repository.product
             - @doctrine.orm.entity_manager
+            - @logger
+            - { download_feed: @old_sound_rabbit_mq.download_feed_affiliate_window_producer }
+        tags:
+            - { name: monolog.logger, channel: product_feeds }
 
     threadandmirror.affiliate.linkshare:
         class: ThreadAndMirror\ProductsBundle\Service\Affiliate\LinkshareService
@@ -86,6 +90,16 @@ services:
             factory_method:  getRepository
             arguments:
                 - ThreadAndMirrorProductsBundle:Category
+
+    # Consumers
+
+    threadandmirror.products.consumer.download_feed_affiliate_window:
+        class: ThreadAndMirror\ProductsBundle\Service\Consumer\DownloadFeedAffiliateWindowConsumer
+        arguments:
+            - @threadandmirror.affiliate.affiliate_window
+            - @logger
+        tags:
+            - { name: monolog.logger, channel: product_feeds }
 
     # Updaters
 

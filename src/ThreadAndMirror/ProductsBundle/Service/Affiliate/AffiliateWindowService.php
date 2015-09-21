@@ -2,6 +2,8 @@
 
 namespace ThreadAndMirror\ProductsBundle\Service\Affiliate;
 
+use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use Symfony\Bridge\Monolog\Logger;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Entity\Category;
 use ThreadAndMirror\ProductsBundle\Entity\Offer;
@@ -14,71 +16,90 @@ use Doctrine\ORM\EntityManager;
 
 class AffiliateWindowService implements AffiliateInterface 
 {
-	/**
-	 * @var The Product Repository
-	 */
+	/** @var ProductRepository */
 	protected $productRepository;
 
-	/**
-	 * @var The Affiliate Window Api service
-	 */
+	/** @var AffiliateWindowApiService */
 	protected $api;
 
-	/**
-	 * @var The Entity Manager
-	 */
+	/** @var EntityManager */
 	protected $em;
 
-	/**
-     * @var For storing product updater
-     */
+	/** @var AbstractUpdater */
 	protected $updater;
 
-	/**
-	 * @var The valid product categories for each each
-	 */
-	protected $categories = array(
-		'fashion' => array(595,149,135,163,168,159,169,161,167,170,194,141,205,198,206,203,208,199,204,201,546,547),
-		'beauty'  => array(110,111,114)
-	);
+	/** @var Producer[] */
+	protected $producers;
 
-	/**
-	 * @var The available product areas
-	 */
-	protected $areas = array(
-		'fashion',
-		'beauty'
-	);
+	/** @var Logger */
+	protected $logger;
 
-	public function __construct(AffiliateWindowApiService $api, ProductRepository $productRepository, EntityManager $em)
-	{
-		$this->productRepository  = $productRepository;
-		$this->api 				  = $api;
-		$this->em 				  = $em;
+	/** @var array */
+	protected $categories = [
+		'fashion' => [595,149,135,163,168,159,169,161,167,170,194,141,205,198,206,203,208,199,204,201,546,547],
+		'beauty'  => [110,111,114]
+	];
+
+	/** @var array */
+	protected $areas = ['fashion', 'beauty'];
+
+	public function __construct(
+		AffiliateWindowApiService $api,
+		ProductRepository $productRepository,
+		EntityManager $em,
+		Logger $logger,
+		$producers
+	) {
+		$this->productRepository = $productRepository;
+		$this->api 				 = $api;
+		$this->em 				 = $em;
+		$this->logger            = $logger;
+		$this->producers         = $producers;
 	}
 
 	/**
-	 * Download the latest feed files
+	 * Add feed downloads to the queue
 	 */
-	public function downloadFeedFiles()
+	public function queueFeedFileDownloads()
 	{
-		// Download feeds for each area
+		// Download feeds for each category
 		foreach ($this->areas as $area) {
+			foreach ($this->categories[$area] as $category) {
+				$this->producers['download_feed']->publish(json_encode([
+					'category' => $category,
+					'area'     => $area
+				]));
+			}
+		}
+	}
 
-			// Load the shops that have products for the current area
-			$merchants = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->getAffiliatesForArea('affiliate_window', $area, true);
+	/**
+	 * Download a feed file for the given category
+	 *
+	 * @param  string   $area
+	 * @param  string   $category
+	 */
+	public function downloadFeedFile($area, $category)
+	{
+		// Load the shops that have products for the current area
+		$merchants = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->getAffiliatesForArea('affiliate_window', $area, true);
 
-			// Get the data
-			$data = $this->api->getDataFeed($merchants, $this->categories[$area])->getContent();
+		// Get the data
+		$data = $this->api->getDataFeed($merchants, [$category])->getContent();
 
-			// Decompress
+		// Decompress if there are no errors
+		if (stristr($data, '<h1>Error</h1>')) {
+			$this->logger->info('Category '.$category.' feed file has no products for affiliate window.');
+		} else {
 			$data = gzdecode($data);
 
 			// Save CSV data to file
-			$csv = fopen(__DIR__.'/../../../../../feeds/affiliate_window/'.$area.'.csv', 'w+');
+			$csv = fopen(__DIR__.'/../../../../../feeds/affiliate_window/'.$category.'.csv', 'w+');
 
 			fwrite($csv, $data);
 			fclose($csv);
+
+			$this->logger->info('Category '.$category.' feed file downloaded for affiliate window.');
 		}
 	}
 

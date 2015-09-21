@@ -25,6 +25,6 @@ class DownloadProductFeedsCommand extends ContainerAwareCommand
         $affiliateService = $this->getContainer()->get('threadandmirror.affiliate.'.$input->getArgument('affiliate'));
 
         // Download the feed files
-        $affiliateService->downloadFeedFiles();
+        $affiliateService->queueFeedFileDownloads();
     }
 }
