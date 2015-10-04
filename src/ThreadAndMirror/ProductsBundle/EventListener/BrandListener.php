@@ -11,13 +11,9 @@ class BrandListener
 	/** @var BrandService */
 	protected $brandService;
 
-	/** @var BrandCache */
-	protected $brandCache;
-
-	public function __construct(BrandService $brandService, BrandCache $brandCache)
+	public function __construct(BrandService $brandService)
 	{
 		$this->brandService = $brandService;
-		$this->brandCache   = $brandCache;
 	}
 
 	/**
@@ -27,6 +23,6 @@ class BrandListener
 	 */
 	public function onCreate(BrandEvent $event)
 	{
-		$this->brandCache->setData($event->getBrand());
+		$this->brandService->cacheBrand($event->getBrand());
 	}
 }

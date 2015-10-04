@@ -6,18 +6,41 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 
 class TopshopFormatter extends AbstractFormatter
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupFeedName(Product $product) 
 	{ 
 		$result = $this->format($product->getName())
-			->sheer(' - ')
+			->sheer(' - ', false)
 			->replace('**', '')
 			->replace('Womens ', '')
 			->replace('MATERNITY', 'Maternity')
+			->replace($product->getBrandName().' ', '')
+			->trim()
 			->result();
 
 		$product->setName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedPid(Product $product)
+	{
+		$metaData = json_decode($product->getMetaData());
+
+		$result = $this
+			->format($metaData->sku)
+			->sheer('TS', true, true)
+			->result();
+
+		$product->setPid($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupFeedImages(Product $product) 
 	{ 
 		$result = $this->format($product->getImages())
@@ -26,6 +49,9 @@ class TopshopFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupFeedPortraits(Product $product) 
 	{ 
 		$result = $this->format($product->getImages())
@@ -35,6 +61,9 @@ class TopshopFormatter extends AbstractFormatter
 		$product->setPortraits($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupFeedThumbnails(Product $product) 
 	{ 
 		$result = $this->format($product->getThumbnails())
@@ -44,11 +73,9 @@ class TopshopFormatter extends AbstractFormatter
 		$product->setThumbnails($result);
 	}
 
-	protected function cleanupCrawledName(Product $product) 
-	{ 
-
-	}
-
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledBrand(Product $product) 
 	{ 
 		$result = $this
@@ -59,6 +86,9 @@ class TopshopFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledCategory(Product $product)
 	{
 		$result = $this
@@ -68,11 +98,9 @@ class TopshopFormatter extends AbstractFormatter
 		$product->setCategoryName($result);
 	}
 
-	protected function cleanupCrawledPid(Product $product) 
-	{ 
-
-	}
-
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledDescription(Product $product) 
 	{ 
 		$result = $this
@@ -83,6 +111,9 @@ class TopshopFormatter extends AbstractFormatter
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product) 
 	{ 
 		$result = $this
@@ -93,6 +124,9 @@ class TopshopFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product) 
 	{ 
 		$result = $this
@@ -102,6 +136,9 @@ class TopshopFormatter extends AbstractFormatter
 		$product->setPortraits($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledThumbnails(Product $product) 
 	{
 		$result = $this
@@ -112,6 +149,9 @@ class TopshopFormatter extends AbstractFormatter
 		$product->setThumbnails($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledAvailableSizes(Product $product) 
 	{
 		$sizes = $product->getAvailableSizes();
@@ -127,6 +167,9 @@ class TopshopFormatter extends AbstractFormatter
 		$product->setAvailableSizes($sizes);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledStockedSizes(Product $product) 
 	{
 		$sizes = $product->getStockedSizes();
@@ -142,6 +185,9 @@ class TopshopFormatter extends AbstractFormatter
 		$product->setStockedSizes($sizes);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledStyleWith(Product $product) 
 	{ 
 

@@ -6,6 +6,79 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 
 class YooxFormatter extends AbstractFormatter
 {
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedName(Product $product)
+	{
+		$result = $this
+			->format($product->getName())
+			->sheerSpecial('caps')
+			->sheer(' WOMEN on ', false)
+			->sheer(' UNISEX on ', false)
+			->sheer('s', false)
+			->sheer('es', false)
+			->result();
+
+		$product->setName($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedBrand(Product $product)
+	{
+		$result = $this
+			->format($product->getBrandName())
+			->name()
+			->result();
+
+		$product->setBrandName($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedDescription(Product $product)
+	{
+		$result = $this
+			->format($product->getDescription())
+			->sheer(' * ', false)->append('.')
+			->result();
+
+		// Yoox descriptions are pretty naff, so ignore
+		$product->setDescription('');
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedPortraits(Product $product)
+	{
+		$result = $this
+			->format($product->getImages())
+			->replace('_12_', '_20_')
+			->result();
+
+		$product->setPortraits($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedThumbnails(Product $product)
+	{
+		$result = $this
+			->format($product->getImages())
+			->replace('_12_', '_20_')
+			->result();
+
+		$product->setThumbnails($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledName(Product $product)
 	{
 		$result = $this
@@ -16,6 +89,9 @@ class YooxFormatter extends AbstractFormatter
 		$product->setName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledBrand(Product $product)
 	{
 		$result = $this
@@ -26,6 +102,9 @@ class YooxFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPid(Product $product)
 	{
 		$result = $this
@@ -35,6 +114,9 @@ class YooxFormatter extends AbstractFormatter
 		$product->setPid($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledDescription(Product $product)
 	{
 		$result = $this
@@ -45,6 +127,9 @@ class YooxFormatter extends AbstractFormatter
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product)
 	{
 		$result = $this
@@ -55,6 +140,9 @@ class YooxFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product)
 	{
 
@@ -66,6 +154,9 @@ class YooxFormatter extends AbstractFormatter
 		$product->setPortraits($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledThumbnails(Product $product)
 	{
 		$result = $this
@@ -75,6 +166,9 @@ class YooxFormatter extends AbstractFormatter
 		$product->setThumbnails($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledAvailableSizes(Product $product)
 	{
 		$result = $this
@@ -85,6 +179,9 @@ class YooxFormatter extends AbstractFormatter
 		$product->setAvailableSizes($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledStockedSizes(Product $product)
 	{
 		$result = $this
@@ -93,10 +190,5 @@ class YooxFormatter extends AbstractFormatter
 			->result();
 
 		$product->setStockedSizes($result);
-	}
-
-	protected function cleanupCrawledStyleWith(Product $product)
-	{
-
 	}
 }

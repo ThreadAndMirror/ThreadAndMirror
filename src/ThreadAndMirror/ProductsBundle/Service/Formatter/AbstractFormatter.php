@@ -33,10 +33,20 @@ abstract class AbstractFormatter implements FormatterInterface
 		$this->cleanupFeedAvailableSizes($product);
 		$this->cleanupFeedStockedSizes($product);
 		$this->cleanupFeedStyleWith($product);
+		$this->cleanupFeedMetaKeywords($product);
 	}
-	protected function cleanupFeedUrl(Product $product) { }
 
-	protected function cleanupFeedName(Product $product) { }
+	protected function cleanupFeedName(Product $product)
+	{
+		$result = $this
+			->format($product->getName())
+			->replace($product->getBrandName().' ', '')
+			->result();
+
+		$product->setName($result);
+	}
+
+	protected function cleanupFeedUrl(Product $product) { }
 
 	protected function cleanupFeedBrand(Product $product) { }
 
@@ -85,6 +95,21 @@ abstract class AbstractFormatter implements FormatterInterface
 	protected function cleanupFeedStockedSizes(Product $product) { }
 
 	protected function cleanupFeedStyleWith(Product $product) { }
+
+	/**
+	 * Clean up the metaKeywords generated from feed data
+	 *
+	 * @param Product $product
+	 */
+	protected function cleanupFeedMetaKeywords(Product $product)
+	{
+		$keywords = $product->getMetaKeywords();
+
+		// Trim size
+		$keywords = substr($keywords, 0, 254);
+
+		$product->setMetaKeywords($keywords);
+	}
 
 	/**
 	 * Post-processing for crawled products
@@ -227,44 +252,105 @@ abstract class AbstractFormatter implements FormatterInterface
 	/**
 	 * Sheers the end or beginning of a string after (and including) a specified character(s)
 	 *
-	 * @param  string 		$delimiter		The point to perform the sheer
-	 * @param  boolean 		$end 			Whether the trim from the end, false for the beginning
+	 * @param  string 		$delimiter		    The point to perform the sheer
+	 * @param  boolean 		$start 			    Whether the trim from the start of the string, false for the end
+	 * @param  boolean      $discardDelimeter   Whether to discard the delimeter too
 	 * @return self
 	 */
-	protected function sheer($delimiter, $end = true)
+	protected function sheer($delimiter, $start = true, $discardDelimeter = false)
 	{	
 		if (is_array($this->subject)) {
 			foreach ($this->subject as $key => $value) {
 				if (stristr($value, $delimiter)) {
-					if ($end) {
+					if ($start) {
 						$explode = explode($delimiter, $value);
-						unset($explode[0]);
-						$this->subject[$key] = implode($delimiter, $explode);
+
+						// Only discard the first segement if the delimeter isn't at the start
+						if (strpos($this->subject, $delimiter) !== 0) {
+							unset($explode[0]);
+						}
+
 					} else {
 						$explode = explode($delimiter, $value);
 						$length = count($explode);
 						unset($explode[$length-1]);
-						$this->subject[$key] = implode($delimiter, $explode);
 					}
+
+					$this->subject[$key] = $discardDelimeter ? implode('', $explode) : implode($delimiter, $explode);
 				}
 			}
 		} else {
 			if (stristr($this->subject, $delimiter)) {
-				if ($end) {
+				if ($start) {
 					$explode = explode($delimiter, $this->subject);
-					unset($explode[0]);
-					$this->subject = implode($delimiter, $explode);
+
+					// Only discard the first segement if the delimeter isn't at the start
+					if (strpos($this->subject, $delimiter) !== 0) {
+						unset($explode[0]);
+					}
+
 				} else {
 					$explode = explode($delimiter, $this->subject);
 					$length = count($explode);
 					unset($explode[$length-1]);
-					$this->subject = implode($delimiter, $explode);
 				}
+
+				$this->subject = $discardDelimeter ? implode('', $explode) : implode($delimiter, $explode);
 			}
 		}
 
 		return $this;
 	}
+
+	/**
+	 * Sheers the end or beginning of a string using specific rules
+	 *
+	 * @param  string 		$rule		The special rule to apply
+	 * @param  boolean 		$start 		Whether the trim from the start of the string, false for the end
+	 * @return self
+	 */
+	protected function sheerSpecial($rule = 'caps', $start = true)
+	{
+		if (is_array($this->subject)) {
+			// @todo
+//			foreach ($this->subject as $key => $value) {
+//				if (stristr($value, $delimiter)) {
+//					if ($end) {
+//						$explode = explode($delimiter, $value);
+//						unset($explode[0]);
+//						$this->subject[$key] = implode($delimiter, $explode);
+//					} else {
+//						$explode = explode($delimiter, $value);
+//						$length = count($explode);
+//						unset($explode[$length-1]);
+//						$this->subject[$key] = implode($delimiter, $explode);
+//					}
+//				}
+//			}
+		} else {
+			switch ($rule)
+			{
+				// Sheer all capitalised words from the start of a string
+				case 'caps':
+					$words = explode(' ', $this->subject);
+					foreach($words as $key => $word) {
+						if (mb_strtoupper($word, 'utf-8') == $word) {
+							unset($words[$key]);
+						} else {
+							break;
+						}
+					}
+					$this->subject = implode(' ', $words);
+					break;
+			}
+
+		}
+
+		return $this;
+	}
+
+
+
 
 	/**
 	 * Extracts part of a string between two delimeters
@@ -313,6 +399,7 @@ abstract class AbstractFormatter implements FormatterInterface
 	{
 		$this->subject = strtolower($this->subject);
 		$this->subject = ucwords($this->subject);
+		$this->subject = utf8_encode($this->subject);
 
 		return $this;
 	}
@@ -432,11 +519,16 @@ abstract class AbstractFormatter implements FormatterInterface
 	 * Explode a string
 	 *
 	 * @param  string       $delimiter
+	 * @param  integer      $keep           Keep this index of the explode and discard the rest
 	 * @return self
 	 */
-	protected function explode($delimiter)
+	protected function explode($delimiter, $keep = null)
 	{
 		$this->subject = explode($delimiter, $this->subject);
+
+		if ($keep !== null) {
+			$this->subject = $this->subject[$keep];
+		}
 
 		return $this;
 	}

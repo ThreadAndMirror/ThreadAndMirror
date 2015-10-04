@@ -6,27 +6,36 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 
 class FrenchConnectionFormatter extends AbstractFormatter
 {
-	public function cleanupFeedName(Product $product) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedName(Product $product)
 	{
-		// For some reason some shops stick the colour in the name...
 		$result = $this
 			->format($product->getName())
-			->sheer(' - ')
+			->replace($product->getBrandName().' ', '')
+			->sheer(' - ', false)
 			->result();
 
 		$product->setName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupFeedDescription(Product $product) 
 	{ 
 		$result = $this
 			->format($product->getDescription())
-			->sheer(' * ')->append('.')
+			->sheer(' * ', false)->append('.')
 			->result();
 
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledUrl(Product $product) 
 	{ 
 		$result = $this
@@ -37,11 +46,9 @@ class FrenchConnectionFormatter extends AbstractFormatter
 		$product->setUrl($result);
 	}
 
-	protected function cleanupCrawledName(Product $product) 
-	{ 
-		
-	}
-
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledBrand(Product $product) 
 	{ 
 		$result = $this
@@ -52,6 +59,9 @@ class FrenchConnectionFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPid(Product $product) 
 	{ 
 		$result = $this
@@ -62,12 +72,9 @@ class FrenchConnectionFormatter extends AbstractFormatter
 		$product->setPid($result);
 	}
 
-	protected function cleanupCrawledDescription(Product $product) 
-	{ 
-
-	}
-
-	
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product) 
 	{ 
 		$result = $this
@@ -78,6 +85,9 @@ class FrenchConnectionFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product) 
 	{ 
 		$result = $this
@@ -88,6 +98,9 @@ class FrenchConnectionFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledThumbnails(Product $product) 
 	{ 
 		$result = $this
@@ -98,6 +111,9 @@ class FrenchConnectionFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledAvailableSizes(Product $product)
 	{
 		$sizes = $product->getAvailableSizes();
@@ -113,6 +129,9 @@ class FrenchConnectionFormatter extends AbstractFormatter
 		$product->setAvailableSizes($sizes);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledStockedSizes(Product $product)
 	{
 		$sizes = $product->getStockedSizes();
@@ -126,10 +145,5 @@ class FrenchConnectionFormatter extends AbstractFormatter
 		}
 
 		$product->setStockedSizes($sizes);
-	}
-
-	protected function cleanupCrawledStyleWith(Product $product) 
-	{ 
-
 	}
 }

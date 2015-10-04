@@ -6,12 +6,13 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Repository\ProductRepository;
+use ThreadAndMirror\ProductsBundle\Service\Cache\ProductCache;
 
 /**
  * Class ProductService
  * @package ThreadAndMirror\ProductsBundle
  *
- * Container aware, so we can pull in the multitude of updaters on dynamically
+ * Container aware, so we can pull in the multitude of updaters in dynamically
  */
 class ProductService extends ContainerAware
 {
@@ -21,10 +22,14 @@ class ProductService extends ContainerAware
 	/** @var ProductRepository */
 	protected $productRepository;
 
-	public function __construct(EntityManager $em, ProductRepository $productRepository)
+	/** @var ProductCache */
+	protected $cache;
+
+	public function __construct(EntityManager $em, ProductRepository $productRepository, ProductCache $cache)
 	{
 		$this->em                = $em;
 		$this->productRepository = $productRepository;
+		$this->cache             = $cache;
 	}
 
 	/**
@@ -74,5 +79,48 @@ class ProductService extends ContainerAware
 	public function updateProduct($product)
 	{
 		return $this->getProductFromUrl($product->getUrl());
+	}
+
+	/**
+	 * Check whether a product already exists
+	 *
+	 * @param  Product  $product
+	 * @return boolean
+	 */
+	public function checkProductExists(Product $product)
+	{
+		// Get the cache key specific to the product's shop
+		$key = $this->getProductCacheKey($product);
+
+
+		// Check the cache
+		$cached = $this->cache->getData($key);
+
+		return $cached !== false;
+	}
+
+	/**
+	 * Helper for getting the product cache key
+	 *
+	 * @param  Product  $product
+	 * @return string
+	 */
+	public function getProductCacheKey(Product $product)
+	{
+		return $this->container->get($product->getShop()->getUpdaterName())->getProductCacheKey($product);
+	}
+
+	/**
+	 * Caches the product data
+	 *
+	 * @param  Product  $product
+	 */
+	public function cacheProduct(Product $product)
+	{
+		// Get the cache key specific to the product's shop
+		$key = $this->getProductCacheKey($product);
+
+		// Cache the data
+		$this->cache->setData($key, $product->getJSON());
 	}
 }

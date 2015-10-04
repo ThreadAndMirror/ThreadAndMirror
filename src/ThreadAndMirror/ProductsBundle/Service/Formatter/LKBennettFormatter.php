@@ -7,15 +7,22 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 class LKBennettFormatter extends AbstractFormatter
 {
 	/**
-	 * Post-processing for feed product creation
-	 *
-	 * @param  Product 		$product 	The product to cleanup
+	 * {@inheritdoc}
 	 */
-	public function cleanupFeedProduct(Product $product) 
+	protected function cleanupFeedName(Product $product)
 	{
+		$result = $this
+			->format($product->getName())
+			->replace($product->getBrandName().' ', '')
+			->sheer(' - ', false)
+			->result();
 
+		$product->setName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledUrl(Product $product) 
 	{ 
 		$result = $this
@@ -26,6 +33,9 @@ class LKBennettFormatter extends AbstractFormatter
 		$product->setUrl($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledName(Product $product) 
 	{
 		$result = $this
@@ -36,11 +46,17 @@ class LKBennettFormatter extends AbstractFormatter
 		$product->setName($result);
 	}
 
-	protected function cleanupCrawledBrand(Product $product) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupCrawledBrand(Product $product)
 	{
 
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPid(Product $product) 
 	{ 
 		$result = $this
@@ -52,6 +68,9 @@ class LKBennettFormatter extends AbstractFormatter
 		$product->setPid($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledDescription(Product $product) 
 	{ 
 		$strings = array(
@@ -68,6 +87,9 @@ class LKBennettFormatter extends AbstractFormatter
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledNow(Product $product) 
 	{
 		$result = $this
@@ -79,6 +101,9 @@ class LKBennettFormatter extends AbstractFormatter
 		$product->setNow($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product) 
 	{ 
 		$result = $this
@@ -89,6 +114,9 @@ class LKBennettFormatter extends AbstractFormatter
 		$product->setImages([$result]);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product) 
 	{
 		$result = $this
@@ -98,6 +126,9 @@ class LKBennettFormatter extends AbstractFormatter
 		$product->setPortraits([$result]);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledThumbnails(Product $product) 
 	{
 		$result = $this
@@ -108,6 +139,9 @@ class LKBennettFormatter extends AbstractFormatter
 		$product->setThumbnails([$result]);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledAvailableSizes(Product $product) 
 	{
 		$sizes = $product->getAvailableSizes();
@@ -128,6 +162,9 @@ class LKBennettFormatter extends AbstractFormatter
 		$product->setAvailableSizes($sizes);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledStockedSizes(Product $product) 
 	{ 
 		$sizes = $product->getStockedSizes();
@@ -149,6 +186,9 @@ class LKBennettFormatter extends AbstractFormatter
 		$product->setStockedSizes($sizes);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledStyleWith(Product $product) 
 	{ 
 

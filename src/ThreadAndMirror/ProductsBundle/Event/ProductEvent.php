@@ -7,7 +7,7 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 
 class ProductEvent extends Event
 {
-	const EVENT_ADD = 'product.add';
+	const EVENT_CREATE = 'product.create';
 
 	const EVENT_UPDATE = 'product.update';
 

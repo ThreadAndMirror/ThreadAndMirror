@@ -2,7 +2,7 @@
 
 <div class="product-view" itemscope itemtype="http://schema.org/Product" data-pid="{{ product.id }}">
 	<div class="product-section">
-		<h1 itemprop="name">{{ product.name }}</h1>
+		<h1 itemprop="name">{{ product.brand ? product.brand.name : '' }} {{ product.name }}</h1>
 		<div class="images">
 			{% if product.image is empty %}
 				<img src="{{ product.image }}" height="400" itemprop="image" alt="{{ product.name }}" title="{{ product.name }}"/>
@@ -68,16 +68,14 @@
 					<p>If your size is out of stock, click on it and we'll notify you by e-mail as soon as it comes back in.</p>
 				</div>
 			{% endif %}
-			<div class="description subsection">
-				<h5><span>Details</span></h5>
-				<div itemprop="description">
-					{% if product.description|length > 10 %}
-						{{ product.description|raw }}
-					{% else %}
-						<p>{{ product.name }}</p>
-					{% endif %}
-				</div>
-			</div>
+            {% if product.description is not empty %}
+                <div class="description subsection">
+                    <h5><span>Details</span></h5>
+                    <div itemprop="description">
+                        {{ product.description|raw }}
+                    </div>
+                </div>
+            {%  endif %}
 			<div class="share subsection">
 				<h5><span>Share</span></h5>
 				{{ share.sharePinterest(product.sharer('pinterest')) }}

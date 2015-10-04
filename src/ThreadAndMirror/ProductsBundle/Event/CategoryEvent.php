@@ -7,7 +7,7 @@ use ThreadAndMirror\ProductsBundle\Entity\Category;
 
 class CategoryEvent extends Event
 {
-	const EVENT_ADD = 'category.add';
+	const EVENT_CREATE = 'category.create';
 
 	const EVENT_UPDATE = 'category.update';
 

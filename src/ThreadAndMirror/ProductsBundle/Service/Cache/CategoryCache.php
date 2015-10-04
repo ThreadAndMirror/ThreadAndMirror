@@ -33,7 +33,7 @@ class CategoryCache
 	{
 		$index = implode('.', array(self::ROOT_KEY, self::DATA_KEY, $category->getSlug()));
 
-		$this->cache->save($index, $category->getJson(true), $this->lifetimes[self::DATA_KEY]);
+		$this->cache->save($index, true, $this->lifetimes[self::DATA_KEY]);
 	}
 
 	/**

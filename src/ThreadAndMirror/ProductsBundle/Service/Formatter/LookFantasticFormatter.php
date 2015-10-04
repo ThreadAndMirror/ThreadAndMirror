@@ -6,24 +6,47 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 
 class LookFantasticFormatter extends AbstractFormatter
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupFeedImages(Product $product) 
 	{ 
-		$result = $this->format($product->getImage())->replace('130/130', '600/600')->result();
-		$product->setImages(array($result));
+		$result = $this
+			->format($product->getThumbnail())
+			->replace('img/300/300', 'img/600/600')
+			->result();
+
+		$product->setImages([$result]);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupFeedPortraits(Product $product) 
 	{ 
-		$result = $this->format($product->getImage())->replace('600/600', '300/300')->result();
-		$product->setPortraits(array($result));
+		$result = $this
+			->format($product->getThumbnail())
+			->result();
+
+		$product->setPortraits([$result]);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupFeedThumbnails(Product $product) 
 	{ 
-		$result = $this->format($product->getImage())->replace('600/600', '130/130')->result();
-		$product->setThumbnails(array($result));
+		$result = $this
+			->format($product->getThumbnail())
+			->replace('img/300/300', 'img/130/130')
+			->result();
+
+		$product->setThumbnails([$result]);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledName(Product $product)
 	{
 		$result = $this
@@ -34,6 +57,9 @@ class LookFantasticFormatter extends AbstractFormatter
 		$product->setName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledBrand(Product $product)
 	{
 		$result = $this
@@ -43,6 +69,9 @@ class LookFantasticFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPid(Product $product)
 	{
 		$result = $this
@@ -52,6 +81,9 @@ class LookFantasticFormatter extends AbstractFormatter
 		$product->setPid($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledWas(Product $product)
 	{
 		if ($product->getWas() != null) {
@@ -64,6 +96,9 @@ class LookFantasticFormatter extends AbstractFormatter
 		}
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledDescription(Product $product)
 	{
 		$result = $this
@@ -74,6 +109,9 @@ class LookFantasticFormatter extends AbstractFormatter
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product)
 	{
 		$result = $this
@@ -84,6 +122,9 @@ class LookFantasticFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product)
 	{
 
@@ -94,6 +135,9 @@ class LookFantasticFormatter extends AbstractFormatter
 		$product->setPortraits($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledThumbnails(Product $product)
 	{
 		$result = $this

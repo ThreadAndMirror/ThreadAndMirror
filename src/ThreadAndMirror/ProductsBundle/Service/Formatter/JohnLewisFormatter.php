@@ -7,18 +7,56 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 class JohnLewisFormatter extends AbstractFormatter
 {
 	/**
-	 * Post-processing for feed product creation
-	 *
-	 * @param  Product 		$product 	The product to cleanup
+	 * {@inheritdoc}
 	 */
-	public function cleanupFeedProduct(Product $product) 
+	protected function cleanupFeedImages(Product $product)
 	{
-		$product->setImage(str_replace('fash_product', 'prod_main', $product->getImage()));
-		$product->setThumbnail(str_replace('prod_thmb', 'prod_grid3', $product->getThumbnail()));
+		$result = $this
+			->format($product->getImages())
+			->replace('fash_product', 'prod_main')
+			->result();
 
-		$this->cleanupFeedProductDefaults($product);
+		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedThumbnails(Product $product)
+	{
+		$result = $this
+			->format($product->getThumbnails())
+			->replace('prod_thmb', 'prod_grid3')
+			->result();
+
+		$product->setThumbnails($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedPortraits(Product $product)
+	{
+		$result = $this
+			->format($product->getPortraits())
+			->replace('prod_thmb', 'prod_grid3')
+			->result();
+
+		$product->setPortraits($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedMetaKeywords(Product $product)
+	{
+		// Nuke the weird characters
+		$product->setMetaKeywords('');
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledName(Product $product)
 	{
 		$result = $this
@@ -28,6 +66,9 @@ class JohnLewisFormatter extends AbstractFormatter
 		$product->setName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledBrand(Product $product)
 	{
 		$result = $this
@@ -37,6 +78,9 @@ class JohnLewisFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledCategory(Product $product)
 	{
 		$result = $this
@@ -46,6 +90,9 @@ class JohnLewisFormatter extends AbstractFormatter
 		$product->setCategoryName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPid(Product $product)
 	{
 		$result = $this
@@ -55,6 +102,9 @@ class JohnLewisFormatter extends AbstractFormatter
 		$product->setPid($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledDescription(Product $product)
 	{
 		$result = $this
@@ -66,6 +116,9 @@ class JohnLewisFormatter extends AbstractFormatter
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product)
 	{
 		$result = $this
@@ -75,6 +128,9 @@ class JohnLewisFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product)
 	{
 		$result = $this
@@ -85,6 +141,9 @@ class JohnLewisFormatter extends AbstractFormatter
 		$product->setPortraits($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledThumbnails(Product $product)
 	{
 		$result = $this

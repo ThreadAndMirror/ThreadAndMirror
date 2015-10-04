@@ -5,6 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Stems\SocialBundle\Service\Sharer;
+use ThreadAndMirror\ProductsBundle\Util\StringSanitizer;
 
 /** 
  * @ORM\Table(name="tam_product", indexes={
@@ -77,12 +78,12 @@ class Product
 	protected $uid;
 
 	/** 
-	 * @ORM\Column(type="string", nullable=true)
+	 * @ORM\Column(type="string", nullable=true, length=512)
 	 */
 	protected $url;
 
 	/** 
-	 * @ORM\Column(type="text", nullable=true)
+	 * @ORM\Column(type="text", nullable=true, length=512)
 	 */
 	protected $affiliateUrl;
 
@@ -212,20 +213,30 @@ class Product
 	protected $picks; 
 
 	/** 
-	 * @ORM\Column(type="string", nullable=true)
+	 * @ORM\Column(type="string", nullable=true, length=255)
 	 */
 	protected $metaKeywords;
 
 	/** 
-	 * @ORM\Column(type="string", nullable=true)
+	 * @ORM\Column(type="string", nullable=true, length=255)
 	 */
 	protected $metaDescription;
 
-	public function __construct()
+	/**
+	 * @ORM\Column(type="string", nullable=true, length=255)
+	 */
+	protected $metaData;
+
+	public function __construct($data = null)
 	{
 		$this->added   = new \DateTime;
 		$this->updated = new \DateTime;
 		$this->checked = new \DateTime;
+
+		// Instantiate the product using product data
+		if ($data !== null) {
+			// @todo
+		}
 	}
 
 	/**
@@ -256,7 +267,6 @@ class Product
 		$this->stockedSizes   = $product->getStockedSizes();
 		$this->styleWith   	  = $product->getStyleWith();
 
-
 		return $this;
 	}
 
@@ -265,24 +275,13 @@ class Product
 	 */
 	public function getSlug()
 	{
-		$slug = $this->name;
-
-		// replace non letter or digits by -
-		$slug = preg_replace('~[^\\pL\d]+~u', '-', $slug);
-
-		// trim
-		$slug = trim($slug, '-');
-
-		// transliterate
-		$slug = iconv('utf-8', 'us-ascii//TRANSLIT', $slug);
-
-		// lowercase
-		$slug = strtolower($slug);
-
-		// remove unwanted characters
-		$slug = preg_replace('~[^-\w]+~', '', $slug);
+		$slug = StringSanitizer::slugify($this->name);
 
 		$slug .= '-'.$this->id;
+
+		if ($this->getBrand() !== null) {
+			$slug = $this->getBrand()->getSlug().'-'.$slug;
+		}
 
 		return $slug;
 	}
@@ -480,12 +479,7 @@ class Product
 		if ($this->description === null) {
 			return $this->shortDescription;
 		} else {
-			// Add p tags if they don't exist, for now.
-			if (stristr($this->description, '<p>') !== false) {
-				return $this->description;
-			} else {
-				return '<p>'.$this->description.'<p>';
-			}
+			return $this->description;
 		}
 			
 	}
@@ -1295,5 +1289,40 @@ class Product
 		];
 
 		return json_encode($json);
+	}
+
+	/**
+	 * Get the cache key of the product
+	 *
+	 * @return string
+	 */
+	public function getCacheKey()
+	{
+		if ($this->getShop()->hasReliablePid()) {
+			return implode('-', $this->getShop()->getSlug(), $this->getPid());
+		}
+	}
+
+	/**
+	 * Set meta data
+	 *
+	 * @param  string    $metaData
+	 * @return Product
+	 */
+	public function setMetaData($metaData)
+	{
+		$this->metaData = $metaData;
+
+		return $this;
+	}
+
+	/**
+	 * Get metaData
+	 *
+	 * @return string
+	 */
+	public function getMetaData()
+	{
+		return $this->metaData;
 	}
 }

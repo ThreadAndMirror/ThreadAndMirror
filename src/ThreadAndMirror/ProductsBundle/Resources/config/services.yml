@@ -1,8 +1,5 @@
 services:
 
-    stems.siren.saleparser:
-       class: ThreadAndMirror\ProductsBundle\Service\SaleParser
-
     # Affiliates
 
     threadandmirror.api.affiliate_window:
@@ -19,10 +16,12 @@ services:
         class: ThreadAndMirror\ProductsBundle\Service\Affiliate\AffiliateWindowService
         arguments: 
             - @threadandmirror.api.affiliate_window
-            - @threadandmirror.products.repository.product
             - @doctrine.orm.entity_manager
             - @logger
-            - { download_feed: @old_sound_rabbit_mq.download_feed_affiliate_window_producer }
+            - @threadandmirror.products.service.product
+            - @service_container
+            - @event_dispatcher
+            - { download_feed: @old_sound_rabbit_mq.download_feed_affiliate_window_producer, process_feed: @old_sound_rabbit_mq.process_feed_affiliate_window_producer }
         tags:
             - { name: monolog.logger, channel: product_feeds }
 
@@ -41,6 +40,7 @@ services:
         arguments:
             - @doctrine.orm.entity_manager
             - @threadandmirror.products.repository.product
+            - @threadandmirror.products.cache.product
 
     threadandmirror.products.service.brand:
         class: ThreadAndMirror\ProductsBundle\Service\BrandService
@@ -56,17 +56,39 @@ services:
 
     # Caches
 
+    threadandmirror.products.cache.product:
+        class: ThreadAndMirror\ProductsBundle\Service\Cache\ProductCache
+        arguments:
+            - @doctrine_cache.providers.redis_cache
+            - { data: 86600 }
+
     threadandmirror.products.cache.brand:
         class: ThreadAndMirror\ProductsBundle\Service\Cache\BrandCache
         arguments:
             - @doctrine_cache.providers.redis_cache
-            - [ data: 86600 ]
+            - { data: 86600 }
 
     threadandmirror.products.cache.category:
-            class: ThreadAndMirror\ProductsBundle\Service\Cache\CategoryCache
-            arguments:
-                - @doctrine_cache.providers.redis_cache
-                - [ data: 86600 ]
+        class: ThreadAndMirror\ProductsBundle\Service\Cache\CategoryCache
+        arguments:
+            - @doctrine_cache.providers.redis_cache
+            - { data: 86600 }
+
+    # Listeners
+
+    threadandmirror.products.listener.product:
+        class: ThreadAndMirror\ProductsBundle\EventListener\ProductListener
+        arguments:
+            - @threadandmirror.products.service.product
+        tags:
+            - { name: kernel.event_listener, event: product.create, method: onCreate }
+
+    threadandmirror.products.listener.brand:
+        class: ThreadAndMirror\ProductsBundle\EventListener\BrandListener
+        arguments:
+            - @threadandmirror.products.service.brand
+        tags:
+            - { name: kernel.event_listener, event: brand.create, method: onCreate }
 
     # Repositories
 
@@ -95,6 +117,14 @@ services:
 
     threadandmirror.products.consumer.download_feed_affiliate_window:
         class: ThreadAndMirror\ProductsBundle\Service\Consumer\DownloadFeedAffiliateWindowConsumer
+        arguments:
+            - @threadandmirror.affiliate.affiliate_window
+            - @logger
+        tags:
+            - { name: monolog.logger, channel: product_feeds }
+
+    threadandmirror.products.consumer.process_feed_affiliate_window:
+        class: ThreadAndMirror\ProductsBundle\Service\Consumer\ProcessFeedAffiliateWindowConsumer
         arguments:
             - @threadandmirror.affiliate.affiliate_window
             - @logger
@@ -290,6 +320,17 @@ services:
             - @threadandmirror.products.service.brand
             - @threadandmirror.products.service.category
 
+    threadandmirror.products.updater.escentual:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\EscentualUpdater
+        arguments:
+            - @threadandmirror.products.crawler.escentual
+            - @threadandmirror.products.formatter.escentual
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.affiliate_window
+            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.category
+
     threadandmirror.products.updater.look_fantastic:
         class: ThreadAndMirror\ProductsBundle\Service\Updater\LookFantasticUpdater
         arguments: 
@@ -423,6 +464,10 @@ services:
         class: ThreadAndMirror\ProductsBundle\Service\Crawler\JohnLewisCrawler
         parent: threadandmirror.products.crawler.base
 
+    threadandmirror.products.crawler.escentual:
+        class: ThreadAndMirror\ProductsBundle\Service\Crawler\EscentualCrawler
+        parent: threadandmirror.products.crawler.base
+
     threadandmirror.products.crawler.look_fantastic:
         class: ThreadAndMirror\ProductsBundle\Service\Crawler\LookFantasticCrawler
         parent: threadandmirror.products.crawler.base
@@ -514,6 +559,10 @@ services:
 
     threadandmirror.products.formatter.john_lewis:
         class: ThreadAndMirror\ProductsBundle\Service\Formatter\JohnLewisFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.escentual:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\EscentualFormatter
         parent: threadandmirror.products.formatter.base
 
     threadandmirror.products.formatter.look_fantastic:

@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ThreadAndMirror\ProductsBundle\Util\Slugifier;
+use ThreadAndMirror\ProductsBundle\Util\StringSanitizer;
 
 /** 
  * @ORM\Table(name="tam_brand", indexes={
@@ -137,24 +139,7 @@ class Brand
 	 */
 	public function guessSlug()
 	{
-		$text = $this->getName();
-
-		// replace non letter or digits by -
-		$text = preg_replace('~[^\\pL\d]+~u', '-', $text);
-
-		// trim
-		$text = trim($text, '-');
-
-		// transliterate
-		$text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-
-		// lowercase
-		$text = strtolower($text);
-
-		// remove unwanted characters
-		$text = preg_replace('~[^-\w]+~', '', $text);
-
-		return $text;
+		return StringSanitizer::slugify($this->getName());
 	}
 
     /**

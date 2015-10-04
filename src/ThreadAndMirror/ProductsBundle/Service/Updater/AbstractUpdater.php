@@ -3,6 +3,7 @@
 namespace ThreadAndMirror\ProductsBundle\Service\Updater;
 
 use ThreadAndMirror\ProductsBundle\Entity\Category;
+use ThreadAndMirror\ProductsBundle\Entity\Shop;
 use ThreadAndMirror\ProductsBundle\Event\BrandEvent;
 use ThreadAndMirror\ProductsBundle\Event\CategoryEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductNewSizesInStockEvent;
@@ -138,33 +139,38 @@ abstract class AbstractUpdater implements UpdaterInterface
 	 * For creating a new product from parsed feed data
 	 *
 	 * @param  array 	$data  		The product data
+	 * @param  Shop     $data       The shop the data belongs to
 	 */
-	public function createProductFromFeed($data)
+	public function createProductFromFeed($data, $shop)
 	{
 		// Instantiate a skeleton product from the data
-		$new = new Product();
+		$product = new Product();
 
-		$new->setUrl($data['url']);
-		$new->setAffiliateUrl($data['affiliate_url']);
-		$new->setName($data['name']);
-		$new->setBrandName($data['brand']);
-		$new->setCategoryName($data['category_name']);
-		$new->setPid($data['pid']);
-		$new->setDescription($data['description']);
-		$new->setShortDescription($data['short_description']);
-		$new->setNow($data['now']);
-		$new->setWas($data['was']);
-		$new->setImages($data['images']);
-		$new->setPortraits($data['portraits']);
-		$new->setThumbnails($data['thumbnails']);
-		$new->setMetaKeywords($data['meta_keywords']);
+		$product->setUrl($data['url']);
+		$product->setAffiliateUrl($data['affiliate_url']);
+		$product->setName($data['name']);
+		$product->setBrandName($data['brand']);
+		$product->setCategoryName($data['category_name']);
+		$product->setPid($data['pid']);
+		$product->setDescription($data['description']);
+		$product->setShortDescription($data['short_description']);
+		$product->setNow($data['now']);
+		$product->setWas($data['was']);
+		$product->setImages($data['images']);
+		$product->setPortraits($data['portraits']);
+		$product->setThumbnails($data['thumbnails']);
+		$product->setMetaKeywords($data['meta_keywords']);
+		$product->setMetaData(json_encode($data['meta_data']));
+		$product->setShop($shop);
 
 		// Tidy up the feed data
-        $this->formatter->cleanupFeedProduct($new);
+        $this->formatter->cleanupFeedProduct($product);
 
-        // @todo Do some post-processing shit with prices etc. here?
+		// Set the brand and categories from their names
+		$this->updateBrandFromBrandName($product);
+		$this->updateCategoryFromCategoryName($product);
 
-		return $new;
+		return $product;
 	}
 
 	/**
@@ -387,7 +393,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 			$this->em->flush();
 			$product->setCategory($category);
 
-			$this->dispatcher->dispatch(CategoryEvent::EVENT_ADD, new CategoryEvent($category));
+			$this->dispatcher->dispatch(CategoryEvent::EVENT_CREATE, new CategoryEvent($category));
 		}
 	}
 
@@ -466,5 +472,16 @@ abstract class AbstractUpdater implements UpdaterInterface
 		if (stristr($product->getUrl(), 'awin1.com')) {
 			$product->setUrl($new->getUrl());
 		}
+	}
+
+	/**
+	 * Generate the unique cache key for the product, defaulting to shop slug & product id
+	 *
+	 * @param  Product  $product
+	 * @return string
+	 */
+	public function getProductCacheKey(Product $product)
+	{
+		return implode('.', [$product->getShop()->getSlug(), $product->getPid()]);
 	}
 }

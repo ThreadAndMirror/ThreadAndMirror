@@ -4,20 +4,29 @@ namespace ThreadAndMirror\ProductsBundle\Service\Affiliate;
 
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Entity\Category;
 use ThreadAndMirror\ProductsBundle\Entity\Offer;
 use ThreadAndMirror\ProductsBundle\Definition\AffiliateInterface;
 use ThreadAndMirror\ProductsBundle\Definition\UpdaterInterface;
+use ThreadAndMirror\ProductsBundle\Event\ProductEvent;
 use ThreadAndMirror\ProductsBundle\Service\Api\AffiliateWindowApiService;
 use ThreadAndMirror\ProductsBundle\Repository\ProductRepository;
 use ThreadAndMirror\ProductsBundle\Service\Formatter\AbstractFormatter;
+use ThreadAndMirror\ProductsBundle\Service\Updater\AbstractUpdater;
 use Doctrine\ORM\EntityManager;
+use ThreadAndMirror\ProductsBundle\Service\ProductService;
 
-class AffiliateWindowService implements AffiliateInterface 
+/**
+ * Class AffiliateWindowService
+ * @package ThreadAndMirror\ProductsBundle
+ *
+ */
+class AffiliateWindowService implements AffiliateInterface
 {
-	/** @var ProductRepository */
-	protected $productRepository;
+	const KEY_NAME = 'affiliate_window';
 
 	/** @var AffiliateWindowApiService */
 	protected $api;
@@ -25,36 +34,50 @@ class AffiliateWindowService implements AffiliateInterface
 	/** @var EntityManager */
 	protected $em;
 
-	/** @var AbstractUpdater */
-	protected $updater;
-
 	/** @var Producer[] */
 	protected $producers;
 
 	/** @var Logger */
 	protected $logger;
 
+	/** @var ProductService */
+	protected $productService;
+
+	/** @var ContainerInterface */
+	protected $container;
+
+	/** @var EventDispatcherInterface */
+	protected $dispatcher;
+
 	/** @var array */
 	protected $categories = [
 		'fashion' => [595,149,135,163,168,159,169,161,167,170,194,141,205,198,206,203,208,199,204,201,546,547],
-		'beauty'  => [110,111,114]
+		'beauty'  => [111,114]
 	];
 
 	/** @var array */
 	protected $areas = ['fashion', 'beauty'];
 
+	/** @var array */
+	protected $parameters;
+
 	public function __construct(
 		AffiliateWindowApiService $api,
-		ProductRepository $productRepository,
 		EntityManager $em,
 		Logger $logger,
+		ProductService $productService,
+		ContainerInterface $container,
+		EventDispatcherInterface $dispatcher,
 		$producers
 	) {
-		$this->productRepository = $productRepository;
 		$this->api 				 = $api;
 		$this->em 				 = $em;
 		$this->logger            = $logger;
+		$this->productService    = $productService;
+		$this->container         = $container;
 		$this->producers         = $producers;
+		$this->dispatcher        = $dispatcher;
+		$this->parameters        = ['process_chunk_size' => 100];
 	}
 
 	/**
@@ -104,70 +127,130 @@ class AffiliateWindowService implements AffiliateInterface
 	}
 
 	/**
-	 * Parse the latest feed files for a shop add new products
+	 * Add feed processing chunks to the queue
+	 *
+	 * @param  string   $area
+	 * @param  string   $category
 	 */
-	public function createProductsFromFeed($shop)
+	public function queueFeedFileProcessing($area = null, $category = null)
 	{
-		// Download feeds for each area
-		foreach ($this->areas as $area) {
+		// Filter categories
+		if ($category !== null) {
+			$categories = [$category];
+		} else if ($area !== null) {
+			$categories = $this->categories[$area];
+		} else {
+			$categories = array_merge($this->categories['fashion'], $this->categories['beauty']);
+		}
+
+		// Download feeds for each category
+		foreach ($categories as $category) {
 
 			// Load the CSV data from the feed file
-			$csv = fopen(__DIR__.'/../../../../../feeds/affiliate_window/'.$area.'.csv', 'r');
+			$filename = __DIR__.'/../../../../../feeds/'.self::KEY_NAME.'/'.$category.'.csv';
 
-			// Get the existing product IDs for the shop
-			$existing = $this->productRepository->findExistingPidsByMerchant($shop->getAffiliateId());
+			if (!file_exists($filename)) {
+				continue;
+			}
+
+			$csv = fopen($filename, 'r');
 
 			// Skip the first line
-			$data = fgetcsv($csv, 10000, ',');
+			$lineItem = fgetcsv($csv, 10000, ',');
 
-			// Start a counter to add new products in chunks
+			// Start a counter to queue the product data in chunks
 			$count = 0;
+			$data  = [];
 
-			while (($data = fgetcsv($csv, 10000, ',')) !== false) {
+			while (($lineItem = fgetcsv($csv, 10000, ',')) !== false) {
 
-				// Only handle if the product belongs to the relevant shop
-				if ($data[11] == $shop->getAffiliateId()) {
+				// Prepare homogenized version of the data for parsing
+				$lineItem = $this->homogeniseProductData($lineItem);
 
-					// Perform a basic PID check before processing
-					if (!in_array($data[1], $existing)) {
+				// Add to the data array
+				$data[] = $lineItem;
+				$count++;
 
-						// Prepare homogenized version of the data for parsing
-						$data = $this->homogeniseProductData($data);
+				if ($count == $this->parameters['process_chunk_size']) {
 
-						// Create and format the product data into an entity
-						$product = $this->updater->createProductFromFeed($data);
+					$area = in_array($category, $this->categories['fashion']) ? 'fashion' : 'beauty';
 
-						// Set the remaining product data
-						$product->setShop($shop);
-						$product->setArea($area);
-						$this->updater->updateCategoryFromAffiliateCategoryId($product, 'affiliateWindowId');
-						$this->updater->updateBrandFromBrandName($product);
+					// Add message to the queue for processing
+					$this->producers['process_feed']->publish(json_encode([
+						'category' => $category,
+						'area'     => $area,
+						'data'     => $data
+					]));
 
-						// @todo check for duplicates with name etc. here
-						// Create uid field?
+					$count = 0;
+					$data  = [];
+				}
+			}
+		}
+	}
 
-						$this->em->persist($product);
+	/**
+	 * Parse the latest feed files for a shop add new products
+	 *
+	 * @param  string   $area
+	 * @param  string   $category
+	 * @param  array    $data
+	 */
+	public function createProductsFromFeedData($area, $category, $data)
+	{
+		// Get array of shops with merchant ids referencing product ids
+		$shops = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(['affiliateName' => 'affiliate_window']);
 
-						$existing[] = $product->getPid();
-						$count++;
+		foreach ($data as $datum) {
 
-						echo 'Added product '.$product->getPid().' for shop '.$shop->getName().PHP_EOL;
+			$owner = null;
 
-						if ($count == 1000) {
-							$this->em->flush();
-							$count = 0;
-						}
-					} else {
-						echo 'Ignoring existing product '.$data[1].PHP_EOL;
-					}
+			// Get the relevant shop and updater for the product
+			foreach ($shops as $shop) {
+				if ($shop->getAffiliateId() == $datum['merchant_id']) {
+					/** @var AbstractUpdater $updater */
+					$updater = $this->container->get($shop->getUpdaterName());
+					$owner   = $shop;
+					break;
 				}
 			}
 
-			$this->em->flush();
+			// No shop found for some reason, so log and skip this product
+			if ($owner === null) {
+				$this->logger->info('No shop found for product with follow data, skipping: '.json_encode($datum));
+				continue;
+			}
 
-			// Close the file
-			fclose($csv);
+			// @todo skipper for testing, remove
+			if (!in_array($owner->getAffiliateId(), [6009])) {
+				echo $owner->getAffiliateId().'.';
+				continue;
+			} else {
+				echo 'Processing: '.memory_get_usage().'B * ';
+			}
+
+			// Create the product from the data
+			$product = $updater->createProductFromFeed($datum, $owner);
+
+			// Check whether the product already exists
+			if ($this->productService->checkProductExists($product)) {
+				continue;
+			}
+
+			// Set the remaining product data
+			$product->setArea($area);
+
+			// Persist if doesn't exist
+			if (!$this->productService->checkProductExists($product)) {
+				$this->em->persist($product);
+				$this->logger->info('Product added from feed: '.$this->productService->getProductCacheKey($product));
+				$this->dispatcher->dispatch(ProductEvent::EVENT_CREATE, new ProductEvent($product));
+			}
+
+			unset($product);
 		}
+
+		$this->em->flush();
 	}
 
 	/**
@@ -178,22 +261,26 @@ class AffiliateWindowService implements AffiliateInterface
 	 */
 	public function homogeniseProductData($data)
 	{
-		return array(
-			'category_name' 	=> $data[13],
-			'pid' 				=> $data[1],
-			'name' 				=> $data[7],
-			'description' 		=> $data[6],
-			'short_description' => $data[6],
-			'brand' 			=> $data[24],
-			'url' 				=> $data[3],
-			'affiliate_url' 	=> $data[3],
-			'now' 				=> $data[17],
-			'was' 				=> $data[17],
-			'meta_keywords' 	=> $data[32],
-			'thumbnails' 		=> array($data[26], $data[25]),
-			'portraits' 		=> array($data[26], $data[25]),
-			'images' 			=> array($data[4], $data[9])
-		);
+		return [
+			'category_name'       => $data[12],
+			'pid'                 => $data[1],
+			'name'                => $data[7],
+			'description'         => $data[6],
+			'short_description'   => $data[6],
+			'brand'               => $data[24],
+			'url'                 => $data[8],
+			'affiliate_url'       => $data[3],
+			'now'                 => $data[17],
+			'was'                 => $data[17],
+			'meta_keywords'       => $data[32],
+			'thumbnails'          => [$data[26], $data[25]],
+			'portraits'           => [$data[26], $data[25]],
+			'images'              => [$data[4], $data[9]],
+			'merchant_id'         => $data[11],
+			'meta_data'           => [
+				'sku'   => $data[30]
+			]
+		];
 	}
 
 	/**
@@ -226,7 +313,7 @@ class AffiliateWindowService implements AffiliateInterface
 	{ 
 		$data = $this->api->getMerchantList();
 
-		$shops = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('affiliateName' => 'affiliate_window'));
+		$shops = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(['affiliateName' => 'affiliate_window']);
 
 		foreach ($shops as $shop) {
 			foreach ($data->oMerchant as $merchant) {

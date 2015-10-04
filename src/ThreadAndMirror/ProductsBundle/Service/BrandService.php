@@ -24,7 +24,7 @@ class BrandService
 	/**
 	 * Get the ID if the brand already exists
 	 *
-	 * @param  string        $brand
+	 * @param  string        $name
 	 * @return string|null
 	 */
 	public function getExistingBrandId($name)
@@ -43,5 +43,15 @@ class BrandService
 		$existing = $this->brandRepository->findOneBy(['slug' => $brand->guessSlug()]);
 
 		return $existing !== null ? $existing->getId() : null;
+	}
+
+	/**
+	 * Caches the brand
+	 *
+	 * @param  Brand    $brand
+	 */
+	public function cacheBrand(Brand $brand)
+	{
+		$this->cache->setData($brand->getSlug(), $brand->getJson());
 	}
 }

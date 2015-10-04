@@ -22,7 +22,7 @@ class AsosCrawler extends AbstractCrawler
 
 	protected function getPid(DomCrawler $crawler) 
 	{
-		return null;
+		return $this->getTextFromElement($crawler, '#CatwalkInventoryId');
 	}
 
 	protected function getDescription(DomCrawler $crawler) 

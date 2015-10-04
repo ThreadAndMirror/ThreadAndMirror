@@ -44,6 +44,11 @@ class Shop
      */
     protected $url;
 
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	protected $hasReliablePid = true;
+
     /** 
      * @ORM\Column(type="string")
      */
@@ -674,7 +679,7 @@ class Shop
     /**
      * Set feedParsed
      *
-     * @param datetime $feedParsed
+     * @param DateTime $feedParsed
      * @return Shop
      */
     public function setFeedParsed($feedParsed)
@@ -723,4 +728,38 @@ class Shop
     {
         return 'threadandmirror.products.formatter.'.$this->serviceName;
     }
+
+	/**
+	 * Set hasReliablePid
+	 *
+	 * @param boolean $hasReliablePid
+	 * @return Shop
+	 */
+	public function setHasReliablePid($hasReliablePid)
+	{
+		$this->hasReliablePid = $hasReliablePid;
+
+		return $this;
+	}
+
+	/**
+	 * Get hasReliablePid
+	 *
+	 * @return boolean
+	 */
+	public function getHasReliablePid()
+	{
+		return $this->hasReliablePid;
+	}
+
+	/**
+	 * Whether the shop's product IDs can be relied on the denote unique products
+	 *
+	 * @return boolean
+	 */
+	public function hasReliablePid()
+	{
+		return $this->hasReliablePid;
+	}
+
 }

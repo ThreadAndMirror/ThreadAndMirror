@@ -5,10 +5,11 @@ namespace ThreadAndMirror\ProductsBundle\Service\Cache;
 
 use Doctrine\Common\Cache\CacheProvider;
 use ThreadAndMirror\ProductsBundle\Entity\Brand;
+use ThreadAndMirror\ProductsBundle\Entity\Product;
 
-class BrandCache
+class ProductCache
 {
-	const ROOT_KEY = 'brand';
+	const ROOT_KEY = 'product';
 
 	const DATA_KEY = 'data';
 
@@ -25,40 +26,41 @@ class BrandCache
 	}
 
 	/**
-	 * Cache the data for a brand
+	 * Cache the data for a product
 	 *
-	 * @param  array      $data
+	 * @param  string       $key
+	 * @param  array        $data
 	 */
-	public function setData($slug, $data)
+	public function setData($key, $data)
 	{
-		$index = implode('.', array(self::ROOT_KEY, self::DATA_KEY, $slug));
+		$index = implode('.', array(self::ROOT_KEY, self::DATA_KEY, $key));
 
 		$this->cache->save($index, json_encode($data), $this->lifetimes[self::DATA_KEY]);
 	}
 
 	/**
-	 * Get cached data for the brand
+	 * Get cached data for the product
 	 *
-	 * @param  string           $slug
+	 * @param  string            $key
 	 * @return array|false
 	 */
-	public function getData($slug)
+	public function getData($key)
 	{
-		$index = implode('.', array(self::ROOT_KEY, self::DATA_KEY, $slug));
+		$index = implode('.', array(self::ROOT_KEY, self::DATA_KEY, $key));
 
 		// Return the cache value
 		return $this->cache->fetch($index) !== false ? json_decode($this->cache->fetch($index), true) : false;
 	}
 
 	/**
-	 * Whether cache exists for the brand
+	 * Whether cache exists for the product
 	 *
-	 * @param  string           $slug
+	 * @param  string           $key
 	 * @return boolean
 	 */
-	public function exists($slug)
+	public function exists($key)
 	{
-		$index = implode('.', array(self::ROOT_KEY, self::DATA_KEY, $slug));
+		$index = implode('.', array(self::ROOT_KEY, self::DATA_KEY, $key));
 
 		// Return the cache value
 		return $this->cache->fetch($index) === false ? false : true;
