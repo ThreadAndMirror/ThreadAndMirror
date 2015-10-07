@@ -89,8 +89,9 @@ class AffiliateWindowService implements AffiliateInterface
 		foreach ($this->areas as $area) {
 			foreach ($this->categories[$area] as $category) {
 				$this->producers['download_feed']->publish(json_encode([
-					'category' => $category,
-					'area'     => $area
+					'affiliate' => self::KEY_NAME,
+					'category'  => $category,
+					'area'      => $area
 				]));
 			}
 		}
@@ -196,7 +197,7 @@ class AffiliateWindowService implements AffiliateInterface
 	 * @param  string   $category
 	 * @param  array    $data
 	 */
-	public function createProductsFromFeedData($area, $category, $data)
+	public function createProductsFromFeedData($data, $area, $category)
 	{
 		// Get array of shops with merchant ids referencing product ids
 		$shops = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(['affiliateName' => 'affiliate_window']);

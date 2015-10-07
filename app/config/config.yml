@@ -401,20 +401,20 @@ old_sound_rabbit_mq:
             # requires php-amqplib v2.4.1+
             heartbeat: 0
     producers:
-        download_feed_affiliate_window:
+        download_feed:
             connection:       default
-            exchange_options: { name: 'download-feed-affiliate-window', type: direct }
-        process_feed_affiliate_window:
+            exchange_options: { name: 'download-feed', type: direct }
+        process_feed:
             connection:       default
-            exchange_options: { name: 'process-feed-affiliate-window', type: direct }
+            exchange_options: { name: 'process-feed', type: direct }
     consumers:
-        download_feed_affiliate_window:
+        download_feed:
             connection:       default
-            exchange_options: { name: 'download-feed-affiliate-window', type: direct }
-            queue_options:    { name: 'download-feed-affiliate-window' }
-            callback:         'threadandmirror.products.consumer.download_feed_affiliate_window'
-        process_feed_affiliate_window:
+            exchange_options: { name: 'download-feed', type: direct }
+            queue_options:    { name: 'download-feed' }
+            callback:         'threadandmirror.products.consumer.download_feed'
+        process_feed:
             connection:       default
-            exchange_options: { name: 'process-feed-affiliate-window', type: direct }
-            queue_options:    { name: 'process-feed-affiliate-window' }
-            callback:         'threadandmirror.products.consumer.process_feed_affiliate_window'
+            exchange_options: { name: 'process-feed', type: direct }
+            queue_options:    { name: 'process-feed' }
+            callback:         'threadandmirror.products.consumer.process_feed'

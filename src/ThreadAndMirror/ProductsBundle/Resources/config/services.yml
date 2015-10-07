@@ -21,15 +21,22 @@ services:
             - @threadandmirror.products.service.product
             - @service_container
             - @event_dispatcher
-            - { download_feed: @old_sound_rabbit_mq.download_feed_affiliate_window_producer, process_feed: @old_sound_rabbit_mq.process_feed_affiliate_window_producer }
+            - { download_feed: @old_sound_rabbit_mq.download_feed_producer, process_feed: @old_sound_rabbit_mq.process_feed_producer }
         tags:
             - { name: monolog.logger, channel: product_feeds }
 
     threadandmirror.affiliate.linkshare:
         class: ThreadAndMirror\ProductsBundle\Service\Affiliate\LinkshareService
         arguments: 
-            - @buzz
-            - @doctrine.orm.entity_manager
+           - @ijanki_ftp
+           - @doctrine.orm.entity_manager
+           - @logger
+           - @threadandmirror.products.service.product
+           - @service_container
+           - @event_dispatcher
+           - { download_feed: @old_sound_rabbit_mq.download_feed_producer, process_feed: @old_sound_rabbit_mq.process_feed_producer }
+        tags:
+           - { name: monolog.logger, channel: product_feeds }
 
     # Manager Services
 
@@ -115,18 +122,20 @@ services:
 
     # Consumers
 
-    threadandmirror.products.consumer.download_feed_affiliate_window:
-        class: ThreadAndMirror\ProductsBundle\Service\Consumer\DownloadFeedAffiliateWindowConsumer
+    threadandmirror.products.consumer.download_feed:
+        class: ThreadAndMirror\ProductsBundle\Service\Consumer\DownloadFeedConsumer
         arguments:
             - @threadandmirror.affiliate.affiliate_window
+            - @threadandmirror.affiliate.linkshare
             - @logger
         tags:
             - { name: monolog.logger, channel: product_feeds }
 
-    threadandmirror.products.consumer.process_feed_affiliate_window:
-        class: ThreadAndMirror\ProductsBundle\Service\Consumer\ProcessFeedAffiliateWindowConsumer
+    threadandmirror.products.consumer.process_feed:
+        class: ThreadAndMirror\ProductsBundle\Service\Consumer\ProcessFeedConsumer
         arguments:
             - @threadandmirror.affiliate.affiliate_window
+            - @threadandmirror.affiliate.linkshare
             - @logger
         tags:
             - { name: monolog.logger, channel: product_feeds }
