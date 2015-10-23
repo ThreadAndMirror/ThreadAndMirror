@@ -77,7 +77,7 @@ class Linkshare
 			if ($product->attributeClass->Gender != 'Male') {
 
 				if (!in_array($pid, $existingPids)) {
-				
+
 					$entity = new Product();
 					$entity->setPid($pid);
 					$entity->setShop($this->shop);
@@ -117,7 +117,7 @@ class Linkshare
 
 					// seo bits
 					$entity->setMetaDescription($product->description->short);
-					
+
 					$keywords = explode('~~', $product->keywords);
 					$combinedKeywords = '';
 
@@ -155,7 +155,7 @@ class Linkshare
 							$existingProduct->setUpdated(new \DateTime());
 							$alert = new AlertNowOnSale($existingProduct);
 							$this->em->persist($alert);
-						
+
 						// update and alert if the sale price has changed further
 						} else if ($sale != $existingProduct->getNow()) {
 							$existingProduct->setUpdated(new \DateTime());
@@ -164,7 +164,7 @@ class Linkshare
 							$alert = new AlertFurtherPriceChange($existingProduct, $previousPrice);
 							$this->em->persist($alert);
 						}
-			
+
 						$existingProduct->setWas($retail);
 						$existingProduct->setNow($sale);
 					}

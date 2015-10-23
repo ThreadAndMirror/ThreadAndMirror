@@ -55,13 +55,21 @@ class Category
      */
     protected $area;
 
-    public function __construct($name = null)
-    {
-        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+	/**
+	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
+	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 */
+	protected $parent = null;
 
-	    if ($name !== null) {
-		    $this->name = $name;
-	    }
+	/**
+	 * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+	 */
+	protected $children;
+
+	public function __construct()
+    {
+        $this->products = new ArrayCollection();
+	    $this->children = new ArrayCollection();
     }
 
     /**
@@ -120,16 +128,6 @@ class Category
         return $this->slug;
     }
 
-	/**
-	 * What the brands slug is expected to be like, based on it's name
-	 *
-	 * @return string
-	 */
-	public function guessSlug()
-	{
-		return StringSanitizer::slugify($this->getName());
-	}
-
     /**
      * Set affiliateWindowId
      *
@@ -156,10 +154,10 @@ class Category
     /**
      * Add products
      *
-     * @param \ThreadAndMirror\ProductsBundle\Entity\Product $products
+     * @param Product $products
      * @return Category
      */
-    public function addProduct(\ThreadAndMirror\ProductsBundle\Entity\Product $products)
+    public function addProduct(Product $products)
     {
         $this->products[] = $products;
 
@@ -169,9 +167,9 @@ class Category
     /**
      * Remove products
      *
-     * @param \ThreadAndMirror\ProductsBundle\Entity\Product $products
+     * @param Product $products
      */
-    public function removeProduct(\ThreadAndMirror\ProductsBundle\Entity\Product $products)
+    public function removeProduct(Product $products)
     {
         $this->products->removeElement($products);
     }
@@ -179,7 +177,7 @@ class Category
     /**
      * Get products
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return ArrayCollection
      */
     public function getProducts()
     {
@@ -208,4 +206,53 @@ class Category
     {
         return $this->area;
     }
+
+	/**
+	 * @return Category
+	 */
+	public function getParent()
+	{
+		return $this->parent;
+	}
+
+	/**
+	 * @param  Category     $parent
+	 */
+	public function setParent(Category $parent)
+	{
+		$this->parent = $parent;
+	}
+
+	/**
+	 * Add products
+	 *
+	 * @param  Category     $child
+	 * @return Category
+	 */
+	public function addChild(Category $child)
+	{
+		$this->children[] = $child;
+
+		return $this;
+	}
+
+	/**
+	 * Remove products
+	 *
+	 * @param  Category     $child
+	 */
+	public function removeChild(Category $child)
+	{
+		$this->children->removeElement($child);
+	}
+
+	/**
+	 * Get products
+	 *
+	 * @return ArrayCollection
+	 */
+	public function getChildren()
+	{
+		return $this->children;
+	}
 }

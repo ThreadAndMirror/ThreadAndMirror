@@ -6,6 +6,22 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 
 class TheOutnetFormatter extends AbstractFormatter
 {
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedUrl(Product $product)
+	{
+		$result = $this
+			->format($product->getUrl())
+			->sheer('murl=')
+			->result();
+
+		$product->setUrl(rawurldecode($result));
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledName(Product $product)
 	{
 		$result = $this
@@ -16,6 +32,9 @@ class TheOutnetFormatter extends AbstractFormatter
 		$product->setName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledBrand(Product $product)
 	{
 		$result = $this
@@ -26,6 +45,9 @@ class TheOutnetFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPid(Product $product)
 	{
 		$result = $this
@@ -35,6 +57,9 @@ class TheOutnetFormatter extends AbstractFormatter
 		$product->setPid($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledDescription(Product $product)
 	{
 		$result = $this
@@ -45,6 +70,9 @@ class TheOutnetFormatter extends AbstractFormatter
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product)
 	{
 		$result = $this
@@ -56,6 +84,9 @@ class TheOutnetFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product)
 	{
 
@@ -68,6 +99,9 @@ class TheOutnetFormatter extends AbstractFormatter
 		$product->setPortraits($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledThumbnails(Product $product)
 	{
 		$result = $this
@@ -78,6 +112,9 @@ class TheOutnetFormatter extends AbstractFormatter
 		$product->setThumbnails($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledAvailableSizes(Product $product)
 	{
 		$result = $this
@@ -88,6 +125,9 @@ class TheOutnetFormatter extends AbstractFormatter
 		$product->setAvailableSizes($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledStockedSizes(Product $product)
 	{
 		$result = $this
@@ -98,6 +138,9 @@ class TheOutnetFormatter extends AbstractFormatter
 		$product->setStockedSizes($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledStyleWith(Product $product)
 	{
 

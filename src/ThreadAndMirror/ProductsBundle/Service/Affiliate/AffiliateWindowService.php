@@ -178,15 +178,26 @@ class AffiliateWindowService implements AffiliateInterface
 
 					// Add message to the queue for processing
 					$this->producers['process_feed']->publish(json_encode([
-						'category' => $category,
-						'area'     => $area,
-						'data'     => $data
+						'affiliate' => self::KEY_NAME,
+						'data'      => $data,
+						'category'  => $category,
+						'area'      => $area
 					]));
 
 					$count = 0;
 					$data  = [];
 				}
 			}
+
+			$area = in_array($category, $this->categories['fashion']) ? 'fashion' : 'beauty';
+
+			// Add message to the queue for processing
+			$this->producers['process_feed']->publish(json_encode([
+				'affiliate' => self::KEY_NAME,
+				'data'      => $data,
+				'category'  => $category,
+				'area'      => $area
+			]));
 		}
 	}
 
@@ -242,11 +253,9 @@ class AffiliateWindowService implements AffiliateInterface
 			$product->setArea($area);
 
 			// Persist if doesn't exist
-			if (!$this->productService->checkProductExists($product)) {
-				$this->em->persist($product);
-				$this->logger->info('Product added from feed: '.$this->productService->getProductCacheKey($product));
-				$this->dispatcher->dispatch(ProductEvent::EVENT_CREATE, new ProductEvent($product));
-			}
+			$this->em->persist($product);
+			$this->logger->info('Product added from feed: '.$this->productService->getProductCacheKey($product));
+			$this->dispatcher->dispatch(ProductEvent::EVENT_CREATE, new ProductEvent($product));
 
 			unset($product);
 		}

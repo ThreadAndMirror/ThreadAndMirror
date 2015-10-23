@@ -40,7 +40,7 @@ class ProcessFeedConsumer implements ConsumerInterface
 		$message   = json_decode($ampq->body, true);
 		$affiliate = $message['affiliate'];
 
-		switch($affiliate)
+		switch ($affiliate)
 		{
 			case AffiliateWindowService::KEY_NAME:
 				$this->logger->info('Attempting to process '.$message['category'].' feed data for affiliate window.');

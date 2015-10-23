@@ -31,24 +31,24 @@
 	<li>
 		<a href="/style-file" {% if page.slug == 'style-file' %}class="active"{% endif %}>Style File</a>
 	</li>
-	{#<li>#}
-		{#<a href="/beauty/new-in" {% if page.slug == 'beauty/new-in' or page.slug == 'beauty/sale' or page.slug == 'beauty/stores' %}class="active"{% endif %}>Beauty</a>#}
-		{#<ul>#}
-			{#<li><a href="{{ path('thread_products_front_new_in', { 'area' : 'beauty' }) }}">New In</a></li>#}
-			{#<li><a href="{{ path('thread_products_front_sale', { 'area' : 'beauty' }) }}">Sale</a></li>#}
-			{#<li><a href="{{ path('thread_products_front_stores', { 'area' : 'beauty' }) }}">Stores</a></li>#}
-			{#<li><a href="{{ path('thread_products_front_brands', { 'area' : 'beauty' }) }}">Brands</a></li>#}
-		{#</ul>#}
-	{#</li>#}
-	{#<li>#}
-		{#<a href="/fashion/new-in" {% if page.slug == 'fashion/new-in' or page.slug == 'fashion/sale' or page.slug == 'fashion/stores' %}class="active"{% endif %}>Fashion</a>#}
-		{#<ul>#}
-			{#<li><a href="{{ path('thread_products_front_new_in', { 'area' : 'fashion' }) }}">New In</a></li>#}
-			{#<li><a href="{{ path('thread_products_front_sale', { 'area' : 'fashion' }) }}">Sale</a></li>#}
-			{#<li><a href="{{ path('thread_products_front_stores', { 'area' : 'fashion' }) }}">Stores</a></li>#}
-			{#<li><a href="{{ path('thread_products_front_brands', { 'area' : 'fashion' }) }}">Brands</a></li>#}
-		{#</ul>#}
-	{#</li>#}
+	<li>
+		<a href="/beauty/new-in" {% if page.slug == 'beauty/new-in' or page.slug == 'beauty/sale' or page.slug == 'beauty/stores' %}class="active"{% endif %}>Beauty</a>
+		<ul>
+			<li><a href="{{ path('thread_products_front_new_in', { 'area' : 'beauty' }) }}">New In</a></li>
+			<li><a href="{{ path('thread_products_front_sale', { 'area' : 'beauty' }) }}">Sale</a></li>
+			<li><a href="{{ path('thread_products_front_stores', { 'area' : 'beauty' }) }}">Stores</a></li>
+			<li><a href="{{ path('thread_products_front_brands', { 'area' : 'beauty' }) }}">Brands</a></li>
+		</ul>
+	</li>
+	<li>
+		<a href="/fashion/new-in" {% if page.slug == 'fashion/new-in' or page.slug == 'fashion/sale' or page.slug == 'fashion/stores' %}class="active"{% endif %}>Fashion</a>
+		<ul>
+			<li><a href="{{ path('thread_products_front_new_in', { 'area' : 'fashion' }) }}">New In</a></li>
+			<li><a href="{{ path('thread_products_front_sale', { 'area' : 'fashion' }) }}">Sale</a></li>
+			<li><a href="{{ path('thread_products_front_stores', { 'area' : 'fashion' }) }}">Stores</a></li>
+			<li><a href="{{ path('thread_products_front_brands', { 'area' : 'fashion' }) }}">Brands</a></li>
+		</ul>
+	</li>
 	<li>
 		<a href="/magazine" {% if page.slug == 'magazine' or page.slug == 'magazine/{post}' %}class="active"{% endif %}>Magazine</a>
 	    <ul>

@@ -1285,7 +1285,9 @@ class Product
 			'thumbnails'        => $this->getThumbnails(),
 			'meta_keywords'     => $this->getMetaKeywords(),
 			'available_sizes'   => $this->getAvailableSizes(),
-			'stocked_sizes'     => $this->getStockedSizes()
+			'stocked_sizes'     => $this->getStockedSizes(),
+			'merchant_id'       => $this->getShop()->getAffiliateId(),
+			'meta_data'         => json_decode($this->getMetaData(), true)
 		];
 
 		return json_encode($json);

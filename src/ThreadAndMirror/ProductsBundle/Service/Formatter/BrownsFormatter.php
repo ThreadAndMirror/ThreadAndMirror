@@ -7,18 +7,72 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 class BrownsFormatter extends AbstractFormatter
 {
 	/**
-	 * Post-processing for feed product creation
-	 *
-	 * @param  Product 		$product 	The product to cleanup
+	 * {@inheritdoc}
 	 */
-	public function cleanupFeedProduct(Product $product) 
+	protected function cleanupFeedUrl(Product $product)
 	{
-		
+		$result = $this
+			->format($product->getUrl())
+			->sheer('murl=')
+			->result();
+
+		$product->setUrl(rawurldecode($result));
 	}
 
-	protected function cleanupCrawledName(Product $product) 
-	{ 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedPid(Product $product)
+	{
+		$metaData = json_decode($product->getMetaData());
 
+		$result = $this
+			->format($metaData->sku)
+			->result();
+
+		$product->setPid($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedCategory(Product $product)
+	{
+		$result = $this->format($product->getCategoryName())
+			->sheer('~~', false)
+			->replace('Women\'s', '')
+			->trim()
+			->name()
+			->result();
+
+		$product->setCategoryName($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedPortraits(Product $product)
+	{
+
+		$result = $this
+			->format($product->getPortraits())
+			->replace('670x830', '338x410')
+			->result();
+
+		$product->setPortraits($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedThumbnails(Product $product)
+	{
+		$result = $this
+			->format($product->getThumbnails())
+			->replace('670x830', '160x198')
+			->result();
+
+		$product->setThumbnails($result);
 	}
 
 	protected function cleanupCrawledBrand(Product $product) 
@@ -72,23 +126,8 @@ class BrownsFormatter extends AbstractFormatter
 		$product->setPortraits($result);
 	}
 
-	protected function cleanupCrawledThumbnails(Product $product) 
-	{ 
-
-	}
-
 	protected function cleanupCrawledAvailableSizes(Product $product) 
 	{
 		$product->setAvailableSizes(array_merge($product->getAvailableSizes(), $product->getStockedSizes()));
-	}
-
-	protected function cleanupCrawledStockedSizes(Product $product) 
-	{ 
-
-	}
-
-	protected function cleanupCrawledStyleWith(Product $product) 
-	{ 
-
 	}
 }

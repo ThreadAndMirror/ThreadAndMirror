@@ -2,12 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f6697b0-6fde-4ab5-902b-7b14249fc9db" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/DownloadFeedAffiliateWindowConsumer.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/DownloadFeedConsumer.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/ProcessFeedAffiliateWindowConsumer.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/ProcessFeedConsumer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/AbstractFormatter.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/AbstractFormatter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/AffiliateWindowService.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/AffiliateWindowService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/BrownsFormatter.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/BrownsFormatter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Category.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Category.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/CategoryService.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/CategoryService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/DownloadFeedConsumer.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/DownloadFeedConsumer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Linkshare.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Linkshare.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/LinkshareService.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/LinkshareService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/MatchesFashionFormatter.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/MatchesFashionFormatter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/NetAPorterFormatter.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/NetAPorterFormatter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/ProcessFeedConsumer.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/ProcessFeedConsumer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Command/ProcessProductFeedsCommand.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Command/ProcessProductFeedsCommand.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/StylebopFormatter.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/StylebopFormatter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/TheOutnetFormatter.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/TheOutnetFormatter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/YoungBritishDesignersFormatter.php" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/YoungBritishDesignersFormatter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump.rdb" afterPath="$PROJECT_DIR$/dump.rdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Front/menu.html.twig" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Front/menu.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/config/services.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/threadandmirror.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/threadandmirror.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="threadandmirror.iws" />
@@ -36,25 +51,12 @@
       <file leaf-file-name="AffiliateWindowService.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/AffiliateWindowService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.909091" vertical-offset="1600" max-vertical-offset="5707">
-              <caret line="150" column="12" selection-start-line="150" selection-start-column="12" selection-end-line="150" selection-end-column="93" />
+            <state vertical-scroll-proportion="-22.454546" vertical-offset="2626" max-vertical-offset="5629">
+              <caret line="255" column="41" selection-start-line="255" selection-start-column="41" selection-end-line="255" selection-end-column="41" />
               <folding>
-                <element signature="e#68#114#0#PHP" expanded="true" />
-                <element signature="e#3044#3080#1#PHP" expanded="true" />
-                <element signature="e#5611#5647#1#PHP" expanded="true" />
-                <element signature="e#8337#8373#1#PHP" expanded="true" />
-                <element signature="e#8883#8919#1#PHP" expanded="true" />
+                <element signature="e#8622#8658#1#PHP" expanded="true" />
+                <element signature="e#9168#9204#1#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.307692" vertical-offset="4945" max-vertical-offset="5525">
-              <caret line="413" column="55" selection-start-line="413" selection-start-column="55" selection-end-line="413" selection-end-column="55" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -62,82 +64,81 @@
       <file leaf-file-name="LinkshareService.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/LinkshareService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.5625" vertical-offset="1210" max-vertical-offset="2041">
-              <caret line="121" column="37" selection-start-line="121" selection-start-column="37" selection-end-line="121" selection-end-column="37" />
-              <folding>
-                <element signature="e#68#100#0#PHP" expanded="true" />
-                <element signature="e#2129#2165#1#PHP" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-19.5" vertical-offset="1898" max-vertical-offset="3380">
+              <caret line="190" column="12" selection-start-line="190" selection-start-column="12" selection-end-line="190" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="35269_3146542_mp_delta.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/feeds/linkshare/35269_3146542_mp_delta.xml">
+      <file leaf-file-name="BrownsFormatter.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/BrownsFormatter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.87953794" vertical-offset="533" max-vertical-offset="5733">
+            <state vertical-scroll-proportion="-11.818182" vertical-offset="312" max-vertical-offset="1794">
+              <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NetAPorterFormatter.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/NetAPorterFormatter.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-28.954546" vertical-offset="0" max-vertical-offset="3809">
+              <caret line="49" column="5" selection-start-line="7" selection-start-column="1" selection-end-line="49" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StylebopFormatter.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/StylebopFormatter.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.272727" vertical-offset="1144" max-vertical-offset="3848">
+              <caret line="102" column="4" selection-start-line="102" selection-start-column="4" selection-end-line="127" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="YoungBritishDesignersUpdater.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/YoungBritishDesignersUpdater.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="169">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DownloadProductFeedsCommand.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Command/DownloadProductFeedsCommand.php">
+      <file leaf-file-name="YoungBritishDesignersFormatter.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/YoungBritishDesignersFormatter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.5" vertical-offset="0" max-vertical-offset="403">
-              <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="56" />
+            <state vertical-scroll-proportion="-1.1818181" vertical-offset="91" max-vertical-offset="1833">
+              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="20" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ftp.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/ijanki/ftp-bundle/Ijanki/Bundle/FtpBundle/Ftp.php">
+      <file leaf-file-name="TheOutnetFormatter.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/TheOutnetFormatter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.1818181" vertical-offset="52" max-vertical-offset="1456">
-              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.46666667" vertical-offset="0" max-vertical-offset="1989">
+              <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProcessFeedConsumer.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/ProcessFeedConsumer.php">
+      <file leaf-file-name="CategoryService.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/CategoryService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.318182" vertical-offset="92" max-vertical-offset="676">
-              <caret line="42" column="26" selection-start-line="42" selection-start-column="26" selection-end-line="42" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/config/services.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="611" max-vertical-offset="7800">
-              <caret line="94" column="18" selection-start-line="94" selection-start-column="18" selection-end-line="94" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Linkshare.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Linkshare.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-118.181816" vertical-offset="0" max-vertical-offset="5655">
-              <caret line="200" column="45" selection-start-line="200" selection-start-column="45" selection-end-line="200" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DownloadFeedConsumer.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/DownloadFeedConsumer.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.318182" vertical-offset="0" max-vertical-offset="676">
-              <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
-              <folding />
+            <state vertical-scroll-proportion="-13.590909" vertical-offset="1430" max-vertical-offset="3445">
+              <caret line="133" column="29" selection-start-line="133" selection-start-column="29" selection-end-line="133" selection-end-column="29" />
+              <folding>
+                <element signature="e#58#98#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -170,6 +171,8 @@
       <command text="redis-server" />
       <command text="php app/console rabbitmq:consumer -m 2 download_feed_affiliate_window " />
       <command text="s redis:flushall" />
+      <command text="redis-server" />
+      <command text="redis-cli flushall" />
     </commandsHistory>
   </component>
   <component name="Git.Settings">
@@ -181,21 +184,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Front/menu.html.twig" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
-        <option value="$PROJECT_DIR$/src/Stems/CoreBundle/Resources/public/css/admin/vendor/roboto.css" />
-        <option value="$PROJECT_DIR$/src/Stems/CoreBundle/Resources/public/js/front/vendor/isotope.pkgd.min.js" />
-        <option value="$PROJECT_DIR$/src/Stems/SocialBundle/Entity/InstagramImage.php" />
-        <option value="$PROJECT_DIR$/app/AppKernel.php" />
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Command/DownloadProductFeedsCommand.php" />
-        <option value="$PROJECT_DIR$/app/config/services.yml" />
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/DownloadFeedAffiliateWindowConsumer.php" />
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Definition/AffiliateInterface.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Shop.php" />
         <option value="$PROJECT_DIR$/app/bootstrap.php.cache" />
         <option value="$PROJECT_DIR$/app/logs/product_feeds.log" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/ProcessFeedAffiliateWindowConsumer.php" />
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Command/ProcessProductFeedsCommand.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Event/ProductEvent.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/EventListener/BrandListener.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Event/CategoryEvent.php" />
@@ -218,20 +210,31 @@
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/YooxFormatter.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Util/Slugifier.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Brand.php" />
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Category.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Crawler/AsosCrawler.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/AsosFormatter.php" />
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php" />
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php" />
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/AbstractFormatter.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/TopshopFormatter.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Rest/product.html.twig" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Linkshare.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/DownloadFeedConsumer.php" />
-        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/AffiliateWindowService.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/ProcessFeedConsumer.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Command/ProcessProductFeedsCommand.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/AbstractFormatter.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/NetAPorterFormatter.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Category.php" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/config/services.yml" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Front/menu.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/threadandmirror.html.twig" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/MatchesFashionFormatter.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/BrownsFormatter.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/StylebopFormatter.php" />
         <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/LinkshareService.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/AffiliateWindowService.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/CategoryService.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/YoungBritishDesignersFormatter.php" />
+        <option value="$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/TheOutnetFormatter.php" />
       </list>
     </option>
   </component>
@@ -421,6 +424,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Updater" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="threadandmirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="threadandmirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ThreadAndMirror" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProductsBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Formatter" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -447,7 +480,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Command" />
+              <option name="myItemId" value="Service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Crawler" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -606,6 +643,9 @@
       <BehatRunner />
       <method />
     </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
@@ -613,9 +653,6 @@
       <arguments />
       <pass-parent-envs>true</pass-parent-envs>
       <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="0" />
@@ -635,36 +672,36 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="971" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2821388" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28100115" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34584755" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Symfony2" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2400455" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992035" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17765568" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26734927" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17948718" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2662116" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28327644" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28100115" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34584755" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -678,11 +715,11 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17765568" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17948718" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26734927" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2662116" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -708,187 +745,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/LookFantasticFormatter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="32.5" vertical-offset="975" max-vertical-offset="2015">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77227724" vertical-offset="0" max-vertical-offset="1001">
-          <caret line="36" column="56" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Embed/product.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.9545455" vertical-offset="0" max-vertical-offset="533">
-          <caret line="5" column="37" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Cache/CategoryCache.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-26.59091" vertical-offset="156" max-vertical-offset="910">
-          <caret line="58" column="33" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Cache/BrandCache.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.681818" vertical-offset="317" max-vertical-offset="910">
-          <caret line="35" column="53" selection-start-line="35" selection-start-column="53" selection-end-line="35" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Cache/ProductCache.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.4545455" vertical-offset="135" max-vertical-offset="923">
-          <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/JohnLewisFormatter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.136364" vertical-offset="208" max-vertical-offset="2093">
-          <caret line="45" column="5" selection-start-line="8" selection-start-column="4" selection-end-line="45" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/EventListener/ProductListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.0" vertical-offset="0" max-vertical-offset="403">
-          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/FarfetchUpdater.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="606">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/EscentualUpdater.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3636363" vertical-offset="0" max-vertical-offset="169">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/EscentualFormatter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.318182" vertical-offset="0" max-vertical-offset="637">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/ProductService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.772727" vertical-offset="976" max-vertical-offset="1664">
-          <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Crawler/JohnLewisCrawler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3636363" vertical-offset="0" max-vertical-offset="676">
-          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Crawler/EscentualCrawler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3636363" vertical-offset="0" max-vertical-offset="676">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/LKBennettFormatter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3561644" vertical-offset="52" max-vertical-offset="2613">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/gedmo/doctrine-extensions/lib/Gedmo/Sluggable/Handler/SlugHandlerInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21212122" vertical-offset="538" max-vertical-offset="1066">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/gedmo/doctrine-extensions/lib/Gedmo/Sluggable/Sluggable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.051136363" vertical-offset="27" max-vertical-offset="611">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/gedmo/doctrine-extensions/lib/Gedmo/Sluggable/Mapping/Event/SluggableAdapter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16287878" vertical-offset="83" max-vertical-offset="780">
-          <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/gedmo/doctrine-extensions/lib/Gedmo/Sluggable/Util/Urlizer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.318182" vertical-offset="0" max-vertical-offset="234">
-          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Parser/AsosParser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4329">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/gedmo/doctrine-extensions/lib/Gedmo/Sluggable/SluggableListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.045455" vertical-offset="195" max-vertical-offset="7163">
-          <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Util/StringSanitizer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.636364" vertical-offset="0" max-vertical-offset="390">
-          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/behat/transliterator/src/Behat/Transliterator/Transliterator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="147.77272" vertical-offset="3901" max-vertical-offset="7345">
           <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -896,14 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.363636" vertical-offset="1364" max-vertical-offset="3575">
           <caret line="141" column="30" selection-start-line="141" selection-start-column="30" selection-end-line="141" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Category.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.909091" vertical-offset="0" max-vertical-offset="2743">
-          <caret line="16" column="54" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -940,14 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-638.7273" vertical-offset="2835" max-vertical-offset="17277">
-          <caret line="1303" column="5" selection-start-line="1303" selection-start-column="5" selection-end-line="1303" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Crawler/TopshopCrawler.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.818182" vertical-offset="0" max-vertical-offset="871">
@@ -956,30 +800,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/AbstractFormatter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.454546" vertical-offset="3420" max-vertical-offset="7735">
-          <caret line="297" column="107" selection-start-line="297" selection-start-column="107" selection-end-line="297" selection-end-column="107" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/TopshopFormatter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.181818" vertical-offset="13" max-vertical-offset="2600">
-          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Front/product.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.227273" vertical-offset="0" max-vertical-offset="390">
           <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
-          <folding>
-            <element signature="e#86#122#0#Twig" expanded="false" />
-            <element signature="e#925#976#0#Twig" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -987,45 +811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-40.136364" vertical-offset="222" max-vertical-offset="1300">
           <caret line="85" column="34" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
-          <folding>
-            <element signature="e#11#50#0#Twig" expanded="false" />
-            <element signature="e#1877#1910#0#Twig" expanded="false" />
-            <element signature="e#2314#2347#0#Twig" expanded="false" />
-            <element signature="e#2471#2504#0#Twig" expanded="false" />
-            <marker date="1443904064000" expanded="true" signature="-1:-1" placeholder="{% if product.description is not empty ...%}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Command/ProcessProductFeedsCommand.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.227273" vertical-offset="0" max-vertical-offset="429">
-          <caret line="23" column="78" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0454545" vertical-offset="2125" max-vertical-offset="6188">
-          <caret line="188" column="42" selection-start-line="188" selection-start-column="42" selection-end-line="188" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Affiliate/AffiliateWindowAffiliate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13356164" vertical-offset="0" max-vertical-offset="584">
-          <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Affiliate/LinkshareAffiliate.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="606">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1033,7 +818,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.590909" vertical-offset="117" max-vertical-offset="1391">
           <caret line="32" column="35" selection-start-line="25" selection-start-column="8" selection-end-line="99" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1041,14 +825,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.272727" vertical-offset="0" max-vertical-offset="338">
           <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Linkshare.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-118.181816" vertical-offset="0" max-vertical-offset="5655">
-          <caret line="200" column="45" selection-start-line="200" selection-start-column="45" selection-end-line="200" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1061,25 +837,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/DownloadFeedConsumer.php">
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Linkshare.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.318182" vertical-offset="0" max-vertical-offset="676">
-          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1261" max-vertical-offset="5655">
+          <caret line="159" column="8" selection-start-line="159" selection-start-column="8" selection-end-line="159" selection-end-column="8" />
+          <folding>
+            <element signature="e#1003#1039#1#PHP" expanded="false" />
+            <element signature="e#1997#2033#1#PHP" expanded="false" />
+            <element signature="e#4309#4348#1#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/feeds/linkshare/35269_3146542_mp_delta.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5733">
+          <caret line="5" column="114" selection-start-line="5" selection-start-column="114" selection-end-line="5" selection-end-column="114" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/AffiliateWindowService.php">
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/DownloadFeedConsumer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.909091" vertical-offset="1600" max-vertical-offset="5707">
-          <caret line="150" column="12" selection-start-line="150" selection-start-column="12" selection-end-line="150" selection-end-column="93" />
-          <folding>
-            <element signature="e#68#114#0#PHP" expanded="true" />
-            <element signature="e#3044#3080#1#PHP" expanded="true" />
-            <element signature="e#5611#5647#1#PHP" expanded="true" />
-            <element signature="e#8337#8373#1#PHP" expanded="true" />
-            <element signature="e#8883#8919#1#PHP" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="70" max-vertical-offset="676">
+          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/ProcessFeedConsumer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.681818" vertical-offset="91" max-vertical-offset="676">
+          <caret line="51" column="53" selection-start-line="51" selection-start-column="53" selection-end-line="51" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Command/ProcessProductFeedsCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.181818" vertical-offset="0" max-vertical-offset="559">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1091,45 +889,290 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/TopshopFormatter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="10.636364" vertical-offset="741" max-vertical-offset="2600">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/AbstractFormatter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.863636" vertical-offset="299" max-vertical-offset="7878">
+          <caret line="61" column="22" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/feeds/linkshare/35725_3146542_mp_delta.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="14352">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Event/ProductNewSizesInStockEvent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.681818" vertical-offset="0" max-vertical-offset="442">
+          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/EntityManagerInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.545454" vertical-offset="17" max-vertical-offset="624">
+          <caret line="49" column="38" selection-start-line="49" selection-start-column="38" selection-end-line="49" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/EntityManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.0416665" vertical-offset="6379" max-vertical-offset="12662">
+          <caret line="523" column="46" selection-start-line="523" selection-start-column="46" selection-end-line="523" selection-end-column="46" />
+          <folding>
+            <element signature="e#6#987#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/common/lib/Doctrine/Common/Proxy/AbstractProxyFactory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.818182" vertical-offset="1020" max-vertical-offset="2990">
+          <caret line="110" column="43" selection-start-line="110" selection-start-column="16" selection-end-line="110" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Util/StringSanitizer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4" vertical-offset="0" max-vertical-offset="585">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/feeds/affiliate_window/206.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1818181" vertical-offset="390" max-vertical-offset="17303">
+          <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.307692" vertical-offset="4945" max-vertical-offset="5525">
-          <caret line="413" column="55" selection-start-line="413" selection-start-column="55" selection-end-line="413" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4918" max-vertical-offset="5525">
+          <caret line="403" column="22" selection-start-line="403" selection-start-column="22" selection-end-line="403" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Entity/Category.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="40.625" vertical-offset="2795" max-vertical-offset="3354">
+          <caret line="71" column="48" selection-start-line="71" selection-start-column="48" selection-end-line="71" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="611" max-vertical-offset="7800">
-          <caret line="94" column="18" selection-start-line="94" selection-start-column="18" selection-end-line="94" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="338" max-vertical-offset="7826">
+          <caret line="59" column="18" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Consumer/ProcessFeedConsumer.php">
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/MatchesFashionFormatter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.318182" vertical-offset="92" max-vertical-offset="676">
-          <caret line="42" column="26" selection-start-line="42" selection-start-column="26" selection-end-line="42" selection-end-column="26" />
+        <state vertical-scroll-proportion="-3.5454545" vertical-offset="0" max-vertical-offset="2093">
+          <caret line="6" column="55" selection-start-line="6" selection-start-column="55" selection-end-line="6" selection-end-column="55" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Affiliate/LinkshareAffiliate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="606">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/feeds/linkshare/35118_3146542_mp_delta.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="71.05882" vertical-offset="8109" max-vertical-offset="18824">
+          <caret line="345" column="253" selection-start-line="345" selection-start-column="253" selection-end-line="345" selection-end-column="253" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/StylebopUpdater.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Resources/views/Front/menu.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.545454" vertical-offset="0" max-vertical-offset="949">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding>
+            <element signature="e#1624#1652#0#Twig" expanded="false" />
+            <element signature="e#1723#1749#0#Twig" expanded="false" />
+            <element signature="e#1818#1846#0#Twig" expanded="false" />
+            <element signature="e#1917#1945#0#Twig" expanded="false" />
+            <element signature="e#2212#2240#0#Twig" expanded="false" />
+            <element signature="e#2312#2338#0#Twig" expanded="false" />
+            <element signature="e#2408#2436#0#Twig" expanded="false" />
+            <element signature="e#2508#2536#0#Twig" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/threadandmirror.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.1111112" vertical-offset="468" max-vertical-offset="2093">
+          <caret line="131" column="62" selection-start-line="131" selection-start-column="62" selection-end-line="131" selection-end-column="62" />
+          <folding>
+            <element signature="e#4890#4918#0#Twig" expanded="false" />
+            <element signature="e#5017#5045#0#Twig" expanded="false" />
+            <element signature="e#5118#5144#0#Twig" expanded="false" />
+            <element signature="e#5215#5243#0#Twig" expanded="false" />
+            <element signature="e#5316#5344#0#Twig" expanded="false" />
+            <element signature="e#5513#5541#0#Twig" expanded="false" />
+            <element signature="e#5639#5667#0#Twig" expanded="false" />
+            <element signature="e#5741#5767#0#Twig" expanded="false" />
+            <element signature="e#5839#5867#0#Twig" expanded="false" />
+            <element signature="e#5941#5969#0#Twig" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/AbstractUpdater.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.272727" vertical-offset="1391" max-vertical-offset="6071">
+          <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/feeds/linkshare/35563_3146542_mp_delta.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1742">
+          <caret line="8" column="385" selection-start-line="8" selection-start-column="385" selection-end-line="8" selection-end-column="444" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Affiliate/AffiliateWindowAffiliate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13333334" vertical-offset="0" max-vertical-offset="585">
+          <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/feeds/linkshare/37898_3146542_mp_delta.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/AffiliateWindowService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.454546" vertical-offset="2626" max-vertical-offset="5629">
+          <caret line="255" column="41" selection-start-line="255" selection-start-column="41" selection-end-line="255" selection-end-column="41" />
+          <folding>
+            <element signature="e#8622#8658#1#PHP" expanded="true" />
+            <element signature="e#9168#9204#1#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Affiliate/LinkshareService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.5625" vertical-offset="1210" max-vertical-offset="2041">
-          <caret line="121" column="37" selection-start-line="121" selection-start-column="37" selection-end-line="121" selection-end-column="37" />
+        <state vertical-scroll-proportion="-19.5" vertical-offset="1898" max-vertical-offset="3380">
+          <caret line="190" column="12" selection-start-line="190" selection-start-column="12" selection-end-line="190" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/CategoryService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.590909" vertical-offset="1430" max-vertical-offset="3445">
+          <caret line="133" column="29" selection-start-line="133" selection-start-column="29" selection-end-line="133" selection-end-column="29" />
           <folding>
-            <element signature="e#68#100#0#PHP" expanded="true" />
-            <element signature="e#2129#2165#1#PHP" expanded="true" />
+            <element signature="e#58#98#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/feeds/linkshare/35269_3146542_mp_delta.xml">
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/NetAPorterFormatter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.87953794" vertical-offset="533" max-vertical-offset="5733">
+        <state vertical-scroll-proportion="-28.954546" vertical-offset="0" max-vertical-offset="3809">
+          <caret line="49" column="5" selection-start-line="7" selection-start-column="1" selection-end-line="49" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/BrownsFormatter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.818182" vertical-offset="312" max-vertical-offset="1794">
+          <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Updater/YoungBritishDesignersUpdater.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/StylebopFormatter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.272727" vertical-offset="1144" max-vertical-offset="3848">
+          <caret line="102" column="4" selection-start-line="102" selection-start-column="4" selection-end-line="127" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/feeds/linkshare/35290_3146542_mp_delta.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12220">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/YoungBritishDesignersFormatter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1818181" vertical-offset="91" max-vertical-offset="1833">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="20" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ThreadAndMirror/ProductsBundle/Service/Formatter/TheOutnetFormatter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46666667" vertical-offset="0" max-vertical-offset="1989">
+          <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
           <folding />
         </state>
       </provider>

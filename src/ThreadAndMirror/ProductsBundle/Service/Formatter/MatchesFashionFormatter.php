@@ -6,6 +6,50 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 
 class MatchesFashionFormatter extends AbstractFormatter
 {
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedUrl(Product $product)
+	{
+		$result = $this
+			->format($product->getUrl())
+			->sheer('murl=')
+			->result();
+
+		$product->setUrl(rawurldecode($result));
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedCategory(Product $product)
+	{
+		$result = $this->format($product->getCategoryName())
+			->sheer('~~', false)
+			->replace('Women\'s', '')
+			->trim()
+			->name()
+			->result();
+
+		$product->setCategoryName($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedBrand(Product $product)
+	{
+		$result = $this->format($product->getBrandName())
+			->trim()
+			->name()
+			->result();
+
+		$product->setBrandName($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledName(Product $product)
 	{
 		$result = $this
@@ -16,6 +60,9 @@ class MatchesFashionFormatter extends AbstractFormatter
 		$product->setName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledBrand(Product $product)
 	{
 		$result = $this
@@ -26,11 +73,9 @@ class MatchesFashionFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
-	protected function cleanupCrawledPid(Product $product)
-	{
-
-	}
-
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledDescription(Product $product)
 	{
 		$result = $this
@@ -41,6 +86,9 @@ class MatchesFashionFormatter extends AbstractFormatter
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product)
 	{
 		$result = $this
@@ -51,6 +99,9 @@ class MatchesFashionFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product)
 	{
 
@@ -63,6 +114,9 @@ class MatchesFashionFormatter extends AbstractFormatter
 		$product->setPortraits($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledThumbnails(Product $product)
 	{
 		$result = $this
@@ -74,6 +128,9 @@ class MatchesFashionFormatter extends AbstractFormatter
 		$product->setThumbnails($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledAvailableSizes(Product $product)
 	{
 		$result = $this
@@ -84,6 +141,9 @@ class MatchesFashionFormatter extends AbstractFormatter
 		$product->setAvailableSizes($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledStockedSizes(Product $product)
 	{
 		$result = $this
@@ -92,10 +152,5 @@ class MatchesFashionFormatter extends AbstractFormatter
 			->result();
 
 		$product->setStockedSizes($result);
-	}
-
-	protected function cleanupCrawledStyleWith(Product $product)
-	{
-
 	}
 }

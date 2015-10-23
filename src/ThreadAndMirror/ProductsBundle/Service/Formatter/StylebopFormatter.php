@@ -6,7 +6,131 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 
 class StylebopFormatter extends AbstractFormatter
 {
-	protected function cleanupCrawledUrl(Product $product) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedUrl(Product $product)
+	{
+		$result = $this
+			->format($product->getUrl())
+			->sheer('murl=')
+			->result();
+
+		$product->setUrl(rawurldecode($result));
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedName(Product $product)
+	{
+		$result = $this->format($product->getName())
+			->sheer(' - ', false)
+			->replace($product->getBrandName().' ', '')
+			->trim()
+			->result();
+
+		$product->setName($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedPid(Product $product)
+	{
+		$metaData = json_decode($product->getMetaData());
+
+		$result = $this
+			->format($metaData->sku)
+			->result();
+
+		$product->setPid($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedCategory(Product $product)
+	{
+		$result = $this->format($product->getCategoryName())
+			->sheer('~~', false)
+			->replace('Women\'s', '')
+			->trim()
+			->name()
+			->result();
+
+		$product->setCategoryName($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedDescription(Product $product)
+	{
+		$result = $this->format($product->getDescription())
+			->append('.')
+			->result();
+
+		$product->setDescription($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedShortDescription(Product $product)
+	{
+		$result = $this->format($product->getShortDescription())
+			->append('.')
+			->result();
+
+		$product->setShortDescription($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedImages(Product $product)
+	{
+
+		$result = $this
+			->format($product->getImages())
+			->replace('/1200/', '/900/')
+			->result();
+
+		$product->setImages($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedPortraits(Product $product)
+	{
+
+		$result = $this
+			->format($product->getPortraits())
+			->replace('/1200/', '/230/')
+			->result();
+
+		$product->setPortraits($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedThumbnails(Product $product)
+	{
+		$result = $this
+			->format($product->getThumbnails())
+			->replace('/1200/', '/100/')
+			->result();
+
+		$product->setThumbnails($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupCrawledUrl(Product $product)
 	{
 		$result = $this
 			->format($product->getUrl())
@@ -15,11 +139,9 @@ class StylebopFormatter extends AbstractFormatter
 		$product->setUrl($result);
 	}
 
-	protected function cleanupCrawledName(Product $product) 
-	{ 
-		
-	}
-
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledBrand(Product $product) 
 	{ 
 		$result = $this
@@ -30,16 +152,23 @@ class StylebopFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPid(Product $product)
 	{
 		$result = $this
-			->format($product->getPid())
-			->sheer('id=')
+			->format($product->getThumbnail())
+			->sheer('/100/')
+			->sheer('.jpg', false)
 			->result();
 
 		$product->setPid($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledDescription(Product $product) 
 	{
 		$result = $this
@@ -51,6 +180,9 @@ class StylebopFormatter extends AbstractFormatter
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledNow(Product $product)
 	{
 		$result = $this
@@ -62,6 +194,9 @@ class StylebopFormatter extends AbstractFormatter
 		$product->setNow($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledWas(Product $product)
 	{
 		$result = $this
@@ -73,26 +208,35 @@ class StylebopFormatter extends AbstractFormatter
 		$product->setWas($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product) 
 	{
 		$result = $this
 			->format($product->getThumbnails())
-			->replace('/230/100/', '/230/900/')
+			->replace('/100/', '/900/')
 			->result();
 
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product) 
 	{ 
 		$result = $this
 			->format($product->getThumbnails())
-			->replace('/230/100/', '/230/230/')
+			->replace('/100/', '/230/')
 			->result();
 
 		$product->setPortraits($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledThumbnails(Product $product) 
 	{
 		$result = $this
@@ -102,6 +246,9 @@ class StylebopFormatter extends AbstractFormatter
 		$product->setThumbnails($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledAvailableSizes(Product $product) 
 	{
 		$sizes = $product->getAvailableSizes();
@@ -115,6 +262,9 @@ class StylebopFormatter extends AbstractFormatter
 		$product->setAvailableSizes($sizes);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledStockedSizes(Product $product) 
 	{ 
 		$sizes = $product->getStockedSizes();
@@ -131,6 +281,9 @@ class StylebopFormatter extends AbstractFormatter
 		$product->setStockedSizes($sizes);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledStyleWith(Product $product) 
 	{ 
 

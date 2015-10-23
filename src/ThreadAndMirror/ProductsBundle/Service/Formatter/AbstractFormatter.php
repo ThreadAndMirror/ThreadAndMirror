@@ -25,6 +25,7 @@ abstract class AbstractFormatter implements FormatterInterface
 		$this->cleanupFeedCategory($product);
 		$this->cleanupFeedPid($product);
 		$this->cleanupFeedDescription($product);
+		$this->cleanupFeedShortDescription($product);
 		$this->cleanupFeedNow($product);
 		$this->cleanupFeedWas($product); 
 		$this->cleanupFeedImages($product);
@@ -62,6 +63,16 @@ abstract class AbstractFormatter implements FormatterInterface
 			->result();
 
 		$product->setDescription($result);
+	}
+
+	protected function cleanupFeedShortDescription(Product $product)
+	{
+		$result = $this
+			->format($product->getShortDescription())
+			->decode()
+			->result();
+
+		$product->setShortDescription($result);
 	}
 
 	protected function cleanupFeedNow(Product $product) 

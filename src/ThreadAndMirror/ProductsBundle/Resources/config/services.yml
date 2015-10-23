@@ -60,6 +60,8 @@ services:
         arguments:
             - @threadandmirror.products.cache.category
             - @threadandmirror.products.repository.category
+            - @doctrine.orm.entity_manager
+            - @event_dispatcher
 
     # Caches
 

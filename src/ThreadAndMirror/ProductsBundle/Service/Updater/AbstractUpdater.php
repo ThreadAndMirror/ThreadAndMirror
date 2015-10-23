@@ -354,47 +354,38 @@ abstract class AbstractUpdater implements UpdaterInterface
 		}
 	}
 
-
 	/**
 	 * Update a product brand based on the brand name
 	 *
-	 * @param  Product 		$product  			The product to update
+	 * @param  Product 		$product  	The product to update
 	 */
 	public function updateCategoryFromCategoryName(Product $product)
 	{
 		// Get the category name from the product
-		$categoryName = $product->getCategoryName();
-		$categoryId   = $this->categoryService->getExistingCategoryId($categoryName);
+		$name = $product->getCategoryName();
+		$id   = $this->categoryService->getExistingCategoryId($name, true);
 
 		// Create a new category if it doesn't exist already
-		if ($categoryId !== null) {
-			$category = $this->em->getReference('ThreadAndMirrorProductsBundle:Category', $categoryId);
-			$product->setCategory($category);
-			$product->setArea($category->getArea());
-		} else {
-			// Create a new category
-			$category = new Category($categoryName);
+		if ($id === null) {
 
 			// Guess the area if a shop is beauty or fashion only
 			$shop = $product->getShop();
 
 			if ($shop->getHasBeauty() && !$shop->getHasFashion()) {
-				$category->setArea('beauty');
-				$product->setArea('beauty');
+				$area = 'beauty';
 			} else if (!$shop->getHasBeauty() && $shop->getHasFashion()) {
-				$category->setArea('fashion');
-				$product->setArea('fashion');
+				$area = 'fashion';
 			} else {
-				$category->setArea('other');
-				$product->setArea('other');
+				$area = 'other';
 			}
 
-			$this->em->persist($category);
-			$this->em->flush();
-			$product->setCategory($category);
-
-			$this->dispatcher->dispatch(CategoryEvent::EVENT_CREATE, new CategoryEvent($category));
+			$category = $this->categoryService->createCategory($name, $area);
+		} else {
+			$category = $this->categoryService->getCategory('id', $id);
 		}
+
+		$product->setCategory($category);
+		$product->setArea($category->getArea());
 	}
 
 	/**
