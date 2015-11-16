@@ -6,6 +6,33 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 
 class SpaceNKFormatter extends AbstractFormatter
 {
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedCategory(Product $product)
+	{
+		$categoryName = $product->getCategoryName();
+
+		if (empty($categoryName) || $categoryName === 'Default') {
+			$product->setCategoryName('Uncategorised');
+		}
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedBrand(Product $product)
+	{
+		$brandName = $product->getBrandName();
+
+		if (empty($brandName)) {
+			$product->setBrandName('Unbranded');
+		}
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledUrl(Product $product)
 	{
 		$result = $this
@@ -15,6 +42,9 @@ class SpaceNKFormatter extends AbstractFormatter
 		$product->setUrl($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledName(Product $product)
 	{
 		$result = $this
@@ -24,6 +54,9 @@ class SpaceNKFormatter extends AbstractFormatter
 		$product->setName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledBrand(Product $product)
 	{
 		$result = $this
@@ -34,6 +67,9 @@ class SpaceNKFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledDescription(Product $product)
 	{
 		$result = $this
@@ -43,6 +79,9 @@ class SpaceNKFormatter extends AbstractFormatter
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product)
 	{
 		$result = $this
@@ -52,6 +91,9 @@ class SpaceNKFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product)
 	{
 		$result = $this
@@ -61,6 +103,9 @@ class SpaceNKFormatter extends AbstractFormatter
 		$product->setPortraits($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledThumbnails(Product $product) 
 	{
 		$result = $this

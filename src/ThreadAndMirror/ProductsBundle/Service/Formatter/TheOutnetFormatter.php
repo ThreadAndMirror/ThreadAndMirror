@@ -22,6 +22,21 @@ class TheOutnetFormatter extends AbstractFormatter
 	/**
 	 * {@inheritdoc}
 	 */
+	protected function cleanupFeedCategory(Product $product)
+	{
+		$result = $this->format($product->getCategoryName())
+			->sheer('~~')
+			->sheer('~~')
+			->sheer('~~')
+			->sheer(' > ', false)
+			->result();
+
+		$product->setCategoryName($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledName(Product $product)
 	{
 		$result = $this

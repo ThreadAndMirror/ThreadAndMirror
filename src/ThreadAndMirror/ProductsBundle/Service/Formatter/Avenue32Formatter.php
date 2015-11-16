@@ -15,11 +15,6 @@ class Avenue32Formatter extends AbstractFormatter
 		$product->setUrl($result);
 	}
 
-	protected function cleanupCrawledName(Product $product) 
-	{ 
-		
-	}
-
 	protected function cleanupCrawledBrand(Product $product) 
 	{ 
 		$result = $this

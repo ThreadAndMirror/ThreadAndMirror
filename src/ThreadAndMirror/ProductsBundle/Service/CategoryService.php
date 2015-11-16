@@ -253,6 +253,18 @@ class CategoryService
 
 			case 'scarvesandties':
 				return 'scarves';
+
+			case 'eyebrow-pencils':
+			case 'eyes':
+				return 'eye-makeup';
+
+			case 'face-cheek-makeup':
+				return 'face-makeup';
+
+			case 'skin-care':
+				return 'skincare';
+
+
 		}
 
 		return $slug;

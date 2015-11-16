@@ -6,6 +6,52 @@ use ThreadAndMirror\ProductsBundle\Entity\Product;
 
 class CultBeautyFormatter extends AbstractFormatter
 {
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedUrl(Product $product)
+	{
+		$result = $this
+			->format($product->getUrl())
+			->sheer('murl=')
+			->result();
+
+		$product->setUrl(rawurldecode($result));
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedPid(Product $product)
+	{
+		$metaData = json_decode($product->getMetaData());
+
+		$result = $this
+			->format($metaData->sku)
+			->replace(' ', '')
+			->result();
+
+		$product->setPid($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupFeedCategory(Product $product)
+	{
+		$result = $this->format($product->getCategoryName())
+			->sheer('~~')
+			->sheer('~~')
+			->sheer('~~')
+			->sheer(' > ', false)
+			->result();
+
+		$product->setCategoryName($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledUrl(Product $product) 
 	{
 		$result = $this
@@ -15,6 +61,9 @@ class CultBeautyFormatter extends AbstractFormatter
 		$product->setUrl($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledName(Product $product) 
 	{
 		$result = $this
@@ -26,6 +75,9 @@ class CultBeautyFormatter extends AbstractFormatter
 		$product->setName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledBrand(Product $product) 
 	{ 
 		$result = $this
@@ -36,6 +88,9 @@ class CultBeautyFormatter extends AbstractFormatter
 		$product->setBrandName($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPid(Product $product)
 	{
 		$result = $this
@@ -47,6 +102,9 @@ class CultBeautyFormatter extends AbstractFormatter
 		$product->setPid($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledDescription(Product $product) 
 	{
 		$result = $this
@@ -56,6 +114,9 @@ class CultBeautyFormatter extends AbstractFormatter
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product) 
 	{
 		$result = $this
@@ -66,6 +127,9 @@ class CultBeautyFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product) 
 	{ 
 		$result = $this
@@ -76,6 +140,9 @@ class CultBeautyFormatter extends AbstractFormatter
 		$product->setPortraits($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledThumbnails(Product $product) 
 	{
 		$result = $this
