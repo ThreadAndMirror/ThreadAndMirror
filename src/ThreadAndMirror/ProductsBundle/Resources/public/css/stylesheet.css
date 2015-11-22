@@ -1,11 +1,3 @@
-/* pallet: ;te
-
-bright red - f93124
-dark red 57080d
-light gold - be8c57
-cf9300
-
-*/
 
 /*
 
@@ -38,7 +30,7 @@ body {
 	position: relative;
 	background: #111111;
 	color: #111111;
-	font-family:'Futura PT Multilingual W01';
+	font-family:'Avenir Next W01', sans-serif;
 	-webkit-font-smoothing: antialiased !important;
 	font-size: 15px;
 	font-weight: 200;
