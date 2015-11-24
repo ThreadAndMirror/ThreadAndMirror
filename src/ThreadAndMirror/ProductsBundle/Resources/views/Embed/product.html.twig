@@ -3,7 +3,7 @@
 	<a class="buy" style="display:none" href="{{ path('thread_products_front_product_buy', { slug : product.slug }) }}" target="_blank" rel="nofollow" onClick="ga('send', 'event', 'Referrals', 'Buy', '{{ product.shop.slug }}', {{ (product.now * (product.shop.affiliateRate / 100))|number_format(0, '.', '') }});"><i class="fa fa-shopping-cart"></i></a>
 	<div class="placeholder"></div>
 	<div class="image" style="background-image:url('{{ product.gridImage }}')"></div>
-	<h3 class="name" itemprop="name">{{ product.brand ? product.brand.name : '' }} {{ product.name|raw }}</h3>
+	<h3 class="name" itemprop="name"><span class="brand">{{ product.brand ? product.brand.name : '' }}</span><br>{{ product.name|raw }}</h3>
 	<div itemprop="description" class="description">{{ product.description|raw }}</div>
 	{% if product.sale and product.was > 0 %}
 		<p class="price sale" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="smaller fade">WAS</span> <span class="fade">£{{ product.was|number_format(0, '.', '') }}</span> &nbsp; <span class="smaller">NOW</span> £<span itemprop="price">{{ product.now|number_format(0, '.', '') }}</span></p>
