@@ -233,14 +233,6 @@ class AffiliateWindowService implements AffiliateInterface
 				continue;
 			}
 
-			// @todo skipper for testing, remove
-			if (!in_array($owner->getAffiliateId(), [6009])) {
-				echo $owner->getAffiliateId().'.';
-				continue;
-			} else {
-				echo 'Processing: '.memory_get_usage().'B * ';
-			}
-
 			// Create the product from the data
 			$product = $updater->createProductFromFeed($datum, $owner);
 

@@ -540,6 +540,7 @@ div+.pagination {
 	-o-filter: blur(5px);
 	-ms-filter: blur(5px);
 	filter: blur(5px);
+    opacity: 0.5;
 }
 
 /* --- BANNER LAYOUTS --- */
@@ -3770,7 +3771,7 @@ div.login {
 	-ms-filter: blur(5px);
 	filter: blur(5px);
 	overflow: hidden;
-	opacity: 0.4;
+	opacity: 0.3;
 }
 
 .widget-blog-homepage-feature .feature-article {
@@ -3879,7 +3880,7 @@ div.login {
 	-ms-filter: blur(5px);
 	filter: blur(5px);
 	overflow: hidden;
-	opacity: 0.4;
+	opacity: 0.3;
 }
 
 .widget-editors-picks .feature-article {
