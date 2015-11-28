@@ -78,35 +78,36 @@ class CategoryService
 	}
 
 	/**
-	 * Create a new category using the name and area
+	 * Caches the category
 	 *
-	 * @param  string   $name
-	 * @param  string   $area
-	 * @return Category
+	 * @param  Category    $category
 	 */
-	public function createCategory($name, $area)
+	public function cacheCategory(Category $category)
 	{
-		// Create a new category
-		$category = new Category();
-
-		$category->setName($name);
-		$category->setArea($area);
-
-		$this->dispatcher->dispatch(CategoryEvent::EVENT_CREATE, new CategoryEvent($category));
-
-		$this->saveCategory($category);
-
-		return $category;
+		$this->cache->setData($category->getSlug(), $category->getJson());
 	}
 
 	/**
-	 * Save a category
+	 * Create a new category
 	 *
-	 * @param Category $category
+	 * @param Category     $category
 	 */
-	public function saveCategory(Category $category)
+	public function createCategory(Category $category)
 	{
-		$this->cache->setData($category);
+		$this->dispatcher->dispatch(CategoryEvent::EVENT_CREATE, new CategoryEvent($category));
+
+		$this->em->persist($category);
+		$this->em->flush();
+	}
+
+	/**
+	 * Update a category
+	 *
+	 * @param Category     $category
+	 */
+	public function updateCategory(Category $category)
+	{
+		$this->dispatcher->dispatch(CategoryEvent::EVENT_UPDATE, new CategoryEvent($category));
 
 		$this->em->persist($category);
 		$this->em->flush();

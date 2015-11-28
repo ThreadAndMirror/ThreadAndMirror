@@ -255,4 +255,23 @@ class Category
 	{
 		return $this->children;
 	}
+
+	/**
+	 * Get the brand data in json format
+	 *
+	 * @return string|array
+	 */
+	public function getJson($encoded = false)
+	{
+		$json = [
+			'id'                => $this->id,
+			'name'              => $this->name,
+			'slug'              => $this->slug,
+			'area'              => $this->area,
+			'affiliateWindowId' => $this->affiliateWindowId,
+			'parent'            => $this->parent
+		];
+
+		return $encoded ? json_encode($json) : $json;
+	}
 }

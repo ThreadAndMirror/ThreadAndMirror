@@ -25,15 +25,15 @@ class CategoryCache
 	}
 
 	/**
-	 * Cache the data for a category
+	 * Cache the data for a brand
 	 *
-	 * @param  Category      $category
+	 * @param  array      $data
 	 */
-	public function setData(Category $category)
+	public function setData($slug, $data)
 	{
-		$index = implode('.', array(self::ROOT_KEY, self::DATA_KEY, $category->getSlug()));
+		$index = implode('.', array(self::ROOT_KEY, self::DATA_KEY, $slug));
 
-		$this->cache->save($index, true, $this->lifetimes[self::DATA_KEY]);
+		$this->cache->save($index, json_encode($data), $this->lifetimes[self::DATA_KEY]);
 	}
 
 	/**
