@@ -19,6 +19,7 @@ use ThreadAndMirror\ProductsBundle\Entity\Brand;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ORM\EntityManager;
 use ThreadAndMirror\ProductsBundle\Service\BrandService;
+use ThreadAndMirror\ProductsBundle\Service\ProductService;
 
 abstract class AbstractUpdater implements UpdaterInterface
 {
@@ -40,8 +41,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/** @var array */
 	protected $cachedCategories = [];
 
-	/** @var BrandService */
-	protected $brandService;
+	/** @var ProductService */
+	protected $productService;
 
 	/** @var CategoryService */
 	protected $categoryService;
@@ -52,7 +53,7 @@ abstract class AbstractUpdater implements UpdaterInterface
         EventDispatcherInterface $dispatcher,
         EntityManager $em,
         AffiliateInterface $affiliate,
-        BrandService $brandService,
+        ProductService $productService,
 		CategoryService $categoryService
 	) {
 		$this->crawler         = $crawler;
@@ -60,7 +61,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 		$this->dispatcher      = $dispatcher;
 		$this->affiliate       = $affiliate;
 		$this->em 		       = $em;
-		$this->brandService    = $brandService;
+		$this->productService  = $productService;
 		$this->categoryService = $categoryService;
 	}
 
@@ -129,8 +130,8 @@ abstract class AbstractUpdater implements UpdaterInterface
         $product->setAffiliateUrl($this->affiliate->getAffiliateLink($url));
 
 		// Set the brand and categories from their names
-		$this->updateBrandFromBrandName($product);
-		$this->updateCategoryFromCategoryName($product);
+		$this->productService->updateBrandFromBrandName($product);
+		$this->productService->updateCategoryFromCategoryName($product);
 
         return $product;
 	}
@@ -167,8 +168,8 @@ abstract class AbstractUpdater implements UpdaterInterface
         $this->formatter->cleanupFeedProduct($product);
 
 		// Set the brand and categories from their names
-		$this->updateBrandFromBrandName($product);
-		$this->updateCategoryFromCategoryName($product);
+		$this->productService->updateBrandFromBrandName($product);
+		$this->productService->updateCategoryFromCategoryName($product);
 
 		return $product;
 	}
@@ -272,32 +273,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 	{
 		if ($product->getBrand() === null) {
 			$product->setBrandName($new->getBrandName());
-			$this->updateBrandFromBrandName($product);
-		}
-	}
-
-	/**
-	 * Update a product brand based on the brand name
-	 *
-	 * @param  Product 		$product  			The product to update
-	 */
-	public function updateBrandFromBrandName(Product $product)
-	{
-		// Get the brand name from the product
-		$brandName = $product->getBrandName();
-		$brandId   = $this->brandService->getExistingBrandId($brandName);
-
-		// Create a new brand if it doesn't exist already
-		if ($brandId !== null) {
-			$product->setBrand($this->em->getReference('ThreadAndMirrorProductsBundle:Brand', $brandId));
-		} else {
-			// Create a new brand
-			$brand = new Brand($brandName);
-			$this->em->persist($brand);
-			$this->em->flush();
-			$product->setBrand($brand);
-
-			$this->dispatcher->dispatch(BrandEvent::EVENT_ADD, new BrandEvent($brand));
+			$this->productService->updateBrandFromBrandName($product);
 		}
 	}
 
@@ -337,7 +313,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 	{
 		if ($product->getCategory() === null) {
 			$product->setCategoryName($new->getCategoryName());
-			$this->updateCategoryFromCategoryName($product);
+			$this->productService->updateCategoryFromCategoryName($product);
 		}
 	}
 
@@ -355,44 +331,11 @@ abstract class AbstractUpdater implements UpdaterInterface
 	}
 
 	/**
-	 * Update a product brand based on the brand name
-	 *
-	 * @param  Product 		$product  	The product to update
-	 */
-	public function updateCategoryFromCategoryName(Product $product)
-	{
-		// Get the category name from the product
-		$name = $product->getCategoryName();
-		$id   = $this->categoryService->getExistingCategoryId($name, true);
-
-		// Create a new category if it doesn't exist already
-		if ($id === null) {
-
-			// Guess the area if a shop is beauty or fashion only
-			$shop = $product->getShop();
-
-			if ($shop->getHasBeauty() && !$shop->getHasFashion()) {
-				$area = 'beauty';
-			} else if (!$shop->getHasBeauty() && $shop->getHasFashion()) {
-				$area = 'fashion';
-			} else {
-				$area = 'other';
-			}
-
-			$category = $this->categoryService->createCategory($name, $area);
-		} else {
-			$category = $this->categoryService->getCategory('id', $id);
-		}
-
-		$product->setCategory($category);
-		$product->setArea($category->getArea());
-	}
-
-	/**
 	 * Update a product category based on the affiliate category id
 	 *
 	 * @param  Product 		$product  			The product to update
 	 * @param  string 		$affiliateField  	The field of the category id to match
+	 *
 	 */
 	public function updateCategoryFromAffiliateCategoryId(Product $product, $affiliateField)
 	{

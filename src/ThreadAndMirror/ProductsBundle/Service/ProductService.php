@@ -4,7 +4,9 @@ namespace ThreadAndMirror\ProductsBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use ThreadAndMirror\ProductsBundle\Entity\Brand;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
+use ThreadAndMirror\ProductsBundle\Entity\Shop;
 use ThreadAndMirror\ProductsBundle\Repository\ProductRepository;
 use ThreadAndMirror\ProductsBundle\Service\Cache\ProductCache;
 
@@ -16,6 +18,8 @@ use ThreadAndMirror\ProductsBundle\Service\Cache\ProductCache;
  */
 class ProductService extends ContainerAware
 {
+	const DEFAULT_LIMIT = 1000;
+
 	/** @var EntityManager */
 	protected $em;
 
@@ -25,11 +29,24 @@ class ProductService extends ContainerAware
 	/** @var ProductCache */
 	protected $cache;
 
-	public function __construct(EntityManager $em, ProductRepository $productRepository, ProductCache $cache)
-	{
+	/** @var BrandService */
+	protected $brandService;
+
+	/** @var CategoryService */
+	protected $categoryService;
+
+	public function __construct(
+		EntityManager $em,
+        ProductRepository $productRepository,
+        ProductCache $cache,
+        BrandService $brandService,
+		CategoryService $categoryService
+	) {
 		$this->em                = $em;
 		$this->productRepository = $productRepository;
 		$this->cache             = $cache;
+		$this->brandService      = $brandService;
+		$this->categoryService   = $categoryService;
 	}
 
 	/**
@@ -100,6 +117,62 @@ class ProductService extends ContainerAware
 	}
 
 	/**
+	 * Update a product's brand based on the brand name
+	 *
+	 * @param  Product 		$product  			The product to update
+	 */
+	public function updateBrandFromBrandName(Product $product)
+	{
+		// Get the brand name from the product
+		$brandName = $product->getBrandName();
+		$brandId   = $this->brandService->getExistingBrandId($brandName);
+
+		// Create a new brand if it doesn't exist already
+		if ($brandId !== null) {
+			$product->setBrand($this->em->getReference('ThreadAndMirrorProductsBundle:Brand', $brandId));
+		} else {
+			// Create a new brand
+			$brand = new Brand($brandName);
+			$this->brandService->createBrand($brand);
+			$product->setBrand($brand);
+		}
+	}
+
+	/**
+	 * Update a product brand based on the brand name
+	 *
+	 * @param  Product 		$product  	The product to update
+	 */
+	public function updateCategoryFromCategoryName(Product $product)
+	{
+		// Get the category name from the product
+		$name = $product->getCategoryName();
+		$id   = $this->categoryService->getExistingCategoryId($name, true);
+
+		// Create a new category if it doesn't exist already
+		if ($id === null) {
+
+			// Guess the area if a shop is beauty or fashion only
+			$shop = $product->getShop();
+
+			if ($shop->getHasBeauty() && !$shop->getHasFashion()) {
+				$area = 'beauty';
+			} else if (!$shop->getHasBeauty() && $shop->getHasFashion()) {
+				$area = 'fashion';
+			} else {
+				$area = 'other';
+			}
+
+			$category = $this->categoryService->createCategory($name, $area);
+		} else {
+			$category = $this->categoryService->getCategory('id', $id);
+		}
+
+		$product->setCategory($category);
+		$product->setArea($category->getArea());
+	}
+
+	/**
 	 * Helper for getting the product cache key
 	 *
 	 * @param  Product  $product
@@ -122,5 +195,18 @@ class ProductService extends ContainerAware
 
 		// Cache the data
 		$this->cache->setData($key, $product->getJSON());
+	}
+
+	/**
+	 * Get products for a specific shop
+	 *
+	 * @param  Shop         $shop
+	 * @param  string       $area
+	 * @param  integer      $limit
+	 * @return Product[]
+	 */
+	public function getProductsForShopAndArea(Shop $shop, $area, $limit = self::DEFAULT_LIMIT)
+	{
+		$this->productRepository->findBy(['shop' => $shop, 'area' => $area], ['added' => 'DESC'], $limit);
 	}
 }

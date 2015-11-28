@@ -7,7 +7,7 @@ use ThreadAndMirror\ProductsBundle\Entity\Brand;
 
 class BrandEvent extends Event
 {
-	const EVENT_ADD = 'brand.add';
+	const EVENT_CREATE = 'brand.create';
 
 	const EVENT_UPDATE = 'brand.update';
 

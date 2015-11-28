@@ -48,12 +48,14 @@ services:
             - @doctrine.orm.entity_manager
             - @threadandmirror.products.repository.product
             - @threadandmirror.products.cache.product
+            - @threadandmirror.products.service.brand
 
     threadandmirror.products.service.brand:
         class: ThreadAndMirror\ProductsBundle\Service\BrandService
         arguments:
             - @threadandmirror.products.cache.brand
             - @threadandmirror.products.repository.brand
+            - @event_dispatcher
 
     threadandmirror.products.service.category:
         class: ThreadAndMirror\ProductsBundle\Service\CategoryService
@@ -62,6 +64,11 @@ services:
             - @threadandmirror.products.repository.category
             - @doctrine.orm.entity_manager
             - @event_dispatcher
+
+    threadandmirror.products.service.shop:
+            class: ThreadAndMirror\ProductsBundle\Service\ShopService
+            arguments:
+                - @threadandmirror.products.repository.shop
 
     # Caches
 
@@ -116,11 +123,18 @@ services:
             - ThreadAndMirrorProductsBundle:Brand
 
     threadandmirror.products.repository.category:
-            class:           ThreadAndMirror\ProductsBundle\Repository\CategoryRepository
-            factory_service: doctrine.orm.entity_manager
-            factory_method:  getRepository
-            arguments:
-                - ThreadAndMirrorProductsBundle:Category
+        class:           ThreadAndMirror\ProductsBundle\Repository\CategoryRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method:  getRepository
+        arguments:
+            - ThreadAndMirrorProductsBundle:Category
+
+    threadandmirror.products.repository.shop:
+        class:           ThreadAndMirror\ProductsBundle\Repository\ShopRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method:  getRepository
+        arguments:
+            - ThreadAndMirrorProductsBundle:Shop
 
     # Consumers
 
@@ -152,7 +166,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.net_a_porter:
@@ -163,7 +177,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.matchesfashion:
@@ -174,7 +188,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.asos:
@@ -185,7 +199,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.browns:
@@ -196,7 +210,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.farfetch:
@@ -207,7 +221,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.mytheresa:
@@ -218,7 +232,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.stylebop:
@@ -229,7 +243,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.avenue_32:
@@ -240,7 +254,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.lane_crawford:
@@ -251,7 +265,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.cult_beauty:
@@ -262,7 +276,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.urban_retreat_beautique:
@@ -273,7 +287,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.space_nk:
@@ -284,7 +298,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.lk_bennett:
@@ -295,7 +309,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.french_connection:
@@ -306,7 +320,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.liberty_london:
@@ -317,7 +331,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.john_lewis:
@@ -328,7 +342,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.escentual:
@@ -339,7 +353,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.look_fantastic:
@@ -350,7 +364,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.affiliate_window
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.young_british_designers:
@@ -361,7 +375,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.harvey_nichols:
@@ -372,7 +386,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.the_outnet:
@@ -383,7 +397,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     threadandmirror.products.updater.yoox:
@@ -394,7 +408,7 @@ services:
             - @event_dispatcher
             - @doctrine.orm.entity_manager
             - @threadandmirror.affiliate.linkshare
-            - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
     # Crawlers

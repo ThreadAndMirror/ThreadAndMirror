@@ -2,6 +2,7 @@
 
 namespace ThreadAndMirror\ProductsBundle\Controller;
 
+use Stems\PageBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -142,26 +143,22 @@ class FrontController extends BaseFrontController
 	 * @Route("/{area}/stores", name="thread_products_front_stores")
 	 * @Template()
 	 */
-	public function storesAction(Request $request, $area)
+	public function storesAction($area)
 	{
 		// Get the stores
-		if ($area === 'fashion') {
-			$stores = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('hasFashion' => true), array('name' => 'ASC'));
-		} else {
-			$stores = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findBy(array('hasBeauty' => true), array('name' => 'ASC'));
-		}
+		$stores = $this->get('threadandmirror.products.service.shop')->getShopsForArea($area);
 
 		// Load the page object from the CMS
-		$this->loadPage('{area}/stores', array(
+		$this->loadPage('{area}/stores', [
 			'title'       => ucwords($area).' Stores',
 			'windowTitle' => ucwords($area).' Stores',
-		));
+		]);
 
-		return array(
-			'area'		=> $area,
-			'stores' 	=> $stores,
-			'page'		=> $this->page,
-		);
+		return [
+			'area'   => $area,
+			'stores' => $stores,
+			'page'   => $this->page,
+		];
 	}
 
 	/**
@@ -173,24 +170,24 @@ class FrontController extends BaseFrontController
 	public function storeAction(Request $request, $slug, $area)
 	{
 		// Get the products
-		$shop     = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findOneBySlug($slug);
-		$products = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findBy(array('shop' => $shop, 'area' => $area), array('added' => 'DESC'), 3000);
+		$shop     = $this->get('threadandmirror.products.service.shop')->getShop($slug);
+		$products = $this->get('threadandmirror.products.service.product')->getProductsForShopAndArea($shop, $area);
 
 		// Paginate the result
-		$data = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));
+		$data = $this->get('stems.core.pagination')->paginate($products, $request, ['maxPerPage' => 100]);
 
 		// Load the page object from the CMS
-		$this->loadPage('{area}/stores/{slug}/products', array(
+		$this->loadPage('{area}/stores/{slug}/products', [
 			'title' 	  => ucfirst($area).' at '.$shop->getName(),
 			'windowTitle' => ucfirst($area).' at '.$shop->getName(),
-		));
+		]);
 
 		// Load the page object from the CMS
-		return array(
+		return [
 			'products' 	=> $data,
 			'page'		=> $this->page,
 			'shop'		=> $shop,
-		);
+		];
 	}
 
 	/**
@@ -200,8 +197,8 @@ class FrontController extends BaseFrontController
 	 */
 	public function storeWebsiteAction(Request $request, $slug)
 	{
-		// Get the stores
-		$shop = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->findOneBySlug($slug);
+		// Get the shop
+		$shop = $this->get('threadandmirror.products.service.shop')->getShop($slug);
 
 		// Redirect to their site
 		return $this->redirect($shop->getFrontendUrl());
@@ -244,7 +241,7 @@ class FrontController extends BaseFrontController
 	public function brandAction(Request $request, Brand $brand, $area)
 	{
 		// Get the products
-		$products = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findBy(array('brand' => $brand, 'area' => $area), array('added' => 'DESC'), 3000);
+		$products = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findBy(array('brand' => $brand, 'area' => $area), array('added' => 'DESC'), 1000);
 
 		// Paginate the result
 		$data = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));
@@ -272,7 +269,7 @@ class FrontController extends BaseFrontController
 	{
 		// Get the product
 		$category = $this->em->getRepository('ThreadAndMirrorProductsBundle:Category')->findOneBy(array('slug' => $category));
-		$products = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findBy(array('brand' => $brand, 'category' => $category), array('added' => 'DESC'), 3000);
+		$products = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findBy(array('brand' => $brand, 'category' => $category), array('added' => 'DESC'), 1000);
 
 		// Paginate the result
 		$data = $this->get('stems.core.pagination')->paginate($products, $request, array('maxPerPage' => 100));

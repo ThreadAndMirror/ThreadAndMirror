@@ -3,7 +3,9 @@
 namespace ThreadAndMirror\ProductsBundle\Service;
 
 use Doctrine\ORM\NoResultException;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use ThreadAndMirror\ProductsBundle\Entity\Brand;
+use ThreadAndMirror\ProductsBundle\Event\BrandEvent;
 use ThreadAndMirror\ProductsBundle\Repository\BrandRepository;
 use ThreadAndMirror\ProductsBundle\Service\Cache\BrandCache;
 
@@ -15,10 +17,14 @@ class BrandService
 	/** @var BrandRepository */
 	protected $brandRepository;
 
-	public function __construct(BrandCache $cache, BrandRepository $brandRepository)
+	/** @var EventDispatcher */
+	protected $dispatcher;
+
+	public function __construct(BrandCache $cache, BrandRepository $brandRepository, EventDispatcher $dispatcher)
 	{
 		$this->cache           = $cache;
 		$this->brandRepository = $brandRepository;
+		$this->dispatcher      = $dispatcher;
 	}
 
 	/**
@@ -53,5 +59,13 @@ class BrandService
 	public function cacheBrand(Brand $brand)
 	{
 		$this->cache->setData($brand->getSlug(), $brand->getJson());
+	}
+
+	/**
+	 * Create a new brand
+	 */
+	public function createBrand(Brand $brand)
+	{
+		$this->dispatcher->dispatch(BrandEvent::EVENT_CREATE, new BrandEvent($brand));
 	}
 }

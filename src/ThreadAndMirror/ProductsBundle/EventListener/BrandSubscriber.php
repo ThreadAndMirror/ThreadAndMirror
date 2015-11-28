@@ -2,11 +2,11 @@
 
 namespace ThreadAndMirror\ProductsBundle\EventListener;
 
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use ThreadAndMirror\ProductsBundle\Event\BrandEvent;
 use ThreadAndMirror\ProductsBundle\Service\BrandService;
-use ThreadAndMirror\ProductsBundle\Service\Cache\BrandCache;
 
-class BrandListener
+class BrandSubscriber implements EventSubscriberInterface
 {
 	/** @var BrandService */
 	protected $brandService;
@@ -17,7 +17,17 @@ class BrandListener
 	}
 
 	/**
-	 * On brand.create
+	 * {@inheritdoc}
+	 */
+	public static function getSubscribedEvents()
+	{
+		return [
+			BrandEvent::EVENT_CREATE => 'onCreate'
+		];
+	}
+
+	/**
+	 * On create brand
 	 *
 	 * @param BrandEvent $event
 	 */
