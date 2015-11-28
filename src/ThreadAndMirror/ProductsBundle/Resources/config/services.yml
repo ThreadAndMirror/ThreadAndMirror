@@ -41,7 +41,7 @@ services:
     # Manager Services
 
     threadandmirror.products.service.product:
-        class:           ThreadAndMirror\ProductsBundle\Service\ProductService
+        class: ThreadAndMirror\ProductsBundle\Service\ProductService
         calls:
             - [setContainer, ['@service_container']]
         arguments:
@@ -49,6 +49,8 @@ services:
             - @threadandmirror.products.repository.product
             - @threadandmirror.products.cache.product
             - @threadandmirror.products.service.brand
+            - @threadandmirror.products.service.category
+            - @event_dispatcher
 
     threadandmirror.products.service.brand:
         class: ThreadAndMirror\ProductsBundle\Service\BrandService
@@ -56,6 +58,7 @@ services:
             - @threadandmirror.products.cache.brand
             - @threadandmirror.products.repository.brand
             - @event_dispatcher
+            - @doctrine.orm.entity_manager
 
     threadandmirror.products.service.category:
         class: ThreadAndMirror\ProductsBundle\Service\CategoryService
@@ -90,21 +93,17 @@ services:
             - @doctrine_cache.providers.redis_cache
             - { data: 86600 }
 
-    # Listeners
+    # Subcribers
 
-    threadandmirror.products.listener.product:
-        class: ThreadAndMirror\ProductsBundle\EventListener\ProductListener
+    threadandmirror.products.subscriber.product:
+        class: ThreadAndMirror\ProductsBundle\EventListener\ProductSubscriber
         arguments:
             - @threadandmirror.products.service.product
-        tags:
-            - { name: kernel.event_listener, event: product.create, method: onCreate }
 
-    threadandmirror.products.listener.brand:
-        class: ThreadAndMirror\ProductsBundle\EventListener\BrandListener
+    threadandmirror.products.subscriber.brand:
+        class: ThreadAndMirror\ProductsBundle\EventListener\BrandSubscriber
         arguments:
             - @threadandmirror.products.service.brand
-        tags:
-            - { name: kernel.event_listener, event: brand.create, method: onCreate }
 
     # Repositories
 

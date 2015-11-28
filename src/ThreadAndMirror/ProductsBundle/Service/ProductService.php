@@ -4,9 +4,11 @@ namespace ThreadAndMirror\ProductsBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use ThreadAndMirror\ProductsBundle\Entity\Brand;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Entity\Shop;
+use ThreadAndMirror\ProductsBundle\Event\ProductEvent;
 use ThreadAndMirror\ProductsBundle\Repository\ProductRepository;
 use ThreadAndMirror\ProductsBundle\Service\Cache\ProductCache;
 
@@ -35,18 +37,23 @@ class ProductService extends ContainerAware
 	/** @var CategoryService */
 	protected $categoryService;
 
+	/** @var EventDispatcherInterface */
+	protected $dispatcher;
+
 	public function __construct(
 		EntityManager $em,
         ProductRepository $productRepository,
         ProductCache $cache,
         BrandService $brandService,
-		CategoryService $categoryService
+		CategoryService $categoryService,
+		EventDispatcherInterface $dispatcher
 	) {
 		$this->em                = $em;
 		$this->productRepository = $productRepository;
 		$this->cache             = $cache;
 		$this->brandService      = $brandService;
 		$this->categoryService   = $categoryService;
+		$this->dispatcher        = $dispatcher;
 	}
 
 	/**
@@ -89,15 +96,7 @@ class ProductService extends ContainerAware
 
 		return null;
 	}
-
-	/**
-	 * Update an existing product
-	 */
-	public function updateProduct($product)
-	{
-		return $this->getProductFromUrl($product->getUrl());
-	}
-
+	
 	/**
 	 * Check whether a product already exists
 	 *
@@ -208,5 +207,31 @@ class ProductService extends ContainerAware
 	public function getProductsForShopAndArea(Shop $shop, $area, $limit = self::DEFAULT_LIMIT)
 	{
 		$this->productRepository->findBy(['shop' => $shop, 'area' => $area], ['added' => 'DESC'], $limit);
+	}
+
+	/**
+	 * Create a new product
+	 *
+	 * @param Product     $product
+	 */
+	public function createProduct(Product $product)
+	{
+		$this->dispatcher->dispatch(ProductEvent::EVENT_CREATE, new ProductEvent($product));
+
+		$this->em->persist($product);
+		$this->em->flush();
+	}
+
+	/**
+	 * Update a product
+	 *
+	 * @param Product     $product
+	 */
+	public function updateProduct(Product $product)
+	{
+		$this->dispatcher->dispatch(ProductEvent::EVENT_UPDATE, new ProductEvent($product));
+
+		$this->em->persist($product);
+		$this->em->flush();
 	}
 }

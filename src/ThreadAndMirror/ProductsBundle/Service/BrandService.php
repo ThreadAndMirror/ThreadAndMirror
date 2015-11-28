@@ -2,8 +2,9 @@
 
 namespace ThreadAndMirror\ProductsBundle\Service;
 
-use Doctrine\ORM\NoResultException;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use ThreadAndMirror\ProductsBundle\Entity\Brand;
 use ThreadAndMirror\ProductsBundle\Event\BrandEvent;
 use ThreadAndMirror\ProductsBundle\Repository\BrandRepository;
@@ -17,14 +18,18 @@ class BrandService
 	/** @var BrandRepository */
 	protected $brandRepository;
 
-	/** @var EventDispatcher */
+	/** @var EventDispatcherInterface */
 	protected $dispatcher;
 
-	public function __construct(BrandCache $cache, BrandRepository $brandRepository, EventDispatcher $dispatcher)
+	/** @var EntityManager */
+	protected $em;
+
+	public function __construct(BrandCache $cache, BrandRepository $brandRepository, EventDispatcherInterface $dispatcher, EntityManager $em)
 	{
 		$this->cache           = $cache;
 		$this->brandRepository = $brandRepository;
 		$this->dispatcher      = $dispatcher;
+		$this->em              = $em;
 	}
 
 	/**
@@ -63,9 +68,27 @@ class BrandService
 
 	/**
 	 * Create a new brand
+	 *
+	 * @param Brand     $brand
 	 */
 	public function createBrand(Brand $brand)
 	{
 		$this->dispatcher->dispatch(BrandEvent::EVENT_CREATE, new BrandEvent($brand));
+
+		$this->em->persist($brand);
+		$this->em->flush();
+	}
+
+	/**
+	 * Update a brand
+	 *
+	 * @param Brand     $brand
+	 */
+	public function updateBrand(Brand $brand)
+	{
+		$this->dispatcher->dispatch(BrandEvent::EVENT_UPDATE, new BrandEvent($brand));
+
+		$this->em->persist($brand);
+		$this->em->flush();
 	}
 }
