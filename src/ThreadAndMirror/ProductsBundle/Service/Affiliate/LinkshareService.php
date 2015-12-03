@@ -208,12 +208,17 @@ class LinkshareService implements AffiliateInterface
 		foreach ($data as $datum) {
 
 			// Create the product from the data
-			$product = $updater->createProductFromFeed($datum, $shop);
+			try {
+				$product = $updater->createProductFromFeed($datum, $shop);
+			} catch (\Exception $e) {
+				// Discard products with erroneous data
+				continue;
+			}
 
 			// Check whether the product already exists
-//			if ($this->productService->checkProductExists($product)) {
-//				continue;
-//			}
+			if ($this->productService->checkProductExists($product)) {
+				continue;
+			}
 
 			// Ignore any men's products
 			if (in_array($datum['meta_data']['linkshare_primary'], ['MEN', 'SALE-MEN', 'MENS-ACCESSORIES'])) {
@@ -222,6 +227,7 @@ class LinkshareService implements AffiliateInterface
 
 			// Set the remaining product data
 			$product->setArea($product->getCategory()->getArea());
+			$product->setNew(true);
 
 			$this->em->persist($product);
 			$this->logger->info('Product added from feed: '.$this->productService->getProductCacheKey($product));

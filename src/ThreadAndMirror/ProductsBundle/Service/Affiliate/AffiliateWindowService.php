@@ -249,6 +249,7 @@ class AffiliateWindowService implements AffiliateInterface
 
 			// Set the remaining product data
 			$product->setArea($area);
+			$product->setNew(true);
 
 			// Persist if doesn't exist
 			$this->em->persist($product);
