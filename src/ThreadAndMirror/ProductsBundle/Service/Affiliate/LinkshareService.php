@@ -212,6 +212,7 @@ class LinkshareService implements AffiliateInterface
 				$product = $updater->createProductFromFeed($datum, $shop);
 			} catch (\Exception $e) {
 				// Discard products with erroneous data
+				$this->logger->error('Could not create product from feed: '.$e->getMessage().' - data: '.json_encode($datum));
 				continue;
 			}
 

@@ -238,9 +238,9 @@ class AffiliateWindowService implements AffiliateInterface
 				$product = $updater->createProductFromFeed($datum, $owner);
 			} catch (\Exception $e) {
 				// Discard products with erroneous data
+				$this->logger->error('Could not create product from feed: '.$e->getMessage().' - data: '.json_encode($datum));
 				continue;
 			}
-
 
 			// Check whether the product already exists
 			if ($this->productService->checkProductExists($product)) {
