@@ -234,7 +234,13 @@ class AffiliateWindowService implements AffiliateInterface
 			}
 
 			// Create the product from the data
-			$product = $updater->createProductFromFeed($datum, $owner);
+			try {
+				$product = $updater->createProductFromFeed($datum, $owner);
+			} catch (\Exception $e) {
+				// Discard products with erroneous data
+				continue;
+			}
+
 
 			// Check whether the product already exists
 			if ($this->productService->checkProductExists($product)) {
