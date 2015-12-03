@@ -99,11 +99,15 @@ services:
         class: ThreadAndMirror\ProductsBundle\EventListener\ProductSubscriber
         arguments:
             - @threadandmirror.products.service.product
+        tags:
+            - { name: kernel.event_subscriber }
 
     threadandmirror.products.subscriber.brand:
         class: ThreadAndMirror\ProductsBundle\EventListener\BrandSubscriber
         arguments:
             - @threadandmirror.products.service.brand
+        tags:
+            - { name: kernel.event_subscriber }
 
     # Repositories
 

@@ -538,6 +538,12 @@ abstract class AbstractFormatter implements FormatterInterface
 		$this->subject = explode($delimiter, $this->subject);
 
 		if ($keep !== null) {
+
+			// Throw an exception if the keep key doesn't exist
+			if (!array_key_exists($keep, $this->subject)) {
+				throw new \InvalidArgumentException('Key '.$keep.' cannot be kept from '.json_encode($this->subject));
+			}
+
 			$this->subject = $this->subject[$keep];
 		}
 
