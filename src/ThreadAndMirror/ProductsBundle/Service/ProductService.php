@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use ThreadAndMirror\ProductsBundle\Entity\Brand;
+use ThreadAndMirror\ProductsBundle\Entity\Category;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Entity\Shop;
 use ThreadAndMirror\ProductsBundle\Event\ProductEvent;
@@ -162,7 +163,11 @@ class ProductService extends ContainerAware
 				$area = 'other';
 			}
 
-			$category = $this->categoryService->createCategory($name, $area);
+			$category = new Category();
+			$category->setName($name);
+			$category->setArea($area);
+			$this->categoryService->createCategory($category);
+
 		} else {
 			$category = $this->categoryService->getCategory('id', $id);
 		}
