@@ -365,7 +365,7 @@ div+.pagination {
     height: 24px;
     font-size: 14px;
     width: 24px;
-    margin: 0 1px 0 0;
+    margin: 0 1px;
     text-align: center;
     font-weight: 600;
     cursor: pointer;
