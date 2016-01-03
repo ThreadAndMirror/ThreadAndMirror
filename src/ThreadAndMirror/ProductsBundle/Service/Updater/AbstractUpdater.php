@@ -9,6 +9,7 @@ use ThreadAndMirror\ProductsBundle\Event\CategoryEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductNewSizesInStockEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductNowOnSaleEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductFurtherReductionsEvent;
+use ThreadAndMirror\ProductsBundle\Exception\ProductParseException;
 use ThreadAndMirror\ProductsBundle\Service\CategoryService;
 use ThreadAndMirror\ProductsBundle\Service\Crawler\AbstractCrawler;
 use ThreadAndMirror\ProductsBundle\Service\Formatter\AbstractFormatter;
@@ -105,12 +106,21 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * For creating a new product from a crawl
 	 *
-	 * @param  string 	$url 		The product's url
+	 * @param  string 	    $url 		The product's url
+	 * @throws ProductParseException
 	 */
 	public function createProductFromCrawl($url) 
 	{
 		// Find the shop
 		$shop = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->getShopFromUrl($url);
+
+		if (!$shop) {
+			throw new ProductParseException('Shop could not be found for the given url.');
+		}
+
+		if (!$shop->isCrawlable()) {
+			throw new ProductParseException('Shop is not flagged as crawlable for the given url.');
+		}
 
 		// Run the product crawler
 		$product = $this->crawler->crawl($url);
@@ -132,6 +142,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 		// Set the brand and categories from their names
 		$this->productService->updateBrandFromBrandName($product);
 		$this->productService->updateCategoryFromCategoryName($product);
+		$this->productService->createProduct($product);
 
         return $product;
 	}

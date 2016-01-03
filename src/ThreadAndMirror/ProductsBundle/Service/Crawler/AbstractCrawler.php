@@ -7,12 +7,11 @@ use Symfony\Bridge\Monolog\Logger;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Exception\CrawlException;
 use ThreadAndMirror\ProductsBundle\Definition\CrawlerInterface;
+use ThreadAndMirror\ProductsBundle\Exception\ProductParseException;
 
 abstract class AbstractCrawler implements CrawlerInterface
 {
-	/**
-	 * @var The Client for making requests
-	 */
+	/** @var Browser */
 	protected $client;
 
 	/**
@@ -54,53 +53,73 @@ abstract class AbstractCrawler implements CrawlerInterface
 				$product->setUrl($this->getUrl($crawler));
 			}
 		} catch (\Exception $e) {
-			$this->logger->error('Crawl Error getting Url - '.$url.' - '.$e->getMessage());
+			$message = 'Crawl Error getting Url - '.$url.' - '.$e->getMessage();
+			$this->logger->error($message);
+			throw new ProductParseException($message);
 		}
 
 		try {
 			$product->setName($this->getName($crawler));
 		} catch (\Exception $e) {
-			$this->logger->error('Crawl Error getting Name - '.$url.' - '.$e->getMessage());
+			$message = 'Crawl Error getting Name - '.$url.' - '.$e->getMessage();
+			$this->logger->error($message);
+			throw new ProductParseException($message);
 		} 
 		try {
 			$product->setBrandName($this->getBrandName($crawler));
 		} catch (\Exception $e) {
-			$this->logger->error('Crawl Error getting Brand - '.$url.' - '.$e->getMessage());
+			$message = 'Crawl Error getting Brand - '.$url.' - '.$e->getMessage();
+			$this->logger->error($message);
+			throw new ProductParseException($message);
 		} 
 		try {
 			$product->setCategoryName($this->getCategoryName($crawler));
 		} catch (\Exception $e) {
-			$this->logger->error('Crawl Error getting Category - '.$url.' - '.$e->getMessage());
+			$message = 'Crawl Error getting Category - '.$url.' - '.$e->getMessage();
+			$this->logger->error($message);
+			throw new ProductParseException($message);
 		}
 		try {
 			$product->setPid($this->getPid($crawler));
 		} catch (\Exception $e) {
-			$this->logger->error('Crawl Error getting Pid - '.$url.' - '.$e->getMessage());
+			$message = 'Crawl Error getting Pid - '.$url.' - '.$e->getMessage();
+			$this->logger->error($message);
+			throw new ProductParseException($message);
 		}
 		try {
 			$product->setDescription($this->getDescription($crawler));
 		} catch (\Exception $e) {
-			$this->logger->error('Crawl Error getting Description - '.$url.' - '.$e->getMessage());
+			$message = 'Crawl Error getting Description - '.$url.' - '.$e->getMessage();
+			$this->logger->error($message);
+			throw new ProductParseException($message);
 		}
 		try {
 			$product->setNow($this->getNow($crawler));
 		} catch (\Exception $e) {
-			$this->logger->error('Crawl Error getting Now - '.$url.' - '.$e->getMessage());
+			$message = 'Crawl Error getting Now - '.$url.' - '.$e->getMessage();
+			$this->logger->error($message);
+			throw new ProductParseException($message);
 		}
 		try {
 			$product->setImages($this->getImages($crawler));
 		} catch (\Exception $e) {
-			$this->logger->error('Crawl Error getting Images - '.$url.' - '.$e->getMessage());
+			$message = 'Crawl Error getting Images - '.$url.' - '.$e->getMessage();
+			$this->logger->error($message);
+			throw new ProductParseException($message);
 		}
 		try {
 			$product->setPortraits($this->getPortraits($crawler));
 		} catch (\Exception $e) {
-			$this->logger->error('Crawl Error getting Images - '.$url.' - '.$e->getMessage());
+			$message = 'Crawl Error getting Images - '.$url.' - '.$e->getMessage();
+			$this->logger->error($message);
+			throw new ProductParseException($message);
 		}
 		try {
 			$product->setThumbnails($this->getThumbnails($crawler));
 		} catch (\Exception $e) {
-			$this->logger->error('Crawl Error getting Thumbnails - '.$url.' - '.$e->getMessage());
+			$message = 'Crawl Error getting Thumbnails - '.$url.' - '.$e->getMessage();
+			$this->logger->error($message);
+			throw new ProductParseException($message);
 		}
 
 		// Non-critical, so don't throw exception

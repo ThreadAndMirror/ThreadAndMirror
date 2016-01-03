@@ -27,42 +27,42 @@ class NetAPorterCrawler extends AbstractCrawler
 
 	protected function getName(DomCrawler $crawler)
 	{
-		return $this->getTextFromElement($crawler, '#product-details h1');
+		return $this->getTextFromElement($crawler, '#main-product h1');
 	}
 
 	protected function getBrandName(DomCrawler $crawler)
 	{
-		return $this->getTextFromElement($crawler, '#product-details h2 a');
+		return $this->getTextFromElement($crawler, '#main-product h2.product-name');
 	}
 
 	protected function getCategoryName(DomCrawler $crawler)
 	{
-		return $this->getTextFromElement($crawler, '#viewMoreCategory');
+		return $this->getTextFromElement($crawler, '.view-more ul li a', 1);
 	}
 
 	protected function getPid(DomCrawler $crawler)
 	{
-		return $this->getDataFromElement($crawler, '#product-details', 'pid');
+		return $this->getTextFromElement($crawler, '#main-product .product-code span');
 	}
 
 	protected function getDescription(DomCrawler $crawler)
 	{
-		return $this->getTextFromElement($crawler, '#editors-notes-content p', 0);
+		return $this->getTextFromElement($crawler, '.editors-notes .wrapper p', 0);
 	}
 
 	protected function getNow(DomCrawler $crawler)
 	{
-		return $this->getTextFromAlternatingElements($crawler, '#product-details .price .now', '#product-details .price > span');
+		return $this->getAttributeFromElement($crawler, '#main-product nap-product-price', 'price');
 	}
 
 	protected function getWas(DomCrawler $crawler)
 	{
-		return $this->getTextFromAlternatingElements($crawler, '#product-details .price .was', null);
+		return $this->getAttributeFromElement($crawler, '#main-product nap-product-price', 'price');
 	}
 
 	protected function getImages(DomCrawler $crawler)
 	{
-		return $this->getSrcFromList($crawler, '#thumbnails-container img');
+		return $this->getSrcFromList($crawler, '#swiper-slide .thumbnail-image');
 	}
 
 	protected function getAvailableSizes(DomCrawler $crawler) 

@@ -14,6 +14,7 @@ use ThreadAndMirror\ProductsBundle\Entity\SectionProduct;
 use ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use ThreadAndMirror\ProductsBundle\Exception\ProductParseException;
 use ThreadAndMirror\ProductsBundle\Form\SectionProductType;
 
 class RestController extends BaseRestController
@@ -437,16 +438,12 @@ class RestController extends BaseRestController
 	 */
 	public function addProductToSectionAction(Request $request, SectionProduct $section, $repository = 'StemsBlogBundle:Section')
 	{
-		// Get the url from the query paramter and attempt to parse the product
-		$em      = $this->getDoctrine()->getManager();
-		$link    = $em->getRepository($repository)->findOneBy(array('entity' => $section->getId(), 'type' => 'product'));
-		$product = $this->get('threadandmirror.products.service.product')->getProductFromUrl($request->get('url'));
+		// Get the url from the query parameter and attempt to parse the product
+		$em   = $this->getDoctrine()->getManager();
+		$link = $em->getRepository($repository)->findOneBy(['entity' => $section->getId(), 'type' => 'product']);
 
-		// If we manage to parse a product from the url then create the product listing for the gallery
-		if (is_object($product)) {
-
-			// Save the product as it may not already exist in the database
-			$em->persist($product);
+		try {
+			$product = $this->get('threadandmirror.products.service.product')->getProductFromUrl($request->get('url'));
 
 			// Update the new section with the new product data
 			$section->updateFromProduct($product);
@@ -474,8 +471,9 @@ class RestController extends BaseRestController
 			);
 
 			return $this->addMeta($meta)->setCallback('updateSectionForm')->success('Image updated.')->sendResponse();
-		} else {
-			return $this->error('We could not load a product using that link.', true)->sendResponse();
+
+		} catch (ProductParseException $e) {
+			return $this->error($e->getMessage(), true)->sendResponse();
 		}
 	}
 }

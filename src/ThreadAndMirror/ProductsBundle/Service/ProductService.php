@@ -10,6 +10,7 @@ use ThreadAndMirror\ProductsBundle\Entity\Category;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Entity\Shop;
 use ThreadAndMirror\ProductsBundle\Event\ProductEvent;
+use ThreadAndMirror\ProductsBundle\Exception\ProductParseException;
 use ThreadAndMirror\ProductsBundle\Repository\ProductRepository;
 use ThreadAndMirror\ProductsBundle\Service\Cache\ProductCache;
 
@@ -62,40 +63,22 @@ class ProductService extends ContainerAware
 	 *
 	 * @param  string 		$url 		The url of the product page
 	 * @return Product
+	 * @throws ProductParseException
 	 */
 	public function getProductFromUrl($url)
 	{
-		// Check which shop the url is from
+		// Find the shop
 		$shop = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->getShopFromUrl($url);
 
 		if (!$shop) {
-			return null;
+			throw new ProductParseException('Shop could not be found for the given url.');
 		}
 
 		// Crawl the product
-		if ($shop->isCrawlable()) {
+		/** @var Product $product */
+		$product = $this->container->get($shop->getUpdaterName())->createProductFromCrawl($url);
 
-			/** @var Product $product */
-			$product = $this->container->get($shop->getUpdaterName())->createProductFromCrawl($url);
-
-			if (!is_object($product)) {
-				return null;
-			}
-
-			// See if a product already exists with that SKU and shop
-			// @todo change this to use cache to find the uid and/or sku (both?)
-			$existing = $this->productRepository->findOneBy(['shop' => $shop, 'pid' => $product->getPid()]);
-
-			if ($existing !== null) {
-				return $existing;
-			}
-
-			$product->setShop($shop);
-
-			return $product;
-		}
-
-		return null;
+		return $product;
 	}
 	
 	/**

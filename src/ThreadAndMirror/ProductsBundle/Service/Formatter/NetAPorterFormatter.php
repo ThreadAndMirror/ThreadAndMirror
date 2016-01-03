@@ -203,6 +203,38 @@ class NetAPorterFormatter extends AbstractFormatter
 	/**
 	 * {@inheritdoc}
 	 */
+	protected function cleanupCrawledNow(Product $product)
+	{
+		$data = json_decode($product->getNow(), true);
+
+		if (array_key_exists('original', $data)) {
+			$result = $data['original']['gross'] / $data['divisor'];
+		} else {
+			$result = $data['gross'] / $data['divisor'];
+		}
+
+		$product->setNow($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupCrawledWas(Product $product)
+	{
+		$data = json_decode($product->getWas(), true);
+
+		if (array_key_exists('original', $data)) {
+			$result = $data['gross'] / $data['divisor'];
+		} else {
+			$result = null;
+		}
+
+		$product->setWas($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product)
 	{
 		$result = $this
