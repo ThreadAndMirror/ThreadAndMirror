@@ -238,7 +238,7 @@ class NetAPorterFormatter extends AbstractFormatter
 	protected function cleanupCrawledImages(Product $product)
 	{
 		$result = $this
-			->format($product->getImages())
+			->format($product->getThumbnails())
 			->prepend('http:')
 			->replace('_xs', '_pp')
 			->result();
@@ -251,9 +251,8 @@ class NetAPorterFormatter extends AbstractFormatter
 	 */
 	protected function cleanupCrawledPortraits(Product $product)
 	{
-
 		$result = $this
-			->format($product->getPortraits())
+			->format($product->getThumbnails())
 			->prepend('http:')
 			->replace('_xs', '_m')
 			->result();

@@ -60,9 +60,9 @@ class NetAPorterCrawler extends AbstractCrawler
 		return $this->getAttributeFromElement($crawler, '#main-product nap-product-price', 'price');
 	}
 
-	protected function getImages(DomCrawler $crawler)
+	protected function getThumbnails(DomCrawler $crawler)
 	{
-		return $this->getSrcFromList($crawler, '#swiper-slide .thumbnail-image');
+		return $this->getSrcFromList($crawler, '.thumbnails .thumbnail-image');
 	}
 
 	protected function getAvailableSizes(DomCrawler $crawler) 

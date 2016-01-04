@@ -454,21 +454,21 @@ class RestController extends BaseRestController
 			$form = $this->createForm(new SectionProductType($link), $section);
 
 			// Render the section form and preview html with the valid values
-			$formHtml = $this->renderView('ThreadAndMirrorProductsBundle:Section:productHiddenForm.html.twig', array(
-				'form' => $form->createView(),
-			));
+			$formHtml = $this->renderView('ThreadAndMirrorProductsBundle:Section:productHiddenForm.html.twig', [
+				'form' => $form->createView()
+			]);
 
-			$previewHtml = $this->renderView('ThreadAndMirrorProductsBundle:Section:productPreview.html.twig', array(
-				'section' => $section,
-			));
+			$previewHtml = $this->renderView('ThreadAndMirrorProductsBundle:Section:productPreview.html.twig', [
+				'section' => $section
+			]);
 
 			// Set the meta data for the update callback
-			$meta = array(
+			$meta = [
 				'type'        => 'product',
 				'section'     => $section->getId(),
 				'formHtml'    => $formHtml,
 				'previewHtml' => $previewHtml
-			);
+			];
 
 			return $this->addMeta($meta)->setCallback('updateSectionForm')->success('Image updated.')->sendResponse();
 
