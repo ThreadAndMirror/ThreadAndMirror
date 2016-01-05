@@ -3,10 +3,12 @@
 {% block content %}
     <div class="{{ section.position }}" itemscope itemtype="http://schema.org/Product">
         <a href="{{ section.url }}" itemprop="url">
-            {% if section.effect == 'cutout' %}
-                <img src="{{ getImageFromUrl(section.image).src|transparentColor }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
-            {% else %}
-                <img class="{% if section.effect != 'none' %}css-filter-{{ section.effect }}{% endif %}" src="{{ getImageFromUrl(section.image).src|imagine_filter('section_image_large') }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
+            {% if section.image is not empty %}
+                {% if section.effect == 'cutout' %}
+                    <img src="{{ getImageFromUrl(section.image).src|transparentColor }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
+                {% else %}
+                    <img class="{% if section.effect != 'none' %}css-filter-{{ section.effect }}{% endif %}" src="{{ getImageFromUrl(section.image).src|imagine_filter('section_image_large') }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
+                {% endif %}
             {% endif %}
         </a>
     </div>

@@ -4,8 +4,6 @@ namespace ThreadAndMirror\ProductsBundle\Service\Updater;
 
 use ThreadAndMirror\ProductsBundle\Entity\Category;
 use ThreadAndMirror\ProductsBundle\Entity\Shop;
-use ThreadAndMirror\ProductsBundle\Event\BrandEvent;
-use ThreadAndMirror\ProductsBundle\Event\CategoryEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductNewSizesInStockEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductNowOnSaleEvent;
 use ThreadAndMirror\ProductsBundle\Event\ProductFurtherReductionsEvent;
@@ -16,10 +14,8 @@ use ThreadAndMirror\ProductsBundle\Service\Formatter\AbstractFormatter;
 use ThreadAndMirror\ProductsBundle\Definition\UpdaterInterface;
 use ThreadAndMirror\ProductsBundle\Definition\AffiliateInterface;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
-use ThreadAndMirror\ProductsBundle\Entity\Brand;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ORM\EntityManager;
-use ThreadAndMirror\ProductsBundle\Service\BrandService;
 use ThreadAndMirror\ProductsBundle\Service\ProductService;
 
 abstract class AbstractUpdater implements UpdaterInterface

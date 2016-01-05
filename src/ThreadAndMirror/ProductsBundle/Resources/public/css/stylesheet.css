@@ -1738,6 +1738,13 @@ section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
 	font-size: 13px;
 }
 
+.section-image .squared .image-caption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: #000;
+}
+
 .section-image.unpinned > div {
     width: 100% !important;
     height: 100% !important;
