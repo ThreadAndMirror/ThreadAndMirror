@@ -95,17 +95,4 @@ $(document).ready(function() {
 		$(this).parent().remove();
 	});
 
-    /**
-     * Update layout span based on blog post type
-     */
-    $('#admin_post_type_category').on('change', function(){
-        if ($(this).val() == 1) {
-            updateLayoutEditorSpan(2);
-            updateLayoutEditorHeight();
-        } else {
-            updateLayoutEditorSpan(4);
-            updateLayoutEditorHeight();
-        }
-    });
-
 });
