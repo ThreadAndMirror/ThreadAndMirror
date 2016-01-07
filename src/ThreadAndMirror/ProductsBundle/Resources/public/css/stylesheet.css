@@ -650,6 +650,15 @@ div+.pagination {
     letter-spacing: 3px;
 }
 
+.layout-banner-inset .banner-wrapper .banner-inset p.accreditation {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    color: #FFF;
+    opacity: 0.5;
+    font-size: 10px;
+}
+
 .layout-banner-inset .banner-inset .banner-thumbnail {
 	border: 3px solid #FFFFFF;
 	border-radius: 60px;
