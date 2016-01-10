@@ -1281,8 +1281,21 @@ div+.pagination {
 }
 
 .article section h4,
+.article section h5,
 .article section h6 {
 	margin: 0;
+}
+
+.article section.text-align-center h4,
+.article section.text-align-center h5,
+.article section.text-align-center h6 {
+    text-align: center;
+}
+
+.article section.text-align-right h4,
+.article section.text-align-right h5,
+.article section.text-align-right h6 {
+    text-align: right;
 }
 
 .article section h4 {
@@ -1297,11 +1310,14 @@ div+.pagination {
 }
 
 .article section h6 {
-	font-family: 'Linotype Didot W01', serif;
-	letter-spacing: -1px;	
-	font-weight: 400;
-	font-size: 20px;
-	text-transform: uppercase;
+    font-family: 'Linotype Didot W01',serif;
+    display: block;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 200;
+    margin-top: 5px;
+    letter-spacing: -1px;
+    font-style: italic;
 }
 
 .article section h6 span { 
@@ -1319,10 +1335,6 @@ div+.pagination {
 
 .article section p {
 	margin: 0 0 15px 0;
-}
-
-.article section a:hover {
-	color: #f93124;
 }
 
 .article section ul {
