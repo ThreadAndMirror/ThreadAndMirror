@@ -44,16 +44,13 @@ i {
 
 a {
 	text-decoration:none;
-	color:#222222;
+	color:#000;
+    font-weight: 600;
 }
 
 a:hover {
 	text-decoration:none;
-	color:#f93124;
-}
-
-.article a {
-	font-weight: 400;
+	color:#777;
 }
 
 .right {
