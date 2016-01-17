@@ -170,6 +170,7 @@ assetic:
             inputs:
                 - '@StemsCoreBundle/Resources/public/css/front/vendor/*'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/stylesheet.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/header-bar.css'
     filters:
         cssrewrite: ~
         less: ~

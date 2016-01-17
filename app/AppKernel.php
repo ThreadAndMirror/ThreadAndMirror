@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Stems\SocialBundle\StemsSocialBundle(),
             new Stems\MediaBundle\StemsMediaBundle(),
             new Stems\PollBundle\StemsPollBundle(),
+	        new ThreadAndMirror\CoreBundle\ThreadAndMirrorCoreBundle(),
             new ThreadAndMirror\AlertBundle\ThreadAndMirrorAlertBundle(),
             new ThreadAndMirror\EditorsPicksBundle\ThreadAndMirrorEditorsPicksBundle(),
             new ThreadAndMirror\StreetChicBundle\ThreadAndMirrorStreetChicBundle(),

@@ -1,3 +1,7 @@
+thread_core:
+    resource: "@ThreadAndMirrorCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
 stems_poll:
     resource: "@StemsPollBundle/Resources/config/routing.yml"
     prefix:   /

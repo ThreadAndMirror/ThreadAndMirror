@@ -1,0 +1,228 @@
+.header-bar {
+    width: 100%;
+    min-height: 50px;
+    background: black;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    box-sizing: border-box;
+}
+
+.header-bar__logo {
+    float: left;
+    font-family: 'Linotype Didot W01', serif;
+    font-size: 24px;
+    line-height: 24px;
+    z-index: 3;
+    margin: 13px 11px 9px 11px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.header-bar__logo,
+.header-bar__logo:hover  {
+    color: white;
+}
+
+.header-bar__logo-ampersand {
+    font-size: 14px;
+    position:relative;
+    top: -4px;
+    margin: 0 -2px;
+}
+
+.header-bar__nav {
+    float: right;
+}
+
+.header-bar__nav-menu {
+    float: right;
+    margin: 0 auto;
+    position: relative;
+}
+
+.header-bar__nav-menu-item {
+    float: right;
+    position: relative;
+    list-style: none;
+    margin: 0 2px 0 0;
+}
+
+.header-bar__nav-menu-item-link {
+    display: block;
+    width: auto;
+    padding: 19px 0 16px 0;
+    border-bottom: 3px solid black;
+    margin: 0 10px;
+    line-height: 100%;
+    font-size: 12px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.header-bar__nav-menu-item:hover .header-bar__nav-menu-item-link,
+.header-bar__nav-menu-item-link.active {
+    border-bottom: 3px solid white;
+    color: white;
+}
+
+.header-bar__nav-menu-item:first-child .header-bar__nav-menu-item-link {
+    margin-right: 20px;
+}
+
+.header-bar__nav-menu-item:last-child .header-bar__nav-menu-item-link {
+    margin-left: 20px;
+}
+
+.header-bar__nav-submenu {
+    height: 0px;
+    width: 150px;
+    overflow: hidden;
+    position: absolute;
+    background: #FAFAFA;
+    left: 50%;
+    margin-left: -75px;
+}
+
+.header-bar__nav-submenu-item {
+    position: relative;
+    list-style: none;
+}
+
+.header-bar__nav-menu-item:hover .header-bar__nav-submenu {
+    height: auto;
+}
+
+.header-bar__nav-submenu-item-link {
+    font-weight: 600;
+    display: block;
+    width: auto;
+    padding: 8px 10px 8px 10px;
+    line-height: 100%;
+    font-size: 12px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.header-bar__nav-submenu-item:hover .header-bar__nav-submenu-item-link {
+    background: black;
+    color: white;
+}
+
+.header-bar__show-nav {
+    display: none;
+}
+
+.header-bar__button, .header-bar__show-nav {
+    width: 50px;
+    height: 50px;
+    display: block;
+    float: right;
+    text-align: center;
+    border-left: 1px solid #333333;
+}
+
+.header-bar__button > i, .header-bar__show-nav > i {
+    color: white;
+    font-size: 18px;
+    line-height: 50px !important;
+    font-weight: 100 !important;
+}
+
+.header-bar__button:hover > i, .header-bar a#back-to-top:hover > i {
+    color: #777777;
+}
+
+.header-bar a#back-to-top {
+    width: 50px;
+    height: 50px;
+    display: none;
+    float: right;
+    text-align: center;
+    cursor: pointer;
+    border-left: 1px solid #333333;
+    border-right: 1px solid #333333;
+}
+
+.header-bar:hover a#back-to-top {
+    display: block;
+}
+
+.header-bar a#back-to-top > i {
+    color: white;
+    font-size: 18px;
+    line-height: 50px !important;
+    font-weight: 100 !important;
+}
+
+@media (max-width : 960px) {
+
+    .header-bar__button, a#back-to-top {
+        display: none !important;
+    }
+
+    .header-bar__show-nav {
+        width: 50px;
+        height: 50px;
+        display: block;
+        float: right;
+        text-align: center;
+        border-left: 1px solid #333333;
+    }
+
+    .header-bar__nav {
+        float: none;
+        width: 100%;
+        position: absolute;
+        top: 50px;
+        left: 100%;
+    }
+
+    .header-bar__nav-menu {
+        float: none;
+        margin: 0 auto;
+        position: relative;
+        width: 100%;
+    }
+
+    .header-bar__nav-menu-item {
+        float: none;
+        position: relative;
+        list-style: none;
+        width: 100%;
+        background: black;
+    }
+
+    .header-bar__nav-menu-item + .header-bar__nav-menu-item {
+        border-top: 1px solid #111;
+    }
+
+    .header-bar__nav-menu-item:hover .header-bar__nav-menu-item-link,
+    .header-bar__nav-menu-item-link.active {
+        border-bottom: none;
+    }
+
+    .header-bar__nav-menu-item-link, .header-bar__nav-submenu-item-link {
+        font-size: 4vw;
+    }
+
+    .header-bar__nav-submenu {
+        height: 0;
+    }
+
+    .header-bar__nav-submenu-item {
+        background: white;
+    }
+
+    .header-bar__nav-submenu-item + .header-bar__nav-submenu-item {
+        border-top: 1px solid #EEE;
+    }
+}
