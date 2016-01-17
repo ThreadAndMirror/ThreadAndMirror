@@ -5,7 +5,6 @@ namespace ThreadAndMirror\CoreBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Stems\CoreBundle\Controller\BaseFrontController;
-use Stems\PageBundle\Entity\Page;
 use Stems\PageBundle\Annotation\PageAnnotation as StemsPage;
 
 class FrontController extends BaseFrontController
