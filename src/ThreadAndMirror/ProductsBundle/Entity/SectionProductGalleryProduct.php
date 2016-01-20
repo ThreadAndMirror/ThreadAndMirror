@@ -65,6 +65,19 @@ class SectionProductGalleryProduct
      */
     protected $sectionProductGallery;
 
+	public function __construct(Product $product = null)
+	{
+		if ($product !== null) {
+			$this->setHeading($product->getName());
+			$this->setCaption($product->getShop()->getName());
+			$this->setUrl($product->getAffiliateUrl());
+			$this->setThumbnail($product->getPortrait());
+			$this->setImage($product->getImage());
+			$this->setRatio($product->getShop()->getImageRatio());
+			$this->setPid($product->getId());
+		}
+	}
+
     /**
      * Get id
      *

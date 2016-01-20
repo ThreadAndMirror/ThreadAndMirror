@@ -2,8 +2,6 @@
 
 namespace ThreadAndMirror\ProductsBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Stems\CoreBundle\Controller\BaseRestController;
@@ -11,10 +9,12 @@ use ThreadAndMirror\ProductsBundle\Entity\Pick;
 use ThreadAndMirror\ProductsBundle\Entity\Outfit;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Entity\SectionProduct;
+use ThreadAndMirror\ProductsBundle\Entity\SectionProductGallery;
 use ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use ThreadAndMirror\ProductsBundle\Exception\ProductParseException;
+use ThreadAndMirror\ProductsBundle\Form\SectionProductGalleryType;
 use ThreadAndMirror\ProductsBundle\Form\SectionProductType;
 
 class RestController extends BaseRestController
@@ -326,61 +326,6 @@ class RestController extends BaseRestController
 	}
 
 	/**
-	 * Adds a product to a product gallery section
-	 *
-	 * @param  integer $id The ID of the Product Gallery Section to add the image to
-	 * @param  Request
-	 * @return JsonResponse
-	 */
-	public function parseProductGalleryProductAction($id, Request $request)
-	{
-		// Get the url from the query paramter and attempt to parse the product
-		$em = $this->getDoctrine()->getManager();
-
-		$product = $em->getRepository('ThreadAndMirrorProductsBundle:Product')->getProductFromUrl($request->get('url'));
-
-		// Get the section for the field id
-		$section = $em->getRepository('ThreadAndMirrorProductsBundle:SectionProductGallery')->findOneById($id);
-
-		// If we manage to parse a product from the url then create the product listing for the gallery
-		if (is_object($product)) {
-
-			// Save the product as it may not already exist in the database
-			$em->persist($product);
-
-			// Create a pick from the product
-			$image = new SectionProductGalleryProduct();
-			$image->setHeading($product->getName());
-			$image->setCaption($product->getShop()->getName());
-			$image->setUrl($this->generateUrl('thread_products_front_product_buy', array('slug' => $product->getslug())));
-			$image->setThumbnail($product->getThumbnail());
-			$image->setImage($product->getImage());
-			$image->setRatio($product->getShop()->getImageRatio());
-			$image->setPid($product->getId());
-
-			$em->persist($image);
-			$em->flush();
-
-			// Get the associated section linkage to tag the fields with the right id
-			$link = $em->getRepository('StemsBlogBundle:Section')->findOneByEntity($section->getId());
-
-			// Get the html for the new product gallery item and to add to the page
-			$html = $this->renderView('ThreadAndMirrorProductsBundle:Section:productGalleryProduct.html.twig', array(
-				'product' => $image,
-				'section' => $section,
-				'link'    => $link,
-			));
-
-			// Store the section id for use in the response handler
-			$this->addMeta(array('section' => $link->getId()));
-
-			return $this->addHtml($html)->success('The product was successfully updated.')->sendResponse();
-		} else {
-			return $this->error('We could not load a product using that link.', true)->sendResponse();
-		}
-	}
-
-	/**
 	 * Update a product gallery product, both generated and manually added
 	 *
 	 * @param  integer $id The ID of the Product Gallery Section to update
@@ -436,10 +381,10 @@ class RestController extends BaseRestController
 	 * @Route("/rest/products/add-product-to-section/{id}", name="thread_products_rest_add_product_to_section")
 	 * @Security("has_role('ROLE_ADMIN')")
 	 */
-	public function addProductToSectionAction(Request $request, SectionProduct $section, $repository = 'StemsBlogBundle:Section')
+	public function addProductToSectionAction(Request $request, SectionProductGallery $section, $repository = 'StemsBlogBundle:Section')
 	{
 		// Get the url from the query parameter and attempt to parse the product
-		$em   = $this->getDoctrine()->getManager();
+		$em = $this->getDoctrine()->getManager();
 		$link = $em->getRepository($repository)->findOneBy(['entity' => $section->getId(), 'type' => 'product']);
 
 		try {
@@ -471,6 +416,64 @@ class RestController extends BaseRestController
 			];
 
 			return $this->addMeta($meta)->setCallback('updateSectionForm')->success('Image updated.')->sendResponse();
+
+		} catch (ProductParseException $e) {
+			return $this->error($e->getMessage(), true)->sendResponse();
+		}
+	}
+
+	/**
+	 * Adds a product to a product section using a url
+	 *
+	 * @Route("/rest/products/add-product-to-gallery-section/{id}", name="thread_products_rest_add_product_to_section")
+	 * @Security("has_role('ROLE_ADMIN')")
+	 */
+	public function addProductToGallerySectionAction(Request $request, SectionProductGallery $section, $repository = 'StemsBlogBundle:Section')
+	{
+		// Get the url from the query parameter and attempt to parse the product
+		$em   = $this->getDoctrine()->getManager();
+		$link = $em->getRepository($repository)->findOneBy(['entity' => $section->getId(), 'type' => 'product']);
+
+		try {
+			$product = $this->get('threadandmirror.products.service.product')->getProductFromUrl($request->get('url'));
+
+			$item = new SectionProductGalleryProduct($product);
+
+			// Override the url with our internal version
+			$item->setUrl($this->generateUrl('thread_products_front_product_buy', ['slug' => $product->getslug()]));
+
+			// Add the item to the gallery
+			$section->addProduct($item);
+			$item->setSectionProductGallery($section);
+
+			$em->persist($section);
+			$em->persist($item);
+			$em->flush();
+
+			// Rebuild the form to get new values for render
+			$form = $this->createForm(new SectionProductGalleryType($link), $section);
+
+			// Render the section form and preview html with the valid values
+			$formHtml = $this->renderView('ThreadAndMirrorProductsBundle:Section:productGalleryHiddenForm.html.twig', [
+				'form' => $form->createView()
+			]);
+
+			$previewHtml = $this->renderView('ThreadAndMirrorProductsBundle:Section:productGalleryPreview.html.twig', [
+				'link'    => $link,
+				'form'    => $form->createView(),
+				'section' => $section
+			]);
+
+
+			// Set the meta data for the update callback
+			$meta = [
+				'type'        => 'product_gallery',
+				'section'     => $section->getId(),
+				'formHtml'    => $formHtml,
+				'previewHtml' => $previewHtml
+			];
+
+			return $this->addMeta($meta)->setCallback('updateSectionForm')->success('Product added.')->sendResponse();
 
 		} catch (ProductParseException $e) {
 			return $this->error($e->getMessage(), true)->sendResponse();

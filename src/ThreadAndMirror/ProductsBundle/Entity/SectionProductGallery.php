@@ -41,6 +41,10 @@ class SectionProductGallery implements SectionInstanceInterface
      */
     protected $products;
 
+	public function __construct()
+	{
+		$this->products = new ArrayCollection();
+	}
     /**
      * Build the html for rendering in the front end, using any nessary custom code
      */
@@ -99,7 +103,7 @@ class SectionProductGallery implements SectionInstanceInterface
             $services->getManager()->persist($productEntity);
         }
         
-        $services->getManager()->persist($this);        
+        $services->getManager()->persist($this);
     }
 
     /**
@@ -184,10 +188,10 @@ class SectionProductGallery implements SectionInstanceInterface
     /**
      * Add products
      *
-     * @param \ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct $products
-     * @return SectionScrapbook
+     * @param SectionProductGalleryProduct $products
+     * @return SectionProductGallery
      */
-    public function addProduct(\ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct $product)
+    public function addProduct(SectionProductGalleryProduct $product)
     {
         $this->products[] = $product;
     
@@ -197,9 +201,9 @@ class SectionProductGallery implements SectionInstanceInterface
     /**
      * Remove products
      *
-     * @param \ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct $product
+     * @param SectionProductGalleryProduct $product
      */
-    public function removeProduct(\ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct $product)
+    public function removeProduct(SectionProductGalleryProduct $product)
     {
         $this->products->removeElement($product);
     }

@@ -33,7 +33,7 @@ $(document).ready(function() {
 	/** 
 	 * Add product to product gallery
 	 */
-	$('.admin-editor').on('click', '.add-product-to-gallery .add-product .from-link', function(e) {
+	$('.admin-editor').on('click', '.section-product-gallery-form__item-btn.from-link', function(e) {
 		e.preventDefault();
 		var add_dialogue = $(this).parent();
 		var add_url = add_dialogue.children('input[type=text]').val();
@@ -42,13 +42,14 @@ $(document).ready(function() {
 			add_dialogue.children().hide();
 			add_dialogue.children('.loader').css('display', 'block');
 			
-			$.post('/admin/products/rest/parse-product-gallery-product/'+add_dialogue.data('productgallery-id'), {
+			$.post('/rest/products/add-product-to-gallery-section/'+add_dialogue.data('productgallery-id'), {
 				url:	add_url
 			}).done(function(data) {
 				add_dialogue.parent().children('ul').append($(data.html));
 				add_dialogue.children().show();
 				add_dialogue.children('.loader').css('display', 'none');
 				add_dialogue.children('input[type=text]').val('');
+                window[data.callback](data, $(this));
 			}).fail(function() {
 				add_dialogue.children().show();
 				add_dialogue.children('.loader').css('display', 'none');
