@@ -21,19 +21,19 @@ class SectionProductGallery implements SectionInstanceInterface
     protected $id;
 
     /** 
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=true, length=255)
      */
     protected $heading;
 
     /** 
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=true, length=255)
      */
     protected $caption;
 
     /** 
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", length=32)
      */
-    protected $style = 'carousel';
+    protected $style = 'feature';
 
     /**
      * @ORM\OneToMany(targetEntity="SectionProductGalleryProduct", mappedBy="sectionProductGallery")
