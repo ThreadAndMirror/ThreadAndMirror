@@ -22,24 +22,24 @@
 	{% elseif section.style == 'feature' %}
 		{% if section.heading is not empty %}<h2>{{ section.heading }}</h2>{% endif %}
 		<p>{{ section.caption|raw }}</p>
-		<button class="prev"><i class="fa fa-angle-left"></i></button>
-		<button class="next"><i class="fa fa-angle-right"></i></button>
-		<div class="feature-image">
+		<button class="section-product-gallery-feature__prev prev"><i class="fa fa-angle-left"></i></button>
+		<button class="section-product-gallery-feature__next next"><i class="fa fa-angle-right"></i></button>
+		<div class="section-product-gallery-feature__feature-image">
 			{% for product in section.products %}
-				<div class="product" {% if loop.index != 1 %}style="display:none"{% endif %} data-image="{{ loop.index }}">
+				<div class="section-product-gallery-feature__product" {% if loop.index != 1 %}style="display:none"{% endif %} data-image="{{ loop.index }}">
 					<img src="{{ product.image }}" height="400" alt="{{ product.heading }} {{ product.caption }}" />
-					<div class="caption">
-						{% if product.heading is not empty %}<h6>{{ product.heading }}</h6>{% endif %}
-						{% if product.caption is not empty %}<p>{{ product.caption }}</p>{% endif %}
+					<div class="section-product-gallery-feature__caption">
+						{% if product.heading is not empty %}<h3 class="section-product-gallery-feature__caption-heading">{{ product.heading }}</h3>{% endif %}
+						{% if product.caption is not empty %}<p class="section-product-gallery-feature__caption-subheading">{{ product.caption }}</p>{% endif %}
 					</div>
-					<a href="{{ product.url }}" target="_blank" rel="nofollow"></a>	
+					<a class="section-product-gallery-feature__product-link"  href="{{ product.url }}" target="_blank" rel="nofollow"></a>
 				</div>
 			{% endfor %}
 		</div>
-		<div class="gallery-thumbnails">
+		<div class="section-product-gallery-feature__thumbnail-images">
 			{% for product in section.products %}
-				<div class="product" data-image="{{ loop.index }}">
-					<img src="{{ product.thumbnail }}" height="50" alt="{{ product.heading }} {{ product.caption }}" />
+				<div class="section-product-gallery-feature__thumbnail-product" data-image="{{ loop.index }}">
+					<img class="section-product-gallery-feature__thumbnail-product-image" src="{{ product.thumbnail }}" alt="{{ product.heading }} {{ product.caption }}" />
 				</div>
 			{% endfor %}
 		</div>		

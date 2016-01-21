@@ -1,25 +1,27 @@
 <div class="product-gallery section-product-gallery-{{ form.vars.value.style }}">
-    <button class="section-product-gallery-{{ form.vars.value.style }}__prev prev"><i class="fa fa-angle-left"></i></button>
-    <button class="section-product-gallery-{{ form.vars.value.style }}__next next"><i class="fa fa-angle-right"></i></button>
-    <div class="feature-image">
-        {% for product in form.vars.value.products %}
-            <div class="product" {% if loop.index != 1 %}style="display:none"{% endif %} data-image="{{ loop.index }}">
-                <img src="{{ product.image }}" height="400" alt="{{ product.heading }} {{ product.caption }}" />
-                <div class="caption">
-                    {% if product.heading is not empty %}<h6>{{ product.heading }}</h6>{% endif %}
-                    {% if product.caption is not empty %}<p>{{ product.caption }}</p>{% endif %}
+    {% if form.vars.value.style == 'feature' %}
+        <button class="section-product-gallery-feature__prev prev"><i class="fa fa-angle-left"></i></button>
+        <button class="section-product-gallery-feature__next next"><i class="fa fa-angle-right"></i></button>
+        <div class="section-product-gallery-feature__feature-image">
+            {% for product in form.vars.value.products %}
+                <div class="section-product-gallery-feature__product" {% if loop.index != 1 %}style="display:none"{% endif %} data-image="{{ loop.index }}">
+                    <img src="{{ product.image }}" height="400" alt="{{ product.heading }} {{ product.caption }}" />
+                    <div class="section-product-gallery-feature__caption">
+                        {% if product.heading is not empty %}<h3 class="section-product-gallery-feature__caption-heading">{{ product.heading }}</h3>{% endif %}
+                        {% if product.caption is not empty %}<p class="section-product-gallery-feature__caption-subheading">{{ product.caption }}</p>{% endif %}
+                    </div>
+                    <a class="section-product-gallery-feature__product-link"  href="{{ product.url }}" target="_blank" rel="nofollow"></a>
                 </div>
-                <a href="{{ product.url }}" target="_blank" rel="nofollow"></a>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="gallery-thumbnails">
-        {% for product in form.vars.value.products %}
-            <div class="product" data-image="{{ loop.index }}">
-                <img src="{{ product.thumbnail }}" height="50" alt="{{ product.heading }} {{ product.caption }}" />
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+        <div class="section-product-gallery-feature__thumbnail-images">
+            {% for product in form.vars.value.products %}
+                <div class="section-product-gallery-feature__thumbnail-product" data-image="{{ loop.index }}">
+                    <img class="section-product-gallery-feature__thumbnail-product-image" src="{{ product.thumbnail }}" alt="{{ product.heading }} {{ product.caption }}" />
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 </div>
 <div class="section-product-gallery-form">
     <ul class="sortable">
