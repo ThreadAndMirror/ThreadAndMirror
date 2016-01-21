@@ -17,7 +17,7 @@
 
 {% block banner %}
 	<div class="banner" style="background-image:url('{{ getMediaImage(post.image).src|imagine_filter('page_banner') }}');background-size:cover;background-position:center;"></div>
-	<div class="banner-inset">
+	<div class="layout-banner-inset__header-inset">
 		<div class="banner-thumbnail" style="background-image:url('{{ getMediaImage(post.image).src|imagine_filter('page_banner') }}');background-size:cover;background-position:center;"></div>
 		<p class="date">{{ post.published|date('jS F Y') }}</p>
         <p class="accreditation">{{ getMediaImage(post.image).accreditation }}</p>

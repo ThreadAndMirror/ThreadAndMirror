@@ -377,7 +377,15 @@ div+.pagination {
 
 /* --- BANNER LAYOUTS --- */
 
-.layout-banner-inset .banner-wrapper {
+.layout-banner-inset {
+    background: #dddddd; /* Old browsers */
+    background: -moz-linear-gradient(left,  #dddddd 0%, #ffffff 50%, #dddddd 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #dddddd 0%,#ffffff 50%,#dddddd 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #dddddd 0%,#ffffff 50%,#dddddd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#dddddd',GradientType=1 ); /* IE6-9 */
+}
+
+.layout-banner-inset__header-wrapper {
 	overflow: hidden;
 	height: 380px;
 	background-color: #111111;
@@ -390,7 +398,12 @@ div+.pagination {
 	width: 960px;
 }
 
-.layout-banner-inset .banner-wrapper .banner {
+.layout-banner-inset__body-wrapper {
+    border: 15px solid rgba(255,255,255,0.4);
+    border-top: none;
+}
+
+.layout-banner-inset__header-wrapper .banner {
 	-webkit-filter: blur(7px);
 	-moz-filter: blur(7px);
 	-o-filter: blur(7px);
@@ -405,7 +418,7 @@ div+.pagination {
     z-index: 1;
 }
 
-.layout-banner-inset .banner-wrapper .banner-inset {
+.layout-banner-inset__header-inset {
     margin: 100px auto 0;
     padding: 50px 0 0;
     width: 960px;
@@ -413,34 +426,37 @@ div+.pagination {
     height: 230px;
     background: #fff;
     z-index: 2;
+    border: 15px solid rgba(255,255,255,0.4);
+    border-bottom: none;
+    background-clip: padding-box;
 }
 
-.layout-banner-inset .banner-wrapper .banner-inset h1 {
+.layout-banner-inset__header-inset h1 {
 	margin: 15px 0 10px;
 	border: none;
 	padding: none;
 }
 
-.layout-banner-inset .banner-wrapper .banner-inset hr {
+.layout-banner-inset__header-inset hr {
 	margin: 0 100px 20px 101px;
 	border: 0;
 	border-top: 1px dotted #DDDDDD;
 }
 
-.layout-banner-inset .banner-wrapper .banner-inset p.caption {
+.layout-banner-inset__header-inset p.caption {
 	margin: 0 115px;
 	text-align: center;
 }
 
-.layout-banner-inset .banner-wrapper .banner-inset .social {
+.layout-banner-inset__header-inset .social {
 	position: absolute;
 	right: 15px;
 	top: 15px;
 	height: 25px;
 }
 
-.layout-banner-inset .banner-wrapper .banner-inset .social p,
-.layout-banner-inset .banner-wrapper .banner-inset .social a {
+.layout-banner-inset__header-inset .social p,
+.layout-banner-inset__header-inset .social a {
 	color: #BBBBBB;
 	float: right;
 	font-family: 'Futura PT Multilingual W01', sans-serif;
@@ -453,21 +469,21 @@ div+.pagination {
 	letter-spacing: -1px;
 }
 
-.layout-banner-inset .banner-wrapper .banner-inset .social a {
+.layout-banner-inset__header-inset .social a {
 	width: 20px;
 	height: 20px;
 	text-align: center;
 }
 
-.layout-banner-inset .banner-wrapper .banner-inset .social a:hover {
+.layout-banner-inset__header-inset .social a:hover {
 	color: #111111;
 } 
 
-.layout-banner-inset .banner-wrapper .banner-inset .social p {
+.layout-banner-inset__header-inset .social p {
 	padding: 0 10px;
 }
 
-.layout-banner-inset .banner-wrapper .banner-inset p.date {
+.layout-banner-inset__header-inset p.date {
 	color: #bbb;
 	margin: 0;
 	position: absolute;
@@ -482,7 +498,7 @@ div+.pagination {
     letter-spacing: 3px;
 }
 
-.layout-banner-inset .banner-wrapper .banner-inset p.accreditation {
+.layout-banner-inset__header-inset p.accreditation {
     position: absolute;
     top: -20px;
     right: 0;
@@ -491,7 +507,7 @@ div+.pagination {
     font-size: 10px;
 }
 
-.layout-banner-inset .banner-inset .banner-thumbnail {
+.layout-banner-inset__header-inset .banner-thumbnail {
 	border: 3px solid #FFFFFF;
 	border-radius: 60px;
 	position: absolute;
@@ -512,7 +528,11 @@ div+.pagination {
 }
 
 .layout-banner-overlay {
-	/*background: #f0f0f0;*/
+    background: #dddddd; /* Old browsers */
+    background: -moz-linear-gradient(left,  #dddddd 0%, #ffffff 50%, #dddddd 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #dddddd 0%,#ffffff 50%,#dddddd 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #dddddd 0%,#ffffff 50%,#dddddd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#dddddd',GradientType=1 ); /* IE6-9 */
 }
 
 .layout-banner-overlay .banner-wrapper {
@@ -1053,6 +1073,10 @@ div+.pagination {
 }
 
 
+article.article {
+    border: 15px solid rgba(255,255,255,0.4);
+    background-clip: padding-box;
+}
 
 .article {
 	background: rgba(255,255,255,1);
