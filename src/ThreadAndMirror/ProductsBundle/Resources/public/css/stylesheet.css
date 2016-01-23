@@ -379,9 +379,9 @@ div+.pagination {
 
 .layout-banner-inset {
     background: #dddddd; /* Old browsers */
-    background: -moz-linear-gradient(left,  #dddddd 0%, #ffffff 50%, #dddddd 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left,  #dddddd 0%,#ffffff 50%,#dddddd 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right,  #dddddd 0%,#ffffff 50%,#dddddd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(left,  #dddddd 0%, #ffffff 40%,#ffffff 60% #dddddd 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #dddddd 0%,#ffffff 40%,#ffffff 60%#dddddd 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #dddddd 0%,#ffffff 40%,#ffffff 60%#dddddd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#dddddd',GradientType=1 ); /* IE6-9 */
 }
 
@@ -484,7 +484,7 @@ div+.pagination {
 }
 
 .layout-banner-inset__header-inset p.date {
-	color: #bbb;
+	color: #999;
 	margin: 0;
 	position: absolute;
 	left: 15px;
@@ -529,9 +529,9 @@ div+.pagination {
 
 .layout-banner-overlay {
     background: #dddddd; /* Old browsers */
-    background: -moz-linear-gradient(left,  #dddddd 0%, #ffffff 50%, #dddddd 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left,  #dddddd 0%,#ffffff 50%,#dddddd 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right,  #dddddd 0%,#ffffff 50%,#dddddd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(left,  #dddddd 0%, #ffffff 40%,#ffffff 60%,  #dddddd 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #dddddd 0%,#ffffff 40%,#ffffff 60%, #dddddd 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #dddddd 0%,#ffffff 40%,#ffffff 60%, #dddddd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#dddddd',GradientType=1 ); /* IE6-9 */
 }
 
