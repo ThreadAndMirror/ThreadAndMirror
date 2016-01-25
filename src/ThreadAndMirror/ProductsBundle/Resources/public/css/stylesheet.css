@@ -37,6 +37,11 @@ body {
 	overflow-x: hidden;
 }
 
+p {
+    margin: 0 0 15px;
+    color: black;
+}
+
 i {
 	line-height: 22px !important;
 	font-size: 17px;
@@ -668,11 +673,6 @@ div+.pagination {
 	display: inline-block;
 }
 
-.cms-page p {
-	margin: 0 0 10px 0;
-	color: #333333;
-}
-
 .cms-page ul {
 	padding: 10px 10px 10px 30px;
 	list-style: square;
@@ -1086,8 +1086,8 @@ article.article {
 }
 
 .article section {
-	margin: 7px 7px 0;
-	padding: 7px;
+	margin: 15px 15px 0;
+	padding: 14px;
 	border: 1px dashed #FFF;
 	float: left;
 	background: #FFFFFF;
@@ -1096,46 +1096,46 @@ article.article {
 
 .article.col-4 section.col-1,
 .article.col-4 section.col-1 .squared {
-    width: 210px;
+    width: 180px;
 }
 
 .article.col-2 section.col-1,
 .article.col-4 section.col-2,
 .article.col-2 section.col-1 .squared,
 .article.col-4 section.col-2 .squared {
-    width: 450px;
+    width: 420px;
 }
 
 .article.col-4 section.col-3 {
-    width: 670px;
+    width: 640px;
 }
 
 .article.col-2 section.col-2,
 .article.col-4 section.col-4 {
-    width: 930px;
+    width: 900px;
 }
 
 .article.col-2 section.col-1 .squared,
 .article.col-4 section.col-2 .squared {
-    height: 450px;
+    height: 420px;
     text-align: center;
 }
 
 .article.col-4 section.col-1 .squared {
-    height: 210px;
+    height: 180px;
     text-align: center;
 }
 
 .article.col-2 section.col-1 .squared img,
 .article.col-4 section.col-2 .squared img {
-    max-width: 450px;
-    max-height: 450px;
+    max-width: 420px;
+    max-height: 420px;
     margin: auto;
 }
 
 .article.col-4 section.col-1 .squared img {
-    max-width: 210px;
-    max-height: 210px;
+    max-width: 180px;
+    max-height: 180px;
     margin: auto;
 }
 
@@ -1192,7 +1192,7 @@ article.article {
 	width: 175px;
 }
 
-.article section p {
+.article section > p {
 	margin: 0 0 15px 0;
 }
 
@@ -1254,39 +1254,6 @@ article.article {
 
     .comments {
         display: none;
-    }
-
-    .article.col-2 section.col-1, .article.col-4 section.col-2, .article.col-4 section.col-3, .article.col-4 section.col-4 {
-        width: 100%;
-    }
-
-    .article.col-4 section.col-1 {
-        width: 50%;
-    }
-
-    .article.col-2 section.col-1.section-product, .article.col-4 section.col-2.section-product, .article.col-4 section.col-3.section-product, .article.col-4 section.col-4.section-product {
-        padding-bottom: 100%;
-        height: 0;
-    }
-
-    .article.col-4 section.col-1.section-product {
-        padding-bottom: 50%;
-        height: 0;
-    }
-
-    .section-product {
-        margin-bottom: 15px;
-    }
-
-    .article section.section-product .squared {
-        height: 100% !important;
-        width: 100% !important;
-        position: absolute;
-    }
-
-    .article section.section-product .squared img {
-        max-width: 100% !important;
-        max-height: 100% !important;
     }
 }
 

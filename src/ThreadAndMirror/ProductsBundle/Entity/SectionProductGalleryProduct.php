@@ -68,7 +68,7 @@ class SectionProductGalleryProduct
 	public function __construct(Product $product = null)
 	{
 		if ($product !== null) {
-			$this->setHeading($product->getName());
+			$this->setHeading($product->getBrand()->getName().' '.$product->getName());
 			$this->setCaption($product->getShop()->getName());
 			$this->setUrl($product->getAffiliateUrl());
 			$this->setThumbnail($product->getPortrait());

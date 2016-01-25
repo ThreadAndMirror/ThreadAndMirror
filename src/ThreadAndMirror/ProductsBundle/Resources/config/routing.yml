@@ -142,7 +142,3 @@ thread_products_rest_view_product:
 thread_products_rest_add_new_outfit:
     pattern:  /rest/add-new-outfit
     defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:addNewOutfit }
-
-thread_products_rest_parse_productgalleryproduct:
-    pattern:  /admin/products/rest/parse-product-gallery-product/{id}
-    defaults: { _controller: ThreadAndMirrorProductsBundle:Rest:parseProductGalleryProduct }

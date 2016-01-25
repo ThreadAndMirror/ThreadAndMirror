@@ -2,12 +2,15 @@
 
 namespace ThreadAndMirror\ProductsBundle\Controller;
 
-use Stems\CoreBundle\Controller\BaseRestController,
-	Symfony\Component\HttpFoundation\Request,
-	ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct,
-	ThreadAndMirror\ProductsBundle\Form\SectionProductGalleryProductType,
-	Stems\MediaBundle\Entity\Image,
-	Stems\MediaBundle\Form\ImageType;
+use Stems\CoreBundle\Controller\BaseRestController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use ThreadAndMirror\ProductsBundle\Entity\SectionProduct;
+use ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct;
+use ThreadAndMirror\ProductsBundle\Form\SectionProductGalleryProductType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use ThreadAndMirror\ProductsBundle\Form\SectionProductType;
 
 
 class PopupController extends BaseRestController
@@ -51,26 +54,50 @@ class PopupController extends BaseRestController
 	/**
 	 * Build a popup to edit a product gallery product
 	 *
-	 * @param  integer 		$id 	The ID of the Product Gallery Product
+	 * @Route("popup/products/update-product-gallery-product/{id}", name="thread_products_popup_update_product_gallery_product")
+	 * @Security("has_role('ROLE_ADMIN')")
+	 *
+	 * @param  SectionProductGalleryProduct     $product
 	 * @param  Request
 	 * @return JsonResponse
 	 */
-	public function updateProductGalleryProductAction($id, Request $request)
+	public function updateProductGalleryProductAction(SectionProductGalleryProduct $product, Request $request)
 	{
-		// Get the product
-		$em    = $this->getDoctrine()->getManager();
-		$image = $em->getRepository('ThreadAndMirrorProductsBundle:SectionProductGalleryProduct')->find($id);
-
-		// Build the form 
-		$form = $this->createForm(new SectionProductGalleryProductType(), $image);
+		// Build the form
+		$form = $this->createForm(new SectionProductGalleryProductType(), $product);
 
 		// Get the html for the popup
-		$html = $this->renderView('ThreadAndMirrorProductsBundle:Popup:updateProductGalleryProduct.html.twig', array(
-			'product'	=> $image,
-			'title'		=> 'Edit Product '.$image->getHeading(),
+		$html = $this->renderView('ThreadAndMirrorProductsBundle:Popup:updateProductGalleryProduct.html.twig', [
+			'product'	=> $product,
+			'title'		=> 'Edit Product '.$product->getHeading(),
 			'form'		=> $form->createView(),
-		));
+		]);
 
-		return $this->addHtml($html)->success('The popup was successfully created.')->sendResponse();
+		return $this->addHtml($html)->success()->sendResponse();
+	}
+
+	/**
+	 * Build a popup to edit a product gallery product
+	 *
+	 * @Route("popup/products/update-product-section/{id}", name="thread_products_popup_update_product_section")
+	 * @Security("has_role('ROLE_ADMIN')")
+	 *
+	 * @param  SectionProduct       $product
+	 * @param  Request
+	 * @return JsonResponse
+	 */
+	public function updateProductSectionAction(SectionProduct $section, Request $request)
+	{
+		$em   = $this->getDoctrine()->getManager();
+		$link = $em->getRepository('StemsBlogBundle:Section')->findOneBy(['entity' => $section->getId(), 'type' => 'product']);
+		$form = $this->createForm(new SectionProductType($link), $section);
+
+		$html = $this->renderView('ThreadAndMirrorProductsBundle:Popup:updateProductSection.html.twig', [
+			'section'	=> $section,
+			'title'		=> 'Edit Product '.$section->getName(),
+			'form'		=> $form->createView(),
+		]);
+
+		return $this->addHtml($html)->success()->sendResponse();
 	}
 }

@@ -1,13 +1,19 @@
 {% extends 'StemsPageBundle:Section:base.html.twig' %}
 
 {% block content %}
-    <div class="{{ section.position }}" itemscope itemtype="http://schema.org/Product">
-        <a href="{{ section.url }}" itemprop="url">
+    <div class="section-product section-product--{{ section.position }}--col-{{ link.span }}" itemscope itemtype="http://schema.org/Product">
+        <a class="section-product__link" href="{{ section.url }}" itemprop="url">
+            <h3 class="section-product__name section-product__name--col-{{ link.span }}"><span class="section-product__brand">{{ section.designer }}</span> {{ section.name }}</h3>
+            <span class="section-product__buy-icon section-product__buy-icon--col-{{ link.span }} fa-stack fa-lg">
+              <i class="fa fa-circle-thin fa-stack-2x"></i>
+              <i class="fa fa-shopping-bag fa-stack-1x"></i>
+            </span>
+            <p class="section-product__description section-product__description--col-{{ link.span }}" >{{ section.designer }}</p>
             {% if section.image is not empty %}
                 {% if section.effect == 'cutout' %}
-                    <img src="{{ getImageFromUrl(section.image).src|transparentColor }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
+                    <img class="section-product__image section-product__image--{{ section.position }}" src="{{ getImageFromUrl(section.image).src|transparentColor }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
                 {% else %}
-                    <img class="{% if section.effect != 'none' %}css-filter-{{ section.effect }}{% endif %}" src="{{ getImageFromUrl(section.image).src|imagine_filter('section_image_large') }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
+                    <img class="{% if section.effect != 'none' %}css-filter-{{ section.effect }}{% endif %} section-product__image section-product__image--{{ section.position }}" src="{{ getImageFromUrl(section.image).src|imagine_filter('section_image_large') }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
                 {% endif %}
             {% endif %}
         </a>

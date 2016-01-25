@@ -66,7 +66,7 @@ class SectionProduct
         if ($product instanceof Product) {
             $this->designer    = $product->getBrand() !== null ? $product->getBrand()->getName() : null;
             $this->name        = $product->getName();
-            $this->description = $product->getShop() !== null ? 'At '.$product->getShop()->getName() : '';
+            $this->description = $product->getShop()->getName();
             $this->url         = $product->getFrontendUrl();
             $this->image       = $product->getImage();
         }

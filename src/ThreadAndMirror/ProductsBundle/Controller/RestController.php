@@ -14,6 +14,7 @@ use ThreadAndMirror\ProductsBundle\Entity\SectionProductGalleryProduct;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use ThreadAndMirror\ProductsBundle\Exception\ProductParseException;
+use ThreadAndMirror\ProductsBundle\Form\SectionProductGalleryProductType;
 use ThreadAndMirror\ProductsBundle\Form\SectionProductGalleryType;
 use ThreadAndMirror\ProductsBundle\Form\SectionProductType;
 
@@ -328,51 +329,37 @@ class RestController extends BaseRestController
 	/**
 	 * Update a product gallery product, both generated and manually added
 	 *
-	 * @param  integer $id The ID of the Product Gallery Section to update
-	 * @param  Request
-	 * @return JsonResponse
+	 * @Route("/rest/products/update-product-gallery-product/{id}", name="thread_products_rest_update_product_gallery_product")
+	 * @Security("has_role('ROLE_ADMIN')")
 	 */
-	public function updateProductGalleryProductAction($id, Request $request)
+	public function updateProductGalleryProductAction(SectionProductGalleryProduct $product, Request $request)
 	{
-		// Get the url from the query parameter and attempt to parse the product
-		$em = $this->getDoctrine()->getManager();
-		$image = $em->getRepository('StemsBlogBundle:SectionProductGalleryProduct')->find($id);
+		$em   = $this->getDoctrine()->getManager();
+		$form = $this->createForm(new SectionProductGalleryProductType(), $product);
 
-		$data = json_decode($request->getContent());
+		$form->handleRequest($request);
 
-		// If the product exists, then handle the request
-		if (is_object($image)) {
+		// Update the product
+		$em->persist($product);
+		$em->flush();
 
-			// Update the product
-			$image->setHeading($request->request->get('section_productgalleryproduct_type')['heading']);
-			$image->setCaption($request->request->get('section_productgalleryproduct_type')['caption']);
-			$image->setUrl($request->request->get('section_productgalleryproduct_type')['url']);
-			$image->setThumbnail($request->request->get('section_productgalleryproduct_type')['thumbnail']);
-			$image->setImage($request->request->get('section_productgalleryproduct_type')['image']);
+		// Get the associated section linkage to tag the fields with the right id
+		$link = $em->getRepository('StemsBlogBundle:Section')->findOneBy(['entity' => $product->getSectionProductGallery()->getId(), 'type' => 'product_gallery']);
 
-			$em->persist($image);
-			$em->flush();
+		// Get the html for the product gallery item and to add to the page
+		$html = $this->renderView('ThreadAndMirrorProductsBundle:Section:productGalleryProduct.html.twig', [
+			'product' => $product,
+			'section' => $product->getSectionProductGallery(),
+			'link'    => $link,
+		]);
 
-			// Get the associated section linkage to tag the fields with the right id
-			$link = $em->getRepository('StemsBlogBundle:Section')->findOneByEntity($image->getSectionProductGallery()->getId());
+		// Store the section and product id for use in the response handler
+		$this->addMeta([
+			'section' => $link->getId(),
+			'product' => $product->getId(),
+		]);
 
-			// Get the html for the product gallery item and to add to the page
-			$html = $this->renderView('StemsBlogBundle:Rest:productGalleryProduct.html.twig', array(
-				'product' => $image,
-				'section' => $image->getSectionProductGallery(),
-				'link'    => $link,
-			));
-
-			// Store the section and product id for use in the response handler
-			$this->addMeta(array(
-				'section' => $link->getId(),
-				'product' => $image->getId(),
-			));
-
-			return $this->addHtml($html)->setCallback('insertProductGalleryProduct')->success('The product was successfully updated.')->sendResponse();
-		} else {
-			return $this->error('There was a problem updating the product.', true)->sendResponse();
-		}
+		return $this->addHtml($html)->setCallback('updateProductGalleryProduct')->success('The product was successfully updated.')->sendResponse();
 	}
 
 	/**
@@ -423,9 +410,9 @@ class RestController extends BaseRestController
 	}
 
 	/**
-	 * Adds a product to a product section using a url
+	 * Adds a product to a product gallery using a url
 	 *
-	 * @Route("/rest/products/add-product-to-gallery-section/{id}", name="thread_products_rest_add_product_to_section")
+	 * @Route("/rest/products/add-product-to-gallery-section/{id}", name="thread_products_rest_add_product_to_gallery")
 	 * @Security("has_role('ROLE_ADMIN')")
 	 */
 	public function addProductToGallerySectionAction(Request $request, SectionProductGallery $section, $repository = 'StemsBlogBundle:Section')

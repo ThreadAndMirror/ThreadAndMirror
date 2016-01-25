@@ -158,6 +158,7 @@ assetic:
                 - '@StemsCoreBundle/Resources/public/css/admin/vendor/*'
                 - '@StemsCoreBundle/Resources/public/css/admin/admin.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product-gallery.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product.css'
         frontend_vendor_js:
             inputs:
                 - '@StemsCoreBundle/Resources/public/js/front/vendor/*'
@@ -172,6 +173,7 @@ assetic:
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/stylesheet.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/header-bar.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product-gallery.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product.css'
     filters:
         cssrewrite: ~
         less: ~

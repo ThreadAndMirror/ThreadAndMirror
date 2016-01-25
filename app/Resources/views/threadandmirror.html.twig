@@ -22,7 +22,7 @@
 		{% endblock %}
 	{# Fonts and styles #}
         <link rel="stylesheet" href="/fonts/fonts.css">
-		<link rel="stylesheet" href="/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/css/font-awesome.min.css?nocache=250116">
 		{% stylesheets '@frontend_css' filter="cssrewrite" filter="uglifycss" output='css/frontend.css' %}<link rel="stylesheet" href="{{ asset_url }}" />{% endstylesheets %}
 		{% block stylesheets %}{% endblock %}
 	{# Icons #}

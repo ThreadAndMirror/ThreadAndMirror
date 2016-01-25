@@ -1,11 +1,11 @@
-<li class="product" data-id="{{ product.id }}">
-	<img src="{{ product.thumbnail }}" height="200" />
-	<div class="caption">
-		<h6>{{ product.heading }}</h6>
-		<p>{{ product.caption }}</p>
-	</div>
-	<a href="/admin/blog/popup/update-product-gallery-product/{{ product.id }}" class="btn btn-small btn-primary rest-get-popup" title="Edit Product"><i class="fa fa-pencil"></i></a>
-	<button class="show-link btn btn-small" title="Open Link"><i class="fa fa-link"></i></button>
-	<button class="remove-productgalleryproduct btn btn-small btn-danger" title="Remove From Gallery" data-id="{{ product.id }}"><i class="fa fa-times"></i></button>
-	<input type="hidden" name="{{ link.id }}_section_productgallery_type[products][]" value="{{ product.id }}">
+<li class="section-product-gallery-form__item" data-id="{{ product.id }}">
+    <img src="{{ product.thumbnail }}" height="200" />
+    <div class="section-product-gallery-form__item-caption">
+        <h6>{{ product.heading }}</h6>
+        <p>{{ product.caption }}</p>
+    </div>
+    <a href="{{ path('thread_products_popup_update_product_gallery_product', { id: product.id }) }}" class="btn btn-primary rest-get-popup section-product-gallery-form__btn-edit" title="Edit Product"><i class="fa fa-pencil"></i></a>
+    {#<button class="show-link btn btn-small" title="Open Link"><i class="fa fa-link"></i></button>#}
+    <button class="remove-productgalleryproduct btn section-product-gallery-form__btn-remove btn-danger" title="Remove From Gallery" data-id="{{ product.id }}"><i class="fa fa-times"></i></button>
+    <input type="hidden" name="{{ link.id }}_section_productgallery_type[products][]" value="{{ product.id }}">
 </li>

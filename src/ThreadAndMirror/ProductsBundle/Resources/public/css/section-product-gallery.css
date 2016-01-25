@@ -416,18 +416,26 @@ section.col-4 .section-product-gallery-feature__next > i, section.col-4 .section
     font-size: 14px !important;
 }
 
-.section-product-gallery-form__item a.rest-get-popup {
-    right: 40px;
-    width: 20px;
-    height: 20px;
-}
-
 .section-product-gallery-form__gallery-item-form {
     display: none;
 }
 
 .section-product-gallery-form__add-item {
     background: #F7F7F7;
+}
+
+.section-product-gallery-form__btn-remove, .section-product-gallery-form__btn-edit {
+    position: absolute;
+    padding: 6px 7px;
+    top: 15px;
+}
+
+.section-product-gallery-form__btn-remove {
+    right: 15px;
+}
+
+.section-product-gallery-form__btn-edit {
+    right: 45px;
 }
 
 .section-product-gallery-form__add-item-label {

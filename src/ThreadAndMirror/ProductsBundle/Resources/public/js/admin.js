@@ -14,11 +14,26 @@ function insertProductGalleryProduct(data, originator) {
 			});
 
 			if (!exists) {
-				console.log(data.html);
 				container.append(data.html);
 			}
 		}
 	});
+}
+
+/**
+ * Callback to update a product gallery product html
+ */
+function updateProductGalleryProduct(data, originator) {
+    $('.section-product-gallery').each(function() {
+        if ($(this).data('id') == data.meta.section) {
+            var products = $(this).find('.section-product-gallery-form__item');
+            products.each(function() {
+                if ($(this).data('id') == data.meta.product) {
+                    $(this).replaceWith(data.html);
+                }
+            });
+        }
+    });
 }
 
 $(document).ready(function() {
