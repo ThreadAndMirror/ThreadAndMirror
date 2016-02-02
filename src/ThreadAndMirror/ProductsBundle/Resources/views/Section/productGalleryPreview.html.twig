@@ -26,7 +26,7 @@
 <div class="section-product-gallery-form">
     <ul class="sortable">
         {% for product in form.vars.value.products %}
-            {% embed 'StemsBlogBundle:Rest:productGalleryProduct.html.twig' %}{% endembed %}
+            {% embed 'ThreadAndMirrorProductsBundle:Section:productGalleryProduct.html.twig' %}{% endembed %}
         {% endfor %}
     </ul>
     <div class="section-product-gallery-form__add-item" data-productgallery-id="{{ form.vars.value.id }}">

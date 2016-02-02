@@ -8,7 +8,7 @@
               <i class="fa fa-circle-thin fa-stack-2x"></i>
               <i class="fa fa-shopping-bag fa-stack-1x"></i>
             </span>
-            <p class="section-product__description section-product__description--col-{{ link.span }}" >{{ section.designer }}</p>
+            <p class="section-product__description section-product__description--col-{{ link.span }}" >{{ section.description }}</p>
             {% if section.image is not empty %}
                 {% if section.effect == 'cutout' %}
                     <img class="section-product__image section-product__image--{{ section.position }}" src="{{ getImageFromUrl(section.image).src|transparentColor }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />

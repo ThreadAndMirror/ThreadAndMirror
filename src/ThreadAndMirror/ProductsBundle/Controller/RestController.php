@@ -368,7 +368,7 @@ class RestController extends BaseRestController
 	 * @Route("/rest/products/add-product-to-section/{id}", name="thread_products_rest_add_product_to_section")
 	 * @Security("has_role('ROLE_ADMIN')")
 	 */
-	public function addProductToSectionAction(Request $request, SectionProductGallery $section, $repository = 'StemsBlogBundle:Section')
+	public function addProductToSectionAction(Request $request, SectionProduct $section, $repository = 'StemsBlogBundle:Section')
 	{
 		// Get the url from the query parameter and attempt to parse the product
 		$em = $this->getDoctrine()->getManager();
