@@ -31,7 +31,6 @@
     margin-left: -19px;
     margin-bottom: -27px;
     font-size: 18px;
-    opacity: 0.5;
     z-index:2;
     display: none;
 }
@@ -43,7 +42,8 @@
 }
 
 .section-product__buy-icon .fa-shopping-bag {
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 19px !important;
 }
 
 .section-product__buy-icon--col-2 .fa-shopping-bag {
