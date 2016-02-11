@@ -45,6 +45,18 @@ class SpaceNKFormatter extends AbstractFormatter
 	/**
 	 * {@inheritdoc}
 	 */
+	protected function cleanupCrawledPid(Product $product)
+	{
+		$result = $this
+			->format($product->getPid())
+			->result();
+
+		$product->setPid($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledName(Product $product)
 	{
 		$result = $this
@@ -86,6 +98,7 @@ class SpaceNKFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getImages())
+			->replace('?sw=344&sh=344&sfrm=jpg', '')
 			->result();
 
 		$product->setImages($result);
@@ -98,6 +111,7 @@ class SpaceNKFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getPortraits())
+			->replace('?sw=344&sh=344&sfrm=jpg', '')
 			->result();
 
 		$product->setPortraits($result);
@@ -110,7 +124,7 @@ class SpaceNKFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getThumbnails())
-			->replace('sw=344&sh=344', 'sw=114&sh=114')
+			->replace('?sw=344&sh=344&sfrm=jpg', '')
 			->result();
 
 		$product->setThumbnails($result);

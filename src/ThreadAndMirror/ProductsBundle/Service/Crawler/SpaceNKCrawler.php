@@ -32,7 +32,7 @@ class SpaceNKCrawler extends AbstractCrawler
 
 	protected function getBrandName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, '.product_brand a');
+		return $this->getTextFromAlternatingElements($crawler, '.product_brand a', '.product_brand');
 	}
 
 	protected function getCategoryName(DomCrawler $crawler) 
@@ -47,12 +47,12 @@ class SpaceNKCrawler extends AbstractCrawler
 
 	protected function getDescription(DomCrawler $crawler)
 	{
-		return $this->getTextFromElement($crawler, '.product_shortDescription');
+		return $this->getTextFromElement($crawler, '#pp_prod_expandables p', 0);
 	}
 
 	protected function getNow(DomCrawler $crawler) 
 	{
-		return $this->getTextFromAlternatingElements($crawler, 'h2.salesprice', 'h2.salesprice');
+		return $this->getTextFromAlternatingElements($crawler, 'h2.salesprice span', 'h2.salesprice span');
 	}
 
 	protected function getWas(DomCrawler $crawler) 
