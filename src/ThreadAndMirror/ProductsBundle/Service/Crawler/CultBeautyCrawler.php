@@ -27,32 +27,32 @@ class CultBeautyCrawler extends AbstractCrawler
 
 	protected function getName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, 'h1.brackets');
+		return $this->getTextFromElement($crawler, '.productTitle');
 	}
 
 	protected function getBrandName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, 'h1.brackets .manufacturerlink');
+		return $this->getTextFromElement($crawler, '.productBrandTitle');
 	}
 
 	protected function getCategoryName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, '.breadcrumbs ul > li:nth-child(3) > a');
+		return 'beauty';
 	}
 
 	protected function getPid(DomCrawler $crawler) 
 	{
-		return $this->getValueFromElement($crawler, 'input[name="product"]');
+		return $this->getDataFromElement($crawler, '.discontinuedMsg', 'sku');
 	}
 
 	protected function getDescription(DomCrawler $crawler)
 	{
-		return $this->getTextFromElement($crawler, '#tab-product-why-cult .std');
+		return $this->getTextFromElement($crawler, '.productInfo .expandInfo .itemContent', 1);
 	}
 
 	protected function getNow(DomCrawler $crawler) 
 	{
-		return $this->getTextFromAlternatingElements($crawler, '.price-box .regular-price .price', '.price-box .regular-price .price');
+		return $this->getTextFromAlternatingElements($crawler, '.productPrice', '.productPrice');
 	}
 
 	protected function getWas(DomCrawler $crawler) 
@@ -62,16 +62,16 @@ class CultBeautyCrawler extends AbstractCrawler
 
 	protected function getImages(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#product-more-views ul li a img');
+		return $this->getSrcFromList($crawler, '.bigImage img');
 	}
 
 	protected function getPortraits(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#product-more-views ul li a img');
+		return $this->getSrcFromList($crawler, '.bigImage img');
 	}
 
 	protected function getThumbnails(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#product-more-views ul li a img');
+		return $this->getSrcFromList($crawler, '.bigImage img');
 	}
 }

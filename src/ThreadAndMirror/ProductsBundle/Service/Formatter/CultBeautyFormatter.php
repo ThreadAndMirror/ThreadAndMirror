@@ -64,20 +64,6 @@ class CultBeautyFormatter extends AbstractFormatter
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function cleanupCrawledName(Product $product) 
-	{
-		$result = $this
-			->format($product->getName())
-			->sheer('By', false)
-			->trim()
-			->result();
-
-		$product->setName($result);
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
 	protected function cleanupCrawledBrand(Product $product) 
 	{ 
 		$result = $this
@@ -95,8 +81,6 @@ class CultBeautyFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getPid())
-			->sheer('product_id/')
-			->sheer('/uenc', false)
 			->result();
 
 		$product->setPid($result);
@@ -121,7 +105,6 @@ class CultBeautyFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getImages())
-			->replace('thumbnail/78x/', 'image/390x490/')
 			->result();
 
 		$product->setImages($result);
@@ -134,7 +117,7 @@ class CultBeautyFormatter extends AbstractFormatter
 	{ 
 		$result = $this
 			->format($product->getPortraits())
-			->replace('thumbnail/78x/', 'image/200x240/')
+			->replace('resized/680x854', 'resized/406x486')
 			->result();
 
 		$product->setPortraits($result);
@@ -146,7 +129,8 @@ class CultBeautyFormatter extends AbstractFormatter
 	protected function cleanupCrawledThumbnails(Product $product) 
 	{
 		$result = $this
-			->format($product->getThumbnails())
+			->format($product->getPortraits())
+			->replace('resized/680x854', 'resized/120x144')
 			->result();
 
 		$product->setThumbnails($result);
