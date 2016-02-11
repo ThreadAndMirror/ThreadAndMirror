@@ -52,7 +52,7 @@ class UrbanRetreatBeautiqueCrawler extends AbstractCrawler
 
 	protected function getNow(DomCrawler $crawler) 
 	{
-		return $this->getTextFromAlternatingElements($crawler, 'h3.price .price', 'h3.price .price');
+		return $this->getTextFromAlternatingElements($crawler, 'h3.price .integer', 'h3.price .price');
 	}
 
 	protected function getWas(DomCrawler $crawler) 
@@ -62,16 +62,16 @@ class UrbanRetreatBeautiqueCrawler extends AbstractCrawler
 
 	protected function getImages(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#UR_Product_updatePanelProductImage img');
+		return $this->getSrcFromList($crawler, '#imgMain');
 	}
 
 	protected function getPortraits(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#UR_Product_updatePanelProductImage img');
+		return $this->getSrcFromList($crawler, '#imgMain');
 	}
 
 	protected function getThumbnails(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#UR_Product_updatePanelProductImage img');
+		return $this->getSrcFromList($crawler, '#imgMain');
 	}
 }
