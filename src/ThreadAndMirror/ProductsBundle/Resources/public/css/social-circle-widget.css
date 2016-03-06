@@ -1,0 +1,91 @@
+
+.social-circle-widget {
+    margin: 0px;
+    padding-top: 1px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: black;
+}
+
+.social-circle-widget__title {
+    margin: 100px auto;
+    text-align: center;
+}
+
+.social-circle-widget__title-link {
+    font-family: 'Linotype Didot W01',serif;
+    font-size: 20px;
+    line-height: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: white;
+}
+
+.social-circle-widget__title-link:hover {
+    color: white;
+}
+
+.social-circle-widget__item-wrap {
+    margin: 0 -120px;
+    width: calc(100% + 480px);
+    height: 480px;
+    overflow: hidden;
+}
+
+.social-circle-widget__item {
+    margin: 0;
+    float: left;
+    position: relative;
+    display: table;
+    border-collapse: collapse;
+    width: 240px;
+    height: 240px;
+    background-color: black;
+}
+
+.social-circle-widget__item-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.social-circle-widget__item-text {
+    padding: 20px;
+    width: 240px;
+    height: 240px;
+    color: white;
+    font-weight: 400;
+    text-align: center;
+    background-color: black;
+    display: table-cell;
+    vertical-align: middle;
+    -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out;
+    opacity: 0;
+}
+
+.social-circle-widget__item:hover .social-circle-widget__item-text, .social-circle-widget__item-text--tweet {
+    opacity: 1;
+}
+
+@media only screen and (max-width : 960px) {
+
+    .social-circle-widget__title {
+        font-size: 4vw;
+    }
+
+    .social-circle-widget__item {
+        display: none;
+    }
+
+    .social-circle-widget__item:nth-child(1),
+    .social-circle-widget__item:nth-child(2),
+    .social-circle-widget__item:nth-child(3),
+    .social-circle-widget__item:nth-child(4) {
+        display: block;
+        width: 50vw;
+        height: 50vw;
+    }
+}

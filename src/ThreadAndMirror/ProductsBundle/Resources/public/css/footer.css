@@ -1,0 +1,110 @@
+.footer {
+    padding:20px 0;
+    min-height: 100px;
+    border-top: 1px solid #000000;
+    width: 100%;
+    z-index: 2;
+    background: #111111;
+}
+
+.footer__menu {
+    list-style: none;
+}
+
+.footer__menu-header-link {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #EEEEEE;
+}
+
+.footer__hr {
+    border: 0;
+    border-bottom: 1px dotted #777777;
+    margin: 14px 0 10px;
+    width: 139px;
+}
+
+.footer__menu-item-link, .footer__menu-item-text {
+    display: inline-block;
+    color: #BBBBBB;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.footer__menu-item-text--small {
+    font-size: 10px;
+    width: 100%;
+    text-align: right;
+    text-transform: none;
+    color: #777777;
+}
+
+.footer__menu-item-text:hover {
+    color: #f93124;
+}
+
+.footer__social-link {
+    float:right;
+    margin: 0 0 0 5px;
+    height: 26px;
+    width: 26px;
+    border-radius: 14px;
+    text-align: center;
+    color: #333333;
+    background: #EEEEEE;
+    -webkit-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;
+}
+
+.footer__social-link:hover {
+    color: #EEEEEE;
+    background: #AAAAAA;
+}
+
+.footer__social-link > i {
+    line-height: 26px !important;
+    font-size: 17px;
+    margin-left: 1px;
+}
+
+@media only screen and (max-width : 960px) {
+
+    .footer_menu {
+        text-align: center;
+    }
+
+    .footer__menu--overlined {
+        border-top: 1px dotted #777777;
+        margin-top: 3vw;
+        padding-top: 3vw;
+    }
+
+    .footer__hr {
+        display: none;
+    }
+
+    .footer__menu-header-link, .footer__menu-item-link, .footer__menu-item-text {
+        font-size: 4vw;
+        line-height: 200%;
+    }
+
+    .footer__social-link {
+        height: 11vw;
+        width: 11vw;
+        border-radius: 50%;
+        margin: 11vw 0 0 2vw;
+        display: inline-block;
+        float: none;
+    }
+
+    .footer__social-link i {
+        font-size: 7vw;
+        width: 7vw;
+        margin: 2vw;
+        line-height: 7vw !important;
+    }
+
+    .footer__menu-item-text--small {
+        text-align: center;
+        font-size: 4vw;
+    }
+}

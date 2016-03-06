@@ -1,0 +1,60 @@
+.our-instagram-widget__title {
+    font-family: 'Linotype Didot W01',serif;
+    font-size: 20px;
+    line-height: 20px;
+    font-style: italic;
+    font-weight: 200;
+    text-shadow: 0 0 1px #fff;
+    text-align: center;
+    margin: 160px 0 45px;
+}
+
+.our-instagram-widget__items {
+    margin: 0 -120px;
+    width: calc(100% + 480px);
+    height: 480px;
+    overflow: hidden;
+}
+
+.our-instagram-widget__item {
+    position:relative;
+    width: 240px;
+    height: 240px;
+    float: left;
+    margin: 0;
+}
+
+.our-instagram-widget__item-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+@media only screen and (max-width : 960px) {
+
+    .our-instagram-widget__title {
+        font-size: 4vw;
+    }
+
+    .our-instagram-widget__items {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .our-instagram-widget__item {
+        display: none;
+    }
+
+    .our-instagram-widget__item:nth-child(1),
+    .our-instagram-widget__item:nth-child(2),
+    .our-instagram-widget__item:nth-child(3),
+    .our-instagram-widget__item:nth-child(4) {
+        display: block;
+        width: 50vw;
+        height: 50vw;
+    }
+}

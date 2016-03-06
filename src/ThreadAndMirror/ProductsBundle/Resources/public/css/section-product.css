@@ -129,6 +129,12 @@
         height: 0;
     }
 
+    .section-product--squared--col-1, .section-product--squared--col-2, .section-product--squared--col-3, .section-product--squared--col-4 {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+
     .article.col-4 section.col-1.section-product {
         padding-bottom: 50%;
         height: 0;

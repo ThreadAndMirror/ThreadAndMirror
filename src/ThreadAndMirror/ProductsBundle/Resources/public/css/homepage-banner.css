@@ -1,0 +1,71 @@
+.homepage-banner {
+    background-color: #333333;
+    height: 300px;
+    padding-top: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.homepage-banner__title,
+.homepage-banner__subtitle,
+.homepage-banner__strapline {
+    width: 100%;
+    color: #FFFFFF;
+    text-align: center;
+    position: absolute;
+}
+
+.homepage-banner__title {
+    top: 125px;
+    text-transform: uppercase;
+}
+
+.homepage-banner__title-ampersand {
+    font-size: 28px;
+    position:relative;
+    top: -8px;
+}
+
+.homepage-banner__subtitle {
+    top: 175px;
+    margin-top: 15px;
+}
+
+.homepage-banner__strapline {
+    font-family: 'Linotype Didot W01',serif;
+    font-size: 20px;
+    line-height: 20px;
+    top: 225px;
+    font-style: italic;
+}
+
+.homepage-banner__background {
+    background-image: url('/media/image/original/london-skyline-slice.jpg');
+    background-size: cover;
+    height: 100%;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    opacity: 0.5;
+}
+
+@media only screen and (max-width : 960px) {
+    .homepage-banner__title-ampersand {
+        font-size: 5vw;
+        top: -1.5vw;
+    }
+
+    .homepage-banner {
+        height: 75vw;
+    }
+
+    .homepage-banner__title {
+        top: 29vw;
+    }
+
+    .homepage-banner__subtitle {
+        top: 41vw;
+    }
+}

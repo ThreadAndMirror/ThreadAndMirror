@@ -1,0 +1,215 @@
+
+.magazine-widget {
+    border-top: 3px solid white;
+    margin-top: 0;
+    padding-top: 0;
+    position: relative;
+}
+
+.magazine-widget__background {
+    height: 570px;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    overflow: hidden;
+    opacity: 0.3;
+}
+
+.magazine-widget__wrap {
+    height: 430px;
+    position: relative;
+    z-index: 1;
+}
+
+.magazine-widget__image {
+    border: 3px solid white;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    height: 100px;
+    width: 100px;
+}
+
+.magazine-widget__link {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.magazine-widget__title-block {
+    padding-top: 90px;
+    color: #111111;
+    text-align: center;
+    width: 100%;
+}
+
+.magazine-widget__subtitle {
+    margin-top: 10px;
+}
+
+.magazine-widget__excerpt {
+    margin-top: 40px;
+}
+
+.magazine-widget__title-dash {
+    border-top: 1px solid black;
+}
+
+.magazine-widget__name {
+    top: 175px;
+}
+
+.magazine-widget__read-more, .magazine-widget__other-article-read-more {
+    margin: 30px auto 60px;
+    text-transform: uppercase;
+}
+
+.magazine-widget__product {
+    position: absolute;
+    background-color: white;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 144px;
+    width: 144px;
+    border-radius: 150px;
+    bottom: 15px;
+    border: 3px solid white;
+    -webkit-filter: saturate(1.1);
+    transition: 0.5s all;
+}
+
+.magazine-widget__other-article-link {
+    background: white;
+    display: block;
+    padding: 30px;
+}
+
+.magazine-widget__other-article-link:hover {
+    color: black;
+}
+
+.magazine-widget__other-article-link:hover .magazine-widget__other-article-read-more,
+.magazine-widget__link:hover .magazine-widget__read-more {
+    background: rgba(0,0,0, 0.1);
+}
+
+.magazine-widget__other-article-title {
+    font-size: 28px;
+    letter-spacing: -1.5px;
+}
+
+.magazine-widget__other-article-title-block {
+    height: 95px;
+    display: table;
+    width: 100%;
+}
+
+.magazine-widget__other-article-title-align {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.magazine-widget__other-article-subtitle {
+    font-size: 16px;
+    line-height: 120%;
+    margin-top: 8px;
+}
+
+.magazine-widget__other-article-excerpt {
+    margin: 15px 0;
+    font-size: 13px;
+    line-height: 150%;
+    font-weight: 400;
+    height: 100px;
+}
+
+.magazine-widget__other-article-image {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    margin: -15px;
+}
+
+@media only screen and (max-width : 960px) {
+    .magazine-widget__featured-article {
+        height: 100vw;
+    }
+
+    .magazine-widget__excerpt {
+        margin-top: 6vw;
+    }
+
+    .magazine-widget__read-more, .magazine-widget__other-article-read-more {
+        height: 7vw;
+        font-size: 2.5vw;
+    }
+
+    .magazine-widget__other-article-read-more {
+        margin-bottom: 0;
+    }
+
+    .magazine-widget__background {
+        height: 100vw;
+    }
+
+    .magazine-widget__image {
+        margin-left: -25vw;
+        margin-top: -10vw;
+        height: 50vw;
+        width: 50vw;
+    }
+
+    .magazine-widget__title-block {
+        padding-top: 47vw;
+    }
+
+    .magazine-widget__other-article-title-block {
+        padding: 10vw;
+    }
+
+    .magazine-widget__other-article-image {
+        height: 50vw;
+        width: 50vw;
+        margin: 0 auto;
+        border-radius: 100%;
+    }
+
+    .magazine-widget__other-article-excerpt {
+        margin: 5vw 0 0;
+        font-size: 2.8vw;
+        line-height: 130%;
+    }
+
+    .magazine-widget__other-article {
+        padding-bottom: 10vw;
+    }
+
+    .magazine-widget__other-article:nth-child(2) {
+        background: black;
+        color: white;
+    }
+
+    .magazine-widget__other-article-title--invert, .magazine-widget__other-article-subtitle--invert, .magazine-widget__other-article-excerpt--invert, .magazine-widget__other-article-read-more--invert {
+        color: white;
+    }
+
+    .magazine-widget__other-article-read-more--invert {
+        border-color: white;
+    }
+
+    .magazine-widget__other-article-subtitle {
+        margin-top: 2vw;
+    }
+}

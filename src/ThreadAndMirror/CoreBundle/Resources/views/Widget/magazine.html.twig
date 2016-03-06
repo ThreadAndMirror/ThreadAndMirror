@@ -1,0 +1,40 @@
+<div class="magazine-widget">
+	<div class="magazine-widget__featured-article">
+		<div class="magazine-widget__background" style="background:url('{{ getMediaImage(posts[0].image).src|imagine_filter('blog_homepage_main') }}') center center; background-size:cover;"></div>
+		<div class="magazine-widget__wrap container" >
+			<a class="magazine-widget__link" href="{{ path('stems_blog_front_post', { slug:posts[0].slug }) }}">
+				<div class="magazine-widget__title-block">
+					<p class="title-faded-sans magazine-widget__name">Latest Feature</p>
+					<h2 class="title-large-serif magazine-widget__title">{{ posts[0].title }}</h2>
+					<h4 class="title-italic-serif magazine-widget__subtitle"><span></span> {{ posts[0].subtitle }} <span></span></h4>
+				</div>
+				<div class="magazine-widget__image" style="background:url('{{ getMediaImage(posts[0].image).src|imagine_filter('blog_header') }}') center center; background-size:cover;"></div>
+				<p class="magazine-widget__excerpt text-center">
+					{{ posts[0].excerpt }}
+				</p>
+				<button class="magazine-widget__read-more">Read More</button>
+			</a>
+		</div>
+	</div>
+	<div class="magazine-widget__other-articles container">
+        <div class="row">
+            {% for post in posts %}
+                {% if loop.index > 1 and loop.index < 5 %}
+                    <figure class="magazine-widget__other-article col-sm-12 col-md-4">
+                        <a class="magazine-widget__other-article-link" href="{{ path('stems_blog_front_post', { slug:post.slug }) }}">
+                            <div class="magazine-widget__other-article-title-block text-center">
+                                <div class="magazine-widget__other-article-title-align">
+                                    <h2 class="title-large-serif magazine-widget__other-article-title {% if loop.index == 3 %}magazine-widget__other-article-title--invert{% endif %}">{{ post.title }}</h2>
+                                    <h4 class="title-italic-serif magazine-widget__other-article-subtitle {% if loop.index == 3 %}magazine-widget__other-article-subtitle--invert{% endif %}">{{ post.subtitle }}</h4>
+                                </div>
+                            </div>
+                            <p class="text-center magazine-widget__other-article-excerpt {% if loop.index == 3 %}magazine-widget__other-article-excerpt--invert{% endif %}">{{ post.excerpt }}</p>
+                            <button class="magazine-widget__other-article-read-more {% if loop.index == 3 %}magazine-widget__other-article-read-more--invert{% endif %}">Read More</button>
+                            <div class="magazine-widget__other-article-image" style="background:url('{{ getMediaImage(post.image).src|imagine_filter('blog_homepage_circle')  }}') center center; background-size:cover;"></div>
+                        </a>
+                    </figure>
+                {% endif %}
+            {% endfor %}
+        </div>
+	</div>
+</div>

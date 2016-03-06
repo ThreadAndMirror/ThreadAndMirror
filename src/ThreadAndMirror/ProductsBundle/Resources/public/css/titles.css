@@ -1,0 +1,90 @@
+
+.title-large-serif {
+    font-family: 'Linotype Didot W01',serif;
+    font-size: 48px;
+    line-height: 120%;
+    z-index: 3;
+    font-weight: 400;
+    letter-spacing: -2px;
+    text-align: center;
+}
+
+.title-large-serif--invert {
+    color: white;
+}
+
+.title-small-serif {
+    font-family: 'Linotype Didot W01',serif;
+    font-size: 22px;
+    line-height: 120%;
+    z-index: 3;
+    font-weight: 400;
+    letter-spacing: -1px;
+    text-align: center;
+}
+
+.title-small-serif--invert {
+    color: white;
+}
+
+.title-faded-sans {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 13px;
+    opacity: .5;
+}
+
+.title-faded-sans--invert {
+    color: white;
+}
+
+.title-italic-serif {
+    font-family: 'Linotype Didot W01',serif;
+    font-size: 20px;
+    line-height: 20px;
+    font-style: italic;
+    font-weight: 400;
+    text-align: center;
+}
+
+.title-italic-serif--invert {
+    color: white;
+}
+
+.title-small-italic-serif {
+    font-family: 'Linotype Didot W01',serif;
+    font-style: italic;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.title-small-italic-serif--invert {
+    color: white;
+}
+
+@media only screen and (max-width : 960px) {
+    .title-large-serif {
+        font-size: 9vw;
+        letter-spacing: -0.4vw;
+    }
+
+    .title-small-serif {
+        font-size: 4vw;
+        letter-spacing: -0.2vw;
+    }
+
+    .title-faded-sans {
+        letter-spacing: 1vw;
+        font-size: 3vw;
+    }
+
+    .title-italic-serif {
+        font-size: 4vw;
+    }
+
+    .title-small-italic-serif {
+        font-size: 2vw;
+    }
+}

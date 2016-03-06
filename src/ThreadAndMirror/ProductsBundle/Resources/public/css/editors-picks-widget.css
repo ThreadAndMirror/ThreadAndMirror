@@ -1,0 +1,146 @@
+
+.widget-editors-picks {
+    border-top: 0 !important;
+    margin-top: 65px;
+    padding-top: 0;
+    background: black;
+    position: relative;
+}
+
+.widget-editors-picks__background {
+    height: 480px;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    overflow: hidden;
+    opacity: 0.3;
+}
+
+.widget-editors-picks__wrap {
+    height: 480px;
+    position: relative;
+    z-index: 1;
+}
+
+.widget-editors-picks__image {
+    border: 3px solid white;
+    border-radius: 100%;
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    bottom: 0;
+    left: 50%;
+    margin-left: -130px;
+    margin-bottom: -80px;
+    height: 260px;
+    width: 260px;
+}
+
+.widget-editors-picks__link {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.widget-editors-picks__title-block {
+    padding-top: 65px;
+    color: #111111;
+    text-align: center;
+    width: 100%;
+}
+
+.widget-editors-picks__subtitle {
+    margin-top: 10px;
+}
+
+.widget-editors-picks__title-dash {
+    border-top: 1px solid black;
+}
+
+.widget-editors-picks__name {
+    top: 175px;
+}
+
+.widget-editors-picks__read-more {
+    margin: 40px auto 60px;
+    text-transform: uppercase;
+}
+
+.widget-editors-picks__product {
+    position: absolute;
+    background-color: #FFFFFF;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 144px;
+    width: 144px;
+    border-radius: 150px;
+    bottom: 15px;
+    border: 3px solid #FFF;
+    -webkit-filter: saturate(1.1);
+    transition: 0.5s all;
+}
+
+.widget-editors-picks__product:hover {
+    background-size: cover;
+}
+
+.widget-editors-picks__product--pos-1 {
+    right: 50%;
+    margin-right: 355px;
+}
+
+.widget-editors-picks__product--pos-2 {
+    right: 50%;
+    margin-right: 170px;
+}
+
+.widget-editors-picks__product--pos-3 {
+    left: 50%;
+    margin-left: 170px;
+}
+
+.widget-editors-picks__product--pos-4 {
+    left: 50%;
+    margin-left: 355px;
+}
+
+@media only screen and (max-width : 960px) {
+
+    .widget-editors-picks {
+        margin-top: 0;
+    }
+
+    .widget-editors-picks__product {
+        display: none;
+    }
+
+    .widget-editors-picks__read-more {
+        height: 7vw;
+        font-size: 2.5vw;
+    }
+
+    .widget-editors-picks__background {
+        height: 100vw;
+    }
+
+    .widget-editors-picks__wrap {
+        height: 100vw;
+    }
+
+    .widget-editors-picks__image {
+        margin-left: -25vw;
+        margin-bottom: -10vw;
+        height: 50vw;
+        width: 50vw;
+    }
+}

@@ -1,57 +1,14 @@
-<div class="widget widget-social-boxes">
-	<h4><a href="/social/all">What's New in the Social Circle...</a></h4>
-	<div class="wrap">
+<div class="social-circle-widget">
+	<h4 class="social-circle-widget__title">
+        <a class="social-circle-widget__title-link" href="/social/all">What's New in the Social Circle...</a>
+    </h4>
+	<div class="social-circle-widget__item-wrap">
 		{% for post in posts %}
-			{% if loop.index <= 8 %}
-				{% if post.source == 'instagram' %}
-					<figure class="instagram" style="background:url('{{ post.image }}') center center;background-size: cover">
-						<p>{{ post.caption|raw }}</p>
-						<a href="{{ post.url }}" rel="nofollow" target="_blank"></a>
-					</figure>
-				{% else %}
-					<figure class="twitter {% if post.image is not empty %}twitter-image" style="background:url('{{ post.image }}') center center;background-size: cover{% endif %}">
-						<p>{{ post.caption|raw }}</p>
-						<a href="{{ post.url }}" rel="nofollow" target="_blank"></a>
-					</figure>
-				{% endif %}
-			{% endif %}
+            <figure class="social-circle-widget__item social-circle-widget__item--{{ post.source }}" style="background:url('{{ post.image }}') center center;background-size: cover">
+                <p class="social-circle-widget__item-text {% if post.image is not empty %}social-circle-widget__item-text--image{% else %}social-circle-widget__item-text--tweet{%  endif %}">{{ post.caption|raw }}</p>
+                <a class="social-circle-widget__item-link" href="{{ post.url }}" rel="nofollow" target="_blank"></a>
+            </figure>
 		{% endfor %}
 		<br class="clear">
-		<div class="offset-right">
-			{% for post in posts %}
-				{% if loop.index > 8 and loop.index <= 16 %}
-					{% if post.source == 'instagram' %}
-						<figure class="instagram" style="background:url('{{ post.image }}') center center;background-size: cover">
-							<p>{{ post.caption|raw }}</p>
-							<a href="{{ post.url }}" rel="nofollow" target="_blank"></a>
-						</figure>
-					{% else %}
-						<figure class="twitter {% if post.image is not empty %}twitter-image" style="background:url('{{ post.image }}') center center;background-size: cover{% endif %}">
-							<p>{{ post.caption|raw }}</p>
-							<a href="{{ post.url }}" rel="nofollow" target="_blank"></a>
-						</figure>
-					{% endif %}
-				{% endif %}
-			{% endfor %}
-			<br class="clear">
-		</div>
-		<div class="offset-left">
-			{% for post in posts %}
-				{% if loop.index > 16 %}
-					{% if post.source == 'instagram' %}
-						<figure class="instagram" style="background:url('{{ post.image }}') center center;background-size: cover">
-							<p>{{ post.caption|raw }}</p>
-							<a href="{{ post.url }}" rel="nofollow" target="_blank"></a>
-						</figure>
-					{% else %}
-						<figure class="twitter {% if post.image is not empty %}twitter-image" style="background:url('{{ post.image }}') center center;background-size: cover{% endif %}">
-							<p>{{ post.caption|raw }}</p>
-							<a href="{{ post.url }}" rel="nofollow" target="_blank"></a>
-						</figure>
-					{% endif %}
-				{% endif %}
-			{% endfor %}
-			<br class="clear">
-		</div>
 	</div>
 </div>

@@ -9,6 +9,10 @@
 }
 
 .header-bar__logo {
+    margin: 0;
+}
+
+.header-bar__logo-link {
     float: left;
     font-family: 'Linotype Didot W01', serif;
     font-size: 24px;
@@ -22,8 +26,8 @@
     text-align: center;
 }
 
-.header-bar__logo,
-.header-bar__logo:hover  {
+.header-bar__logo-link,
+.header-bar__logo-link:hover  {
     color: white;
 }
 
@@ -124,7 +128,6 @@
 .header-bar__button, .header-bar__show-nav {
     width: 50px;
     height: 50px;
-    display: block;
     float: right;
     text-align: center;
     border-left: 1px solid #333333;
@@ -183,7 +186,7 @@
         width: 100%;
         position: absolute;
         top: 50px;
-        left: 100%;
+        display: none;
     }
 
     .header-bar__nav-menu {
@@ -199,10 +202,7 @@
         list-style: none;
         width: 100%;
         background: black;
-    }
-
-    .header-bar__nav-menu-item + .header-bar__nav-menu-item {
-        border-top: 1px solid #111;
+        border-top: 1px solid #333;
     }
 
     .header-bar__nav-menu-item:hover .header-bar__nav-menu-item-link,
@@ -212,14 +212,26 @@
 
     .header-bar__nav-menu-item-link, .header-bar__nav-submenu-item-link {
         font-size: 4vw;
+        margin: 0;
+
     }
 
     .header-bar__nav-submenu {
         height: 0;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        position: relative;
+    }
+
+    .header-bar__nav-submenu--expanded {
+        height: auto;
     }
 
     .header-bar__nav-submenu-item {
         background: white;
+        padding: 10px 0;
     }
 
     .header-bar__nav-submenu-item + .header-bar__nav-submenu-item {

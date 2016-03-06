@@ -1,18 +1,18 @@
-<div class="widget widget-editors-picks">
+<div class="widget-editors-picks">
 	<div>
-		<div class="background" style="background:url('{{ getMediaImage(post.image).src|imagine_filter('blog_homepage_main') }}') center center; background-size:cover;"></div>
-		<div class="feature-article wrap" >
-			<a href="{{ path('thread_editorspicks_front_post', { 'slug' : post.slug }) }}">
-				<div class="title">
-					<p class="title-faded-sans">Editor's Picks</p>
-					<h2>{{ post.title }}</h2>
-					<h4><span></span> {{ post.subtitle }} <span></span></h4>
-					<button class="button-invert">Read More</button>
-				</div>
-			</a>
-			<a href="{{ path('thread_editorspicks_front_post', { 'slug' : post.slug }) }}" class="image" style="background-image:url('{{ getMediaImage(post.image).src|imagine_filter('blog_homepage_circle') }}');"></a>
+		<div class="widget-editors-picks__background" style="background:url('{{ getMediaImage(post.image).src|imagine_filter('blog_homepage_main') }}') center center; background-size:cover;"></div>
+		<div class="widget-editors-picks__wrap" >
+            <a class="widget-editors-picks__link" href="{{ path('thread_editorspicks_front_post', { 'slug' : post.slug }) }}">
+                <div class="widget-editors-picks__title-block">
+                    <p class="title-faded-sans title-faded-sans--invert widget-editors-picks__name">Editor's Picks</p>
+                    <h2 class="title-large-serif title-large-serif--invert widget-editors-picks__title">{{ post.title }}</h2>
+                    <h4 class="title-italic-serif title-italic-serif--invert widget-editors-picks__subtitle"><span class="widget-editors-picks__title-dash"></span> {{ post.subtitle }} <span class="widget-editors-picks__title-dash"></span></h4>
+                    <button class="button-invert widget-editors-picks__read-more">Read More</button>
+                    <div class="widget-editors-picks__image" style="background-image:url('{{ getMediaImage(post.image).src|imagine_filter('blog_homepage_circle') }}');"></div>
+                </div>
+            </a>
             {% for product in products %}
-                <a href="{{ product.url }}" class="product pos-{{ loop.index }}" style="background-image:url('{{ getImageFromUrl(product.image).src|imagine_filter('section_image_large') }}');"></a>
+                <a href="{{ path('thread_editorspicks_front_post', { 'slug' : post.slug }) }}" class="widget-editors-picks__product widget-editors-picks__product--pos-{{ loop.index }}" style="background-image:url('{{ getImageFromUrl(product.image).src|imagine_filter('section_image_large') }}');"></a>
             {% endfor %}
 		</div>
 	</div>

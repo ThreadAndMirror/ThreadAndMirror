@@ -165,15 +165,25 @@ assetic:
         frontend_js:
             inputs:
                 - '@ThreadAndMirrorSocialBundle/Resources/public/js/frontend.js'
-                - '@StemsCoreBundle/Resources/public/js/front/frontend.js'
+                - '@ThreadAndMirrorCoreBundle/Resources/public/js/front/frontend.js'
                 - '@StemsBlogBundle/Resources/public/js/front/frontend.js'
         frontend_css:
             inputs:
+                - 'css/bootstrap-3.3.6-dist/css/bootstrap.css'
                 - '@StemsCoreBundle/Resources/public/css/front/vendor/*'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/stylesheet.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/titles.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/header-bar.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product-gallery.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/footer.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/follow-us-widget.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/social-circle-widget.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/our-instagram-widget.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/editors-picks-widget.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/magazine-widget.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/homepage-banner.css'
+
     filters:
         cssrewrite: ~
         less: ~

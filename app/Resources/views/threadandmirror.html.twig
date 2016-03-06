@@ -46,7 +46,7 @@
 	</head>
 	<body class="{% if app.user %}logged-in{% else %}not-logged-in{% endif %}" {% if page is defined %}data-cms-slug="{{ page.slug }}"{% endif %}>
 		<header class="header-bar">
-			<h2><a class="header-bar__logo" href="/">T<span class="header-bar__logo-ampersand">&amp;</span>M</a></h2>
+			<h2 class="header-bar__logo"><a class="header-bar__logo-link" href="/">T<span class="header-bar__logo-ampersand">&amp;</span>M</a></h2>
 
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 				<a class="header-bar__button" href="/logout" title="Sign Out"><i class="fa fa-key"></i></a>
@@ -88,67 +88,7 @@
 		    </div>
 		</div>
 		{% block layout %}{% endblock %}
-		<div id="footer">
-			<div class="wrap">
-				<ul>
-					<li><h6><a href="/">General</a></h6></li>
-					<li><hr></li>
-					<li><a href="/">Home</a></li>
-					<li><a href="/about">About</a></li>
-					{# <li><a href="/feedback">Feedback</a></li> #}
-					<li><a href="/contact">Contact</a></li>
-					<li><a href="/privacy-policy">Privacy Policy</a></li>
-				</ul>
-				<ul>
-					<li><h6><a href="{{ path('thread_products_front_new_in', { 'area' : 'fashion' }) }}">Fashion</a></h6></li>
-					<li><hr></li>
-					<li><a href="{{ path('thread_products_front_new_in', { 'area' : 'beauty' }) }}">New In</a></li>
-					<li><a href="{{ path('thread_products_front_sale', { 'area' : 'beauty' }) }}">Sale</a></li>
-					<li><a href="{{ path('thread_products_front_stores', { 'area' : 'beauty' }) }}">Stores</a></li>
-					<li><a href="{{ path('thread_products_front_brands', { 'area' : 'beauty' }) }}">Brands</a></li>
-					{# <li><a href="/fashion/offers">Offers &amp; Discounts</a></li> #}
-				</ul>
-				<ul>
-					<li><h6><a href="{{ path('thread_products_front_new_in', { 'area' : 'fashion' }) }}">Beauty</a></h6></li>
-					<li><hr></li>
-					<li><a href="{{ path('thread_products_front_new_in', { 'area' : 'fashion' }) }}">New In</a></li>
-					<li><a href="{{ path('thread_products_front_sale', { 'area' : 'fashion' }) }}">Sale</a></li>
-					<li><a href="{{ path('thread_products_front_stores', { 'area' : 'fashion' }) }}">Stores</a></li>
-					<li><a href="{{ path('thread_products_front_brands', { 'area' : 'fashion' }) }}">Brands</a></li>
-					{# <li><a href="/beauty/offers">Offers &amp; Discounts</a></li> #}
-				</ul>
-				<ul>
-					<li><h6><a href="/magazine">Magazine &amp; Media</a></h6></li>
-					<li><hr></li>
-					<li><a href="/magazine">Magazine</a></li>
-					<li><a href="/style-file">Style File</a></li>
-					<li><a href="/social">The Social Circle</a></li>
-					{# <li><a href="/editors-picks">Editors Picks</a></li> #}
-				</ul>
-				<ul>
-					<li><h6><a href="/account">Account</a></h6></li>
-					<li><hr></li>
-					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-						<li><a href="/wishlist">My Wishlist</a></li>
-						<li><a href="/social/my-circle">My Social Circle</a></li>
-						<li><a href="/account">Manage Account</a></li>
-						<li><a href="/logout">Sign Out</a></li>
-					{% else %}
-						<li><a href="/register">Register</a></li>
-						<li><a href="/login">Sign In</a></li>
-					{% endif %}
-				</ul>
-				<ul>
-					<li class="social">
-						<a href="http://www.pinterest.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-pinterest"></i></a>
-						<a href="http://instagram.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-instagram"></i></a>
-						<a href="http://www.twitter.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-twitter"></i></a>
-						<a href="http://www.facebook.com/threadandmirror" rel="nofollow" target="_blank" ><i class="fa fa-facebook"></i></a>
-					</li>
-					<li><br><br><br><br><p class="small">&copy; Thread &amp; Mirror {{ 'now'|date('Y') }}</p></li>
-				</ul> 
-			</div>
-		</div>
+        {% include 'ThreadAndMirrorCoreBundle:Layout:footer.html.twig' %}
 	 	<script src="/js/vendor/packery.pkgd.min.js"></script>
 	 	{% javascripts '@frontend_vendor_js' filter='uglifyjs2' output='js/front/vendor.js' %}<script src="{{ asset_url }}"></script>{% endjavascripts %}
         {% javascripts '@frontend_js' filter='uglifyjs2' output='js/front/frontend.js' %}<script src="{{ asset_url }}"></script>{% endjavascripts %}

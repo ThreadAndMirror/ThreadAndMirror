@@ -28,7 +28,6 @@ ul, li {
 
 body {
 	position: relative;
-	background: #000;
 	color: #000;
 	font-family:'Avenir Next W01', sans-serif;
 	-webkit-font-smoothing: antialiased !important;
@@ -86,19 +85,18 @@ a:hover {
 button,
 input[type=submit] {
 	display: block;
-	line-height: 26px;
-	height: 28px;
-	font-size: 12px;
-	color: #111111;
+    line-height: 31px;
+    height: 32px;
+    font-size: 12px;
+	color: black;
 	background: none;
-	border: 1px solid #111111;
-	padding: 0px 6px 0px 8px;
+	border: 1px solid black;
+	padding: 0 10px;
 	border-radius: 4px;
 	margin: 0;
 	letter-spacing: 2px;
 	text-align: center;
-	font-family: 'Futura PT Multilingual W01',sans-serif;
-	font-weight: 400;
+	font-weight: 600;
 	cursor: pointer;
 	text-transform: uppercase;
 }
@@ -106,7 +104,7 @@ input[type=submit] {
 .button:hover ,
 button:hover ,
 input[type=submit]:hover {
-	background: rgba(16,16,16, 0.1);
+	background: rgba(0,0,0, 0.1);
 }
 
 .button-invert {
@@ -223,34 +221,6 @@ div+.pagination {
 	font-size: 18px !important;
 }
 
-/* --- TITLES --- */
-
-.title-large-serif {
-    font-family: 'Linotype Didot W01',serif;
-    font-size: 48px;
-    line-height: 48px;
-    z-index: 3;
-    font-weight: 400;
-    letter-spacing: -2px;
-}
-
-.title-faded-sans {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    font-size: 13px;
-    opacity: .5;
-}
-
-.title-italic-serif {
-    font-family: 'Linotype Didot W01',serif;
-    font-size: 20px;
-    line-height: 20px;
-    font-style: italic;
-    font-weight: 400;
-    text-align: center;
-}
-
 /* --- GENERIC CONTENT --- */
 
 .cms-page {
@@ -288,7 +258,7 @@ div+.pagination {
 	font-family: 'Linotype Didot W01', serif;
 	font-size: 44px;
     line-height: 54px;
-	color:#111111;
+	color:black;
 	border-bottom: 1px dotted #DDDDDD;
 	text-align: center;
 	font-weight: 400;
@@ -298,87 +268,7 @@ div+.pagination {
 
 /* --- HOMEPAGE LAYOUT --- */
 
-.layout-homepage .widget {
-	position: relative;
-}
 
-.layout-homepage .widget h5 {
-	font-size: 26px;
-	color: #111;
-	position: absolute;
-	width: 100%;
-	top: -16px;
-	text-align: center;
-	text-transform: uppercase;
-	font-weight: 100;
-	letter-spacing: 4px;
-}
-
-.layout-homepage .widget h5 a {
-	background: #FFFFFF;
-	padding: 10px;
-}
-
-.homepage-banner-wrapper+.cms-page {
-	margin-top: 0;
-}
-
-.homepage-banner-wrapper {
-	background-color: #333333;
-	height: 300px;
-	padding-top: 30px;
-	position: relative;
-	overflow: hidden;
-}
-
-.homepage-banner-wrapper h1,
-.homepage-banner-wrapper h2,
-.homepage-banner-wrapper p {
-	width: 100%;
-	color: #FFFFFF;
-	text-align: center;
-	position: absolute;
-}
-
-.homepage-banner-wrapper h2 {
-	top: 125px;
-	text-transform: uppercase;
-}
-
-.homepage-banner-wrapper h2 span {
-	font-size: 28px;
-	position:relative;
-	top: -8px;
-}
-
-.homepage-banner-wrapper h1 {
-    font-weight: 600;
-    top: 175px;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    font-size: 12px;
-    opacity: .5;
-}
-	
-.homepage-banner-wrapper p {
-	font-family: 'Linotype Didot W01',serif;
-	font-size: 20px;
-	line-height: 20px;
-	top: 225px;
-	font-style: italic;
-}
-
-.homepage-banner {
-	background-image: url('/media/image/original/london-skyline-slice.jpg');
-	background-size: cover;
-	height: 100%;
-	-webkit-filter: blur(5px);
-	-moz-filter: blur(5px);
-	-o-filter: blur(5px);
-	-ms-filter: blur(5px);
-	filter: blur(5px);
-    opacity: 0.5;
-}
 
 /* --- BANNER LAYOUTS --- */
 
@@ -393,7 +283,7 @@ div+.pagination {
 .layout-banner-inset__header-wrapper {
 	overflow: hidden;
 	height: 380px;
-	background-color: #111111;
+	background-color: black;
     position: relative;
     z-index: 1;
 }
@@ -464,7 +354,6 @@ div+.pagination {
 .layout-banner-inset__header-inset .social a {
 	color: #BBBBBB;
 	float: right;
-	font-family: 'Futura PT Multilingual W01', sans-serif;
 	font-size: 16px;
 	line-height: 20px;
 	z-index: 3;
@@ -481,7 +370,7 @@ div+.pagination {
 }
 
 .layout-banner-inset__header-inset .social a:hover {
-	color: #111111;
+	color: black;
 } 
 
 .layout-banner-inset__header-inset .social p {
@@ -617,7 +506,6 @@ div+.pagination {
 
 .layout-banner-overlay .social a {
 	color: #BBBBBB;
-	font-family: 'Futura PT Multilingual W01', sans-serif;
 	font-size: 16px;
 	line-height: 20px;
 	z-index: 3;
@@ -631,7 +519,7 @@ div+.pagination {
 }
 
 .layout-banner-overlay .social a:hover {
-	color: #111111;
+	color: black;
 }
 
 .layout-banner-overlay .section-blog-header {
@@ -653,7 +541,7 @@ div+.pagination {
 .cms-page .layout-content h5,
 .cms-page .layout-banner h5 {
 	font-size: 18px;
-	color: #111111;
+	color: black;
 	border-top: 1px dotted #DDDDDD;
 	position: relative;
 	width: 100%;
@@ -703,7 +591,6 @@ div+.pagination {
 .cms-page form input[type=password] {
 	text-align: center;
 	border: 1px dotted #DDDDDD;
-	font-family: 'Futura PT Multilingual W01', sans-serif;
 	font-size: 12px;
 	line-height: 28px;
 	height: 28px;
@@ -860,7 +747,6 @@ div+.pagination {
 .layout-frameless h4 {
 	color: #F0F0F0;
 	display: inline-block;
-	font-family: 'Futura PT Multilingual W01', sans-serif;
 	font-size: 16px;
 	z-index: 3;
 	background: rgba(0,0,0,0.75);
@@ -931,7 +817,7 @@ div+.pagination {
 }
 
 .article-snippet:hover {
-    color: #111111;
+    color: black;
 }
 
 .article-snippet .background {
@@ -1076,13 +962,12 @@ div+.pagination {
 article.article {
     border: 15px solid rgba(255,255,255,0.4);
     background-clip: padding-box;
+    margin: 0 -15px;
 }
 
 .article {
 	background: rgba(255,255,255,1);
 	position: relative;
-	width: 960px;
-	margin: 0 auto;
 }
 
 .article section {
@@ -1206,7 +1091,8 @@ article.article {
 	padding-top: 5px;
 }
 
-@media only screen and (max-width : 960px) {
+@media (max-width : 960px) {
+
     .layout-banner-overlay .banner-wrapper {
         height: 330px;
     }
@@ -1215,7 +1101,7 @@ article.article {
         margin: 155px 0;
     }
 
-    .layout-banner-overlay .banner-wrapper p {
+    .layout-banner-overlay .banner-wrapper p.date {
         margin: 130px 0;
     }
 
@@ -1226,15 +1112,6 @@ article.article {
     .layout-banner-overlay .article {
         border: none;
         height: auto !important;
-    }
-
-    .layout-banner-overlay .article, .layout-banner-inset .article {
-        width: 90%;
-        padding: 0 5%;
-    }
-
-    .article, .comments {
-        width: 100%;
     }
 
     .article section {
@@ -1412,7 +1289,6 @@ article.article {
 
 .comments #idc-container .idc-btn_l,
 .comments #idc-container .idc-btn_s {
-    font-family: 'Futura PT Multilingual W01', sans-serif;
     display: block;
     line-height: 26px;
     height: 26px;
@@ -1485,7 +1361,6 @@ article.article {
 }
 
 .comments h4 {
-	font-family: 'Futura PT Multilingual W01', sans-serif;
 	font-size: 12px;
 	line-height: 20px;
 	height: 20px;
@@ -1516,7 +1391,7 @@ article.article {
 	font-size: 10px !important;
 	line-height: 19px !important;
 	border-radius: 10px;
-	background-color: #111111;
+	background-color: black;
 	color: #FFFFFF;
 }
 
@@ -1558,7 +1433,7 @@ article.article {
 }
 
 .comments ul li .content h6 > span {
-	color: #111111;
+	color: black;
 }
 
 .comments ul li .content p {
@@ -1697,7 +1572,6 @@ section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
 	font-size: 12px;
 	color: #FFFFFF;
 	background: rgba(0,0,0,0.75);
-	font-family: 'Futura PT Multilingual W01', sans-serif;
 	z-index: 4;
 }
 
@@ -1735,8 +1609,7 @@ section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
 	margin: 0 !important;
 	text-align: center;
 	font-size: 12px;
-	color: #111111;
-	font-family: 'Futura PT Multilingual W01', sans-serif;
+	color: black;
 	z-index: 4;
 }
 
@@ -1786,7 +1659,6 @@ section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
 .section-blog-header .social a {
 	color: #BBBBBB;
 	float: right;
-	font-family: 'Futura PT Multilingual W01', sans-serif;
 	font-size: 16px;
 	line-height: 20px;
 	z-index: 3;
@@ -1803,7 +1675,7 @@ section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
 }
 
 .section-blog-header .social a:hover {
-	color: #111111;
+	color: black;
 } 
 
 .section-blog-header .social p {
@@ -1869,7 +1741,7 @@ section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
 }
 
 .left-control i {
-	color: #111111;
+	color: black;
 	width: 28px;
 	line-height: 22px !important;
 	font-size: 22px !important;
@@ -1951,8 +1823,7 @@ section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
 	height: 24px;
 	font-size: 10px;
 	padding: 0 5px;
-	font-family: 'Futura PT Multilingual W01', sans-serif;
-	width:390px; 
+	width:390px;
 	box-shadow: none;
 }
 
@@ -1983,7 +1854,7 @@ section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
 	height: 40px;
 	width: 70px;
 	background: none;
-	color: #111111;
+	color: black;
 	font-size: 17px;
 	line-height: 24px;
 	margin-left: 890px;
@@ -2017,7 +1888,7 @@ section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
 
 .store-item h3 {
 	font-size: 18px;
-	color: #111111;
+	color: black;
 	position: relative;
 	width: 100%;
 	text-align: center;
@@ -2053,7 +1924,7 @@ section.section-list.italics-list .preview > div > textarea.wysiwig-editor {
 
 .brand-item h3 {
 	font-size: 14px;
-	color: #111111;
+	color: black;
 	position: relative;
 	width: 100%;
 	text-align: center;
@@ -2091,7 +1962,6 @@ p.introduction {
 .text-search > input[type=text] {
 	text-align: center;
 	border: 1px solid #DDDDDD !important;
-	font-family: 'Futura PT Multilingual W01', sans-serif;
 	font-size: 14px !important;
 	line-height: 30px !important;
 	height: 30px !important;
@@ -2108,7 +1978,7 @@ p.introduction {
 	width: 26px;
 	background: none;
 	border-radius: 15px;
-	color: #111111;
+	color: black;
 }
 
 .text-search > button:hover {
@@ -2130,7 +2000,7 @@ p.introduction {
 	width: 26px;
 	background: none;
 	border-radius: 15px;
-	color: #111111;
+	color: black;
 	top: 1px;
 	left: 257px;
 }
@@ -2309,7 +2179,7 @@ p.introduction {
 .product-grid .product p.price {
 	position:absolute; bottom:0px; left:0px;
 	width: 200px;
-	color: #111111;
+	color: black;
 	margin: 0 10px;
 	font-size: 16px;
     line-height: 20px;
@@ -2321,7 +2191,7 @@ p.introduction {
 }
 
 .product-grid .product p.price span.fade {
-	color: #111111;
+	color: black;
 	opacity: 0.3;
 }
 
@@ -2376,11 +2246,11 @@ p.introduction {
 }
 
 .product-grid .product p.add-to-wishlist:hover i {
-	color: #111111;
+	color: black;
 }
 
 .product-grid .product p.remove-from-wishlist i {
-	color: #111111;
+	color: black;
 }
 
 .product-grid .product p.remove-from-wishlist:hover i {
@@ -2396,7 +2266,7 @@ p.introduction {
 .product-grid .product p.add-to-outfit i {
 	line-height: 20px !important;
 	font-size: 16px !important;
-	color: #111111;
+	color: black;
 }
 
 .product-grid .product p.add-to-outfit:hover i {
@@ -2433,11 +2303,10 @@ p.introduction {
 	line-height: 240px;
 	font-size: 16px;
 	text-transform: uppercase;
-	font-family: 'Futura PT Multilingual W01', sans-serif;
 	width: 100%;
 	text-align: center;
 	background: rgba(255,255,255,0.8);
-	color: #111111;
+	color: black;
 }
 
 .product-grid .product img {
@@ -2489,7 +2358,7 @@ p.introduction {
 .product-grid-small .product a > h3.name > span {
 	display: table-cell;
 	vertical-align: middle;
-	color: #111111;
+	color: black;
 }
 
 .product-grid-nine .product {
@@ -2537,7 +2406,7 @@ p.introduction {
 	letter-spacing: -1px;
 	font-weight: normal;
 	font-size: 24px;
-	color:#111111;
+	color:black;
 	margin: 10px;
 	text-align: center;
 }
@@ -2577,7 +2446,7 @@ p.introduction {
 	padding: 0 7px;
 	font-size: 12px;
 	text-align: center;
-	background: #111111;
+	background: black;
 	color: #FFFFFF;
 	position: relative;
 	cursor: pointer;
@@ -2631,7 +2500,7 @@ p.introduction {
 .product-view .images .style-it-with h5,
 .product-view .images .featured-in h5 {
 	font-size: 14px;
-	color: #111111;
+	color: black;
 	border: none;
 	position: absolute;
 	width: 100%;
@@ -2663,7 +2532,7 @@ p.introduction {
 	text-transform: uppercase;
 	font-weight: 400;
 	text-align: center;
-	color: #111111;
+	color: black;
 	background: #FFFFFF;
 	padding: 10px;
 	font-size: 20px;
@@ -2697,7 +2566,7 @@ p.introduction {
 .product-view .options button {
 	float: left;
 	background: none;
-	color:#111111;
+	color:black;
 	margin: 10px;
 }
 
@@ -2715,7 +2584,7 @@ p.introduction {
 	float: right;
 	margin-right: 10px;
 	background: #FFFFFF;
-	color: #111111;
+	color: black;
 	position: relative;
 }
 
@@ -2771,7 +2640,7 @@ p.introduction {
 }
 
 .product-view .details .actions a:hover {
-	color: #111111;
+	color: black;
 }
 
 .product-view .details .actions a {
@@ -2787,7 +2656,7 @@ p.introduction {
 }
 
 .product-view .details .add-to-wishlist:hover {
-	border: 1px solid #111111;
+	border: 1px solid black;
 }
 
 .product-view .details .add-to-wishlist i {
@@ -2799,7 +2668,7 @@ p.introduction {
 }
 
 .product-view .details .add-to-wishlist:hover i {
-	color: #111111;
+	color: black;
 }
 
 .product-view .share a {
@@ -2815,7 +2684,7 @@ p.introduction {
 	line-height: 28px !important;
 	font-size: 28px;
 	background: none;
-	color:#111111;
+	color:black;
 }
 
 .product-view .share a:hover > i {
@@ -2905,7 +2774,7 @@ p.introduction {
 	border-top: none !important;
 	margin: 0 !important;
 	font-size: 14px !important;
-	color: #111111;
+	color: black;
 	position: relative;
 	width: 100%;
 	top: -9px;
@@ -3021,7 +2890,7 @@ p.introduction {
 .social-feed figure {
 	margin: 0px;
 	width: 25%;
-	background: #111111;
+	background: black;
 	overflow: hidden;
 }
 
@@ -3222,7 +3091,7 @@ div.login {
 /* --- WIDGET - LATEST ADDTIONS --- */
 
 .widget a:hover {
-	color: #111111;
+	color: black;
 }
 
 .widget-latest-additions {
@@ -3334,7 +3203,7 @@ div.login {
 .widget .feature-article h4 > span {
     width: 50px;
     height: 5px;
-    border-top: 1px solid #111111;
+    border-top: 1px solid black;
     display: inline-block;
     margin: 0 5px;
     opacity: 0.4;
@@ -3375,7 +3244,7 @@ div.login {
 	margin-left: -50px;
 	margin-top: -50px;
 	height: 100px;
-	width: 100px;	
+	width: 100px;
 }
 
 .widget-blog-homepage-feature .feature-article a {
@@ -3385,7 +3254,7 @@ div.login {
 
 .widget-blog-homepage-feature .feature-article .title {
 	padding-top: 90px;
-	color: #111111;
+	color: black;
 	text-align: center;
 	width: 100%;
 }
@@ -3430,17 +3299,10 @@ div.login {
 	background: #FFFFFF;
 }
 
-.widget-blog-homepage-feature .other-articles figure h4 {
-	font-family: 'Linotype Didot W01', serif;
-	font-style: italic;
-	text-align: center;
-	font-size: 14px;
-	font-weight: 400;
-}
-
 .widget-blog-homepage-feature .other-articles figure p {
 	margin: 15px 0;
 	text-align: center;
+    font-weight: 400;
 }
 
 .widget-blog-homepage-feature .other-articles figure .image {
@@ -3449,306 +3311,7 @@ div.login {
 	border-radius: 160px;
 }
 
-/* --- WIDGET - EDITORS PICKS --- */
 
-.widget-editors-picks {
-	border-top: 0 !important;
-	margin-top: 65px;
-	padding-top: 0;
-	background: #111111;
-}
-
-.widget-editors-picks .background {
-	height: 480px;
-	width: 100%;
-	position: absolute;
-	-webkit-filter: blur(5px);
-	-moz-filter: blur(5px);
-	-o-filter: blur(5px);
-	-ms-filter: blur(5px);
-	filter: blur(5px);
-	overflow: hidden;
-	opacity: 0.3;
-}
-
-.widget-editors-picks .feature-article {
-	height: 480px;
-}
-
-.widget-editors-picks .feature-article .image {
-	border: 3px solid #FFFFFF;
-	border-radius: 260px;
-	position: absolute;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-	bottom: 0;
-	left: 50%;
-	margin-left: -133px;
-	margin-bottom: -80px;
-	height: 260px;
-	width: 260px;
-}
-
-.widget-editors-picks .feature-article > a {
-	width: 100%;
-	height: 450px;
-}
-
-.widget-editors-picks .feature-article .title {
-	padding-top: 65px;
-	color: #111111;
-	text-align: center;
-	width: 100%;
-}
-
-.widget-editors-picks .feature-article h2,
-.widget-editors-picks .feature-article h4,
-.widget-editors-picks .feature-article .title p {
-	color: #FFFFFF;
-}
-
-.widget-editors-picks .feature-article h4 {
-	margin-top: 10px;
-}
-
-.widget-editors-picks .feature-article h4 > span {
-    border-top: 1px solid #FFFFFF;
-}
-
-
-.widget-editors-picks .feature-article .title p {
-	top: 175px;
-}
-
-.widget-editors-picks .feature-article button {
-	margin: 40px auto 60px;
-}
-
-.widget-editors-picks .feature-article a:hover button { 
-	background: rgba(255,255,255, 0.1);
-}
-
-.widget-editors-picks a.product {
-	position: absolute;
-    background-color: #FFFFFF;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 144px;
-    width: 144px;
-    border-radius: 150px;
-    bottom: 15px;
-    border: 3px solid #FFF;
-    -webkit-filter: saturate(1.1);
-    transition: 0.5s all;
-}
-
-.widget-editors-picks a.product:hover {
-    background-size: cover;
-}
-
-.widget-editors-picks .product.pos-1 {
-    left: 0;
-}
-
-.widget-editors-picks .product.pos-2 {
-    left: 175px;
-}
-
-.widget-editors-picks .product.pos-3 {
-    right: 175px;
-}
-
-.widget-editors-picks .product.pos-4 {
-    right: 0;
-}
-
-
-/* --- WIDGET - INSTAGRAM --- */
-
-.widget-instagram h4 {
-    font-family: 'Linotype Didot W01',serif;
-    font-size: 20px;
-    line-height: 20px;
-    font-style: italic;
-    font-weight: 200;
-    margin-top: 5px;
-    text-shadow: 0 0 1px #fff;
-    text-align: center;
-    margin: 160px 0 45px;
-}
-
-.widget-instagram .images {
-    margin: 0 -120px;
-    width: calc(100% + 480px);
-    height: 480px;
-    overflow: hidden;
-}
-
-.widget-instagram .images figure {
-    position:relative;
-    width: 240px;
-    height: 240px;
-    float: left;
-    margin: 0;
-}
-
-.widget-instagram .images figure a {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-/* --- WIDGET - SOCIAL LATEST --- */
-
-.widget-social-boxes {
-	margin: 0px;
-	padding-top: 1px;
-	position: relative;
-	width: 100%;
-	overflow: hidden;
-	background: #111111;
-}
-
-.widget-social-boxes > h4 {
-	margin: 100px auto;
-	text-align: center;
-}
-
-.widget-social-boxes > h4 a {
-	font-family: 'Linotype Didot W01',serif;
-	font-size: 20px;
-	line-height: 20px;
-	font-style: italic;
-	font-weight: 200;
-	color: #FFFFFF;
-}
-
-.widget-social-boxes > h4 a:hover {
-	color: #FFFFFF;
-}
-
-.widget-social-boxes .wrap {
-	margin: 0 auto;
-}
-
-.widget-social-boxes .offset-left,
-.widget-social-boxes .offset-right {
-	position: absolute;
-	top: 0;
-	width: 960px;
-}
-
-.widget-social-boxes .offset-left {
-	right: 960px;
-}
-
-.widget-social-boxes .offset-right {
-	left: 960px;
-}
-
-.widget-social-boxes figure {
-	margin: 0;
-	float: left;
-	position: relative;
-	display: table;
-	border-collapse: collapse;
-	width: 240px;
-	height: 240px;
-	background-color: #111111;
-}
-
-.widget-social-boxes figure:nth-child(4n+1) {
-	margin-left: 0;
-}
-
-.widget-social-boxes figure:nth-child(4n) {
-	margin-right: 0;
-}
-
-.widget-social-boxes figure a {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-
-.widget-social-boxes figure p {
-	padding: 20px;
-	width: 221px;
-	height: 220px;
-	color: #FFFFFF;
-	font-weight: 200;
-	text-align: center;
-	background-color: #111111;
-	display: table-cell;
-	vertical-align: middle;
-}
-
-.widget-social-boxes figure.twitter-image p, 
-.widget-social-boxes figure.instagram p {
-	-webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out;
-	opacity: 0;	
-}
-
-.widget-social-boxes figure.twitter-image:hover p, 
-.widget-social-boxes figure.instagram:hover p {
-	opacity: 1;	
-}
-
-/* --- WIDGET - SOCIAL BUTTONS --- */
-
-.layout-homepage .follow-us-widget {
-	padding: 80px 0 80px !important;
-	margin: 0 !important;
-}
-
-.layout-homepage .follow-us-widget p {
-	font-weight: 200;
-	top: 175px;
-	text-transform: uppercase;
-	letter-spacing: 3px;
-	text-align: center;
-	font-size: 12px;
-	opacity: 0.7;
-}
-
-.layout-homepage .follow-us-widget .social {
-	margin: 0 auto;
-	width: 305px;
-}
-
-.layout-homepage .follow-us-widget .social a {
-	height: 64px;
-	width: 64px;
-	border: 1px solid #111;
-	border-radius: 34px;
-	display: block;
-	float: left;
-	margin: 5px;
-}
-
-.layout-homepage .follow-us-widget .social a i {
-	font-size: 40px;
-	line-height: 40px !important;
-	display: block;
-	width: 40px;
-	margin: 12px;
-	-webkit-transition: all 0.3s ease-in-out; 
-	-o-transition: all 0.3s ease-in-out; 
-	-moz-transition: all 0.3s ease-in-out; 
-	transition: all 0.3s ease-in-out;
-}
-
-.layout-homepage .follow-us-widget .social a i:hover {
-	-ms-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-}
 
 .widget-poll {
 	border: 1px solid #DDDDDD;
@@ -3760,7 +3323,7 @@ div.login {
 
 .widget-poll h5 {
 	font-size: 14px;
-	color: #111111;
+	color: black;
 	position: absolute;
 	width: 100%;
 	top: -9px;
@@ -3834,89 +3397,6 @@ div.login {
 	line-height: 18px;
 }
 
-/* --- FOOTER --- */
-
-#footer {
-	padding:20px 0;
-	min-height: 100px;
-	border-top: 1px solid #000000;
-	width: 100%;
-	z-index: 2;
-	background: #111111;
-}
-
-#footer ul {
-	float: left;
-	width: 140px;
-	list-style: none;
-	padding:5px;
-}
-
-#footer ul.two-col {
-	width: 302px;
-}
-
-#footer ul+ul {
-	margin: 0 0 0 12px;
-}
-
-#footer ul > li {
-	height: 16px;
-}
-
-#footer ul > li > h6 > a {
-	text-transform: uppercase;
-	font-size: 12px;
-	color: #EEEEEE;
-}
-
-#footer ul > li > hr {
-	border-bottom: 1px dotted #777777;
-	margin-top: 1px;
-	height: 7px;
-	width: 139px;
-}
-
-#footer ul > li > a, #footer ul > li > p {
-	display: inline-block;
-	color: #BBBBBB;
-	font-size: 12px;
-}
-
-#footer ul > li > p.small {
-	font-size: 10px;
-	width: 100%;
-	text-align: right;
-	text-transform: none;
-	color: #777777;
-} 
-
-#footer ul > li > a:hover {
-	color: #f93124;
-}
-
-#footer ul > li.social > a {
-	float:right;
-	margin: 0 0 0 5px;
-	height: 26px;
-	width: 26px;
-	border-radius: 14px;
-	text-align: center;
-	color: #333333;
-	background: #EEEEEE;
-	-webkit-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;
-}
-
-#footer ul > li.social > a:hover {
-	color: #EEEEEE;
-	background: #AAAAAA;
-}
-
-#footer ul > li.social > a > i {
-	line-height: 26px !important;
-	font-size: 17px;
-	margin-left: 1px;
-}
 
 /*--- CSS FILTERS ---*/
 
