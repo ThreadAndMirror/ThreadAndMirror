@@ -149,6 +149,7 @@
 
     .magazine-widget__excerpt {
         margin-top: 6vw;
+        font-size: 3vw;
     }
 
     .magazine-widget__read-more, .magazine-widget__other-article-read-more {
@@ -157,7 +158,7 @@
     }
 
     .magazine-widget__other-article-read-more {
-        margin-bottom: 0;
+        /*margin-bottom: 0;*/
     }
 
     .magazine-widget__background {
@@ -176,7 +177,8 @@
     }
 
     .magazine-widget__other-article-title-block {
-        padding: 10vw;
+        padding: 10vw 10vw 0;
+        height: auto;
     }
 
     .magazine-widget__other-article-image {
@@ -190,6 +192,7 @@
         margin: 5vw 0 0;
         font-size: 2.8vw;
         line-height: 130%;
+        height: auto;
     }
 
     .magazine-widget__other-article {
@@ -199,6 +202,10 @@
     .magazine-widget__other-article:nth-child(2) {
         background: black;
         color: white;
+    }
+
+    .magazine-widget__other-article-link {
+        background: none;
     }
 
     .magazine-widget__other-article-title--invert, .magazine-widget__other-article-subtitle--invert, .magazine-widget__other-article-excerpt--invert, .magazine-widget__other-article-read-more--invert {
@@ -211,5 +218,11 @@
 
     .magazine-widget__other-article-subtitle {
         margin-top: 2vw;
+        font-size: 4vw;
+    }
+
+    .magazine-widget__other-article-title {
+        font-size: 9vw;
+        letter-spacing: -0.4vw;
     }
 }

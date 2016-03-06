@@ -169,7 +169,7 @@ assetic:
                 - '@StemsBlogBundle/Resources/public/js/front/frontend.js'
         frontend_css:
             inputs:
-                - 'css/bootstrap-3.3.6-dist/css/bootstrap.css'
+                - '../assets/css/bootstrap-3.3.6-dist/css/bootstrap.css'
                 - '@StemsCoreBundle/Resources/public/css/front/vendor/*'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/stylesheet.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/titles.css'
