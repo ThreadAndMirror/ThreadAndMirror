@@ -3,7 +3,8 @@
 	<head>
 	{# Metadata #}
 		<title>{% block windowTitle %}{% if page.windowTitle is not empty %}{{ page.windowTitle }}{% else %}Home{% endif %}{% endblock %} &middot; Thread &amp; Mirror &middot; Fashion, Beauty, Blog, Street Chic, The Social Circle and Sale Alerts.</title>
-		<meta http-equiv="Content-Type"  content="text/html;charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type"  content="text/html;charset=UTF-8" />
         {% block metaNoIndex %}{% if page is defined %}{% if page.noIndex %}<meta name="robots" content="noindex" />{% endif %}{% endif %}{% endblock %}
 		<meta name="p:domain_verify" content="365a3fd68ee25f112944be3892208ba0"/>
 		<meta name="google-site-verification" content="dXihq8Jt3LO5JRItWHODoHiMBlNSv4QhqsSpOtGZIZ4" />

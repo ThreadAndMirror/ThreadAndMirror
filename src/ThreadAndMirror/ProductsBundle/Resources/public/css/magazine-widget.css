@@ -144,53 +144,60 @@
 
 @media only screen and (max-width : 960px) {
     .magazine-widget__featured-article {
-        height: 100vw;
+        position: relative;
+    }
+
+    .magazine-widget__wrap {
+        height: 100%;
     }
 
     .magazine-widget__excerpt {
         margin-top: 6vw;
-        font-size: 3vw;
+        font-size: 4vw;
+        line-height: 130%;
     }
 
     .magazine-widget__read-more, .magazine-widget__other-article-read-more {
         height: 7vw;
+        line-height: 7vw;
         font-size: 2.5vw;
     }
 
-    .magazine-widget__other-article-read-more {
-        /*margin-bottom: 0;*/
+    .magazine-widget__read-more {
+        margin: 7vw auto 0;
     }
 
     .magazine-widget__background {
-        height: 100vw;
+        height: 100%;
     }
 
     .magazine-widget__image {
-        margin-left: -25vw;
+        margin-left: -40vw;
         margin-top: -10vw;
-        height: 50vw;
-        width: 50vw;
+        height: 80vw;
+        width: 80vw;
     }
 
     .magazine-widget__title-block {
-        padding-top: 47vw;
+        padding-top: 78vw;
     }
 
     .magazine-widget__other-article-title-block {
-        padding: 10vw 10vw 0;
+        padding: 10vw 0 0;
         height: auto;
     }
 
     .magazine-widget__other-article-image {
-        height: 50vw;
-        width: 50vw;
-        margin: 0 auto;
+        margin-left: 0;
+        margin-top: 0;
+        height: 80vw;
+        width: 80vw;
         border-radius: 100%;
     }
 
     .magazine-widget__other-article-excerpt {
         margin: 5vw 0 0;
-        font-size: 2.8vw;
+        font-size: 4vw;
         line-height: 130%;
         height: auto;
     }
@@ -216,9 +223,13 @@
         border-color: white;
     }
 
+    .magazine-widget__other-article-title {
+        font-size: 5vw;
+    }
+
     .magazine-widget__other-article-subtitle {
         margin-top: 2vw;
-        font-size: 4vw;
+        font-size: 5vw;
     }
 
     .magazine-widget__other-article-title {

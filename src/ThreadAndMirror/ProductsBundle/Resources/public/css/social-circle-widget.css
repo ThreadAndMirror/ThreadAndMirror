@@ -79,7 +79,11 @@
     }
 
     .social-circle-widget__title {
-        font-size: 4vw;
+        margin: 16vw 0;
+    }
+
+    .social-circle-widget__title-link {
+        font-size: 5vw;
     }
 
     .social-circle-widget__item {

@@ -126,21 +126,22 @@
 
     .widget-editors-picks__read-more {
         height: 7vw;
+        line-height: 7vw;
         font-size: 2.5vw;
     }
 
     .widget-editors-picks__background {
-        height: 100vw;
+        height: 100%;
     }
 
     .widget-editors-picks__wrap {
-        height: 100vw;
+        height: 100%;
     }
 
     .widget-editors-picks__image {
-        margin-left: -25vw;
+        margin-left: -40vw;
         margin-bottom: -10vw;
-        height: 50vw;
-        width: 50vw;
+        height: 80vw;
+        width: 80vw;
     }
 }

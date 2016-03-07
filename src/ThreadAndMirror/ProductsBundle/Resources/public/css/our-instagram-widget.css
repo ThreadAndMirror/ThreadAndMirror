@@ -1,3 +1,7 @@
+.our-instagram-widget {
+    overflow: hidden;
+}
+
 .our-instagram-widget__title {
     font-family: 'Linotype Didot W01',serif;
     font-size: 20px;
@@ -33,10 +37,14 @@
 }
 
 
-@media only screen and (max-width : 960px) {
+@media (max-width : 960px) {
 
     .our-instagram-widget__title {
-        font-size: 4vw;
+        margin: 24vw 0 12vw;
+    }
+
+    .our-instagram-widget__title-link {
+        font-size: 5vw;
     }
 
     .our-instagram-widget__items {
