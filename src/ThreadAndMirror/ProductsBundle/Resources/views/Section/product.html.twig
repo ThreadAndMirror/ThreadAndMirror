@@ -1,8 +1,8 @@
 {% extends 'StemsPageBundle:Section:base.html.twig' %}
 
 {% block content %}
-    <div class="section-product section-product--{{ section.position }}--col-{{ link.span }}" itemscope itemtype="http://schema.org/Product">
-        <a class="section-product__link" href="{{ section.url }}" itemprop="url">
+    <div class="section-product__wrapper section-product__wrapper--{{ section.position }}--col-{{ link.span }}" itemscope itemtype="http://schema.org/Product">
+        <a class="section-product__link section-product__link--{{ section.position }}--col-{{ link.span }}" href="{{ section.url }}" itemprop="url">
             <h3 class="section-product__name section-product__name--col-{{ link.span }}"><span class="section-product__brand">{{ section.designer }}</span> {{ section.name }}</h3>
             <span class="section-product__buy-icon section-product__buy-icon--col-{{ link.span }} fa-stack fa-lg">
               <i class="fa fa-circle-thin fa-stack-2x"></i>

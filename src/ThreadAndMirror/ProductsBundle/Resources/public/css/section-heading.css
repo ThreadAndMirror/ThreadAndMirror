@@ -1,0 +1,41 @@
+.section-heading__title--h4 {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+    opacity: .7;
+    position: absolute;
+    width: 100%;
+}
+
+.section-heading__title--h6 {
+    font-family: 'Linotype Didot W01',serif;
+    display: block;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 200;
+    margin-top: 5px;
+    letter-spacing: -1px;
+    font-style: italic;
+}
+
+@media (max-width : 960px) {
+
+    .section-heading {
+        padding: 10vw 0;
+        float: none;
+    }
+
+    .section-heading__title--h4 {
+        font-size: 5vw;
+        letter-spacing: 7px;
+        position: relative;
+    }
+
+    .section-heading__title--h6 {
+        font-size: 6vw;
+        letter-spacing: -0.2vw;
+        position: relative;
+    }
+}

@@ -124,6 +124,10 @@
         display: none;
     }
 
+    .widget-editors-picks__subtitle {
+        font-size: 5vw;
+    }
+
     .widget-editors-picks__read-more {
         height: 7vw;
         line-height: 7vw;

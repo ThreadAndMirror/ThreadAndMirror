@@ -155,6 +155,7 @@
         margin-top: 6vw;
         font-size: 4vw;
         line-height: 130%;
+        padding: 5vw 0;
     }
 
     .magazine-widget__read-more, .magazine-widget__other-article-read-more {
@@ -200,6 +201,7 @@
         font-size: 4vw;
         line-height: 130%;
         height: auto;
+        padding: 5vw 0;
     }
 
     .magazine-widget__other-article {
@@ -223,7 +225,7 @@
         border-color: white;
     }
 
-    .magazine-widget__other-article-title {
+    .magazine-widget__other-article-subtitle, .magazine-widget__subtitle {
         font-size: 5vw;
     }
 

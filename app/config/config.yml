@@ -183,6 +183,12 @@ assetic:
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/editors-picks-widget.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/magazine-widget.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/homepage-banner.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/magazine-layout-banner.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/section.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-heading.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product-gallery.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product-gallery-feature.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product.css'
 
     filters:
         cssrewrite: ~
