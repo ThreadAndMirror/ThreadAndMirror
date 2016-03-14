@@ -35,7 +35,7 @@
     text-align: center;
     font-family: 'Linotype Didot W01',serif;
     font-size: 48px;
-    line-height: 48px;
+    line-height: 100%;
     font-weight: 400;
     letter-spacing: -2px;
     z-index: 2;
@@ -63,7 +63,6 @@
 .magazine-layout-banner__subtitle {
     display: block;
     font-size: 20px;
-    line-height: 20px;
     font-weight: 200;
     margin-top: 5px;
     letter-spacing: -1px;
@@ -126,6 +125,10 @@
 
 @media (max-width : 960px) {
 
+    .magazine-layout-banner {
+        background: #eee;
+    }
+
     .magazine-layout-banner__banner-wrapper {
         height: 100vw;
         display: table;
@@ -141,6 +144,11 @@
     .magazine-layout-banner__article-wrapper {
         height: auto !important;
         padding: 5vw;
+    }
+
+    .magazine-layout-banner__title {
+        font-size: 11vw;
+        letter-spacing: -0.5vw;
     }
 
     .magazine-layout-banner__subtitle {
