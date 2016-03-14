@@ -1,0 +1,128 @@
+.article-list {
+    padding: 0;
+}
+
+.article-list__item {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 320px;
+    margin: 0;
+    display: block;
+}
+
+.article-list__item:hover {
+    color: black;
+}
+
+.article-list__item-background {
+    background-position: center;
+    background-size: cover;
+    left:-15px;
+    right:-15px;
+    top:-15px;
+    bottom:-15px;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -ms-filter: blur(5px);
+    -o-filter: blur(5px);
+    position: absolute;
+    opacity: 0.2;
+}
+
+.article-list__item:nth-child(2n+1) {
+    background: black;
+    color: white;
+}
+
+.article-list__item-title {
+    text-align: center;
+    font-family: 'Linotype Didot W01',serif;
+    font-size: 36px;
+    line-height: 48px;
+    z-index: 3;
+    font-weight: 400;
+    letter-spacing: -2px;
+}
+
+.article-list__item-date {
+    font-weight: 200;
+    top: 175px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 12px;
+    opacity: .3;
+    text-align: center;
+}
+
+.article-list__item-subtitle {
+    font-family: 'Linotype Didot W01',serif;
+    display: block;
+    font-size: 20px;
+    line-height: 20px;
+    font-style: italic;
+    font-weight: 200;
+    margin: 5px 0 20px;
+    letter-spacing: -1px;
+}
+
+.article-list__item-dash {
+    width: 50px;
+    height: 5px;
+    border-top: 1px solid #111;
+    display: inline-block;
+    margin: 0 10px;
+    opacity: .4;
+}
+
+.article-list__item-read-more {
+    margin: 0 auto;
+}
+
+.article-list__item:nth-child(2n+1) .article-list__item-image-wapper {
+    float: right;
+}
+
+.article-list__item-image {
+    background-size: cover;
+    background-position: center;
+    background-clip: content-box;
+    width: 260px;
+    height: 260px;
+    border-radius: 100%;
+}
+
+.article-list__item-title-block {
+    position: relative;
+    display: table;
+    width: 640px;
+    height: 320px;
+}
+
+.article-list__item-middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.article-list__item-title-block--odd {
+    float: left;
+}
+
+.article-list__item:nth-child(2n+1) .article-list__item-read-more {
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+
+.article-list__item-excerpt {
+    text-align: center;
+    margin: 5px 5px 25px;
+    padding: 15px;
+    box-sizing: border-box;
+    line-height: 20px;
+}
+
+@media (max-width : 960px) {
+
+
+}

@@ -35,6 +35,17 @@
     text-align: center;
 }
 
+.section--text-align-right {
+    text-align: right;
+}
+
+.section--text-align-left {
+    text-align: left;
+}
+
+.section--text-align-center {
+    text-align: center;
+}
 @media (max-width : 960px) {
 
     .section {

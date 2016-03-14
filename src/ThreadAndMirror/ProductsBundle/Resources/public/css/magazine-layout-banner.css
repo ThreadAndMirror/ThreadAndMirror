@@ -10,6 +10,7 @@
 .magazine-layout-banner__banner-wrapper {
     overflow: hidden;
     height: 200px;
+    margin-top: 50px;
     background-color: #111;
     position: relative;
     text-align: center;
@@ -17,9 +18,17 @@
     z-index: 1;
 }
 
+.magazine-layout-banner__title-alignment {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
 .magazine-layout-banner__title-block {
     display: table-cell;
     vertical-align: middle;
+    position: relative;
+    z-index: 2;
 }
 
 .magazine-layout-banner__title {
@@ -100,10 +109,19 @@
     color: black;
 }
 
+.magazine-layout-banner__content {
+    padding-bottom: 30px;
+}
+
 .magazine-layout-banner__article {
     border: 15px solid rgba(255,255,255,0.4);
     background-clip: padding-box;
-    margin: 0 -15px;
+    position: relative;
+    padding: 0;
+}
+
+.magazine-layout-banner__article-wrapper {
+    background: white;
 }
 
 @media (max-width : 960px) {
@@ -114,18 +132,15 @@
         width: 100%;
     }
 
-    .magazine-layout-banner__banner {
-        height: 100%;
-    }
-
     .magazine-layout-banner__article {
         border: none;
-        padding: 5vw;
+        padding: 0;
         margin: 0;
     }
 
     .magazine-layout-banner__article-wrapper {
         height: auto !important;
+        padding: 5vw;
     }
 
     .magazine-layout-banner__subtitle {

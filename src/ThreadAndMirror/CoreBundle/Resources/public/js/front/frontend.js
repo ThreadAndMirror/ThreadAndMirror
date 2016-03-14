@@ -604,7 +604,6 @@ $(document).ready(function() {
 	};
 
 	$.fn.updateImage = function(slide) {
-
 		$(this).data('currentImage', slide);
 		var self = $(this);
 		$(this).data('features').hide().each(function(){
@@ -614,20 +613,20 @@ $(document).ready(function() {
 		});
 	};
 
-	$('.gallery-layout-feature').each(function() {
+	$('.section-product-gallery').each(function() {
 		$(this).featureImageGallery();
 	});
 
 	$('body').on('click', '.section-product-gallery-feature__next', function() {
-		$(this).closest('.gallery-layout-feature').nextImage();
+		$(this).closest('.section-product-gallery').nextImage();
 	});
 
 	$('body').on('click', '.section-product-gallery-feature__prev', function() {
-		$(this).closest('.gallery-layout-feature').prevImage();
+		$(this).closest('.section-product-gallery').prevImage();
 	});
 
 	$('body').on('click', '.section-product-gallery-feature__thumbnail-product', function() {
-		$(this).closest('.gallery-layout-feature').updateImage($(this).data('image'));
+		$(this).closest('.section-product-gallery').updateImage($(this).data('image'));
 	});
 
 	////////////////////////////////////////////////////////////////////////////////////////////////

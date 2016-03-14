@@ -189,6 +189,7 @@ assetic:
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product-gallery.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product-gallery-feature.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/article-list.css'
 
     filters:
         cssrewrite: ~
