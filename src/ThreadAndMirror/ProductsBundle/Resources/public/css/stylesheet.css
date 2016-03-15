@@ -440,9 +440,9 @@ div+.pagination {
 
 /* --- LAYOUT - RESPONSIVE COVER --- */
 
-.layout-responsive-cover {
-	padding-top: 30px;
-}
+/*.layout-responsive-cover {*/
+	/*padding-top: 30px;*/
+/*}*/
 
 .layout-responsive-cover h1 {
 	border-bottom: none;
