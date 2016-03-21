@@ -15,12 +15,14 @@
     position: relative;
     z-index: 1;
     margin: 0 auto;
+    width: 990px;
 }
 
 .magazine-layout-inset__body-wrapper {
     border: 15px solid rgba(255,255,255,0.4);
     border-top: none;
     padding: 0;
+    width: 990px;
 }
 
 .magazine-layout-inset__banner {
@@ -155,10 +157,12 @@
 
     .magazine-layout-inset__header-wrapper {
         height: auto;
+        width: 100%;
     }
 
     .magazine-layout-inset__body-wrapper {
         border: 0;
+        width: 100%;
     }
 
     .magazine-layout-inset__header-inset {

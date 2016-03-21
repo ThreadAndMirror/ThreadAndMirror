@@ -1,0 +1,33 @@
+
+.section-image__container {
+    position: relative;
+}
+
+.section-image__caption {
+    font-weight: 200;
+    text-align: center;
+    font-size: 13px;
+}
+
+.section-image__image--squared {
+    object-fit: cover;
+}
+
+.section-image__image--squared--col-2 {
+    height: 470px;
+    width: 470px;
+}
+
+.section-image__caption--squared {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: #000;
+}
+
+@media (max-width : 960px) {
+    .section-image__image--squared--col-2 {
+        height: 90vw;
+        width: 90vw;
+    }
+}

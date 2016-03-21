@@ -1,5 +1,5 @@
 .section {
-    margin: 15px 15px 0;
+    margin: 0;
     padding: 14px;
     border: 1px dashed white;
     background: white;
@@ -9,20 +9,20 @@
 
 .section__col-1,
 .section__col-1 .squared {
-    width: 180px;
+    width: 210px;
 }
 
 .section__col-2,
 .section__col-2 .squared {
-    width: 420px;
+    width: 480px;
 }
 
 .section__col-3 {
-    width: 640px;
+    width: 670px;
 }
 
 .section__col-4 {
-    width: 900px;
+    width: 960px;
 }
 
 .section__col-2 .squared {
@@ -31,7 +31,7 @@
 }
 
 .section__col-1 .squared {
-    height: 180px;
+    height: 210px;
     text-align: center;
 }
 
@@ -52,7 +52,7 @@
         position: relative;
         top: 0 !important;
         left: 0 !important;
-        margin: 0 0 15px;
+        margin: 0 0 5vw;
         padding: 0;
         float: left;
     }

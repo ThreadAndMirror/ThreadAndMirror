@@ -117,10 +117,18 @@
     background-clip: padding-box;
     position: relative;
     padding: 0;
+    width: 1030px;
 }
+
+.magazine-layout-banner__article-padding {
+    background: white;
+    padding: 15px;
+}
+
 
 .magazine-layout-banner__article-wrapper {
     background: white;
+    position: relative;
 }
 
 @media (max-width : 960px) {
@@ -139,6 +147,7 @@
         border: none;
         padding: 0;
         margin: 0;
+        width: 100%;
     }
 
     .magazine-layout-banner__article-wrapper {

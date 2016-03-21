@@ -78,8 +78,13 @@
     margin: 0 auto;
 }
 
-.article-list__item:nth-child(2n) .article-list__item-image-wapper {
+.article-list__item-image-wapper, .article-list__item:nth-child(2n) .article-list__item-snippet-wapper {
     float: right;
+}
+
+.article-list__item-image-wapper {
+    display: table;
+    height: 100%;
 }
 
 .article-list__item-image {
