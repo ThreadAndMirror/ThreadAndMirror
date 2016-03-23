@@ -22,10 +22,6 @@
 
 @media (max-width : 960px) {
 
-    .section-heading {
-        padding: 10vw 0;
-    }
-
     .section-heading__title--h4 {
         font-size: 5vw;
         letter-spacing: 7px;

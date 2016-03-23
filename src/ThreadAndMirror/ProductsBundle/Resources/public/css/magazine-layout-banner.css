@@ -133,6 +133,12 @@
 
 @media (max-width : 960px) {
 
+    .magazine-layout-banner__article p {
+        font-size: 4vw;
+        line-height: 150%;
+        margin: 0;
+    }
+
     .magazine-layout-banner {
         background: white;
     }
