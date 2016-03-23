@@ -9,6 +9,14 @@
     font-size: 13px;
 }
 
+.section-image__caption--squared {
+    width: 100%;
+    color: black;
+    font-weight: 600;
+    padding: 15px;
+    margin: 0;
+}
+
 .section-image__image--squared {
     object-fit: cover;
 }
@@ -18,16 +26,16 @@
     width: 470px;
 }
 
-.section-image__caption--squared {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    color: #000;
-}
-
 @media (max-width : 960px) {
+
     .section-image__image--squared--col-2 {
-        height: 90vw;
-        width: 90vw;
+        height: 80vw;
+        width: 80vw;
+    }
+
+    .section-image__caption--squared {
+        padding: 5vw;
+        font-size: 3vw;
+        line-height: 150%;
     }
 }
