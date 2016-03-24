@@ -1,0 +1,23 @@
+{% extends '@StemsPage/Layout/banner.html.twig' %}
+
+{% block windowTitle %}Contact Us{% endblock %}
+
+{% block metaKeywords %}{% endblock %}
+
+{% block metaDescription %}Contact Us{% endblock %}
+
+{% block twitterCardDescription %}Contact Us{% endblock %}
+
+{% block title %}<h1 class="magazine-layout-banner__title">Contact Us</h1>{% endblock %}
+
+{% block banner %}{{ '/media/image/page/typewriter.jpg'|imagine_filter('page_banner') }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 text-center">
+            <p class="content-layout-banner__paragraph">General enquiries, feedback and suggestions:  <a href="mailto:info@threadandmirror.com">info@threadandmirror.com</a></p>
+            <p class="content-layout-banner__paragraph">Press, stores, brands and potential contributors: <a href="mailto:tricia@threadandmirror.com">tricia@threadandmirror.com</a></p>
+            <p class="content-layout-banner__paragraph">Technical enquiries: <a href="mailto:stephen@threadandmirror.com">stephen@threadandmirror.com</a></p>
+        </div>
+    </div>
+{% endblock %}

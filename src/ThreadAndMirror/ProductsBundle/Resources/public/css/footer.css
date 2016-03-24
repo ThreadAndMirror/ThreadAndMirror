@@ -1,10 +1,9 @@
 .footer {
     padding:20px 0;
     min-height: 100px;
-    border-top: 1px solid #000000;
     width: 100%;
     z-index: 2;
-    background: #111111;
+    background: black;
 }
 
 .footer__menu {

@@ -8,32 +8,18 @@
 
 {% block twitterCardDescription %}About Thread & Mirror{% endblock %}
 
-{% block twitterCardImage %}/media/image/page/clothing-rack.jpg{% endblock %}
+{% block title %}<h1 class="magazine-layout-banner__title">About Us</h1>{% endblock %}
 
-{% block banner %}<div class="banner" style="background-image:url('{{ '/media/image/page/clothing-rack.jpg'|imagine_filter('page_banner') }}')">{% endblock %}
-
-{% block title %}<h1>About</h1>{% endblock %}
+{% block banner %}{{ '/media/image/page/clothing-rack.jpg'|imagine_filter('page_banner') }}{% endblock %}
 
 {% block content %}
-    <p>Thread & Mirror is a site focused on bringing together, on one site, the premier luxury brands in fashion and beauty so you can curate your own personal shopping experience, effortlessly and efficiently.</p>
-
-    <h5><span>Find Fashion</span></h5>
-    <p>Forget jumping from store to store to find what’s new in or now on sale, simply scroll through <a href="/latest-additions">Latest Additions</a> and  <a href="sale-items">Sale Items</a> to find what you desire whilst we do all of the searching for you. You can select your favourite stores or browse through all of them - discovering great style has never been so easy!
-
-    <h5><span>Wishlist Alerts</span></h5>
-    <p>Add items to your Wish List and we will notify you by email when they are back in stock or if they go on sale. We aim to check each product at least once every hour to ensure you don’t miss out on your favourite items, allowing you to snap it up before someone else does! </p>
-
-    <h5><span>Follow Designers</span></h5>
-    <p>Coming soon...</p>
-    <p>Follow your favourite designer(s) to receive e-mail alerts as soon as they have new stock in any of our stores. </p>
-
-    <h5><span>Street Chic</span></h5>
-    <p>Get style inspiration from Street Chic where you can find great looks from your favourite bloggers and street style photos.</p>
-    <p>To submit a photo of your great style and feature on Street Chic, email <a href="mailto:tricia@threadandmirror.com">tricia@threadandmirror.com</a> with a photo(s) of your outfit(s).</p>
-    <p>Please include in the email:</p>
-    <ul>
-        <li>Your photograph(s).</li>
-        <li>Your name and details of the designer/brand of each piece.</li>
-        <li>Your social media details (blog/instagram/twitter) if you would like these to be visible alongside your photograph.</li>
-    </ul>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 text-center">
+            <p class="content-layout-banner__paragraph">At Thread & Mirror, we love fashion and beauty, hence the name. We created this site as an outlet for our passion and to connect with like-minded lovelies like you.</p>
+            <p class="content-layout-banner__paragraph">Amongst our daily ramblings, you’ll find us waxing lyrical about the latest look or IT item, bloggers we admires, the next miracle serum or our favourite dish.</p>
+        </div>
+        <div class="col-xs-12 col-sm-12">
+            {% include 'ThreadAndMirrorCoreBundle:Widget:followUs.html.twig' %}
+        </div>
+    </div>
 {% endblock %}

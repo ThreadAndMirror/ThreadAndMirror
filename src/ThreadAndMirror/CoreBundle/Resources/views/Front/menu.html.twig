@@ -1,29 +1,29 @@
 <ul class="header-bar__nav-menu">
+	{#<li class="header-bar__nav-menu-item">#}
+		{#{% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+			{#<a href="/account"  class="header-bar__nav-menu-item-link {% if route == 'wishlist' or route == 'outfits' or route == 'account/update-details' or route == 'account/change-password' or route == 'account' %}active{% endif %}">My Account</a>#}
+			{#<ul class="header-bar__nav-submenu">#}
+				{#{% if is_granted('ROLE_ADMIN') %}#}
+				  	{#<li class="header-bar__nav-submenu-item">#}
+                        {#<a class="header-bar__nav-submenu-item-link" href="/admin">Admin Dashboard</a>#}
+                    {#</li>#}
+				{#{% endif %}#}
+				{#<li class="header-bar__nav-submenu-item">#}
+                    {#<a class="header-bar__nav-submenu-item-link" href="/wishlist">My Wishlist</a>#}
+                {#</li>#}
+				{#<li class="header-bar__nav-submenu-item">#}
+                    {#<a class="header-bar__nav-submenu-item-link" href="/account">Manage Account</a>#}
+                {#</li>#}
+				{#<li class="header-bar__nav-submenu-item">#}
+                    {#<a class="header-bar__nav-submenu-item-link" href="/logout">Sign Out</a>#}
+                {#</li>#}
+			{#</ul>#}
+		{#{% else %}#}
+			{#<a class="header-bar__nav-menu-item-link" href="/register">Register</a>#}
+		{#{% endif %}#}
+	{#</li>#}
 	<li class="header-bar__nav-menu-item">
-		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-			<a href="/account"  class="header-bar__nav-menu-item-link {% if slug == 'wishlist' or slug == 'outfits' or slug == 'account/update-details' or slug == 'account/change-password' or slug == 'account' %}active{% endif %}">My Account</a>
-			<ul class="header-bar__nav-submenu">
-				{% if is_granted('ROLE_ADMIN') %}
-				  	<li class="header-bar__nav-submenu-item">
-                        <a class="header-bar__nav-submenu-item-link" href="/admin">Admin Dashboard</a>
-                    </li>
-				{% endif %}
-				<li class="header-bar__nav-submenu-item">
-                    <a class="header-bar__nav-submenu-item-link" href="/wishlist">My Wishlist</a>
-                </li>
-				<li class="header-bar__nav-submenu-item">
-                    <a class="header-bar__nav-submenu-item-link" href="/account">Manage Account</a>
-                </li>
-				<li class="header-bar__nav-submenu-item">
-                    <a class="header-bar__nav-submenu-item-link" href="/logout">Sign Out</a>
-                </li>
-			</ul>
-		{% else %}
-			<a class="header-bar__nav-menu-item-link" href="/register">Register</a>
-		{% endif %}
-	</li>
-	<li class="header-bar__nav-menu-item">
-		<a class="header-bar__nav-menu-item-link {% if slug == 'social' or slug == 'social/{source}' or slug == 'social/category/{category}' %}active{% endif %}" href="/social">The Social Circle</a>
+		<a class="header-bar__nav-menu-item-link {% if route == 'social' or route == 'social/{source}' or route == 'social/category/{category}' %}active{% endif %}" href="/social">The Social Circle</a>
 		<ul class="header-bar__nav-submenu">
 			<li class="header-bar__nav-submenu-item">
                 <a class="header-bar__nav-submenu-item-link" href="/social/category/blog">Blogs</a>
@@ -51,10 +51,10 @@
 		</ul>
 	</li>
 	{#<li class="header-bar__nav-menu-item">#}
-		{#<a class="header-bar__nav-menu-item-link {% if slug == 'style-file' %}active{% endif %}" href="/style-insiders">Style Insiders</a>#}
+		{#<a class="header-bar__nav-menu-item-link {% if route == 'style-file' %}active{% endif %}" href="/style-insiders">Style Insiders</a>#}
 	{#</li>#}
 	{#<li class="header-bar__nav-menu-item">#}
-		{#<a href="/beauty/new-in" {% if slug == 'beauty/new-in' or slug == 'beauty/sale' or slug == 'beauty/stores' %}class="active"{% endif %}>Beauty</a>#}
+		{#<a href="/beauty/new-in" {% if route == 'beauty/new-in' or route == 'beauty/sale' or route == 'beauty/stores' %}class="active"{% endif %}>Beauty</a>#}
 		{#<ul>#}
 			{#<li><a href="{{ path('thread_products_front_new_in', { 'area' : 'beauty' }) }}">New In</a></li>#}
 			{#<li><a href="{{ path('thread_products_front_sale', { 'area' : 'beauty' }) }}">Sale</a></li>#}
@@ -63,7 +63,7 @@
 		{#</ul>#}
 	{#</li>#}
 	{#<li class="header-bar__nav-menu-item">#}
-		{#<a href="/fashion/new-in" {% if slug == 'fashion/new-in' or slug == 'fashion/sale' or slug == 'fashion/stores' %}class="active"{% endif %}>Fashion</a>#}
+		{#<a href="/fashion/new-in" {% if route == 'fashion/new-in' or route == 'fashion/sale' or route == 'fashion/stores' %}class="active"{% endif %}>Fashion</a>#}
 		{#<ul>#}
 			{#<li><a href="{{ path('thread_products_front_new_in', { 'area' : 'fashion' }) }}">New In</a></li>#}
 			{#<li><a href="{{ path('thread_products_front_sale', { 'area' : 'fashion' }) }}">Sale</a></li>#}
@@ -72,7 +72,7 @@
 		{#</ul>#}
 	{#</li>#}
 	<li class="header-bar__nav-menu-item">
-		<a href="/magazine" class="header-bar__nav-menu-item-link {% if slug == 'magazine' or slug == 'magazine/{post}' %}active{% endif %}">Magazine</a>
+		<a href="/magazine" class="header-bar__nav-menu-item-link {% if route == 'magazine' or route == 'magazine/{post}' %}active{% endif %}">Magazine</a>
 	</li>	
 </ul>
 <br class="clear">

@@ -28,7 +28,8 @@ ul, li {
 
 body {
 	position: relative;
-	color: #000;
+	color: black;
+    background: black;
 	font-family:'Avenir Next W01', sans-serif;
 	-webkit-font-smoothing: antialiased !important;
 	font-size: 14px;

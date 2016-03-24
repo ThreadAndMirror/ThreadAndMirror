@@ -1,0 +1,143 @@
+
+.content-layout-banner {
+    background: white;
+}
+
+.content-layout-banner__banner-wrapper {
+    overflow: hidden;
+    height: 200px;
+    margin-top: 50px;
+    background-color: #111;
+    position: relative;
+    text-align: center;
+    color: #FFFFFF;
+    z-index: 1;
+}
+
+.content-layout-banner__title-alignment {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.content-layout-banner__title-block {
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+    z-index: 2;
+}
+
+.content-layout-banner__title {
+    text-align: center;
+    font-family: 'Linotype Didot W01',serif;
+    font-size: 48px;
+    line-height: 100%;
+    font-weight: 400;
+    letter-spacing: -2px;
+    z-index: 2;
+    border: 0;
+    padding: 0;
+    width: 100%;
+    text-shadow: 0 0 1px #111;
+    color: #FFFFFF;
+}
+
+.content-layout-banner__date {
+    width: 100%;
+    color: #fff;
+}
+
+.content-layout-banner__accreditation {
+    position: absolute;
+    bottom: -10px;
+    right: 15px;
+    color: #FFF;
+    opacity: .5;
+    font-size: 10px;
+}
+
+.content-layout-banner__subtitle {
+    display: block;
+    font-size: 20px;
+    font-weight: 200;
+    margin-top: 5px;
+    letter-spacing: -1px;
+    font-style: italic;
+}
+
+.content-layout-banner__banner {
+    -webkit-filter: blur(7px);
+    -moz-filter: blur(7px);
+    -o-filter: blur(7px);
+    -ms-filter: blur(7px);
+    filter: blur(7px);
+    opacity: 0.3;
+    left:-15px;
+    right:-15px;
+    top:-15px;
+    bottom:-15px;
+    position: absolute;
+    z-index: 1;
+}
+
+.content-layout-banner__content {
+    border: 15px solid rgba(255,255,255,0.4);
+    background-clip: padding-box;
+    position: relative;
+    padding: 15px 0 0;
+    width: 960px;
+}
+
+.content-layout-banner__content-padding {
+    background: white;
+    padding: 15px;
+}
+
+
+.content-layout-banner__content-wrapper {
+    background: white;
+    position: relative;
+}
+
+@media (max-width : 960px) {
+
+    .content-layout-banner__paragraph {
+        font-size: 4vw;
+        line-height: 150%;
+        margin: 0 0 10vw;
+    }
+
+    .content-layout-banner__banner-wrapper {
+        height: 100vw;
+        display: table;
+        width: 100%;
+    }
+
+    .content-layout-banner__content {
+        border: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .content-layout-banner__content-wrapper {
+        padding: 5vw;
+    }
+
+    .content-layout-banner__content-padding {
+        padding: 5vw;
+    }
+
+    .content-layout-banner__title {
+        font-size: 11vw;
+        letter-spacing: -0.5vw;
+    }
+
+    .content-layout-banner__subtitle {
+        font-size: 5vw;
+        line-height: 100%;
+        font-weight: 200;
+        margin-top: 5vw;
+        letter-spacing: -0.1vw;
+    }
+}

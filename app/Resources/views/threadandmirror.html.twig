@@ -2,20 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	{# Metadata #}
-		<title>{% block windowTitle %}{% if page.windowTitle is not empty %}{{ page.windowTitle }}{% else %}Home{% endif %}{% endblock %} &middot; Thread &amp; Mirror &middot; Fashion, Beauty, Blog, Street Chic, The Social Circle and Sale Alerts.</title>
+		<title>{% block windowTitle %}Fashion &amp; Beauty{% endblock %} &middot; Thread &amp; Mirror &middot; Fashion, Beauty, Blog, Street Chic, The Social Circle and Sale Alerts.</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type"  content="text/html;charset=UTF-8" />
-        {% block metaNoIndex %}{% if page is defined %}{% if page.noIndex %}<meta name="robots" content="noindex" />{% endif %}{% endif %}{% endblock %}
 		<meta name="p:domain_verify" content="365a3fd68ee25f112944be3892208ba0"/>
 		<meta name="google-site-verification" content="dXihq8Jt3LO5JRItWHODoHiMBlNSv4QhqsSpOtGZIZ4" />
-		<meta name="keywords" content="{% block metaKeywords %}{% if page.metaKeywords is not empty %}{{ page.metaKeywords }}{% else %}{{ stems_site_keywords }}{% endif %}{% endblock %}">
-		<meta name="description" content="{% block metaDescription %}{% if page.metaDescription is not empty %}{{ page.metaDescription }}{% else %}{{ stems_site_description }}{% endif %}{% endblock %}">
+		<meta name="keywords" content="{% block metaKeywords %}{{ stems_site_keywords }}{% endblock %}">
+		<meta name="description" content="{% block metaDescription %}{{ stems_site_description }}{% endblock %}">
+        {% block headMetas %}{% endblock %}
 	{# Sharing metadata #}
 		{% block twitterCard %}
 			<meta name="twitter:card" content="photo">
 			<meta name="twitter:url" content="{{ app.request.uri }}">
 			<meta name="twitter:title" content="Thread & Mirror">
-			<meta name="twitter:description" content="{% block twitterCardDescription %}{% if page.metaDescription is not empty %}{{ page.metaDescription }}{% else %}Fashion, Beauty, Street Chic, Style Exchange and Sale Alerts.{% endif %}{% endblock %}">
+			<meta name="twitter:description" content="{% block twitterCardDescription %}Fashion, Beauty, Street Chic, Style Exchange and Sale Alerts.{% endblock %}">
 			<meta name="twitter:image" content="{% block twitterCardImage %}http://www.threadandmirror.com/media/image/original/london-skyline.jpg{% endblock %}">
 			<meta name="twitter:site" content="@threadandmirror">
 			<meta name="twitter:creator" content="@threadandmirror">
@@ -45,7 +45,7 @@
 		{# WebGains Affiliate Code #}
 		<!-- WGCC163 --> 
 	</head>
-	<body class="{% if app.user %}logged-in{% else %}not-logged-in{% endif %}" {% if page is defined %}data-cms-slug="{{ page.slug }}"{% endif %}>
+	<body class="{% if app.user %}logged-in{% else %}not-logged-in{% endif %}">
 		<header class="header-bar">
 			<h2 class="header-bar__logo"><a class="header-bar__logo-link" href="/">T<span class="header-bar__logo-ampersand">&amp;</span>M</a></h2>
 
@@ -56,7 +56,7 @@
 			{% endif %}
             <a class="header-bar__show-nav" href="#"><i class="fa fa-navicon"></i></a>
 			<nav class="header-bar__nav">
-				{{ render(controller('ThreadAndMirrorCoreBundle:Front:menu', {'slug' : page.slug })) }}
+				{{ render(controller('ThreadAndMirrorCoreBundle:Front:menu', { 'route' : app.request.get('_route') })) }}
 			</nav>
 			<a id="back-to-top" title="Back To The Top"><i class="fa fa-angle-double-up"></i></a>
 		</header>

@@ -10,29 +10,60 @@ use Stems\PageBundle\Annotation\PageAnnotation as StemsPage;
 class FrontController extends BaseFrontController
 {
 	/**
+	 * Home page
+	 *
+	 * @Route("/", name="thread_core_home")
+	 * @Template()
+	 */
+	public function indexAction()
+	{
+		return [];
+	}
+
+	/**
 	 * Embeds the contextual main menu on the site
+	 *
+	 * @param string    $route      The route name of the main request
 	 *
 	 * @Template()
 	 */
-	public function menuAction($slug)
+	public function menuAction($route)
 	{
 		return [
-			'slug' => $slug
+			'route' => $route
 		];
 	}
 
 	/**
-	 * About page
+	 * About us page
 	 *
 	 * @Route("/about", name="thread_core_about")
-	 * @StemsPage(layout="banner", title="About Thread & Mirror", windowTitle="About")
 	 * @Template()
-	 *
 	 */
 	public function aboutAction()
 	{
-		return [
-			'page' => $this->page
-		];
+		return [];
+	}
+
+	/**
+	 * Privacy policy page
+	 *
+	 * @Route("/privacy-policy", name="thread_core_privacy_policy")
+	 * @Template()
+	 */
+	public function privacyAction()
+	{
+		return [];
+	}
+
+	/**
+	 * Contact us page
+	 *
+	 * @Route("/contact", name="thread_core_contact")
+	 * @Template()
+	 */
+	public function contactAction()
+	{
+		return [];
 	}
 }

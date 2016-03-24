@@ -15,7 +15,6 @@
     position: relative;
     z-index: 1;
     margin: 0 auto;
-    width: 990px;
 }
 
 .magazine-layout-inset__body-wrapper {
@@ -43,7 +42,7 @@
 .magazine-layout-inset__header-inset {
     margin: 125px auto 0;
     padding: 50px 0 0;
-    width: 960px;
+    width: 990px;
     position: relative;
     height: 255px;
     background: #fff;
