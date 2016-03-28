@@ -24,31 +24,31 @@
 	{#</li>#}
 	<li class="header-bar__nav-menu-item">
 		<a class="header-bar__nav-menu-item-link {% if route == 'social' or route == 'social/{source}' or route == 'social/category/{category}' %}active{% endif %}" href="/social">The Social Circle</a>
-		<ul class="header-bar__nav-submenu">
-			<li class="header-bar__nav-submenu-item">
-                <a class="header-bar__nav-submenu-item-link" href="/social/category/blog">Blogs</a>
-            </li>
-			<li class="header-bar__nav-submenu-item">
-                <a class="header-bar__nav-submenu-item-link" href="/social/category/brand">Brands</a>
-            </li>
-			<li class="header-bar__nav-submenu-item">
-                <a class="header-bar__nav-submenu-item-link" href="/social/category/magazine">Magazines</a>
-            </li>
-			<li class="header-bar__nav-submenu-item">
-                <a class="header-bar__nav-submenu-item-link" href="/social/category/model">Models</a>
-            </li>
-			<li class="header-bar__nav-submenu-item">
-                <a class="header-bar__nav-submenu-item-link" href="/social/category/store">Stores</a>
-            </li>
-			<li class="header-bar__nav-submenu-item">
-                <a class="header-bar__nav-submenu-item-link" href="/social/category/street-style">Street Style</a>
-            </li>
-			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-				<li class="header-bar__nav-submenu-item">
-                    <a class="header-bar__nav-submenu-item-link" href="/social/my-circle">My Social Circle</a>
-                </li>
-			{% endif %}
-		</ul>
+		{#<ul class="header-bar__nav-submenu">#}
+			{#<li class="header-bar__nav-submenu-item">#}
+                {#<a class="header-bar__nav-submenu-item-link" href="/social/category/blog">Blogs</a>#}
+            {#</li>#}
+			{#<li class="header-bar__nav-submenu-item">#}
+                {#<a class="header-bar__nav-submenu-item-link" href="/social/category/brand">Brands</a>#}
+            {#</li>#}
+			{#<li class="header-bar__nav-submenu-item">#}
+                {#<a class="header-bar__nav-submenu-item-link" href="/social/category/magazine">Magazines</a>#}
+            {#</li>#}
+			{#<li class="header-bar__nav-submenu-item">#}
+                {#<a class="header-bar__nav-submenu-item-link" href="/social/category/model">Models</a>#}
+            {#</li>#}
+			{#<li class="header-bar__nav-submenu-item">#}
+                {#<a class="header-bar__nav-submenu-item-link" href="/social/category/store">Stores</a>#}
+            {#</li>#}
+			{#<li class="header-bar__nav-submenu-item">#}
+                {#<a class="header-bar__nav-submenu-item-link" href="/social/category/street-style">Street Style</a>#}
+            {#</li>#}
+			{#{% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+				{#<li class="header-bar__nav-submenu-item">#}
+                    {#<a class="header-bar__nav-submenu-item-link" href="/social/my-circle">My Social Circle</a>#}
+                {#</li>#}
+			{#{% endif %}#}
+		{#</ul>#}
 	</li>
 	{#<li class="header-bar__nav-menu-item">#}
 		{#<a class="header-bar__nav-menu-item-link {% if route == 'style-file' %}active{% endif %}" href="/style-insiders">Style Insiders</a>#}

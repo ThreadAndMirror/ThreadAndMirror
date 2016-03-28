@@ -344,7 +344,7 @@ class RestController extends BaseRestController
 		$em->flush();
 
 		// Get the associated section linkage to tag the fields with the right id
-		$link = $em->getRepository('StemsBlogBundle:Section')->findOneBy(['entity' => $product->getSectionProductGallery()->getId(), 'type' => 'product_gallery']);
+		$link = $em->getRepository('ThreadAndMirrorBlogBundle:Section')->findOneBy(['entity' => $product->getSectionProductGallery()->getId(), 'type' => 'product_gallery']);
 
 		// Get the html for the product gallery item and to add to the page
 		$html = $this->renderView('ThreadAndMirrorProductsBundle:Section:productGalleryProduct.html.twig', [
@@ -368,7 +368,7 @@ class RestController extends BaseRestController
 	 * @Route("/rest/products/add-product-to-section/{id}", name="thread_products_rest_add_product_to_section")
 	 * @Security("has_role('ROLE_ADMIN')")
 	 */
-	public function addProductToSectionAction(Request $request, SectionProduct $section, $repository = 'StemsBlogBundle:Section')
+	public function addProductToSectionAction(Request $request, SectionProduct $section, $repository = 'ThreadAndMirrorBlogBundle:Section')
 	{
 		// Get the url from the query parameter and attempt to parse the product
 		$em = $this->getDoctrine()->getManager();
@@ -415,7 +415,7 @@ class RestController extends BaseRestController
 	 * @Route("/rest/products/add-product-to-gallery-section/{id}", name="thread_products_rest_add_product_to_gallery")
 	 * @Security("has_role('ROLE_ADMIN')")
 	 */
-	public function addProductToGallerySectionAction(Request $request, SectionProductGallery $section, $repository = 'StemsBlogBundle:Section')
+	public function addProductToGallerySectionAction(Request $request, SectionProductGallery $section, $repository = 'ThreadAndMirrorBlogBundle:Section')
 	{
 		// Get the url from the query parameter and attempt to parse the product
 		$em   = $this->getDoctrine()->getManager();

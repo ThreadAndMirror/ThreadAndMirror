@@ -12,9 +12,9 @@
         {% block headMetas %}{% endblock %}
 	{# Sharing metadata #}
 		{% block twitterCard %}
-			<meta name="twitter:card" content="photo">
-			<meta name="twitter:url" content="{{ app.request.uri }}">
-			<meta name="twitter:title" content="Thread & Mirror">
+			<meta name="twitter:card" content="{% block twitterCardType %}photo{% endblock %}">
+			<meta name="twitter:url" content="{% block twitterCardUrl %}{{ app.request.uri }}{% endblock %}">
+			<meta name="twitter:title" content="{% block twitterCardTitle %}Thread & Mirror{% endblock %}">
 			<meta name="twitter:description" content="{% block twitterCardDescription %}Fashion, Beauty, Street Chic, Style Exchange and Sale Alerts.{% endblock %}">
 			<meta name="twitter:image" content="{% block twitterCardImage %}http://www.threadandmirror.com/media/image/original/london-skyline.jpg{% endblock %}">
 			<meta name="twitter:site" content="@threadandmirror">
@@ -49,16 +49,16 @@
 		<header class="header-bar">
 			<h2 class="header-bar__logo"><a class="header-bar__logo-link" href="/">T<span class="header-bar__logo-ampersand">&amp;</span>M</a></h2>
 
-			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-				<a class="header-bar__button" href="/logout" title="Sign Out"><i class="fa fa-key"></i></a>
-			{% else %}
-				<a class="header-bar__button" href="/login" title="Sign In"><i class="fa fa-key"></i></a>
-			{% endif %}
+			{#{% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+				{#<a class="header-bar__button" href="/logout" title="Sign Out"><i class="fa fa-key"></i></a>#}
+			{#{% else %}#}
+				{#<a class="header-bar__button" href="/login" title="Sign In"><i class="fa fa-key"></i></a>#}
+			{#{% endif %}#}
             <a class="header-bar__show-nav" href="#"><i class="fa fa-navicon"></i></a>
 			<nav class="header-bar__nav">
 				{{ render(controller('ThreadAndMirrorCoreBundle:Front:menu', { 'route' : app.request.get('_route') })) }}
 			</nav>
-			<a id="back-to-top" title="Back To The Top"><i class="fa fa-angle-double-up"></i></a>
+			{#<a id="back-to-top" title="Back To The Top"><i class="fa fa-angle-double-up"></i></a>#}
 		</header>
 		<div id="flash-messages">
 			<div class="wrap">

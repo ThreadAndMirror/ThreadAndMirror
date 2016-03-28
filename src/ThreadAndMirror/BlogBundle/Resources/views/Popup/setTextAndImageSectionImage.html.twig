@@ -1,0 +1,31 @@
+{% extends 'StemsCoreBundle:Popup:default.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block classes %}{% endblock %}
+
+{% block content %}
+	<div class="two-column">
+		<div class="column">
+			<form action="{{ path('stems_rest_blog_set_textandimagesectionimage', { id : section.id }) }}" enctype="multipart/form-data">
+				{{ form_row(form.title) }}
+				{{ form_row(form.upload) }}
+				{{ form_row(form.category) }}
+				{{ form_rest(form) }}
+			</form>
+		</div>
+		<div class="column">
+			<label>Current Image</label>
+			<div class="popup-image-preview" 
+				{% if section.image is not empty %}
+					style="background-image:url('{{ getMediaImage(section.image).src }}')"
+				{% elseif existing is not empty %}
+					style="background-image:url('{{ existing }}')"
+				{% endif %}
+			></div>
+		</div>
+		<br class="clear">
+	</div>
+	<button class="btn btn-success rest-upload-popup">Upload Image</button>
+	<br class="clear">
+{% endblock %}

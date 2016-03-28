@@ -1,0 +1,60 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Blog Overview{% endblock %}
+
+{% block content %}
+	<h1 class="pages">Blog Posts</h1>
+	<div class="controls">
+		<a href="/admin/blog/create" class="btn btn-primary right"><i class="fa faw-fw fa-plus"></i> Add New Post</a>
+		<br class="clear"/>
+	</div>
+
+	<table>
+		<thead>
+			<tr>
+				<th><a>Title &amp; Subtitle</a></th>
+				<th><a>Author</a></th>
+                <th><a>Category</a></th>
+				<th><a>Status</a></th>
+				<th><a>Updated</a></th>
+				<th width="100px">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for post in posts %}
+				<tr>
+					<td><h4>{{ post.title }}</h4><p class="subtext">{{ post.subtitle }}</p></td>
+					<td>{{ post.author|username }}</td>
+                    <td>{{ post.category.name }}</td>
+					<td>{{ post.status }}</td>
+					<td><p>{{ post.updated|date('d/m/Y') }}</p></td>
+					<td>
+						<a href="/blog/preview/{{ post.slug }}" class="btn btn-circle btn-small" target="_blank" title="Preview"><i class="fa fa-fw fa-eye"></i></a> 
+						<a href="/admin/blog/{{ post.id }}/edit" class="btn btn-circle btn-small" title="Edit"><i class="fa fa-fw fa-pencil"></i></a> 
+						{% if post.status == 'Published' %}
+							<a href="{{ path('stems_admin_blog_publish', { 'id' : post.id }) }}" class="btn btn-success btn-circle btn-small" title="Unpublish" ><i class="fa fa-fw fa-globe"></i></a>
+						{% else %}
+							<a href="{{ path('stems_admin_blog_publish', { 'id' : post.id }) }}" class="btn btn-warning btn-circle btn-small" title="Publish" ><i class="fa fa-fw fa-globe"></i></a>
+						{% endif %}
+						<a href="/admin/blog/{{ post.id }}/delete" class="btn btn-danger btn-circle btn-small" title="Delete" onclick="return confirm('Are you sure you want to delete this post?');"><i class="fa fa-fw fa-times"></i></a> 
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6"><p>There are no posts</p></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<th><a>Title &amp; Excerpt</a></th>
+				<th><a>Author</a></th>
+                <th><a>Category</a></th>
+				<th><a>Status</a></th>
+				<th><a>Updated</a></th>
+				<th width="100px">Actions</th>
+			</tr>
+		</tfoot>
+	</table>
+
+{% endblock %}

@@ -1,3 +1,7 @@
+thread_and_mirror_blog:
+    resource: "@ThreadAndMirrorBlogBundle/Resources/config/routing.yml"
+    prefix:   /
+
 thread_core:
     resource: "@ThreadAndMirrorCoreBundle/Resources/config/routing.yml"
     prefix:   /
@@ -42,8 +46,8 @@ thread_products:
     resource: "@ThreadAndMirrorProductsBundle/Resources/config/routing.yml"
     prefix:   /
 
-StemsBlogBundle:
-    resource: "@StemsBlogBundle/Resources/config/routing.yml"
+ThreadAndMirrorBlogBundle:
+    resource: "@ThreadAndMirrorBlogBundle/Resources/config/routing.yml"
     prefix:   /
 
 StemsUserBundle:

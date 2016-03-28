@@ -1,0 +1,15 @@
+{% spaceless %}
+	{# The blog overview page - not included to avoid duplicate content #}
+{# 	<url> 
+		<loc>{{ site_url }}/{{ slug }}</loc>
+		<changefreq>weekly</changefreq>
+	</url> #}
+	{# The blog articles #}
+	{% for post in posts %}
+		<url>
+			<loc>{{ site_url }}/{{ slug }}/{{ post.slug }}</loc>
+			<changefreq>monthly</changefreq>
+			<lastmod>{{ post.published|date('Y-m-d') }}</lastmod>
+		</url>
+	{% endfor %}
+{% endspaceless %}

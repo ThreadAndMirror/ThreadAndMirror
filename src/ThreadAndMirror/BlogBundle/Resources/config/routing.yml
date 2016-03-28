@@ -1,0 +1,15 @@
+thread_blog_admin:
+    resource: "@ThreadAndMirrorBlogBundle/Controller/AdminController.php"
+    type:     annotation
+
+thread_blog_front:
+    resource: "@ThreadAndMirrorBlogBundle/Controller/FrontController.php"
+    type:     annotation
+
+thread_blog_popup:
+    resource: "@ThreadAndMirrorBlogBundle/Controller/PopupController.php"
+    type:     annotation
+
+thread_blog_rest:
+    resource: "@ThreadAndMirrorBlogBundle/Controller/RestController.php"
+    type:     annotation

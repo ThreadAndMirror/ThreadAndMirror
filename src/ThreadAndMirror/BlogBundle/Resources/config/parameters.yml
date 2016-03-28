@@ -1,0 +1,80 @@
+parameters:
+
+    # Bundle specific
+    threadandmirror.blog.template_sections: ['blog_header','magazine']
+    threadandmirror.blog.index.list_style: 'sequential'
+    threadandmirror.blog.index.chunk_size: 6
+    threadandmirror.blog.comments.enabled: true
+    threadandmirror.blog.comments.moderated: true
+    threadandmirror.blog.comments.captcha: false
+    threadandmirror.blog.comments.require_login: false
+    threadandmirror.blog.comments.show_avatars: false
+
+    stems.core.sections.available:
+        blog: 
+            magazine:
+                id: 1
+                name: 'Magazine'
+                enabled: true
+                entity: 'StemsPageBundle:SectionMagazine'
+                class: 'Stems\PageBundle\Entity\SectionMagazine'
+                form: 'Stems\PageBundle\Form\SectionMagazineType'
+            text:
+                id: 2
+                name: 'Text'
+                enabled: true
+                entity: 'StemsPageBundle:SectionText'
+                class: 'Stems\PageBundle\Entity\SectionText'
+                form: 'Stems\PageBundle\Form\SectionTextType'
+            text_and_image:
+                id: 4
+                name: 'Text and Image'
+                enabled: true
+                entity: 'StemsPageBundle:SectionTextAndImage'
+                class: 'Stems\PageBundle\Entity\SectionTextAndImage'
+                form: 'Stems\PageBundle\Form\SectionTextAndImageType'
+            # scrapbook:
+            #     name: 'Scrapbook'
+            #     enabled: true
+            #     entity: 'StemsPageBundle:SectionScrapbook'
+            #     class: 'Stems\PageBundle\Entity\SectionScrapbook'
+            image:
+                id: 8
+                name: 'Image'
+                enabled: true
+                entity: 'StemsPageBundle:SectionImage'
+                class: 'Stems\PageBundle\Entity\SectionImage'
+                form: 'Stems\PageBundle\Form\SectionImageType'
+            poll:
+                id: 9
+                name: 'Poll'
+                enabled: true
+                entity: 'StemsPollBundle:SectionPoll'
+                class: 'Stems\PollBundle\Entity\SectionPoll'
+                form: 'Stems\PollBundle\Form\SectionPollType'
+            blog_header:
+                id: 7
+                name: 'Blog Header'
+                enabled: true
+                entity: 'ThreadAndMirrorBlogBundle:SectionBlogHeader'
+                class: 'ThreadAndMirror\BlogBundle\Entity\SectionBlogHeader'
+                form: 'ThreadAndMirror\BlogBundle\Form\SectionBlogHeaderType'
+            product_gallery:
+                id: 6
+                name: 'Product Gallery'
+                enabled: true
+                entity: 'ThreadAndMirrorProductsBundle:SectionProductGallery'
+                class: 'ThreadAndMirror\ProductsBundle\Entity\SectionProductGallery'
+                form: 'ThreadAndMirror\ProductsBundle\Form\SectionProductGalleryType'
+
+    # Media categories
+    stems.media.image.categories: 
+        blog: 'Blog'
+
+    # Admin menu items
+    stems.admin.menu_core_ThreadAndMirrorBlogBundle:
+        thread_blog:
+            title: 'Blog'
+            route: 'stems_admin_blog_overview'
+            icon: 'fa fa-edit'
+            children: []

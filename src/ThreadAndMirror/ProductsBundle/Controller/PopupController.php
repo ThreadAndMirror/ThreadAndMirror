@@ -89,7 +89,7 @@ class PopupController extends BaseRestController
 	public function updateProductSectionAction(SectionProduct $section, Request $request)
 	{
 		$em   = $this->getDoctrine()->getManager();
-		$link = $em->getRepository('StemsBlogBundle:Section')->findOneBy(['entity' => $section->getId(), 'type' => 'product']);
+		$link = $em->getRepository('ThreadAndMirrorBlogBundle:Section')->findOneBy(['entity' => $section->getId(), 'type' => 'product']);
 		$form = $this->createForm(new SectionProductType($link), $section);
 
 		$html = $this->renderView('ThreadAndMirrorProductsBundle:Popup:updateProductSection.html.twig', [

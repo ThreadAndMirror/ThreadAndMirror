@@ -150,7 +150,7 @@ assetic:
                 - '@StemsCoreBundle/Resources/public/js/admin/admin.js'
                 - '@StemsPageBundle/Resources/public/js/admin.js'
                 - '@StemsMediaBundle/Resources/public/js/admin.js'
-                - '@StemsBlogBundle/Resources/public/js/admin/admin.js'
+                - '@ThreadAndMirrorBlogBundle/Resources/public/js/admin/admin.js'
                 - '@ThreadAndMirrorEditorsPicksBundle/Resources/public/js/admin.js'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/js/admin.js'
         admin_css:
@@ -166,7 +166,7 @@ assetic:
             inputs:
                 - '@ThreadAndMirrorSocialBundle/Resources/public/js/frontend.js'
                 - '@ThreadAndMirrorCoreBundle/Resources/public/js/front/frontend.js'
-                - '@StemsBlogBundle/Resources/public/js/front/frontend.js'
+                - '@ThreadAndMirrorBlogBundle/Resources/public/js/front/frontend.js'
         frontend_css:
             inputs:
                 - '../assets/css/bootstrap-3.3.6-dist/css/bootstrap.css'
@@ -263,7 +263,7 @@ parameters:
     stems.site.email: 'info@threadandmirror.com'
     stems.site.description: 'All Luxury, One Site: Fashion, Beauty, Blog, Street Chic, The Social Circle and Sale Alerts'
     stems.site.keywords: 'Fashion, Street Chic, Style, Clothing, Sales, Beauty, Blog, Style Exchange, Sale Alerts, Shop, Offer, High Fashion, Fashion Shows, Sample Sale, Sample Sales, Luxury'
-    stems.site.sitemap.bundles: ['StemsPageBundle', 'StemsBlogBundle', 'ThreadAndMirrorEditorsPicksBundle']
+    stems.site.sitemap.bundles: ['StemsPageBundle', 'ThreadAndMirrorBlogBundle', 'ThreadAndMirrorEditorsPicksBundle']
     stems.media.image.categories: 
         general: 'General'
         blog:    'Blog'

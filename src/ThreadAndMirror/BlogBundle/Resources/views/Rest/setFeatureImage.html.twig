@@ -1,0 +1,13 @@
+<div class="feature-image">
+	<img src="{{ image.src }}" {% if image.width > 738 %}width="738"{% else %}width="{{ image.width }}"{% endif %}/>
+	<div class="button-holder">
+		<div>
+			<div>
+				<a 
+					class="btn btn-primary rest-get-popup" 
+					href="{{ path('stems_rest_blog_popup_set_featureimage', { id : post.id }) }}?existing={{ image.src|url_encode(true) }}"
+				><i class="fa fa-picture-o"></i> Change Feature Image</a>
+			</div>
+		</div>
+	</div>
+</div>

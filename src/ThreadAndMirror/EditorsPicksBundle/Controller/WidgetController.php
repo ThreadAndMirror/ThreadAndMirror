@@ -21,7 +21,7 @@ class WidgetController extends Controller
 	{
 		// Get the latest editors pick article and it's products
 		$em       = $this->getDoctrine()->getManager();
-		$posts    = $em->getRepository('StemsBlogBundle:Post')->findPublishedPostsByCategory('editors-picks', 1);
+		$posts    = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findPublishedPostsByCategory('editors-picks', 1);
 		$post     = reset($posts);
 
 		$products = [];

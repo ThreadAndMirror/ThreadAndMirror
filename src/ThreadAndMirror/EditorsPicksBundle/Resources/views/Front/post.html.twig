@@ -13,67 +13,6 @@
 	<meta name="twitter:domain" content="http://www.threadandmirror.com">
 {% endblock %}
 
-{% block breadcrumbs %}<a href="{{ path('thread_editorspicks_front_post', { 'slug' : post.slug }) }}">Editor's Picks: {{ post.title ~ ' - ' ~ post.subtitle }}</a>{% endblock %}
+{% block breadcrumbs %}<a href="{{ path('thread_blog_front_editors_pick', { 'slug' : post.slug }) }}">Editor's Picks: {{ post.title ~ ' - ' ~ post.subtitle }}</a>{% endblock %}
 
-{% block banner %}
-	<div class="magazine-layout-inset__banner" style="background-image:url('{{ getMediaImage(post.image).src|imagine_filter('page_banner') }}');background-size:cover;background-position:center;"></div>
-	<div class="magazine-layout-inset__header-inset text-center">
-		<div class="magazine-layout-inset__thumbnail" style="background-image:url('{{ getMediaImage(post.image).src|imagine_filter('page_banner') }}');background-size:cover;background-position:center;"></div>
-        <div class="magazine-layout-inset__social">
-            {{ share.shareGoogleplus(post.sharer('googleplus')) }}
-            {{ share.sharePinterest(post.sharer('pinterest')) }}
-            {{ share.shareTwitter(post.sharer('twitter')) }}
-            {{ share.shareFacebook(post.sharer('facebook')) }}
-        </div>
-		<p class="magazine-layout-inset__date">{{ post.published|date('jS F Y') }}</p>
-        <p class="magazine-layout-inset__accreditation">{{ getMediaImage(post.image).accreditation }}</p>
-		{% block title %}<h1 class="magazine-layout-inset__title">{{ post.title }}<span class="magazine-layout-inset__subtitle">{{ post.subtitle }}</span></h1>{% endblock %}
-		<hr class="magazine-layout-inset__hr">
-		{% block content %}
-			{% if post.excerpt is not empty %}<p class="magazine-layout-inset__caption">{{ post.excerpt }}</p>{% endif %}
-		{% endblock %}
-	</div>
-{% endblock %}
-
-{% block dynamic %}
-	<article class="magazine-layout-inset__article" itemscope itemtype="http://schema.org/Article">
-        <div class="magazine-layout-inset__article-wrapper col-{{ post.span }}" style="height:{{ post.height }}px">
-            {% if post.content is not empty %}
-                {{ post.content|raw }}
-            {% endif %}
-            {% for section in sections %}
-                {{ section|raw }}
-            {% endfor %}
-        </div>
-	</article>
-    {#</div>#}
-    {#<div class="comments">#}
-    {#<div class="background"></div>#}
-    {#<div class="wrapper">#}
-            {#&#123;&#35; Comment configuration parameters &#35;&#125;#}
-            {#{% if 'stems.blog.comments.moderated'|parameter %}#}
-        {#{% set comments = post.moderatedComments %}#}
-    {#{% else %}#}
-        {#{% set comments = post.undeletedComments %}#}
-    {#{% endif %}#}
-            {#{% if 'stems.blog.comments.require_login'|parameter and app.user is empty %}#}
-        {#{% set authorised = false %}#}
-    {#{% else %}#}
-        {#{% set authorised = true %}#}
-    {#{% endif %}#}
-            {#{% if 'stems.blog.comments.enabled'|parameter %}#}
-        {#<script>#}
-            {#var idcomments_acct = '68806c77daa6d4bce5c5b1ef56c01258';#}
-            {#var idcomments_post_id;#}
-            {#var idcomments_post_url;#}
-        {#</script>#}
-        {#<span id="IDCommentsPostTitle" style="display:none"></span>#}
-        {#<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>#}
-        {#<div class="add-comment-form">#}
-
-        {#</div>#}
-    {#{% endif %}#}
-{#</div>#}
-
-    {#</div>#}
 {% endblock %}

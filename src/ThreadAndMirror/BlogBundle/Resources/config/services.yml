@@ -1,0 +1,9 @@
+services:
+
+    # Forms
+    threadandmirror.blog.form.type.comment:
+        class: ThreadAndMirror\BlogBundle\Form\CommentType
+        arguments: 
+            login: %threadandmirror.blog.comments.require_login%
+        tags:
+            - { name: form.type, alias: blog_comment_type }

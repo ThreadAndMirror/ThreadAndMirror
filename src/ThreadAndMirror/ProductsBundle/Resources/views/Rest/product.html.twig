@@ -18,7 +18,7 @@
 			{% if product.feature is not empty %}
 				<div class="featured-in">
 					<h5><span>Featured In</span></h5>
-					{{ render(controller('StemsBlogBundle:Widget:featuredIn', { 'id' : product.feature })) }}
+					{{ render(controller('ThreadAndMirrorBlogBundle:Widget:featuredIn', { 'id' : product.feature })) }}
 				</div>
 			{% endif %}
 		</div>

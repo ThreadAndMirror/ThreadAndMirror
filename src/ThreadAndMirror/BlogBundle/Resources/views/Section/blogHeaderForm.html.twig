@@ -1,0 +1,8 @@
+<section class="col-2 section-{{ link.type|replace({('_'):'-'}) }}">
+	<button class="remove-section btn btn-small btn-danger" data-id="{{ link.id }}"><i class="fa fa-times"></i> Remove</button>
+	<input type="hidden" name="sections[]" value="{{ link.id }}">
+	{% if link.post.image is not empty %}
+		<div class="image" style="background-image: url('{{ getMediaImage(link.post.image).src|imagine_filter('blog_header') }}')"></div>
+	{% endif %}
+	{{ form_row(form.content) }}
+</section>

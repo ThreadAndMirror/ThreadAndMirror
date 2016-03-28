@@ -1,0 +1,27 @@
+{% extends '::threadandmirror.html.twig' %}
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+{% import 'StemsSocialBundle:Macro:share.html.twig' as share %}
+
+{% block windowTitle %}Magazine{% endblock %}
+{#{% block metaDescription %}{{ post.metaDescription }}{% endblock %}#}
+{#{% block metaKeywords %}{% endblock %}#}
+{% block twitterCardTitle %}Thread &amp; Mirror Magazine{% endblock %}
+{#{% block twitterCardDescription %}{{ post.excerpt }}{% endblock %}#}
+{#{% block twitterCardImage %}{{ getMediaImage(post.image).src|imagine_filter('page_banner') }}{% endblock %}#}
+
+
+{% block layout %}
+    <div class="layout-responsive-cover">
+        <h1>Magazine</h1>
+        <div class="article-list">
+            {% for post in posts %}
+                {% include 'ThreadAndMirrorBlogBundle:Rest:post.html.twig' %}
+            {% endfor %}
+            <div class="rest-load-more" data-url="{{ path('thread_blog_rest_more_posts') }}/" data-offset="6"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block dynamic %}
+
+{% endblock %}

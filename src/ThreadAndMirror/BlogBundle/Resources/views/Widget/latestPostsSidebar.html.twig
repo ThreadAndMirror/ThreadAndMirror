@@ -1,0 +1,10 @@
+<div class="widget widget-latest-posts">
+	{% for post in posts %}
+		{% if loop.index > 1 %}
+			<div>
+				<h2>{{ post.title }}<span>{{ post.excerpt }}</span></h2>
+				<a href="/blog/{{ post.slug }}" style="background:url('{{ getMediaImage(post.image).src }}') center center; background-size:cover;"></a>
+			</div>
+		{% endif %}
+	{% endfor %}
+</div>

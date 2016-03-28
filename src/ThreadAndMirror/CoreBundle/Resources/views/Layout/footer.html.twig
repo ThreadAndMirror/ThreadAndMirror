@@ -22,19 +22,19 @@
             </ul>
         </div>
         <div class="col-md-2 col-xs-12">
-            <ul class="footer__menu footer__menu--overlined">
-                <li class="footer__menu-item"><h6><a class="footer__menu-header-link" href="/account">Account</a></h6></li>
-                <li class="footer__menu-item"><hr class="footer__hr"></li>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    {#<li class="footer__menu-item"><a class="footer__menu-item-link" href="/wishlist">My Wishlist</a></li>#}
-                    <li class="footer__menu-item"><a class="footer__menu-item-link" href="/social/my-circle">My Social Circle</a></li>
-                    <li class="footer__menu-item"><a class="footer__menu-item-link" href="/account">Manage Account</a></li>
-                    <li class="footer__menu-item"><a class="footer__menu-item-link" href="/logout">Sign Out</a></li>
-                {% else %}
-                    <li class="footer__menu-item"><a class="footer__menu-item-link" href="/register">Register</a></li>
-                    <li class="footer__menu-item"><a class="footer__menu-item-link" href="/login">Sign In</a></li>
-                {% endif %}
-            </ul>
+            {#<ul class="footer__menu footer__menu--overlined">#}
+                {#<li class="footer__menu-item"><h6><a class="footer__menu-header-link" href="/account">Account</a></h6></li>#}
+                {#<li class="footer__menu-item"><hr class="footer__hr"></li>#}
+                {#{% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+                    {#&#123;&#35;<li class="footer__menu-item"><a class="footer__menu-item-link" href="/wishlist">My Wishlist</a></li>&#35;&#125;#}
+                    {#<li class="footer__menu-item"><a class="footer__menu-item-link" href="/social/my-circle">My Social Circle</a></li>#}
+                    {#<li class="footer__menu-item"><a class="footer__menu-item-link" href="/account">Manage Account</a></li>#}
+                    {#<li class="footer__menu-item"><a class="footer__menu-item-link" href="/logout">Sign Out</a></li>#}
+                {#{% else %}#}
+                    {#<li class="footer__menu-item"><a class="footer__menu-item-link" href="/register">Register</a></li>#}
+                    {#<li class="footer__menu-item"><a class="footer__menu-item-link" href="/login">Sign In</a></li>#}
+                {#{% endif %}#}
+            {#</ul>#}
         </div>
         <div class="col-md-2 col-xs-12">
         {#<ul class="footer__menu footer__menu--overlined">#}

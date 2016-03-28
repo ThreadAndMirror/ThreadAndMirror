@@ -1,0 +1,26 @@
+<a href="{{ path('thread_blog_front_article', { slug: post.slug }) }}" class="article-list__item">
+    <div class="container">
+        <div class="col-sm-8 col-xs-12 article-list__item-snippet-wapper">
+            <div class="article-list__item-title-block text-center">
+                <div class="article-list__item-middle">
+                    <p class="article-list__item-date">{{ post.published|date('jS F Y') }}</p>
+                    <h2 class="article-list__item-title">{{ post.title }}</h2>
+                    <h4 class="article-list__item-subtitle">
+                        <span class="article-list__item-dash"></span>
+                        {{ post.subtitle }}
+                        <span  class="article-list__item-dash"></span>
+                    </h4>
+                    <p class="article-list__item-excerpt">{{ post.excerpt }}</p>
+                    <button  class="article-list__item-read-more">Read More</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-xs-12 article-list__item-image-wapper">
+            <div class="article-list__item-middle">
+                <div class="article-list__item-image" style="background-image: url('{{ getMediaImage(post.image).src|imagine_filter('blog_homepage_circle') }}')">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</a>

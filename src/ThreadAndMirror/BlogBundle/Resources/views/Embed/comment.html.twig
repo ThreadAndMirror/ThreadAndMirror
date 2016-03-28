@@ -1,0 +1,19 @@
+<li>
+	{% if 'threadandmirror.blog.comments.require_login'|parameter and 'threadandmirror.blog.comments.show_avatars'|parameter %}
+		<div class="avatar">
+		</div>
+	{% endif %}
+	<div class="content">
+		<h6>
+			By <span>
+			{% if 'threadandmirror.blog.comments.require_login'|parameter %}
+				{{ comment.author|username }}
+			{% else %}
+				{{ comment.author }}
+			{% endif %}
+			</span> on {{ comment.created|date('jS F Y') }} at {{ comment.created|date('G:i') }}
+		</h6>
+		<p>{{ comment.content }}</p>
+	</div>
+	<br class="clear">
+</li>

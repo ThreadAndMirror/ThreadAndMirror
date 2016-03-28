@@ -1,0 +1,78 @@
+{% extends '::threadandmirror.html.twig' %}
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+{% import 'StemsSocialBundle:Macro:share.html.twig' as share %}
+
+{% block windowTitle %}{{ post.title }} - {{ post.subtitle }}{% endblock %}
+{% block metaDescription %}{{ post.metaDescription }}{% endblock %}
+{% block metaKeywords %}{{ post.metaKeywords }}{% endblock %}
+{% block twitterCardTitle %}{{ post.title }} - {{ post.subtitle }}{% endblock %}
+{% block twitterCardDescription %}{{ post.excerpt }}{% endblock %}
+{% block twitterCardImage %}{{ getMediaImage(post.image).src|imagine_filter('page_banner') }}{% endblock %}
+
+{% block layout %}
+    <div class="magazine-layout-banner">
+        <div class="magazine-layout-banner__banner-wrapper">
+            <div class="magazine-layout-banner__banner" style="background-image:url('{{ getMediaImage(post.image).src|imagine_filter('page_banner') }}');background-size: cover;">
+            </div>
+            <div class="magazine-layout-banner__title-alignment">
+                <div class="magazine-layout-banner__title-block">
+                    <p class="magazine-layout-banner__date title-faded-sans">{{ post.published|date('jS F Y') }}</p>
+                    <h1 class="magazine-layout-banner__title">
+                        {{ post.title }}<span class="magazine-layout-banner__subtitle">{{ post.subtitle }}</span>
+                    </h1>
+                </div>
+            </div>
+            <p class="magazine-layout-banner__accreditation">{{ getMediaImage(post.image).accreditation }}</p>
+        </div>
+        <div class="magazine-layout-banner__content">
+            <div class="magazine-layout-banner__social">
+                <a href="http://www.bloglovin.com/blog/12328721/?claim=vyv5723q8t6" target="_blank" rel="nofollow" title="Follow this blog on Bloglovin"><i class="fa fa-heart-o"></i></a>
+                {{ share.shareGoogleplus(post.sharer('googleplus')) }}
+                {{ share.sharePinterest(post.sharer('pinterest')) }}
+                {{ share.shareTwitter(post.sharer('twitter')) }}
+                {{ share.shareFacebook(post.sharer('facebook')) }}
+            </div>
+            <article class="container magazine-layout-banner__article">
+                <div class="magazine-layout-banner__article-padding">
+                    <div class="magazine-layout-banner__article-wrapper col-{{ post.span }}" itemscope itemtype="http://schema.org/Article" style="height:{{ post.height }}px">
+                        {% if post.content is not empty %}
+                            {{ post.content|raw }}
+                        {% endif %}
+                        {% for section in sections %}
+                            {{ section|raw }}
+                        {% endfor %}
+                        <br class="clear">
+                    </div>
+                </div>
+            </article>
+            {#<div class="comments">#}
+            {#<div class="background"></div>#}
+            {#<div class="wrapper">#}
+            {#&#123;&#35; Comment configuration parameters &#35;&#125;#}
+            {#{% if 'threadandmirror.blog.comments.moderated'|parameter %}#}
+            {#{% set comments = post.moderatedComments %}#}
+            {#{% else %}#}
+            {#{% set comments = post.undeletedComments %}#}
+            {#{% endif %}#}
+            {#{% if 'threadandmirror.blog.comments.require_login'|parameter and app.user is empty %}#}
+            {#{% set authorised = false %}#}
+            {#{% else %}#}
+            {#{% set authorised = true %}#}
+            {#{% endif %}#}
+            {#{% if 'threadandmirror.blog.comments.enabled'|parameter %}#}
+            {#<script>#}
+            {#var idcomments_acct = '68806c77daa6d4bce5c5b1ef56c01258';#}
+            {#var idcomments_post_id;#}
+            {#var idcomments_post_url;#}
+            {#</script>#}
+            {#<span id="IDCommentsPostTitle" style="display:none"></span>#}
+            {#<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>#}
+            {#<div class="add-comment-form">#}
+
+            {#</div>#}
+            {#{% endif %}#}
+            {#</div>#}
+            {#</div>#}
+        </div>
+    </div>
+{% endblock %}

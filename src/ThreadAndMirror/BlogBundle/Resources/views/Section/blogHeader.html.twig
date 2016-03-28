@@ -1,0 +1,17 @@
+{% import 'StemsSocialBundle:Macro:share.html.twig' as share %}
+
+<div class="section-blog-header" >
+<p class="date">{{ link.post.published|date('jS F Y') }}</p>
+<div class="social">
+	<a href="/blog/{{ link.post.slug }}" target="_blank" rel="nofollow" title="View Article in a New Tab"><i class="fa fa-share"></i></a>
+	<a href="http://www.bloglovin.com/blog/12328721/?claim=vyv5723q8t6" target="_blank" rel="nofollow" title="Follow this blog on Bloglovin"><i class="fa fa-heart-o"></i></a>
+	{{ share.shareGoogleplus(link.post.sharer('googleplus')) }}
+	{{ share.sharePinterest(link.post.sharer('pinterest')) }}
+	{{ share.shareTwitter(link.post.sharer('twitter')) }}
+	{{ share.shareFacebook(link.post.sharer('facebook')) }}	
+</div>
+<br class="clear">
+<h2 itemprop="name">{{ link.post.title }} <span>{{ link.post.excerpt }}</span></h2>
+{% set image = getMediaImage(link.post.image) %}
+<div class="image" title="{{ link.post.title }} {{ link.post.excerpt }}" style="background-image: url('{{ getMediaImage(link.post.image).src|imagine_filter('blog_header') }}')"></div>
+</div>

@@ -28,8 +28,8 @@ class AdminController extends BaseAdminController
 	{
 		// Get the posts
 		$em      = $this->getDoctrine()->getEntityManager();
-		$picks   = $em->getRepository('StemsBlogBundle:Post')->findPublishedPostsByCategory('editors-picks', 9999);
-		$outfits = $em->getRepository('StemsBlogBundle:Post')->findPublishedPostsByCategory('instant-outfits', 9999);
+		$picks   = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findPublishedPostsByCategory('editors-picks', 9999);
+		$outfits = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findPublishedPostsByCategory('instant-outfits', 9999);
 
 
 		return $this->render('ThreadAndMirrorEditorsPicksBundle:Admin:sitemap.html.twig', array(

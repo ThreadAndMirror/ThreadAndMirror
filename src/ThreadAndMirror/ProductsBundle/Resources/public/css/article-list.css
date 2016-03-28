@@ -3,6 +3,7 @@
 }
 
 .article-list__item {
+    color: white;
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -32,8 +33,12 @@
 }
 
 .article-list__item:nth-child(2n+1) {
-    background: black;
-    color: white;
+    background: white;
+    color: black;
+}
+
+.article-list__item:nth-child(2n+1):hover {
+    color: black;
 }
 
 .article-list__item-title {

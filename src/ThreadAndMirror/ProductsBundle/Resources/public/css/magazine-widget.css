@@ -47,9 +47,13 @@
     left: 0;
 }
 
+.magazine-widget__link:hover {
+    color: black;
+}
+
 .magazine-widget__title-block {
     padding-top: 90px;
-    color: #111111;
+    color: black;
     text-align: center;
     width: 100%;
 }

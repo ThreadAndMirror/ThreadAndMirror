@@ -17,7 +17,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Stems\CoreBundle\StemsCoreBundle(),
-            new Stems\BlogBundle\StemsBlogBundle(),
             new Stems\PageBundle\StemsPageBundle(),
             new Stems\UserBundle\StemsUserBundle(),
             new Stems\SocialBundle\StemsSocialBundle(),
@@ -39,6 +38,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
 	        new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+            new ThreadAndMirror\BlogBundle\ThreadAndMirrorBlogBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

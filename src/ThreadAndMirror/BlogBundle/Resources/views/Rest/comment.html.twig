@@ -1,0 +1,5 @@
+{% if moderated and created %}
+	<li><p class="awaiting-moderation">Thanks for your comment, it is now awaiting approval from an administrator.</p></li>
+{% else %}
+	{% embed 'ThreadAndMirrorBlogBundle:Embed:comment.html.twig' %}{% endembed %}
+{% endif %}

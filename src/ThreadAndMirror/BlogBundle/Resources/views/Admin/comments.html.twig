@@ -1,0 +1,40 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Comments Awaiting Moderation{% endblock %}
+
+{% block content %}
+	<h1 class="pages">Comments Awaiting Moderation</h1>
+	<table>
+		<thead>
+			<tr>
+				<th><a>Author &amp; Comment</a></th>
+				<th><a>Posted</a></th>
+				<th width="100px">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for comment in comments %}
+				<tr>
+					<td><h4>{{ comment.author|username }}</h4><p class="subtext">{{ comment.content }}</p></td>
+					<td><p>{{ comment.created|date('d/m/Y') }}</p></td>
+					<td>
+						<a href="{{ path('stems_admin_blog_moderate_comment', { 'id' : comment.id }) }}" class="btn btn-success btn-circle btn-small" title="Unpublish" ><i class="fa fa-fw fa-check"></i></a>
+						<a href="{{ path('stems_admin_blog_delete_comment', { 'id' : comment.id }) }}" class="btn btn-danger btn-circle btn-small" title="Delete" onclick="return confirm('Are you sure you want to delete this comment?');"><i class="fa fa-fw fa-times"></i></a> 
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6"><p>There are no comments awaiting moderation</p></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<th><a>Author &amp; Comment</a></th>
+				<th><a>Posted</a></th>
+				<th width="100px">Actions</th>
+			</tr>
+		</tfoot>
+	</table>
+
+{% endblock %}
