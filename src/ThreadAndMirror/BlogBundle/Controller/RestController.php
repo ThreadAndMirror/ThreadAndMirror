@@ -148,7 +148,10 @@ class RestController extends BaseRestController
 	 * Removes the specified section and its linkage
 	 *
 	 * @param  integer 		$id 	Section id
+	 *
 	 * @return JsonResponse
+	 *
+	 * @Route("/remove-section/{id}", name="thread_blog_rest_remove_section")
 	 */
 	public function removeSectionAction($id)
 	{

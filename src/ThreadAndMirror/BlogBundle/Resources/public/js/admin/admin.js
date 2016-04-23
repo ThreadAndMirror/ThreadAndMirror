@@ -85,7 +85,7 @@ $(document).ready(function() {
 		var button = $(this);
 		confirm('Are you sure you want to delete this section?');
 
-		$.get('/admin/blog/rest/remove-section/'+button.data('id')).done(function(data) {
+		$.get('/rest/blog/remove-section/'+button.data('id')).done(function(data) {
 			if (data.status == 'success') {
 				button.closest('section').remove();
                 updateLayoutEditorHeight();

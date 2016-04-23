@@ -414,6 +414,17 @@ services:
             - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
+    threadandmirror.products.updater.vestiaire_collective:
+        class: ThreadAndMirror\ProductsBundle\Service\Updater\VestiaireCollectiveUpdater
+        arguments:
+            - @threadandmirror.products.crawler.vestiaire_collective
+            - @threadandmirror.products.formatter.vestiaire_collective
+            - @event_dispatcher
+            - @doctrine.orm.entity_manager
+            - @threadandmirror.affiliate.linkshare
+            - @threadandmirror.products.service.product
+            - @threadandmirror.products.service.category
+
     # Crawlers
 
     threadandmirror.products.crawler.base:
@@ -516,6 +527,10 @@ services:
          class: ThreadAndMirror\ProductsBundle\Service\Crawler\YooxCrawler
          parent: threadandmirror.products.crawler.base
 
+    threadandmirror.products.crawler.vestiaire_collective:
+         class: ThreadAndMirror\ProductsBundle\Service\Crawler\VestiaireCollectiveCrawler
+         parent: threadandmirror.products.crawler.base
+
     # Formatters
 
     threadandmirror.products.formatter.base:
@@ -611,4 +626,8 @@ services:
 
     threadandmirror.products.formatter.yoox:
         class: ThreadAndMirror\ProductsBundle\Service\Formatter\YooxFormatter
+        parent: threadandmirror.products.formatter.base
+
+    threadandmirror.products.formatter.vestiaire_collective:
+        class: ThreadAndMirror\ProductsBundle\Service\Formatter\VestiaireCollectiveFormatter
         parent: threadandmirror.products.formatter.base
