@@ -11,15 +11,15 @@
     <div class="content-layout-responsive-cover">
         <h1 class="title-large-serif text-center content-layout-responsive-cover__title">{% block title %}The Social Circle{% endblock %}</h1>
         {% block content %}
-            {% embed 'ThreadAndMirrorSocialBundle:Embed:controls.html.twig' %}{% endembed %}
-            <div class="social-circle-feed" id="packery-loader">
-                {% for post in posts %}
-                    {% embed 'ThreadAndMirrorSocialBundle:Embed:post.html.twig' %}{% endembed %}
-                {% endfor %}
-            </div>
-            {% if posts|length == 30 %}
-                <div class="rest-load-more" data-offset="30" data-url="{{ loadMorePath }}/"></div>
-            {% endif %}
+                {% embed 'ThreadAndMirrorSocialBundle:Embed:controls.html.twig' %}{% endembed %}
+                <div class="social-circle-feed" id="packery-loader">
+                    {% for post in posts %}
+                        {% embed 'ThreadAndMirrorSocialBundle:Embed:post.html.twig' %}{% endembed %}
+                    {% endfor %}
+                </div>
+                {% if posts|length == 30 %}
+                    <div class="rest-load-more" data-offset="30" data-url="{{ loadMorePath }}/"></div>
+                {% endif %}
         {% endblock %}
     </div>
 {% endblock %}

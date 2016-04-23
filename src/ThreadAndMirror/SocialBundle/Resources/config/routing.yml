@@ -1,59 +1,75 @@
-# Admin routes
+thread_social_admin:
+    resource: "@ThreadAndMirrorSocialBundle/Controller/AdminController.php"
+    type:     annotation
 
-thread_admin_social_overview:
-    pattern:  /admin/threadandmirror/social
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Admin:index }
+thread_social_front:
+    resource: "@ThreadAndMirrorSocialBundle/Controller/FrontController.php"
+    type:     annotation
 
-thread_admin_social_updatefeeds:
-    pattern:  /admin/threadandmirror/social/{type}/update-feeds
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Admin:updateFeeds }
+thread_social_popup:
+    resource: "@ThreadAndMirrorSocialBundle/Controller/WidgetController.php"
+    type:     annotation
 
-# Frontend routes
+thread_social_rest:
+    resource: "@ThreadAndMirrorSocialBundle/Controller/RestController.php"
+    type:     annotation
 
-thread_front_social_index:
-    pattern:  /social
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:index }
-
-thread_front_social_test_index:
-    pattern:  /social-responsive
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:responsiveTest }
-
-
-thread_front_social_mycircle:
-    pattern:  /social/my-circle
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:mySocialCircle }
-
-thread_front_social_category:
-    pattern:  /social/category/{category}
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:category }
-
-thread_front_social_feed:
-    pattern:  /social/feed/{slug}
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:feed }
-
-thread_front_social_source:
-    pattern:  /social/{source}
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:index }
-
-# Rest routes
-
-thread_rest_social_favourite_feed:
-    pattern:  /rest/social/favourite-feed/{id}
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Rest:favouriteFeed }
-
-thread_rest_social_more_posts:
-    pattern:  /rest/social/get-more-posts/{source}/{offset}
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Rest:getMorePosts }
-
-thread_rest_social_more_category_posts:
-    pattern:  /rest/social/get-more-category-posts/{category}/{offset}
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Rest:getMoreCategoryPosts }
-
-thread_rest_social_more_feed_posts:
-    pattern:  /rest/social/get-more-feed-posts/{id}/{offset}
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Rest:getMoreFeedPosts }
-
-thread_rest_social_more_favourite_posts:
-    pattern:  /rest/social/get-more-favourite-posts/{offset}
-    defaults: { _controller: ThreadAndMirrorSocialBundle:Rest:getMoreFavouritePosts }
+## Admin routes
+#
+#thread_social_admin_overview:
+#    pattern:  /admin/threadandmirror/social
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Admin:index }
+#
+#thread_social_admin_updatefeeds:
+#    pattern:  /admin/threadandmirror/social/{type}/update-feeds
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Admin:updateFeeds }
+#
+## Frontend routes
+#
+#thread_social_front_index:
+#    pattern:  /social
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:index }
+#
+#thread_social_front_test_index:
+#    pattern:  /social-responsive
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:responsiveTest }
+#
+#
+#thread_social_front_mycircle:
+#    pattern:  /social/my-circle
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:mySocialCircle }
+#
+#thread_social_front_category:
+#    pattern:  /social/category/{category}
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:category }
+#
+#thread_social_front_feed:
+#    pattern:  /social/feed/{slug}
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:feed }
+#
+#thread_social_front_source:
+#    pattern:  /social/{source}
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Front:index }
+#
+## Rest routes
+#
+#thread_social_rest_favourite_feed:
+#    pattern:  /rest/social/favourite-feed/{id}
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Rest:favouriteFeed }
+#
+#thread_social_rest_more_posts:
+#    pattern:  /rest/social/get-more-posts/{source}
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Rest:getMorePosts }
+#
+#thread_social_rest_more_category_posts:
+#    pattern:  /rest/social/get-more-category-posts/{category}/{offset}
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Rest:getMoreCategoryPosts }
+#
+#thread_social_rest_more_feed_posts:
+#    pattern:  /rest/social/get-more-feed-posts/{id}/{offset}
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Rest:getMoreFeedPosts }
+#
+#thread_social_rest_more_favourite_posts:
+#    pattern:  /rest/social/get-more-favourite-posts/{offset}
+#    defaults: { _controller: ThreadAndMirrorSocialBundle:Rest:getMoreFavouritePosts }
 

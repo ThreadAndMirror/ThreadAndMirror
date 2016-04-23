@@ -13,7 +13,7 @@
 }
 
 .article-list__item:hover {
-    color: black;
+    color: white;
 }
 
 .article-list__item-background {
@@ -113,10 +113,16 @@
     vertical-align: middle;
 }
 
-.article-list__item:nth-child(2n+1) .article-list__item-read-more {
+.article-list__item:nth-child(2n) .article-list__item-read-more {
     color: #FFFFFF;
     border: 1px solid #FFFFFF;
 }
+
+.article-list__item:nth-child(2n) .article-list__item-read-more:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+
 
 .article-list__item-excerpt {
     text-align: center;

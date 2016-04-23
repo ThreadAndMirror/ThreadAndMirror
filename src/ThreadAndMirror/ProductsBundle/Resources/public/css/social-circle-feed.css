@@ -1,0 +1,223 @@
+.social-circle-feed {
+    width: 100%;
+    margin: 0;
+}
+
+.social-circle-feed__post {
+    margin: 0px;
+    background: none;
+    overflow: hidden;
+    position: relative;
+    display: block;
+}
+
+.social-circle-feed__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.social-circle-feed__post--1x1 {
+    width: 25vw;
+    height: 25vw;
+}
+
+.social-circle-feed__post--2x2 {
+    width: 50vw;
+    height: 50vw;
+}
+
+.social-circle-feed__post--1x2 {
+    width: 50vw;
+    height: 25vw;
+}
+
+.social-circle-feed__post--2x1 {
+    width: 25vw;
+    height: 50vw;
+}
+
+.social-circle-feed__post--text {
+    display: none;
+}
+
+.social-circle-feed__caption--text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.social-circle-feed__text-wrapper {
+    width: 100%;
+    height: 100%;
+    display: table;
+    background: black;
+}
+
+.social-circle-feed__text {
+    padding: 30px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.social-circle-feed__text--text {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.social-circle-feed__caption--image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    margin: 5vw;
+    min-width: 50%;
+    border: 1px solid rgba(16,16,16,0.5);
+    background: rgba(16,16,16,0.8);
+    -webkit-transition: 0.3s cubic-bezier(0.665, 0, 0.43, 1) all;
+    -moz-transition: 0.3s cubic-bezier(0.665, 0, 0.43, 1) all;
+    -ms-transition: 0.3s cubic-bezier(0.665, 0, 0.43, 1) all;
+    -o-transition: 0.3s cubic-bezier(0.665, 0, 0.43, 1) all;
+    transition: 0.3s cubic-bezier(0.665, 0, 0.43, 1) all;
+}
+
+.social-circle-feed__post:hover .social-circle-feed__caption--image {
+    opacity: 1;
+}
+
+.social-circle-feed__caption-header {
+    opacity: 1;
+}
+
+.social-circle-feed__caption-header--image {
+    position: relative;
+}
+
+.social-circle-feed__caption-header--image:hover {
+
+}
+
+.social-circle-feed__caption-header {
+    position: relative;
+    z-index: 10;
+    height: 36px;
+    margin: 0;
+}
+
+.social-circle-feed__caption-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.social-circle-feed__owner {
+    line-height: 30px;
+    font-size: 12px;
+    font-weight: 200;
+    width: auto;
+    background: none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #777777;
+}
+
+.social-circle-feed__owner:hover {
+    color: #FFFFFF;
+}
+
+.social-circle-feed__source,
+.social-circle-feed__add {
+    position: absolute;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.social-circle-feed__source {
+    left: 7px;
+}
+
+.social-circle-feed__add {
+    right: 7px;
+    text-align: right;
+}
+
+.social-circle-feed__add > i,
+.social-circle-feed__source > i {
+    color: #777777;
+    font-size: 16px !important;
+    line-height: 30px !important;
+}
+
+.social-circle-feed__add:hover > i,
+.social-circle-feed__source:hover > i {
+    color: #FFFFFF;
+}
+
+.social-circle-feed__caption-header > a.favourite-feed > i {
+    color: #f93124 !important;
+}
+
+.social-circle-feed__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+@media (max-width : 960px) {
+
+    .social-circle-feed__post--1x1 {
+        width: 50vw;
+        height: 50vw;
+    }
+
+    .social-circle-feed__post--2x2 {
+        width: 100vw;
+        height: 100vw;
+    }
+
+    .social-circle-feed__post--1x2 {
+        width: 100vw;
+        height: 50vw;
+    }
+
+    .social-circle-feed__post--2x1 {
+        width: 50vw;
+        height: 100vw;
+    }
+
+    .social-circle-feed__text {
+        padding: 5vw;
+    }
+
+    .social-circle-feed__text--image {
+        padding: 10vw 5vw 5vw;
+        margin: 0;
+    }
+
+    .social-circle-feed__owner {
+        line-height: 10vw;
+        font-size: 2.5vw;
+        font-weight: 400;
+    }
+
+    .social-circle-feed__source > i {
+        font-size: 4vw !important;
+        line-height: 10vw !important;
+    }
+}

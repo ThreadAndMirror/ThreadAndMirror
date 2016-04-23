@@ -1,0 +1,22 @@
+{% extends '::threadandmirror.html.twig' %}
+{% import 'StemsCoreBundle:Macro:core.html.twig' as macros %}
+
+{% block layout %}
+    <div class="content-layout-banner">
+        <div class="content-layout-banner__banner-wrapper">
+            <div class="content-layout-banner__title-alignment">
+                <div class="content-layout-banner__banner" style="background-image:url('{% block banner %}{% endblock %}');background-size: cover;"></div>
+                <div class="content-layout-banner__title-block">
+                    <h1 class="magazine-layout-banner__title">{% block title %}{% endblock %}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container content-layout-banner__content">
+            <div class="content-layout-banner__content-padding">
+                <div class="content-layout-banner__content-wrapper">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,22 +1,17 @@
-{% extends '@StemsPage/Layout/banner.html.twig' %}
+{% extends '@ThreadAndMirrorCore/Layout/banner.html.twig' %}
 
-{% block windowTitle %}About Thread & Mirror{% endblock %}
+{% block windowTitle %}About Us{% endblock %}
+{% block twitterCardDescription %}At Thread & Mirror, we love fashion and beauty, hence the name. We created this site as an outlet for our passion and to connect with like-minded lovelies like you.{% endblock %}
+{% block twitterCardImage %}{{ '/media/image/page/clothing-rack.jpg'|imagine_filter('page_banner') }}{% endblock %}
 
-{% block metaKeywords %}{% endblock %}
-
-{% block metaDescription %}About Thread & Mirror{% endblock %}
-
-{% block twitterCardDescription %}About Thread & Mirror{% endblock %}
-
-{% block title %}<h1 class="magazine-layout-banner__title">About Us</h1>{% endblock %}
-
+{% block title %}About Us{% endblock %}
 {% block banner %}{{ '/media/image/page/clothing-rack.jpg'|imagine_filter('page_banner') }}{% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 text-center">
-            <p class="content-layout-banner__paragraph">At Thread & Mirror, we love fashion and beauty, hence the name. We created this site as an outlet for our passion and to connect with like-minded lovelies like you.</p>
-            <p class="content-layout-banner__paragraph">Amongst our daily ramblings, you’ll find us waxing lyrical about the latest look or IT item, bloggers we admire, the next miracle serum or our favourite dish.</p>
+            <p class="content__paragraph content__paragraph--inset">At Thread & Mirror, we love fashion and beauty, hence the name. We created this site as an outlet for our passion and to connect with like-minded lovelies like you.</p>
+            <p class="content__paragraph content__paragraph--inset">Amongst our daily ramblings, you’ll find us waxing lyrical about the latest look or IT item, bloggers we admire, the next miracle serum or our favourite dish.</p>
         </div>
         <div class="col-xs-12 col-sm-12">
             {% include 'ThreadAndMirrorCoreBundle:Widget:followUs.html.twig' %}

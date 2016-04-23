@@ -1,0 +1,18 @@
+.content__list, .content__list-item {
+    margin-bottom: 15px;
+}
+
+.content__list {
+    padding: 0 0 0 15px;
+}
+
+.content__paragraph--inset {
+    padding: 0 0 0 15px;
+}
+
+@media only screen and (max-width : 960px) {
+
+    .content__paragraph--inset {
+        margin: 0 0 10vw;
+    }
+}

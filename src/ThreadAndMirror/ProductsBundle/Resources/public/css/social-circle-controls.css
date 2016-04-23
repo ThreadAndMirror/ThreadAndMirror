@@ -1,0 +1,107 @@
+.social-circle-controls {
+    margin: 0 auto;
+}
+
+.social-circle-controls__intro {
+    text-align: center;
+    padding: 15px;
+}
+
+.social-circle-controls__filters-wrapper {
+    width: 100%;
+    height: 85px;
+    border: none;
+    border-top: 1px solid #DDDDDD;
+    margin: 0;
+    position: relative;
+    text-align: center;
+}
+
+.social-circle-controls__filters-title {
+    border-top: none !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+    color: black;
+    position: relative;
+    width: 100%;
+    top: -9px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 200;
+    letter-spacing: 2px;
+    z-index: 5;
+}
+
+.social-circle-controls__filters-title-padding {
+    background: #FFFFFF;
+    padding: 0 5px;
+    line-height: 18px;
+    top: 0;
+    left: 0;
+    position: relative;
+}
+
+.social-circle-controls__filters-list {
+    padding: 0;
+    text-align: center;
+    list-style: none;
+}
+
+.social-circle-controls__filters-item {
+    display: inline-block;
+}
+
+.social-circle-controls__filters-item-link {
+    padding: 0 20px;
+    line-height: 48px;
+    display: block;
+    text-transform: uppercase;
+    text-align: center
+}
+
+.social-circle-controls__filters-item-link i {
+    font-size: 36px !important;
+    line-height: 48px !important;
+}
+
+@media (max-width : 960px) {
+
+    .social-circle-controls__intro {
+        padding: 10vw;
+    }
+
+    .social-circle-controls__filters-wrapper--sources {
+        height: 34vw;
+    }
+
+    .social-circle-controls__filters-wrapper--categories {
+        height: 54vw;
+    }
+
+    .social-circle-controls__filters-title {
+        font-size: 3.5vw;
+    }
+
+    .social-circle-controls__filters-title-padding {
+        background: #FFFFFF;
+        padding: 0 2vw;
+        line-height: 3.5vw;
+        top: 0;
+        left: 0;
+        position: relative;
+    }
+
+    .social-circle-controls__filters-list {
+        padding: 5vw 0;
+    }
+
+    .social-circle-controls__filters-item-link {
+        line-height: 14vw;
+        font-size: 4.5vw;
+    }
+
+    .social-circle-controls__filters-item-link i {
+        font-size: 15vw !important;
+        line-height: 15vw !important;
+    }
+}

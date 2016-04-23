@@ -32,9 +32,9 @@
 						<a href="/blog/preview/{{ post.slug }}" class="btn btn-circle btn-small" target="_blank" title="Preview"><i class="fa fa-fw fa-eye"></i></a> 
 						<a href="/admin/blog/{{ post.id }}/edit" class="btn btn-circle btn-small" title="Edit"><i class="fa fa-fw fa-pencil"></i></a> 
 						{% if post.status == 'Published' %}
-							<a href="{{ path('stems_admin_blog_publish', { 'id' : post.id }) }}" class="btn btn-success btn-circle btn-small" title="Unpublish" ><i class="fa fa-fw fa-globe"></i></a>
+							<a href="{{ path('thread_blog_admin_publish', { 'id' : post.id }) }}" class="btn btn-success btn-circle btn-small" title="Unpublish" ><i class="fa fa-fw fa-globe"></i></a>
 						{% else %}
-							<a href="{{ path('stems_admin_blog_publish', { 'id' : post.id }) }}" class="btn btn-warning btn-circle btn-small" title="Publish" ><i class="fa fa-fw fa-globe"></i></a>
+							<a href="{{ path('thread_blog_admin_publish', { 'id' : post.id }) }}" class="btn btn-warning btn-circle btn-small" title="Publish" ><i class="fa fa-fw fa-globe"></i></a>
 						{% endif %}
 						<a href="/admin/blog/{{ post.id }}/delete" class="btn btn-danger btn-circle btn-small" title="Delete" onclick="return confirm('Are you sure you want to delete this post?');"><i class="fa fa-fw fa-times"></i></a> 
 					</td>

@@ -1,4 +1,4 @@
-thread_and_mirror_blog:
+thread_blog:
     resource: "@ThreadAndMirrorBlogBundle/Resources/config/routing.yml"
     prefix:   /
 

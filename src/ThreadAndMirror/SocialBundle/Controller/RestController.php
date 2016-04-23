@@ -3,9 +3,12 @@
 namespace ThreadAndMirror\SocialBundle\Controller;
 
 use Stems\CoreBundle\Controller\BaseRestController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RestController extends BaseRestController
 {
+	const POST_CHUNK = 30;
+
 	/**
 	 * Add a feed to the user's favourites
 	 *
@@ -29,7 +32,7 @@ class RestController extends BaseRestController
 		}
 
 		// Favourites can be null if none exist already
-		$favourites = $profile->getSocialFeeds() ? $profile->getSocialFeeds() : array();
+		$favourites = $profile->getSocialFeeds() ? $profile->getSocialFeeds() : [];
 
 		// Add the feed to the user's favourites if it doesn't already exist
 		if (!in_array($id, $favourites)) {
@@ -54,30 +57,33 @@ class RestController extends BaseRestController
 	 *
 	 * @param  string 	$source 	The source type to filter posts by
 	 * @param  integer 	$offset 	The amount of posts already loaded, and therefore the query offset
-	 * @param  integer 	$chunk 		The amount of posts to render
+	 *
+	 * @Route("/rest/social/get-more-posts/{source}/{offset}", name="thread_social_rest_more_posts")
 	 */
-	public function getMorePostsAction($source='all', $offset, $chunk=50)
+	public function getMorePostsAction($source = 'all', $offset = 0)
 	{
 		$em = $this->getDoctrine()->getManager();
 
 		// Get the posts
 		if ($source == 'all') {
-			$posts = $em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('deleted' => false), array('created' => 'DESC'), $chunk, $offset);
+			$posts = $em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(['deleted' => false], ['created' => 'DESC'], self::POST_CHUNK, $offset);
 		} else {
-			$posts = $em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('source' => $source, 'deleted' => false), array('created' => 'DESC'), $chunk, $offset);
+			$posts = $em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(['source' => $source, 'deleted' => false], ['created' => 'DESC'], self::POST_CHUNK, $offset);
 		}
 
 		// Render the html for the posts
 		$html = '';
 
 		foreach ($posts as &$post) {
-			$html .= $this->renderView('ThreadAndMirrorSocialBundle:Rest:post.html.twig', array(
-				'post' 		=> $post,
-			));
+			$html .= $this->renderView('ThreadAndMirrorSocialBundle:Rest:post.html.twig', [
+				'post' => $post,
+			]);
 		}
 		
 		// Let the ajax response know when there's no more additional posts to load
-		count($posts) < $chunk and $this->setCallback('stopLoading');
+		if (count($posts) < self::POST_CHUNK) {
+			$this->setCallback('stopLoading');
+		}
 
 		return $this->addHtml($html)->success()->sendResponse();
 	}
@@ -87,25 +93,28 @@ class RestController extends BaseRestController
 	 *
 	 * @param  string 	$category 	The category to filter posts by
 	 * @param  integer 	$offset 	The amount of posts already loaded, and therefore the query offset
-	 * @param  integer 	$chunk 		The amount of posts to render
+	 *
+	 * @Route("/rest/social/get-more-category-posts/{category}/{offset}", name="thread_social_rest_more_category_posts")
 	 */
-	public function getMoreCategoryPostsAction($category='magazine', $offset, $chunk=50)
+	public function getMoreCategoryPostsAction($category = 'magazine', $offset = 0)
 	{
 		// Get the posts
 		$em    = $this->getDoctrine()->getManager();
-		$posts = $em->getRepository('ThreadAndMirrorSocialBundle:Post')->findByOwnerCategory($category, $offset, $chunk);
+		$posts = $em->getRepository('ThreadAndMirrorSocialBundle:Post')->findByOwnerCategory($category, $offset, self::POST_CHUNK);
 
 		// Render the html for the posts
 		$html = '';
 
 		foreach ($posts as &$post) {
-			$html .= $this->renderView('ThreadAndMirrorSocialBundle:Rest:post.html.twig', array(
-				'post' 		=> $post,
-			));
+			$html .= $this->renderView('ThreadAndMirrorSocialBundle:Rest:post.html.twig', [
+				'post' => $post,
+			]);
 		}
 		
 		// Let the ajax response know when there's no more additional posts to load
-		count($posts) < $chunk and $this->setCallback('stopLoading');
+		if (count($posts) < self::POST_CHUNK) {
+			$this->setCallback('stopLoading');
+		}
 
 		return $this->addHtml($html)->success()->sendResponse();
 	}
@@ -115,25 +124,26 @@ class RestController extends BaseRestController
 	 *
 	 * @param  string 	$slug    	The slug of the feed
 	 * @param  integer 	$offset 	The amount of posts already loaded, and therefore the query offset
-	 * @param  integer 	$chunk 		The amount of posts to render
 	 */
-	public function getMoreFeedPostsAction($id, $offset, $chunk=50)
+	public function getMoreFeedPostsAction($id, $offset = 0)
 	{
 		// Get the posts
 		$em    = $this->getDoctrine()->getManager();
-		$posts = $em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(array('feed' => $id, 'deleted' => false), array('created' => 'DESC'), $offset, $chunk);
+		$posts = $em->getRepository('ThreadAndMirrorSocialBundle:Post')->findBy(['feed' => $id, 'deleted' => false], ['created' => 'DESC'], $offset, self::POST_CHUNK);
 
 		// Render the html for the posts
 		$html = '';
 
 		foreach ($posts as &$post) {
-			$html .= $this->renderView('ThreadAndMirrorSocialBundle:Rest:post.html.twig', array(
-				'post' 		=> $post,
-			));
+			$html .= $this->renderView('ThreadAndMirrorSocialBundle:Rest:post.html.twig', [
+				'post' => $post,
+			]);
 		}
 		
 		// Let the ajax response know when there's no more additional posts to load
-		count($posts) < $chunk and $this->setCallback('stopLoading');
+		if (count($posts) < self::POST_CHUNK) {
+			$this->setCallback('stopLoading');
+		}
 
 		return $this->addHtml($html)->success()->sendResponse();
 	}
@@ -142,26 +152,27 @@ class RestController extends BaseRestController
 	 * Returns the html for the next n posts that are on the users favourite list
 	 *
 	 * @param  integer 	$offset 	The amount of posts already loaded, and therefore the query offset
-	 * @param  integer 	$chunk 		The amount of posts to render
 	 */
-	public function getMoreFavouritePostsAction($offset, $chunk=50)
+	public function getMoreFavouritePostsAction($offset)
 	{
 		// Get the user's profile and their favourite feeds
 		$em      = $this->getDoctrine()->getManager();
 		$profile = $em->getRepository('ThreadAndMirrorProductsBundle:Profile')->findOneByUser($this->getUser()->getId());
-		$posts   = $em->getRepository('ThreadAndMirrorSocialBundle:Post')->findFromFeedList($profile->getSocialFeeds(), $offset, $chunk);
+		$posts   = $em->getRepository('ThreadAndMirrorSocialBundle:Post')->findFromFeedList($profile->getSocialFeeds(), $offset, self::POST_CHUNK);
 
 		// Render the html for the posts
 		$html = '';
 
 		foreach ($posts as &$post) {
-			$html .= $this->renderView('ThreadAndMirrorSocialBundle:Rest:post.html.twig', array(
-				'post' 		=> $post,
-			));
+			$html .= $this->renderView('ThreadAndMirrorSocialBundle:Rest:post.html.twig', [
+				'post' => $post,
+			]);
 		}
 		
 		// Let the ajax response know when there's no more additional posts to load
-		count($posts) < $chunk and $this->setCallback('stopLoading');
+		if (count($posts) < self::POST_CHUNK) {
+			$this->setCallback('stopLoading');
+		}
 
 		return $this->addHtml($html)->success()->sendResponse();
 	}

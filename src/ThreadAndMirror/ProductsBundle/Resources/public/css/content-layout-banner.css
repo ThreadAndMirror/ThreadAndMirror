@@ -101,12 +101,6 @@
 
 @media (max-width : 960px) {
 
-    .content-layout-banner__paragraph {
-        font-size: 4vw;
-        line-height: 150%;
-        margin: 0 0 10vw;
-    }
-
     .content-layout-banner__banner-wrapper {
         height: 100vw;
         display: table;

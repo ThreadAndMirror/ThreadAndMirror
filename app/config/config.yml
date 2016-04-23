@@ -172,6 +172,7 @@ assetic:
                 - '../assets/css/bootstrap-3.3.6-dist/css/bootstrap.css'
                 - '@StemsCoreBundle/Resources/public/css/front/vendor/*'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/stylesheet.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/content.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/titles.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/header-bar.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product-gallery.css'
@@ -185,6 +186,7 @@ assetic:
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/homepage-layout.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/homepage-banner.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/content-layout-banner.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/content-layout-responsive-cover.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/magazine-layout-banner.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/magazine-layout-inset.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section.css'
@@ -194,6 +196,8 @@ assetic:
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-image.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/article-list.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/social-circle-controls.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/social-circle-feed.css'
 
     filters:
         cssrewrite: ~

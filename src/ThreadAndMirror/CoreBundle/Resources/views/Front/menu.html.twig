@@ -23,7 +23,7 @@
 		{#{% endif %}#}
 	{#</li>#}
 	<li class="header-bar__nav-menu-item">
-		<a class="header-bar__nav-menu-item-link {% if route == 'social' or route == 'social/{source}' or route == 'social/category/{category}' %}active{% endif %}" href="/social">The Social Circle</a>
+		<a href="{{ path('thread_social_front_index') }}" class="header-bar__nav-menu-item-link {% if route in ['thread_social_front_index', 'thread_social_front_category', 'thread_social_front_source', 'thread_social_front_feed', 'thread_social_front_mycircle'] %}active{% endif %}">The Social Circle</a>
 		{#<ul class="header-bar__nav-submenu">#}
 			{#<li class="header-bar__nav-submenu-item">#}
                 {#<a class="header-bar__nav-submenu-item-link" href="/social/category/blog">Blogs</a>#}
@@ -72,7 +72,7 @@
 		{#</ul>#}
 	{#</li>#}
 	<li class="header-bar__nav-menu-item">
-		<a href="/magazine" class="header-bar__nav-menu-item-link {% if route == 'magazine' or route == 'magazine/{post}' %}active{% endif %}">Magazine</a>
+		<a href="{{ path('thread_blog_front_index') }}" class="header-bar__nav-menu-item-link {% if route in ['thread_blog_front_index', 'thread_blog_front_article', 'thread_blog_front_editors_pick'] %}active{% endif %}">Magazine</a>
 	</li>	
 </ul>
 <br class="clear">

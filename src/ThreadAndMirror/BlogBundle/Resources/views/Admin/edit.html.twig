@@ -38,7 +38,7 @@
 								<div class="button-holder">
 									<div>
 										<div>
-											<a class="btn btn-primary rest-get-popup" href="{{ path('stems_rest_blog_popup_set_featureimage', { id : post.id }) }}"><i class="fa fa-picture-o"></i> Change Feature Image</a>
+											<a class="btn btn-primary rest-get-popup" href="{{ path('thread_blog_popup_set_feature_image', { id : post.id }) }}"><i class="fa fa-picture-o"></i> Change Feature Image</a>
 										</div>
 									</div>
 								</div>
@@ -48,7 +48,7 @@
 								<div class="button-holder">
 									<div>
 										<div>
-											<a class="btn btn-primary rest-get-popup" href="{{ path('stems_rest_blog_popup_set_featureimage', { id : post.id }) }}"><i class="fa fa-picture-o"></i> Add Feature Image</a>
+											<a class="btn btn-primary rest-get-popup" href="{{ path('thread_blog_popup_set_feature_image', { id : post.id }) }}"><i class="fa fa-picture-o"></i> Add Feature Image</a>
 										</div>
 									</div>
 								</div>
@@ -74,12 +74,12 @@
 					</div>
 					<div id="add-section">
 						<div class="available-sections">
-							<a class="btn btn-large btn-primary" data-type-id="text" title="Add Paragraph"><i class="fa fa-align-left"></i></a>
-                            <a class="btn btn-large btn-primary" data-type-id="image" title="Add Image"><i class="fa fa-picture-o"></i></a>
-                            <a class="btn btn-large btn-primary" data-type-id="heading" title="Add Heading"><i class="fa fa-header"></i></a>
-                            <a class="btn btn-large btn-primary" data-type-id="list" title="Add List"><i class="fa fa-list-ul"></i></a>
-                            <a class="btn btn-large btn-primary" data-type-id="product" title="Add Product"><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-large btn-primary" data-type-id="product_gallery" title="Add Product Gallery"><i class="fa fa-th-large"></i></a>
+							<a href="{{ path('thread_blog_rest_add_section_type', { type: 'text' }) }}" class="btn btn-large btn-primary" title="Add Paragraph"><i class="fa fa-align-left"></i></a>
+                            <a href="{{ path('thread_blog_rest_add_section_type', { type: 'image' }) }}" class="btn btn-large btn-primary" title="Add Image"><i class="fa fa-picture-o"></i></a>
+                            <a href="{{ path('thread_blog_rest_add_section_type', { type: 'heading' }) }}" class="btn btn-large btn-primary"  title="Add Heading"><i class="fa fa-header"></i></a>
+                            <a href="{{ path('thread_blog_rest_add_section_type', { type: 'list' }) }}" class="btn btn-large btn-primary" title="Add List"><i class="fa fa-list-ul"></i></a>
+                            <a href="{{ path('thread_blog_rest_add_section_type', { type: 'product' }) }}" class="btn btn-large btn-primary" title="Add Product"><i class="fa fa-shopping-cart"></i></a>
+                            <a href="{{ path('thread_blog_rest_add_section_type', { type: 'product_gallery' }) }}" class="btn btn-large btn-primary" title="Add Product Gallery"><i class="fa fa-th-large"></i></a>
 						</div>
 					</div>
 					{{ form_row(form.height) }}
@@ -90,12 +90,12 @@
 		<div class="admin-editor-controls">
 			<input class="btn btn-success" type="submit" value="Save">
 			{% if post.status == 'Published' %}
-				<a href="{{ path('stems_admin_blog_publish', { 'id' : post.id }) }}" class="btn btn-warning" >Unpublish</a>
+				<a href="{{ path('thread_blog_admin_publish', { 'id' : post.id }) }}" class="btn btn-warning" >Unpublish</a>
 			{% else %}
-				<a href="{{ path('stems_admin_blog_publish', { 'id' : post.id }) }}" class="btn btn-success" >Publish</a>
+				<a href="{{ path('thread_blog_admin_publish', { 'id' : post.id }) }}" class="btn btn-success" >Publish</a>
 			{% endif %}
-			<a href="{{ path('stems_admin_blog_delete', { 'id' : post.id }) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?" >Delete</a>
-			<a href="{{ path('stems_admin_blog_overview') }}" class="btn" >Cancel</a>
+			<a href="{{ path('thread_blog_admin_delete', { 'id' : post.id }) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?" >Delete</a>
+			<a href="{{ path('thread_blog_admin_index') }}" class="btn" >Cancel</a>
 		</div>
 	</form>
 {% endblock %}

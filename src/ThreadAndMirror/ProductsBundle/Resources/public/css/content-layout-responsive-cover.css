@@ -1,0 +1,13 @@
+.content-layout-responsive-cover {
+    background: white;
+    padding-top: 50px;
+}
+
+.content-layout-responsive-cover__title {
+    margin-top: 50px;
+}
+
+@media (max-width : 960px) {
+
+
+}

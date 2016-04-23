@@ -33,10 +33,15 @@
     letter-spacing: 5px;
     font-size: 13px;
     opacity: .5;
+    margin-bottom: 15px;
 }
 
 .title-faded-sans--invert {
     color: white;
+}
+
+.title-faded-sans--large {
+    font-size: 16px;
 }
 
 .title-italic-serif {
@@ -78,6 +83,11 @@
     .title-faded-sans {
         letter-spacing: 1vw;
         font-size: 3vw;
+    }
+
+    .title-faded-sans--large {
+        letter-spacing: 1vw;
+        font-size: 4vw;
     }
 
     .title-italic-serif {

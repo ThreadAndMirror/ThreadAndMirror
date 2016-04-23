@@ -75,6 +75,6 @@ parameters:
     stems.admin.menu_core_ThreadAndMirrorBlogBundle:
         thread_blog:
             title: 'Blog'
-            route: 'stems_admin_blog_overview'
+            route: 'thread_blog_admin_index'
             icon: 'fa fa-edit'
             children: []

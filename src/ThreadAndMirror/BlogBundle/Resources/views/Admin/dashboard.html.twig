@@ -1,8 +1,8 @@
 <div class="icon"><div class="inset"><i class="fa fa-edit"></i></div></div>
 <div class="options">
 	<h2>Blog</h2>
-	<a href="/admin/blog"><i class="fa fa-fw fa-list"></i> View Articles</a>
-	<a href="/admin/blog/create"><i class="fa fa-fw fa-plus"></i> Create New Article</a>
+	<a href="{{ path('thread_blog_admin_index') }}"><i class="fa fa-fw fa-list"></i> View Articles</a>
+	<a href="{{ path('thread_blog_admin_create') }}"><i class="fa fa-fw fa-plus"></i> Create New Article</a>
 	{% if 'threadandmirror.blog.comments.enabled'|parameter and 'threadandmirror.blog.comments.moderated'|parameter %}
 		<a href="/admin/blog/comments">
 			<i class="fa fa-fw fa-comment{% if comments > 0 %} danger{% endif %}"></i> 

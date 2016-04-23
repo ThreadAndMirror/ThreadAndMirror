@@ -6,21 +6,21 @@ use Stems\CoreBundle\Controller\BaseAdminController;
 use Symfony\Component\HttpFoundation\Request;
 use ThreadAndMirror\BlogBundle\Form\AdminPostType;
 use ThreadAndMirror\BlogBundle\Entity\Post;
-use ThreadAndMirror\BlogBundle\Entity\Section;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+/**
+ * @Route("/admin/blog", name="thread_blog_admin")
+ */
 class AdminController extends BaseAdminController
 {
-	protected $home = 'stems_admin_blog_overview';
-
 	/**
 	 * Render the dialogue for the module's dashboard entry in the admin panel
 	 */
 	public function dashboardAction()
 	{
-		$em = $this->getDoctrine()->getEntityManager();
-
 		// Get the number of unmoderated comments
-		$comments = $em->getRepository('ThreadAndMirrorBlogBundle:Comment')->findBy(array('moderated' => false, 'deleted' => false));
+		$comments = $this->em->getRepository('ThreadAndMirrorBlogBundle:Comment')->findBy(array('moderated' => false, 'deleted' => false));
 		$comments = count($comments); 
 
 		return $this->render('ThreadAndMirrorBlogBundle:Admin:dashboard.html.twig', array(
@@ -37,8 +37,7 @@ class AdminController extends BaseAdminController
 		$slug = 'magazine';
 
 		// Get the posts
-		$em    = $this->getDoctrine()->getEntityManager();
-		$posts = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findPublishedPostsByCategory('articles', 9999);
+		$posts = $this->em->getRepository('ThreadAndMirrorBlogBundle:Post')->findPublishedPostsByCategory('articles', 9999);
 
 		return $this->render('ThreadAndMirrorBlogBundle:Admin:sitemap.html.twig', array(
 			'slug' 		=> $slug,
@@ -47,23 +46,25 @@ class AdminController extends BaseAdminController
 	}
 
 	/**
-	 * Blog overview
+	 * Overview of all magazine posts
+	 *
+	 * @Route("/", name="thread_blog_admin_index")
+	 * @Template()
 	 */
 	public function indexAction()
 	{		
 		// Get all undeleted articles
-		$em    = $this->getDoctrine()->getEntityManager();
-		$posts = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findBy(array('deleted' => false), array('created' => 'DESC'));
+		$posts = $this->em->getRepository('ThreadAndMirrorBlogBundle:Post')->findBy(['deleted' => false], ['created' => 'DESC']);
 
-		return $this->render('ThreadAndMirrorBlogBundle:Admin:index.html.twig', array(
-			'posts' 	=> $posts,
-		));
+		return [
+			'posts' => $posts,
+		];
 	}
 
 	/**
 	 * Create a post, using a template if defined
 	 *
-	 * @param  Request 
+	 * @Route("/create", name="thread_blog_admin_create")
 	 */
 	public function createAction(Request $request)
 	{
@@ -72,17 +73,17 @@ class AdminController extends BaseAdminController
 		// Create a new post for persisting, so we already have an id for adding sections etc.
 		$post = new Post();
 		$post->setAuthor($this->getUser()->getId());
-		$category = $em->getRepository('ThreadAndMirrorBlogBundle:Category')->find(1);
+		$category = $this->em->getRepository('ThreadAndMirrorBlogBundle:Category')->find(1);
 		$post->setCategory($category);
 
-		$em->persist($post);
+		$this->em->persist($post);
 		
 		// If a title was posted then use it
 		$request->get('title') and $post->setTitle($request->get('title'));
-		$em->flush();
+		$this->em->flush();
 
 		// Save all the things
-		$em->flush();
+		$this->em->flush();
 
 		// Redirect to the edit page for the new post
 		return $this->redirect($this->generateUrl('stems_admin_blog_edit', array('id' => $post->getId())));
@@ -91,22 +92,18 @@ class AdminController extends BaseAdminController
 	/**
 	 * Edit a blog post
 	 *
-	 * @param  integer 	$id  	The ID of the blog post
-	 * @param  Request 
+	 * @Route("/{id}/edit", name="thread_blog_admin_edit")
+	 * @Template()
 	 */
-	public function editAction(Request $request, $id)
+	public function editAction(Request $request, Post $post)
 	{
-		// Get the blog post requested
-		$em   = $this->getDoctrine()->getEntityManager();
-		$post = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findOneBy(array('id' => $id, 'deleted' => false));
-
 		// Load the section management service
 		$sectionHandler = $this->get('stems.core.sections.manager')->setBundle('blog');
 
 		// Throw an error if the post could not be found
 		if (!$post) {
 			$request->getSession()->getFlashBag()->set('error', 'The requested post could not be found.');
-			return $this->redirect($this->generateUrl($this->home));
+			return $this->redirect($this->generateUrl('thread_blog_admin_index'));
 		}
 
 		// Get the available section types
@@ -137,7 +134,7 @@ class AdminController extends BaseAdminController
 				foreach ($request->get('sections') as $section) {
 					
 					// Attach and update order
-					$sectionEntity = $em->getRepository('ThreadAndMirrorBlogBundle:Section')->find($section);
+					$sectionEntity = $this->em->getRepository('ThreadAndMirrorBlogBundle:Section')->find($section);
 					$sectionEntity->setPost($post);
 					$sectionEntity->setPosition($position);
 
@@ -158,7 +155,7 @@ class AdminController extends BaseAdminController
 
 					// ...then process and update the entity
 					$sectionHandler->saveSection($sectionEntity, $sectionParameters, $request);
-					$em->persist($sectionEntity);
+					$this->em->persist($sectionEntity);
 
 					$position++;
 				}
@@ -166,11 +163,11 @@ class AdminController extends BaseAdminController
 				// If there were no errors then save the entity, otherwise display the save errors
 				// if ($sectionHandler->getSaveErrors()) {
 					
-					$em->persist($post);
-					$em->flush();
+					$this->em->persist($post);
+					$this->em->flush();
 					$request->getSession()->getFlashBag()->set('success', 'The post "'.$post->getTitle().'" has been updated.');
 
-					return $this->redirect($this->generateUrl($this->home));
+					return $this->redirect($this->generateUrl('thread_blog_admin_index'));
 
 				// } else {
 				// 	$request->getSession()->getFlashBag()->set('error', 'Your request was not processed as errors were found.');
@@ -190,65 +187,43 @@ class AdminController extends BaseAdminController
 	/**
 	 * Delete a post
 	 *
-	 * @param  integer 	$id  	The ID of the blog post
-	 * @param  Request 
+	 * @Route("/{id}/delete", name="thread_blog_admin_delete")
 	 */
-	public function deleteAction(Request $request, $id)
+	public function deleteAction(Request $request, Post $post)
 	{
-		// Get the post
-		$em   = $this->getDoctrine()->getEntityManager();
-		$post = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findOneBy(array('id' => $id, 'deleted' => false));
+		// Delete the post if was found
+		$name = $post->getTitle();
+		$post->setDeleted(true);
+		$this->em->persist($post);
+		$this->em->flush();
 
-		if ($post) {
+		// Return the success message
+		$request->getSession()->getFlashBag()->set('success', 'The post "'.$name.'" was successfully deleted!');
 
-			// Delete the post if was found
-			$name = $post->getTitle();
-			$post->setDeleted(true);
-			$em->persist($post);
-			$em->flush();
-
-			// Return the success message
-			$request->getSession()->getFlashBag()->set('success', 'The post "'.$name.'" was successfully deleted!');
-
-		} else {
-			$request->getSession()->getFlashBag()->set('error', 'The requested post could not be deleted as it does not exist in the database.');
-		}
-
-		return $this->redirect($this->generateUrl($this->home));
+		return $this->redirect($this->generateUrl('thread_blog_admin_index'));
 	}
 
 	/**
 	 * Publish/unpublish a post
 	 *
-	 * @param  integer 	$id  	The ID of the blog post
-	 * @param  Request 
+	 * @Route("/{id}/publish", name="thread_blog_admin_publish")
 	 */
-	public function publishAction(Request $request, $id)
+	public function publishAction(Request $request, Post $post)
 	{
-		// Get the post
-		$em   = $this->getDoctrine()->getEntityManager();
-		$post = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findOneBy(array('id' => $id, 'deleted' => false));
-
-		if ($post) {
-
-			// Set the post to published/unpublished 
-			if ($post->getStatus() == 'Draft') {	
-				$post->setStatus('Published');
-				$post->setPublished(new \DateTime());
-				$request->getSession()->getFlashBag()->set('success', 'The post "'.$post->getTitle().'" was successfully published!');
-			} else {
-				$post->setStatus('Draft');
-				$request->getSession()->getFlashBag()->set('success', 'The post "'.$post->getTitle().'" was successfully unpublished!');
-			}
-
-			$em->persist($post);
-			$em->flush();
-
+		// Set the post to published/unpublished
+		if ($post->getStatus() == 'Draft') {
+			$post->setStatus('Published');
+			$post->setPublished(new \DateTime());
+			$request->getSession()->getFlashBag()->set('success', 'The post "'.$post->getTitle().'" was successfully published!');
 		} else {
-			$request->getSession()->getFlashBag()->set('error', 'The requested post could not be published as it does not exist in the database.');
+			$post->setStatus('Draft');
+			$request->getSession()->getFlashBag()->set('success', 'The post "'.$post->getTitle().'" was successfully unpublished!');
 		}
 
-		return $this->redirect($this->generateUrl($this->home));
+		$this->em->persist($post);
+		$this->em->flush();
+
+		return $this->redirect($this->generateUrl('thread_blog_admin_index'));
 	}
 
 	/**
@@ -258,7 +233,7 @@ class AdminController extends BaseAdminController
 	{		
 		// Get all unmoderated comments
 		$em       = $this->getDoctrine()->getEntityManager();
-		$comments = $em->getRepository('ThreadAndMirrorBlogBundle:Comment')->findBy(array('deleted' => false, 'moderated' => false), array('created' => 'DESC'));
+		$comments = $this->em->getRepository('ThreadAndMirrorBlogBundle:Comment')->findBy(array('deleted' => false, 'moderated' => false), array('created' => 'DESC'));
 
 		return $this->render('ThreadAndMirrorBlogBundle:Admin:comments.html.twig', array(
 			'comments' 	=> $comments,
@@ -275,7 +250,7 @@ class AdminController extends BaseAdminController
 	{
 		// Get the comment
 		$em      = $this->getDoctrine()->getEntityManager();
-		$comment = $em->getRepository('ThreadAndMirrorBlogBundle:Comment')->findOneBy(array('id' => $id, 'deleted' => false));
+		$comment = $this->em->getRepository('ThreadAndMirrorBlogBundle:Comment')->findOneBy(array('id' => $id, 'deleted' => false));
 
 		if ($comment) {
 
@@ -283,14 +258,14 @@ class AdminController extends BaseAdminController
 			$comment->setModerated(true);
 			$request->getSession()->getFlashBag()->set('success', 'The comment was successfully authorised!');
 
-			$em->persist($comment);
-			$em->flush();
+			$this->em->persist($comment);
+			$this->em->flush();
 
 		} else {
 			$request->getSession()->getFlashBag()->set('error', 'The requested comment could not be moderated as it does not exist in the database.');
 		}
 
-		return $this->redirect($this->generateUrl($this->home));
+		return $this->redirect($this->generateUrl('thread_blog_admin_index'));
 	}
 
 	/**
@@ -303,14 +278,14 @@ class AdminController extends BaseAdminController
 	{
 		// Get the comment
 		$em   = $this->getDoctrine()->getEntityManager();
-		$comment = $em->getRepository('ThreadAndMirrorBlogBundle:Comment')->findOneBy(array('id' => $id, 'deleted' => false));
+		$comment = $this->em->getRepository('ThreadAndMirrorBlogBundle:Comment')->findOneBy(array('id' => $id, 'deleted' => false));
 
 		if ($comment) {
 
 			// Delete the comment if was found
 			$comment->setDeleted(true);
-			$em->persist($comment);
-			$em->flush();
+			$this->em->persist($comment);
+			$this->em->flush();
 
 			// Return the success message
 			$request->getSession()->getFlashBag()->set('success', 'The comment was successfully deleted!');
@@ -319,6 +294,6 @@ class AdminController extends BaseAdminController
 			$request->getSession()->getFlashBag()->set('error', 'The requested comment could not be deleted as it does not exist in the database.');
 		}
 
-		return $this->redirect($this->generateUrl($this->home));
+		return $this->redirect($this->generateUrl('thread_blog_admin_index'));
 	}
 }

@@ -1,18 +1,18 @@
 $(document).ready(function() {
 	
-	if ($('.social-feed').length) {
-		var container = document.querySelector('.social-feed');
+	if ($('.social-circle-feed').length) {
+		var container = document.querySelector('.social-circle-feed');
 		window.packery = new Packery( container, {
-			itemSelector: 'figure',
+			itemSelector: '.social-circle-feed__post',
 			layoutMode: 'meticulous',
-			columnWidth: 'figure.text-post'
+			columnWidth: '.social-circle-feed__post--1x1'
         });
 	}
 	
 	/**
 	 * Add to my social circle
      */
-	$('.social-feed').on('click', '.add-to-my-circle', function(e) {
+	$('.social-circle-feed').on('click', '.add-to-my-circle', function(e) {
 		e.preventDefault();
 		var button = $(this);
 

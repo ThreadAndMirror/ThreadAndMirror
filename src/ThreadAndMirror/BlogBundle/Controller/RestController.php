@@ -3,7 +3,9 @@
 namespace ThreadAndMirror\BlogBundle\Controller;
 
 use Stems\CoreBundle\Controller\BaseRestController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use ThreadAndMirror\BlogBundle\Entity\Post;
 use ThreadAndMirror\BlogBundle\Entity\Section;
 use ThreadAndMirror\BlogBundle\Entity\SectionProductGalleryProduct;
 use ThreadAndMirror\BlogBundle\Form\SectionProductGalleryProductType;
@@ -12,6 +14,9 @@ use Stems\MediaBundle\Form\ImageType;
 use ThreadAndMirror\BlogBundle\Entity\Comment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * @Route("/rest/blog", name="thread_blog_rest")
+ */
 class RestController extends BaseRestController
 {
 	/**
@@ -20,7 +25,7 @@ class RestController extends BaseRestController
 	 * @param  integer 	    $offset 	The amount of posts already loaded
 	 * @param  integer 	    $chunk 		The maximum amount of posts to get
 	 *
-	 * @Route("/rest/blog/get-more-posts/{offset}", name="thread_blog_rest_more_posts")
+	 * @Route("/get-more-posts/{offset}", name="thread_blog_rest_more_posts")
 	 */
 	public function getMorePostsAction($offset = 6, $chunk = 6)
 	{
@@ -106,6 +111,8 @@ class RestController extends BaseRestController
 	 *
 	 * @param  integer 	$type 	Section type id
 	 * @return JsonResponse
+	 *
+	 * @Route("/add-section-type/{type}", name="thread_blog_rest_add_section_type")
 	 */
 	public function addSectionTypeAction($type)
 	{
@@ -170,13 +177,15 @@ class RestController extends BaseRestController
 	 *
 	 * @param  integer 		$id 		The ID of the Product Gallery Section to add the image to
 	 * @param  Request 		$request
+	 *
 	 * @return JsonResponse
+	 *
+	 * @Route("/set-feature-image/{id}", name="thread_blog_rest_popup_set_featureimage")
 	 */
-	public function setFeatureImageAction($id, Request $request)
+	public function setFeatureImageAction(Post $post, Request $request)
 	{
 		// Get the blog post and existing image
 		$em    = $this->getDoctrine()->getManager();
-		$post  = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->find($id);
 
 		if ($post->getImage()) {
 			$image = $em->getRepository('StemsMediaBundle:Image')->find($post->getImage());

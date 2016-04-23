@@ -45,14 +45,21 @@ $(document).ready(function() {
 		originator.css('width', buttonWidth);
 		originator.html('<i class="fa fa-circle-o-notch fa-spin"></i>');
 
-		$.get('/admin/blog/rest/add-section-type/'+$(this).data('type-id')).done(function(data) {
+		$.get(originator.attr('href')).done(function(data) {
 			var section = $(data.html);
 
             intiliaseDraggable(section);
 
 			$('.layout-editor').append(section);
 			originator.html(buttonText);
-            section.css('top', $('.layout-editor').css('height'));
+
+            // Snap the new height to the nearest 15 pixels
+            var newTop = $('.layout-editor').height();
+            var remainder = newTop % 15;
+
+            newTop += 15 - remainder;
+
+            section.css('top', newTop + 'px');
             section.find('.section-y').val(section.position().top);
             updateLayoutEditorHeight();
 		});

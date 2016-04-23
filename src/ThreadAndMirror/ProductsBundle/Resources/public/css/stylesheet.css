@@ -22,8 +22,8 @@ body, img, p, h1, h2, h3, h4, h5, h6, div, span, form, hr {
 }
 
 ul, li {
-	padding: 0;
-	margin: 0;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -35,6 +35,13 @@ body {
 	font-size: 14px;
     line-height: 20px;
 	overflow-x: hidden;
+}
+
+@media (max-width : 960px) {
+    body {
+        font-size: 3.5vw;
+        line-height: 150%;
+    }
 }
 
 p {
@@ -441,13 +448,7 @@ div+.pagination {
 
 /* --- LAYOUT - RESPONSIVE COVER --- */
 
-/*.layout-responsive-cover {*/
-	/*padding-top: 30px;*/
-/*}*/
 
-.layout-responsive-cover h1 {
-	border-bottom: none;
-}
 
 /* --- LAYOUT - MAGAZINE --- */
 
@@ -2177,313 +2178,36 @@ p.introduction {
 
 /* --- SOCIAL FEEDS --- */
 
-.social-controls > p {
-	text-align: center;
-	padding: 20px;
-}
 
-.social-controls > div.options {
-	width:458px;
-	height: 113px;
-	margin: 10px;
-	border: 1px solid rgba(16,16,16,0.4);
-	position: relative;
-	float: left;
-}
 
-.social-controls > div.options > h5 {
-	border-top: none !important;
-	margin: 0 !important;
-	font-size: 14px !important;
-	color: black;
-	position: relative;
-	width: 100%;
-	top: -9px;
-	text-align: center;
-	text-transform: uppercase;
-	font-weight: 200;
-	letter-spacing: 2px;
-	z-index: 5;
-}
+/*.social-feed {*/
+	/*width: 960px;*/
+	/*margin: 10px 0 30px 0;*/
+/*}*/
 
-.social-controls > div.options > h5 > span {
-	background: #FFFFFF;
-	padding: 0 5px;
-	line-height: 18px;
-	top: 0;
-	left: 0;
-	position: relative;
-}
+/*.social-feed figure {*/
+	/*margin: 10px;*/
+	/*width: 300px;*/
+	/*position: relative;*/
+/*}*/
 
-.social-controls ul {
-	list-style: none;
-}
+/*.social-feed figure > a {*/
+	/*position: absolute;*/
+	/*top: 0;*/
+	/*left: 0;*/
+	/*height: 100%;*/
+	/*width: 100%;*/
+/*}*/
 
-.social-controls ul li {
-	float: left;
-}
+/*.social-feed figure figcaption p {*/
+	/*padding: 20px;*/
+	/*font-size: 14px;*/
+	/*margin: 0;*/
+	/*color: #FFFFFF;*/
+/*}*/
 
-.social-controls ul li a {
-	display: block;
-	width: 123px;
-	padding: 5px;
-	text-transform: uppercase;
-	text-align: center
-}
 
-.social-controls ul li a i {
-	font-size: 36px !important;
-	line-height: 48px !important;
-}
 
-.source-links ul li a {
-	width: 188px;
-}
-
-.social-feed {
-	width: 960px;
-	margin: 10px 0 30px 0;
-}
-
-.social-feed figure {
-	margin: 10px;
-	width: 300px;
-	position: relative;
-}
-
-.social-feed figure > a {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-}
-
-.social-feed figure figcaption p {
-	padding: 20px;
-	font-size: 14px;
-	margin: 0;
-	color: #FFFFFF;
-}
-
-.layout-responsive-cover .social-controls {
-	margin: 0 auto;
-}
-
-.layout-responsive-cover .social-controls .options {
-	width: 100%;
-	height: 80px;
-	border: none;
-	border-top: 1px solid #DDDDDD;
-	margin: 0;
-	position: relative;
-	text-align: center;
-}
-
-.layout-responsive-cover .social-controls .source-links {
-	height: 100px;
-}
-
-.layout-responsive-cover .social-controls p {
-	padding: 10px 0 20px 0;
-}
-
-.layout-responsive-cover .social-controls ul {
-	padding: 0;
-	display: inline-block;
-}
-
-.layout-responsive-cover .social-controls ul li a {
-	padding: 0 20px;
-	line-height: 48px;
-	width: auto;
-}
-
-.layout-responsive-cover .social-controls ul li a i {
-	line-height: 68px !important;
-}
-
-.social-feed {
-	width: 100%;
-	margin: 0;
-}
-
-.social-feed figure {
-	margin: 0px;
-	width: 25%;
-	background: black;
-	overflow: hidden;
-}
-
-.social-feed figure:before {
-	content: "";
-    display: block;
-    padding-top: 100%;
-	position: relative;
-}
-
-.social-feed figure.instagram {
-	width: 50%;
-	/*padding-bottom: 50%;*/
-}
-
-.social-feed figure.portrait:before {
-    padding-top: 200%;
-}
-
-.social-feed figure.landscape {
-    width: 50%;
-}
-
-.social-feed figure.landscape:before {
-    padding-top: 50%;
-}
-
-.social-feed figure.text-post figcaption {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-}
-
-.social-feed figure.text-post figcaption div {
-	width: 100%;
-	height: 100%;
-	display: table;
-}
-
-.social-feed figure.text-post figcaption div p {
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-	padding: 30px;
-	height: 100%;
-	color: #FFFFFF;
-}
-
-.social-feed figure.image-post figcaption {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	opacity: 0;
-	margin: 30px;
-	min-width: 50%;
-	border: 1px solid rgba(16,16,16,0.5);
-	background: rgba(16,16,16,0.8);
-	-webkit-transition: 0.3s cubic-bezier(0.665, 0, 0.43, 1) all;
-	-moz-transition: 0.3s cubic-bezier(0.665, 0, 0.43, 1) all;
-	-ms-transition: 0.3s cubic-bezier(0.665, 0, 0.43, 1) all;
-	-o-transition: 0.3s cubic-bezier(0.665, 0, 0.43, 1) all;
-	transition: 0.3s cubic-bezier(0.665, 0, 0.43, 1) all;
-}
-
-.social-feed figure.image-post:hover figcaption {
-	opacity: 1;
-}
-
-.social-feed figure.image-post figcaption p {
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-	padding: 30px;
-	height: 100%;
-	color: #FFFFFF;
-}
-
-.social-feed figure.image-post figcaption h6 {
-	position: relative;
-
-} 
-
-.social-feed figure.image-post:hover figcaption h6 {
-
-}
-
-.social-feed figure figcaption h6 {
-	position: relative;
-	z-index: 10;
-	height: 36px;
-	margin: 0;
-}
-
-.social-feed figure figcaption h6 {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-}
-
-.social-feed figure figcaption h6 > a.owner {
-	line-height: 30px;
-	font-size: 12px;
-	font-weight: 200;
-	width: auto;
-	background: none;
-	display: block;
-	margin: 0 auto;
-	text-align: center;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	color: #777777;
-}
-
-.social-feed figure figcaption h6 > a.owner:hover {
-	color: #FFFFFF;
-}
-
-.social-feed figure figcaption h6 > a.social,
-.social-feed figure figcaption h6 > a.add-to-my-circle {
-	position: absolute;
-	top: 0;
-	width: 30px;
-	height: 30px;
-	cursor: pointer;
-}
-
-.social-feed figure figcaption h6 > a.social {
-	left: 7;
-}
-
-.social-feed figure figcaption h6 > a.add-to-my-circle {
-	right: 7;
-	text-align: right;
-}
-
-.social-feed figure figcaption h6 > a.add-to-my-circle > i,
-.social-feed figure figcaption h6 > a.social > i {
-	color: #777777;
-	font-size: 16px !important;
-	line-height: 30px !important;
-}
-
-.social-feed figure figcaption h6 > a.add-to-my-circle:hover > i,
-.social-feed figure figcaption h6 > a.social:hover > i {
-	color: #FFFFFF;
-}
-
-.social-feed figure figcaption h6 > a.favourite-feed > i {
-	color: #f93124 !important;
-}
-
-.layout-responsive-cover .social-feed figure > h6:hover {
-	opacity: 1;
-} 
-
-.layout-responsive-cover .social-feed figure.image-post > h6:hover {
-	background: rgba(16, 16, 16, 0.8);
-}
-
-.layout-responsive-cover .social-feed figure > .image {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-repeat: no-repeat;	
-	background-position: center center;
-	background-size: cover;
-}
 
 /* --- ACCOUNT --- */
 

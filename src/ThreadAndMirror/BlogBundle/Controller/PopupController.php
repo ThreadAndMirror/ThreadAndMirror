@@ -2,14 +2,17 @@
 
 namespace ThreadAndMirror\BlogBundle\Controller;
 
-use Stems\CoreBundle\Controller\BaseRestController,
-	Symfony\Component\HttpFoundation\Request,
-	ThreadAndMirror\BlogBundle\Entity\SectionProductGalleryProduct,
-	ThreadAndMirror\BlogBundle\Form\SectionProductGalleryProductType,
-	Stems\MediaBundle\Entity\Image,
-	Stems\MediaBundle\Form\ImageType;
+use Stems\CoreBundle\Controller\BaseRestController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Stems\MediaBundle\Entity\Image;
+use ThreadAndMirror\BlogBundle\Entity\Post;
 
-
+/**
+ * @Route("/popup/blog", name="thread_blog_popup")
+ */
 class PopupController extends BaseRestController
 {
 	/**
@@ -17,13 +20,15 @@ class PopupController extends BaseRestController
 	 *
 	 * @param  integer 		$id 	The ID of the blog post
 	 * @param  Request
+	 *
 	 * @return JsonResponse
+	 *
+	 * @Route("/set-feature-image/{id}", name="thread_blog_popup_set_feature_image")
 	 */
-	public function setFeatureImageAction($id, Request $request)
+	public function setFeatureImageAction(Post $post, Request $request)
 	{
 		// Get the blog post and existing image
-		$em    = $this->getDoctrine()->getManager();
-		$post  = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->find($id);
+		$em = $this->getDoctrine()->getManager();
 
 		if ($post->getImage()) {
 			$image = $em->getRepository('StemsMediaBundle:Image')->find($post->getImage());

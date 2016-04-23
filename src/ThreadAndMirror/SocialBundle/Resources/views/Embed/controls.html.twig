@@ -1,20 +1,22 @@
-<div class="social-controls">
-	<p>Style and beauty social media from across the web, in one place.</p>
-	<div class="source-links options">
-		<h5><span>Filter by Social Network</span></h5>
-		<ul>
-			<li><a href="/social/instagram"><i class="fa fa-fw fa-instagram"></i></a></li>
-			<li><a href="/social/twitter"><i class="fa fa-fw fa-twitter"></i></a></li>
-			{# <li><a href="/social/tumblr"><i class="fa fa-fw fa-tumblr"></i></a></li> #}
-			{# <li><a href="/social/pinterest"><i class="fa fa-fw fa-pinterest"></i></a></li> #}
-			{# <li><a href="/social/facebook"><i class="fa fa-fw fa-facebook"></i> Facebook</a></li> #}
+<div class="social-circle-controls">
+	<p class="social-circle-controls__intro">Style and beauty social media from across the web, in one place.</p>
+	<div class="social-circle-controls__filters-wrapper social-circle-controls__filters-wrapper--sources">
+		<h5 class="social-circle-controls__filters-title"><span class="social-circle-controls__filters-title-padding">Filter by Social Network</span></h5>
+		<ul class="social-circle-controls__filters-list social-circle-controls__filters-list--sources container">
+            {% for source in ['instagram', 'twitter'] %}
+                <li class="social-circle-controls__filters-item social-circle-controls__filters-item--sources">
+                    <a class="social-circle-controls__filters-item-link social-circle-controls__filters-item-link--sources" href="{{ path('thread_social_front_source', { source: source }) }}"><i class="fa fa-fw fa-{{ source }}"></i></a>
+                </li>
+            {% endfor %}
 		</ul>
 	</div>
-	<div class="category-links options">
-		<h5><span>Filter by Category</span></h5>
-		<ul>
+	<div class="social-circle-controls__filters-wrapper social-circle-controls__filters-wrapper--categories">
+		<h5 class="social-circle-controls__filters-title"><span class="social-circle-controls__filters-title-padding">Filter by Category</span></h5>
+		<ul class="social-circle-controls__filters-list social-circle-controls__filters-list--categories container">
 			{% for category,name in categories %}
-				<li><a href="/social/category/{{ category }}">{{ name }}</a></li>
+                <li class="social-circle-controls__filters-item social-circle-controls__filters-item--categories col-xs-6 col-sm-4">
+                    <a class="social-circle-controls__filters-item-link social-circle-controls__filters-item-link--categories" href="{{ path('thread_social_front_category', { category: category }) }}">{{ name }}</a>
+                </li>
 			{% endfor %}
 		</ul>
 	</div>
