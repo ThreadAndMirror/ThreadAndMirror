@@ -31,6 +31,10 @@
     padding: 0 100px;
 }
 
+.section-product-gallery-feature--preview {
+     z-index: 0;
+     position: relative;
+ }
 
 .section-product-gallery-feature__feature-image {
     height: 400px;

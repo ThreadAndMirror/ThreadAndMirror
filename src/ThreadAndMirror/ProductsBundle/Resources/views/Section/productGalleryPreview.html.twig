@@ -1,11 +1,13 @@
-<div class="product-gallery gallery-layout-feature section-product-gallery-{{ form.vars.value.style }}">
+<div class="product-gallery gallery-layout-feature section-product-gallery-{{ form.vars.value.style }} section-product-gallery-{{ form.vars.value.style }}--preview">
     {% if form.vars.value.style == 'feature' %}
-        <button class="section-product-gallery-feature__prev prev"><i class="fa fa-angle-left"></i></button>
-        <button class="section-product-gallery-feature__next next"><i class="fa fa-angle-right"></i></button>
+        {% if section.heading is not empty %}<h2>{{ section.heading }}</h2>{% endif %}
+        <p>{{ section.caption|raw }}</p>
+        <button class="section-product-gallery-feature__prev section-product-gallery-feature__prev--col-{{ link.span }} prev"><i class="fa fa-angle-left"></i></button>
+        <button class="section-product-gallery-feature__next section-product-gallery-feature__next--col-{{ link.span }} next"><i class="fa fa-angle-right"></i></button>
         <div class="section-product-gallery-feature__feature-image">
             {% for product in form.vars.value.products %}
                 <div class="section-product-gallery-feature__product" {% if loop.index != 1 %}style="display:none"{% endif %} data-image="{{ loop.index }}">
-                    <img src="{{ product.image }}" height="400" alt="{{ product.heading }} {{ product.caption }}" />
+                    <img src="{{ product.image }}" height="400" alt="{{ product.heading }} {{ product.caption }}" class="section-product-gallery-feature__product-image" />
                     <div class="section-product-gallery-feature__caption">
                         {% if product.heading is not empty %}<h3 class="section-product-gallery-feature__caption-heading">{{ product.heading }}</h3>{% endif %}
                         {% if product.caption is not empty %}<p class="section-product-gallery-feature__caption-subheading">{{ product.caption }}</p>{% endif %}

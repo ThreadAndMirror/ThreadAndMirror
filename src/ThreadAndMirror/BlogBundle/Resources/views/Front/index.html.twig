@@ -17,7 +17,7 @@
             {% for post in posts %}
                 {% include 'ThreadAndMirrorBlogBundle:Rest:post.html.twig' %}
             {% endfor %}
-            <div class="rest-load-more" data-url="{{ path('thread_blog_rest_more_posts') }}/" data-offset="6"></div>
+            <div class="rest-load-more" data-url="{{ path('thread_blog_rest_more_posts', { offset: 'offset' }) }}" data-offset="6"></div>
         </div>
     </div>
 {% endblock %}

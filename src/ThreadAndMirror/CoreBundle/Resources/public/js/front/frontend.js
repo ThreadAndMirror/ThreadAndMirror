@@ -281,7 +281,7 @@ $(document).ready(function() {
 				currently_loading = true;
 
 				// do the rest request to the url determined by the buffer element
-				$.get(loader_buffer.data('url')+total_loaded).done(function(data) {
+                $.get(loader_buffer.data('url').replace('offset', total_loaded)).done(function(data) {
 
 					// update the list length data
 					loader_buffer.data('offset', total_loaded+chunk_size);

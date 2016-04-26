@@ -25,7 +25,7 @@ class FrontController extends BaseFrontController
 		return [
 			'posts'        => $posts,
 			'categories'   => $this->container->getParameterBag()->get('threadandmirror.social.feed_categories'),
-			'loadMorePath' => $this->generateUrl('thread_social_rest_more_posts', ['source' => 'all'])
+			'loadMorePath' => $this->generateUrl('thread_social_rest_more_posts', ['source' => 'all', 'offset' => 'offset'])
 		];
 	}
 
@@ -46,7 +46,7 @@ class FrontController extends BaseFrontController
 		return [
 			'posts'      => $posts,
 			'categories' => $this->container->getParameterBag()->get('threadandmirror.social.feed_categories'),
-			'loadMorePath' => $this->generateUrl('thread_social_rest_more_posts', ['source' => $source])
+			'loadMorePath' => $this->generateUrl('thread_social_rest_more_posts', ['source' => $source, 'offset' => 'offset'])
 		];
 	}
 
@@ -75,7 +75,7 @@ class FrontController extends BaseFrontController
 			'posts'           => $posts,
 			'categories'      => $categories,
 			'currentCategory' => $category,
-			'loadMorePath'    => $this->generateUrl('thread_social_rest_more_category_posts', ['category' => $category])
+			'loadMorePath'    => $this->generateUrl('thread_social_rest_more_category_posts', ['category' => $category, 'offset' => 'offset'])
 		];
 	}
 
