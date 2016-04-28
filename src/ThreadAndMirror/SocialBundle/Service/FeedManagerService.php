@@ -64,6 +64,8 @@ class FeedManagerService extends ContainerAware
 		$owners   = $this->em->getRepository('ThreadAndMirrorSocialBundle:Feed')->findActiveFeeds('twitter');
 		$existing = $this->em->getRepository('ThreadAndMirrorSocialBundle:Post')->getExistingPostIds();
 
+		echo 'feeds loaded from db: ' . memory_get_usage() . '\n';
+
 		// update via the API for each owner
 		foreach ($owners as $owner) {
 
@@ -75,7 +77,9 @@ class FeedManagerService extends ContainerAware
 
 			// use curl the get their feed data
 			$json = $this->apiRequest($url, $options);
-	   
+
+			echo 'Processing json for ' . $owner->getTwitterHandle() . ': ' . memory_get_usage() . '\n';
+
 			// sometimes twitter won't send the response, so we need to catch it
 			try
 			{
