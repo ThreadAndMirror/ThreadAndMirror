@@ -363,6 +363,48 @@ class RestController extends BaseRestController
 	}
 
 	/**
+	 * Update a product section
+	 *
+	 * @Route("/rest/products/update-product-section/{id}", name="thread_products_rest_update_product_section")
+	 * @Security("has_role('ROLE_ADMIN')")
+	 *
+	 * @param  SectionProduct       $section
+	 * @param  Request
+	 * @return JsonResponse
+	 */
+	public function updateProductSectionAction(SectionProduct $section, Request $request)
+	{
+		$em   = $this->getDoctrine()->getManager();
+		$link = $em->getRepository('ThreadAndMirrorBlogBundle:Section')->findOneBy(['entity' => $section->getId(), 'type' => 'product']);
+		$form = $this->createForm(new SectionProductType($link), $section);
+
+		$form->handleRequest($request);
+
+		// Update the product section
+		$em->persist($section);
+		$em->flush();
+
+		// Get the updated html for the product gallery item and to add to the page
+		$formHtml = $this->renderView('ThreadAndMirrorProductsBundle:Section:productHiddenForm.html.twig', [
+			'form' => $form->createView()
+		]);
+
+		$previewHtml = $this->renderView('ThreadAndMirrorProductsBundle:Section:productPreview.html.twig', [
+			'section' => $section
+		]);
+
+		// Set the meta data for the update callback
+		$meta = [
+			'type'        => 'product',
+			'section'     => $section->getId(),
+			'formHtml'    => $formHtml,
+			'previewHtml' => $previewHtml
+		];
+
+		return $this->addMeta($meta)->setCallback('updateSectionForm')->success()->sendResponse();
+	}
+
+	/**
 	 * Adds a product to a product section using a url
 	 *
 	 * @Route("/rest/products/add-product-to-section/{id}", name="thread_products_rest_add_product_to_section")

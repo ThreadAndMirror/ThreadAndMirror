@@ -7,13 +7,15 @@
 {% block content %}
 	<div class="two-column">
 		<div class="column">
-			<form action="ddd">
+			<form action="{{ path('thread_products_rest_update_product_section', { id: section.id }) }}" method="post">
 				{{ form_row(form.designer) }}
 				{{ form_row(form.name) }}
 				{{ form_row(form.url) }}
 				{{ form_row(form.image) }}
-				{#{{ form_row(form.thumbnail) }}#}
-			</form>
+                <div style="visibility:hidden;">
+                    {{ form_rest(form) }}
+                </div>
+            </form>
 		</div>
 		<div class="column">
 			<label>Image Preview</label>

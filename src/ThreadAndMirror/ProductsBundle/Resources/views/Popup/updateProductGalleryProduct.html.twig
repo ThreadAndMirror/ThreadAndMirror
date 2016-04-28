@@ -7,7 +7,7 @@
 {% block content %}
 	<div class="two-column">
 		<div class="column">
-			<form action="{{ path('thread_products_rest_update_product_gallery_product', { id: product.id }) }}">
+			<form action="{{ path('thread_products_rest_update_product_gallery_product', { id: product.id }) }}" method="post">
 				{{ form_row(form.heading) }}
 				{{ form_row(form.caption) }}
 				{{ form_row(form.url) }}
