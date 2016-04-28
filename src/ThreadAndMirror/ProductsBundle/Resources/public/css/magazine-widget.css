@@ -229,6 +229,7 @@
 
     .magazine-widget__other-article-link {
         background: none;
+        padding: 30px 0;
     }
 
     .magazine-widget__other-article-title--invert, .magazine-widget__other-article-subtitle--invert, .magazine-widget__other-article-excerpt--invert, .magazine-widget__other-article-read-more--invert {

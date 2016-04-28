@@ -94,6 +94,7 @@
         padding: 5vw;
         width: 50vw;
         height: 50vw;
+        display: none;
     }
 
     .social-circle-widget__item:nth-child(1),
