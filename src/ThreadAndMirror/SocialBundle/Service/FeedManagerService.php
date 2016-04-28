@@ -86,7 +86,11 @@ class FeedManagerService extends ContainerAware
 					if (!in_array($tweet->id, $existing)) {
 						$post = new Post('twitter', $tweet);
 						$post->setFeed($owner);
-						$this->em->persist($post);
+
+						// Ignore text tweets
+						if ($post->getImage() !== null) {
+							$this->em->persist($post);
+						}
 					}
 				}
 
