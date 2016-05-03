@@ -86,7 +86,7 @@ class AdminController extends BaseAdminController
 		$this->em->flush();
 
 		// Redirect to the edit page for the new post
-		return $this->redirect($this->generateUrl('stems_admin_blog_edit', array('id' => $post->getId())));
+		return $this->redirect($this->generateUrl('thread_blog_admin_edit', array('id' => $post->getId())));
 	}
 
 	/**
