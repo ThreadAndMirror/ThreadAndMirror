@@ -5,7 +5,6 @@ namespace ThreadAndMirror\ProductsBundle\Service\Crawler;
 use Buzz\Browser;
 use Symfony\Bridge\Monolog\Logger;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
-use ThreadAndMirror\ProductsBundle\Exception\CrawlException;
 use ThreadAndMirror\ProductsBundle\Definition\CrawlerInterface;
 use ThreadAndMirror\ProductsBundle\Exception\ProductParseException;
 

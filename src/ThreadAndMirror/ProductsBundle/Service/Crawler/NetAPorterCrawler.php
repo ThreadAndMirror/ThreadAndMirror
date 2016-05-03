@@ -73,7 +73,7 @@ class NetAPorterCrawler extends AbstractCrawler
 	 */
 	protected function getNow(DomCrawler $crawler)
 	{
-		return $this->getAttributeFromElement($crawler, '#main-product .full-price', 'content');
+		return $this->getAttributeFromElement($crawler, '#main-product nap-price.product-price', 'price');
 	}
 
 	/**

@@ -210,7 +210,7 @@ class NetAPorterFormatter extends AbstractFormatter
 		if (array_key_exists('original', $data)) {
 			$result = $data['original']['gross'] / $data['divisor'];
 		} else {
-			$result = $data['gross'] / $data['divisor'];
+			$result = $data['amount'] / $data['divisor'];
 		}
 
 		$product->setNow($result);
@@ -221,15 +221,15 @@ class NetAPorterFormatter extends AbstractFormatter
 	 */
 	protected function cleanupCrawledWas(Product $product)
 	{
-		$data = json_decode($product->getWas(), true);
-
-		if (array_key_exists('original', $data)) {
-			$result = $data['gross'] / $data['divisor'];
-		} else {
-			$result = null;
-		}
-
-		$product->setWas($result);
+//		$data = json_decode($product->getWas(), true);
+//
+//		if (array_key_exists('original', $data)) {
+//			$result = $data['amount'] / $data['divisor'];
+//		} else {
+//			$result = null;
+//		}
+//
+//		$product->setWas($result);
 	}
 
 	/**
