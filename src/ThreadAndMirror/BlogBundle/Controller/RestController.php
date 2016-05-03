@@ -183,7 +183,7 @@ class RestController extends BaseRestController
 	 *
 	 * @return JsonResponse
 	 *
-	 * @Route("/set-feature-image/{id}", name="thread_blog_rest_popup_set_featureimage")
+	 * @Route("/set-feature-image/{id}", name="thread_blog_rest_set_featureimage")
 	 */
 	public function setFeatureImageAction(Post $post, Request $request)
 	{

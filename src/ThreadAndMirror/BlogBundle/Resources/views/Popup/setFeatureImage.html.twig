@@ -7,7 +7,7 @@
 {% block content %}
 	<div class="two-column">
 		<div class="column">
-			<form action="{{ path('stems_rest_blog_set_featureimage', { id : post.id }) }}" enctype="multipart/form-data">
+			<form action="{{ path('thread_blog_rest_set_featureimage', { id : post.id }) }}" enctype="multipart/form-data">
 				{{ form_row(form.title) }}
 				{{ form_row(form.upload) }}
 				<div class="invisible">
