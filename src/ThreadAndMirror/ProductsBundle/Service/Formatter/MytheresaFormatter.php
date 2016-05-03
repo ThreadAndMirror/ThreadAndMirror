@@ -50,31 +50,31 @@ class MytheresaFormatter extends AbstractFormatter
 		$product->setThumbnails($result);
 	}
 
-	protected function cleanupCrawledAvailableSizes(Product $product) 
-	{
-		$sizes = $product->getAvailableSizes();
-
-		foreach ($sizes as $key => $size) {
-			if (stristr($size, 'wishlist')) {
-				unset($sizes[$key]);
-			}
-		}
-		
-		$product->setAvailableSizes($sizes);
-	}
-
-	protected function cleanupCrawledStockedSizes(Product $product) 
-	{ 
-		$sizes = $product->getStockedSizes();
-
-		foreach ($sizes as $key => $size) {
-			if (stristr($size, 'wishlist')) {
-				$sizes[$key] = $this->format($size)->sheer('-', false)->trim()->result();
-			}
-		}
-
-		$product->setStockedSizes($sizes);
-	}
+//	protected function cleanupCrawledAvailableSizes(Product $product)
+//	{
+//		$sizes = $product->getAvailableSizes();
+//
+//		foreach ($sizes as $key => $size) {
+//			if (stristr($size, 'wishlist')) {
+//				unset($sizes[$key]);
+//			}
+//		}
+//
+//		$product->setAvailableSizes($sizes);
+//	}
+//
+//	protected function cleanupCrawledStockedSizes(Product $product)
+//	{
+//		$sizes = $product->getStockedSizes();
+//
+//		foreach ($sizes as $key => $size) {
+//			if (stristr($size, 'wishlist')) {
+//				$sizes[$key] = $this->format($size)->sheer('-', false)->trim()->result();
+//			}
+//		}
+//
+//		$product->setStockedSizes($sizes);
+//	}
 
 	protected function cleanupCrawledStyleWith(Product $product) 
 	{ 

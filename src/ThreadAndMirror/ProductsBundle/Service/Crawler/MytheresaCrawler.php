@@ -25,19 +25,14 @@ class MytheresaCrawler extends AbstractCrawler
 		// }
 	}
 
-	protected function getUrl(DomCrawler $crawler)
-	{
-		return $this->getHrefFromElement($crawler, '.breadcrumbs li.product a');
-	}
-
 	protected function getName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, '.product-name h1');
+		return $this->getTextFromElement($crawler, '.product-name span');
 	}
 
 	protected function getBrandName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, '.designer-link');
+		return $this->getTextFromElement($crawler, '.product-designer span a');
 	}
 
 	protected function getCategoryName(DomCrawler $crawler) 
@@ -47,12 +42,12 @@ class MytheresaCrawler extends AbstractCrawler
 
 	protected function getPid(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, 'h3.sku-number');
+			return $this->getTextFromElement($crawler, '.product-sku .h1');
 	}
 
 	protected function getDescription(DomCrawler $crawler)
 	{
-		return $this->getTextFromElement($crawler, '.product-collateral .overview h5');
+		return $this->getTextFromElement($crawler, '.product-description');
 	}
 
 	protected function getNow(DomCrawler $crawler) 
@@ -67,28 +62,28 @@ class MytheresaCrawler extends AbstractCrawler
 
 	protected function getImages(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#main-image-image');
+		return $this->getSrcFromList($crawler, '.product-image-gallery img');
 	}
 
 	protected function getPortraits(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#main-image-image');
+		return $this->getSrcFromList($crawler, '.product-image-gallery img');
 	}
 
 	protected function getThumbnails(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '#main-image-image');
+		return $this->getSrcFromList($crawler, '.product-image-gallery img');
 	}
 
-	protected function getAvailableSizes(DomCrawler $crawler) 
-	{
-		return $this->getTextFromList($crawler, 'ul.sizes li a');
-	}
-
-	protected function getStockedSizes(DomCrawler $crawler) 
-	{
-		return $this->getTextFromList($crawler, 'ul.sizes li a');
-	}
+//	protected function getAvailableSizes(DomCrawler $crawler)
+//	{
+//		return $this->getTextFromList($crawler, 'ul.sizes li a');
+//	}
+//
+//	protected function getStockedSizes(DomCrawler $crawler)
+//	{
+//		return $this->getTextFromList($crawler, 'ul.sizes li a');
+//	}
 
 	protected function getStyleWith(DomCrawler $crawler) 
 	{
