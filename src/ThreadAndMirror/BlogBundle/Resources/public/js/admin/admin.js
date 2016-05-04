@@ -102,7 +102,7 @@ $(document).ready(function() {
 
         e.preventDefault();
         var className = 'col-' + $(this).text();
-        $(this).closest('section').removeClass('col-1 col-2').addClass(className).find('.section-span').val($(this).text());
+        $(this).closest('section').removeClass('col-1 col-2 col-3 col-4').addClass(className).find('.section-span').val($(this).text());
 
         updateLayoutEditorHeight();
     });
