@@ -5,6 +5,7 @@ namespace ThreadAndMirror\BlogBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Snc\RedisBundle\Doctrine\Cache\RedisCache;
 use Redis;
+use ThreadAndMirror\BlogBundle\Entity\Post;
 
 class PostRepository extends EntityRepository
 {
@@ -130,5 +131,61 @@ class PostRepository extends EntityRepository
 		$cache->setRedis(new Redis());
 
 		return $cache;
+	}
+
+	/**
+	 * Get the next post of the same category
+	 *
+	 * @param Post $post
+	 *
+	 * @return Post
+	 */
+	public function findNextPostInCategory(Post $post)
+	{
+		$qb = $this->getEntityManager()->createQueryBuilder();
+
+		$qb->addSelect('post');
+		$qb->from('ThreadAndMirrorBlogBundle:Post', 'post');
+		$qb->innerJoin('post.category', 'category');
+		$qb->where('post.deleted = :deleted');
+		$qb->andWhere('post.status = :status');
+		$qb->andWhere('post.published > :published');
+		$qb->andWhere('category.slug = :category');
+		$qb->orderBy('post.published', 'ASC');
+
+		$qb->setParameter('deleted', '0');
+		$qb->setParameter('status', 'Published');
+		$qb->setParameter('category', $post->getCategory());
+		$qb->setParameter('published', $post->getPublished());
+
+		return $qb->getQuery()->getFirstResult();
+	}
+
+	/**
+	 * Get the previous post of the same category
+	 *
+	 * @param Post $post
+	 *
+	 * @return Post
+	 */
+	public function findNextPreviousInCategory(Post $post)
+	{
+		$qb = $this->getEntityManager()->createQueryBuilder();
+
+		$qb->addSelect('post');
+		$qb->from('ThreadAndMirrorBlogBundle:Post', 'post');
+		$qb->innerJoin('post.category', 'category');
+		$qb->where('post.deleted = :deleted');
+		$qb->andWhere('post.status = :status');
+		$qb->andWhere('post.published < :published');
+		$qb->andWhere('category.slug = :category');
+		$qb->orderBy('post.published', 'DESC');
+
+		$qb->setParameter('deleted', '0');
+		$qb->setParameter('status', 'Published');
+		$qb->setParameter('category', $post->getCategory());
+		$qb->setParameter('published', $post->getPublished());
+
+		return $qb->getQuery()->getFirstResult();
 	}
 }
