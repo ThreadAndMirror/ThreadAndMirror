@@ -1,9 +1,26 @@
 services:
 
     # Forms
+
     threadandmirror.blog.form.type.comment:
         class: ThreadAndMirror\BlogBundle\Form\CommentType
         arguments: 
             login: %threadandmirror.blog.comments.require_login%
         tags:
             - { name: form.type, alias: blog_comment_type }
+
+    # Repositories
+
+    threadandmirror.blog.repository.post:
+        class:           ThreadAndMirror\BlogBundle\Repository\PostRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method:  getRepository
+        arguments:
+            - ThreadAndMirror\BlogBundle\Entity\Post
+
+    # Services
+
+    threadandmirror.blog.service.post:
+        class: ThreadAndMirror\BlogBundle\Service\PostService
+        arguments:
+            - @threadandmirror.blog.repository.post

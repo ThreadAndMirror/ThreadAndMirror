@@ -150,7 +150,7 @@ class PostRepository extends EntityRepository
 		$qb->where('post.deleted = :deleted');
 		$qb->andWhere('post.status = :status');
 		$qb->andWhere('post.published > :published');
-		$qb->andWhere('category.slug = :category');
+		$qb->andWhere('category = :category');
 		$qb->orderBy('post.published', 'ASC');
 
 		$qb->setParameter('deleted', '0');
@@ -158,7 +158,9 @@ class PostRepository extends EntityRepository
 		$qb->setParameter('category', $post->getCategory());
 		$qb->setParameter('published', $post->getPublished());
 
-		return $qb->getQuery()->getFirstResult();
+		$result = $qb->getQuery()->setMaxResults(1)->getResult();
+
+		return count($result) > 0 ? $result[0] : null;
 	}
 
 	/**
@@ -168,7 +170,7 @@ class PostRepository extends EntityRepository
 	 *
 	 * @return Post
 	 */
-	public function findNextPreviousInCategory(Post $post)
+	public function findPreviousPostInCategory(Post $post)
 	{
 		$qb = $this->getEntityManager()->createQueryBuilder();
 
@@ -178,7 +180,7 @@ class PostRepository extends EntityRepository
 		$qb->where('post.deleted = :deleted');
 		$qb->andWhere('post.status = :status');
 		$qb->andWhere('post.published < :published');
-		$qb->andWhere('category.slug = :category');
+		$qb->andWhere('category = :category');
 		$qb->orderBy('post.published', 'DESC');
 
 		$qb->setParameter('deleted', '0');
@@ -186,6 +188,8 @@ class PostRepository extends EntityRepository
 		$qb->setParameter('category', $post->getCategory());
 		$qb->setParameter('published', $post->getPublished());
 
-		return $qb->getQuery()->getFirstResult();
+		$result = $qb->getQuery()->setMaxResults(1)->getResult();
+
+		return count($result) > 0 ? $result[0] : null;
 	}
 }

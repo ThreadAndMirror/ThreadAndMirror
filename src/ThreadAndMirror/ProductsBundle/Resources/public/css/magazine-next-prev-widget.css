@@ -1,0 +1,105 @@
+.magazine-next-prev-widget {
+    background: white;
+}
+
+.magazine-next-prev-widget__article {
+    padding: 30px 0;
+}
+
+.magazine-next-prev-widget__intro {
+    opacity: 0.3;
+}
+
+.magazine-next-prev-widget__link {
+    display: block;
+}
+
+.magazine-next-prev-widget__link:hover {
+    color: black;
+}
+
+.magazine-next-prev-widget__title {
+    font-size: 28px;
+    letter-spacing: -1.5px;
+}
+
+.magazine-next-prev-widget__title-block {
+    height: 240px;
+    display: table;
+    width: 100%;
+}
+
+.magazine-next-prev-widget__title-align {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.magazine-next-prev-widget__subtitle {
+    font-size: 16px;
+    line-height: 120%;
+    margin-top: 8px;
+}
+
+.magazine-next-prev-widget__excerpt {
+    margin: 15px 0;
+    font-size: 13px;
+    line-height: 150%;
+    font-weight: 400;
+}
+
+.magazine-next-prev-widget__image {
+    height: 210px;
+    border-radius: 50%;
+    margin: 15px 0;
+}
+
+@media only screen and (max-width : 960px) {
+
+    .magazine-next-prev-widget__title-block {
+        padding: 10vw 0 0;
+        height: auto;
+    }
+
+    .magazine-next-prev-widget__image {
+        margin-left: 0;
+        margin-top: 0;
+        height: 80vw;
+        width: 80vw;
+        border-radius: 100%;
+    }
+
+    .magazine-next-prev-widget__excerpt {
+        margin: 5vw 0 0;
+        font-size: 4vw;
+        line-height: 130%;
+        height: auto;
+        padding: 5vw 0;
+    }
+
+    .magazine-next-prev-widget__link {
+        background: none;
+        padding: 30px 0;
+    }
+
+    .magazine-next-prev-widget__title--invert, .magazine-next-prev-widget__subtitle--invert, .magazine-next-prev-widget__excerpt--invert, .magazine-next-prev-widget__read-more--invert {
+        color: white;
+    }
+
+    .magazine-next-prev-widget__read-more--invert {
+        border-color: white;
+    }
+
+    .magazine-next-prev-widget__subtitle, .magazine-next-prev-widget__subtitle {
+        font-size: 5vw;
+    }
+
+    .magazine-next-prev-widget__subtitle {
+        margin-top: 2vw;
+        font-size: 5vw;
+    }
+
+    .magazine-next-prev-widget__title {
+        font-size: 9vw;
+        letter-spacing: -0.4vw;
+    }
+}

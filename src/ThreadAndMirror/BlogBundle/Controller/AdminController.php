@@ -131,7 +131,7 @@ class AdminController extends BaseAdminController
 				// Order the sections, attached to the page and save their values
 				$position = 1;
 
-				foreach ($request->get('sections') as $section) {
+				foreach ($request->get('sections', []) as $section) {
 					
 					// Attach and update order
 					$sectionEntity = $this->em->getRepository('ThreadAndMirrorBlogBundle:Section')->find($section);

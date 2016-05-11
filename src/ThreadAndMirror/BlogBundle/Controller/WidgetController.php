@@ -3,9 +3,8 @@
 namespace ThreadAndMirror\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use ThreadAndMirror\BlogBundle\Entity\Post;
 
 class WidgetController extends Controller
 {
@@ -77,5 +76,25 @@ class WidgetController extends Controller
 		return $this->render('ThreadAndMirrorBlogBundle:Widget:homepageFeature.html.twig', array(
 			'posts' 	=> $posts,
 		));
+	}
+
+	/**
+	 * Render a block that contains CTAs for next and previous posts in the category of the given article
+	 *
+	 * @param Post $post
+	 *
+	 * @Template()
+	 */
+	public function nextAndPreviousPostsAction(Post $post)
+	{
+		$postService = $this->get('threadandmirror.blog.service.post');
+
+		$next = $postService->getNextPostInCategory($post);
+		$prev = $postService->getPreviousPostInCategory($post);
+
+		return [
+			'next' => $next,
+			'prev' => $prev
+		];
 	}
 }
