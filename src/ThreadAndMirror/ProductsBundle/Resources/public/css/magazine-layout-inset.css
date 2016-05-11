@@ -1,6 +1,5 @@
 
 .magazine-layout-inset {
-    padding-bottom: 30px;
     background: #dddddd; /* Old browsers */
     background: -moz-linear-gradient(left,  #dddddd 0%, #ffffff 40%,#ffffff 60%, #dddddd 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(left,  #dddddd 0%,#ffffff 40%,#ffffff 60%, #dddddd 100%); /* Chrome10-25,Safari5.1-6 */
