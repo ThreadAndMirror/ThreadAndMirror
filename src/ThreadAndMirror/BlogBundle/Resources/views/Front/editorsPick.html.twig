@@ -69,6 +69,7 @@
 
             {#</div>#}
         </div>
+        {{ render(controller('ThreadAndMirrorBlogBundle:Widget:nextAndPreviousPosts', { post: post })) }}
     </div>
 {% endblock %}
 
