@@ -74,6 +74,6 @@
             {#</div>#}
             {#</div>#}
         </div>
-        {{ render(controller('ThreadAndMirrorBlogBundle:Widget:nextAndPreviousPosts', { post: post })) }}
+        {{ render(controller('ThreadAndMirrorBlogBundle:Widget:nextAndPreviousPosts', { post: post, route: 'thread_blog_front_article' })) }}
     </div>
 {% endblock %}

@@ -81,11 +81,12 @@ class WidgetController extends Controller
 	/**
 	 * Render a block that contains CTAs for next and previous posts in the category of the given article
 	 *
-	 * @param Post $post
+	 * @param Post      $post
+	 * @param string    $route
 	 *
 	 * @Template()
 	 */
-	public function nextAndPreviousPostsAction(Post $post)
+	public function nextAndPreviousPostsAction(Post $post, $route)
 	{
 		$postService = $this->get('threadandmirror.blog.service.post');
 
@@ -93,8 +94,9 @@ class WidgetController extends Controller
 		$prev = $postService->getPreviousPostInCategory($post);
 
 		return [
-			'next' => $next,
-			'prev' => $prev
+			'next'  => $next,
+			'prev'  => $prev,
+			'route' => $route
 		];
 	}
 }
