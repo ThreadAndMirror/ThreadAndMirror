@@ -4,40 +4,14 @@ namespace ThreadAndMirror\ProductsBundle\Service\Crawler;
 
 class StylebopCrawler extends AbstractCrawler
 {
-	protected function getExpired(DomCrawler $crawler) 
-	{
-		// Page not found
-		// try {
-		// 	if ($this->getTextFromElement($crawler, '#breadcrumb > ul > li > a', 'last') === 'Page Not Found') {
-		// 		return true;
-		// 	} else {
-		// 		return false;
-		// 	}
-		// } catch (\Exception $e) { }
-		
-		// // Redirected back to category page
-		// try {
-		// 	if ($this->getTextFromElement($crawler, '.filteroptions') !== null) {
-		// 		return true;
-		// 	}
-		// } catch (\Exception $e) {
-			return false;
-		// }
-	}
-
-	protected function getUrl(DomCrawler $crawler)
-	{
-		return $this->getHrefFromElement($crawler, '.breadcrumbCenter li:last-child a');
-	}
-
 	protected function getName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, '#productInfo > span');
+		return $this->getTextFromElement($crawler, '.productInfo span');
 	}
 
 	protected function getBrandName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, '#productInfo .caption_designer');
+		return $this->getTextFromElement($crawler, '.productInfo .caption_designer');
 	}
 
 	protected function getCategoryName(DomCrawler $crawler) 
@@ -47,12 +21,12 @@ class StylebopCrawler extends AbstractCrawler
 
 	protected function getPid(DomCrawler $crawler)
 	{
-		return $this->getValueFromElement($crawler, '#shoppingbagForm input[name="pid"]');
+		return $this->getValueFromElement($crawler, '.productcode span');
 	}
 
 	protected function getDescription(DomCrawler $crawler)
 	{
-		return $this->getTextFromList($crawler, '#product_details_data tr td:nth-child(2)');
+		return $this->getTextFromList($crawler, '.product_details_table .productlisting');
 	}
 
 	protected function getNow(DomCrawler $crawler) 
@@ -82,12 +56,12 @@ class StylebopCrawler extends AbstractCrawler
 
 	protected function getAvailableSizes(DomCrawler $crawler) 
 	{
-		return $this->getTextFromList($crawler, '#product_size select option');
+		return $this->getTextFromList($crawler, '#product_size .size-item');
 	}
 
 	protected function getStockedSizes(DomCrawler $crawler) 
 	{
-		return $this->getTextFromList($crawler, '#product_size select option');
+		return $this->getTextFromList($crawler, '#product_size .size-item');
 	}
 
 	protected function getStyleWith(DomCrawler $crawler) 
