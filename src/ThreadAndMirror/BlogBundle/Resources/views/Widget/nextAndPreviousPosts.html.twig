@@ -1,8 +1,8 @@
 <div class="row magazine-next-prev-widget">
     <div class="container">
         <div class="row">
-            <figure class="magazine-next-prev-widget__article col-sm-6{% if next is empty %} col-sm-offset-3{% endif %}">
-                {% if prev is not empty %}
+            {% if prev is not empty %}
+                <figure class="magazine-next-prev-widget__article col-sm-6{% if next is empty %} col-sm-offset-3{% endif %}">
                     <a class="magazine-next-prev-widget__link" href="{{ path(route, { slug: prev.slug }) }}">
                         <div class="col-sm-12">
                             <p class="title-faded-sans text-center magazine-next-prev-widget__intro">Previous Article</p>
@@ -20,10 +20,10 @@
                             </div>
                         </div>
                     </a>
-                {% endif %}
-            </figure>
-            <figure class="magazine-next-prev-widget__article col-sm-6{% if prev is empty %} col-sm-offset-3{% endif %}">
-                {% if next is not empty %}
+                </figure>
+            {% endif %}
+            {% if next is not empty %}
+                <figure class="magazine-next-prev-widget__article col-sm-6{% if prev is empty %} col-sm-offset-3{% endif %}">
                     <a class="magazine-next-prev-widget__link" href="{{ path(route, { slug: next.slug }) }}">
                         <div class="col-sm-12">
                             <p class="title-faded-sans text-center magazine-next-prev-widget__intro">Next Article</p>
@@ -41,8 +41,8 @@
                             </div>
                         </div>
                     </a>
-                {% endif %}
-            </figure>
+                </figure>
+            {% endif %}
         </div>
     </div>
 </div>
