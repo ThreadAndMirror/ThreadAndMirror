@@ -38,9 +38,9 @@ class FrontController extends BaseFrontController
 	 */
 	public function articleAction(Post $post)
 	{
-		// Redirect to the index if the collection isn't published
+		// Redirect to the index if the article isn't published
 		if ($post->getStatus() !== 'Published' || $post->getCategory()->getSlug() !== 'articles') {
-			$this->redirect($this->generateUrl('thread_blog_front_list'));
+			$this->redirect($this->generateUrl('thread_blog_front_index'));
 		}
 
 		// Prerender the sections, as referencing twig within itself causes a circular reference
@@ -60,9 +60,9 @@ class FrontController extends BaseFrontController
 	 */
 	public function editorsPickAction(Post $post)
 	{
-		// Redirect to the index if the collection isn't published
+		// Redirect to the index if the article isn't published
 		if ($post->getStatus() !== 'Published' || $post->getCategory()->getSlug() !== 'editors-picks') {
-			$this->redirect($this->generateUrl('thread_blog_front_list'));
+			$this->redirect($this->generateUrl('thread_blog_front_index'));
 		}
 
 		// Prerender the sections, as referencing twig within itself causes a circular reference
