@@ -265,10 +265,10 @@ abstract class AbstractFormatter implements FormatterInterface
 	 *
 	 * @param  string 		$delimiter		    The point to perform the sheer
 	 * @param  boolean 		$start 			    Whether the trim from the start of the string, false for the end
-	 * @param  boolean      $discardDelimeter   Whether to discard the delimeter too
+	 * @param  boolean      $discardDelimiter   Whether to discard the delimiter too
 	 * @return self
 	 */
-	protected function sheer($delimiter, $start = true, $discardDelimeter = false)
+	protected function sheer($delimiter, $start = true, $discardDelimiter = false)
 	{	
 		if (is_array($this->subject)) {
 			foreach ($this->subject as $key => $value) {
@@ -276,8 +276,8 @@ abstract class AbstractFormatter implements FormatterInterface
 					if ($start) {
 						$explode = explode($delimiter, $value);
 
-						// Only discard the first segement if the delimeter isn't at the start
-						if (strpos($this->subject, $delimiter) !== 0) {
+						// Only discard the first segment if the delimiter isn't at the start
+						if (strpos($value, $delimiter) !== 0) {
 							unset($explode[0]);
 						}
 
@@ -287,7 +287,7 @@ abstract class AbstractFormatter implements FormatterInterface
 						unset($explode[$length-1]);
 					}
 
-					$this->subject[$key] = $discardDelimeter ? implode('', $explode) : implode($delimiter, $explode);
+					$this->subject[$key] = $discardDelimiter ? implode('', $explode) : implode($delimiter, $explode);
 				}
 			}
 		} else {
@@ -295,7 +295,7 @@ abstract class AbstractFormatter implements FormatterInterface
 				if ($start) {
 					$explode = explode($delimiter, $this->subject);
 
-					// Only discard the first segement if the delimeter isn't at the start
+					// Only discard the first segment if the delimiter isn't at the start
 					if (strpos($this->subject, $delimiter) !== 0) {
 						unset($explode[0]);
 					}
@@ -306,7 +306,7 @@ abstract class AbstractFormatter implements FormatterInterface
 					unset($explode[$length-1]);
 				}
 
-				$this->subject = $discardDelimeter ? implode('', $explode) : implode($delimiter, $explode);
+				$this->subject = $discardDelimiter ? implode('', $explode) : implode($delimiter, $explode);
 			}
 		}
 
@@ -364,10 +364,10 @@ abstract class AbstractFormatter implements FormatterInterface
 
 
 	/**
-	 * Extracts part of a string between two delimeters
+	 * Extracts part of a string between two delimiters
 	 *
-	 * @param  string 		$start			The delimeter at the start of the segement
-	 * @param  string 		$end 			The delimeter at the end of the segement
+	 * @param  string 		$start			The delimiter at the start of the segment
+	 * @param  string 		$end 			The delimiter at the end of the segment
 	 * @return self
 	 */
 	protected function extract($start, $end)
