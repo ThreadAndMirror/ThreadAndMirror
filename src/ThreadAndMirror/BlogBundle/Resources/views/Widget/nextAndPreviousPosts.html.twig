@@ -1,48 +1,36 @@
 <div class="row magazine-next-prev-widget">
     <div class="container">
-        <div class="row">
-            {% if prev is not empty %}
-                <figure class="magazine-next-prev-widget__article col-sm-6{% if next is empty %} col-sm-offset-3{% endif %}">
-                    <a class="magazine-next-prev-widget__link" href="{{ path(route, { slug: prev.slug }) }}">
-                        <div class="col-sm-12">
-                            <p class="title-faded-sans text-center magazine-next-prev-widget__intro">Previous Article</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="magazine-next-prev-widget__image" style="background:url('{{ getMediaImage(prev.image).src|imagine_filter('blog_homepage_circle')  }}') center center; background-size:cover;"></div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="magazine-next-prev-widget__title-block text-center">
-                                <div class="magazine-next-prev-widget__title-align">
-                                    <h2 class="title-large-serif magazine-next-prev-widget__title">{{ prev.title }}</h2>
-                                    <h4 class="title-italic-serif magazine-next-prev-widget__subtitle">{{ prev.subtitle }}</h4>
-                                    <p class="text-center magazine-next-prev-widget__excerpt">{{ prev.excerpt }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </figure>
-            {% endif %}
-            {% if next is not empty %}
-                <figure class="magazine-next-prev-widget__article col-sm-6{% if prev is empty %} col-sm-offset-3{% endif %}">
-                    <a class="magazine-next-prev-widget__link" href="{{ path(route, { slug: next.slug }) }}">
-                        <div class="col-sm-12">
+        {% if next is not empty %}
+            <figure class="magazine-next-prev-widget__article col-sm-6{% if prev is empty %} col-sm-offset-3{% endif %}">
+                <a class="magazine-next-prev-widget__link" href="{{ path(route, { slug: next.slug }) }}">
+                    <div class="magazine-next-prev-widget__background" style="background:url('{{ getMediaImage(next.image).src|imagine_filter('page_banner')  }}') center center; background-size:cover;">
+                    </div>
+                    <div class="magazine-next-prev-widget__title-block text-center">
+                        <div class="magazine-next-prev-widget__title-align">
                             <p class="title-faded-sans text-center magazine-next-prev-widget__intro">Next Article</p>
+                            <h2 class="title-large-serif magazine-next-prev-widget__title">{{ next.title }}</h2>
+                            <h4 class="title-italic-serif magazine-next-prev-widget__subtitle">{{ next.subtitle }}</h4>
+                            <p class="text-center magazine-next-prev-widget__excerpt">{{ next.excerpt }}</p>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="magazine-next-prev-widget__image" style="background:url('{{ getMediaImage(next.image).src|imagine_filter('blog_homepage_circle')  }}') center center; background-size:cover;"></div>
+                    </div>
+                </a>
+            </figure>
+        {% endif %}
+        {% if prev is not empty %}
+            <figure class="magazine-next-prev-widget__article col-sm-6{% if next is not empty %} magazine-next-prev-widget__article--invert{% endif %}{% if next is empty %} col-sm-offset-3{% endif %}">
+                <a class="magazine-next-prev-widget__link{% if next is not empty %} magazine-next-prev-widget__link--invert{% endif %}" href="{{ path(route, { slug: prev.slug }) }}">
+                    <div class="magazine-next-prev-widget__background" style="background:url('{{ getMediaImage(prev.image).src|imagine_filter('page_banner')  }}') center center; background-size:cover;">
+                    </div>
+                    <div class="magazine-next-prev-widget__title-block text-center">
+                        <div class="magazine-next-prev-widget__title-align">
+                            <p class="title-faded-sans text-center magazine-next-prev-widget__intro">Previous Article</p>
+                            <h2 class="title-large-serif magazine-next-prev-widget__title">{{ prev.title }}</h2>
+                            <h4 class="title-italic-serif magazine-next-prev-widget__subtitle">{{ prev.subtitle }}</h4>
+                            <p class="text-center magazine-next-prev-widget__excerpt">{{ prev.excerpt }}</p>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="magazine-next-prev-widget__title-block text-center">
-                                <div class="magazine-next-prev-widget__title-align">
-                                    <h2 class="title-large-serif magazine-next-prev-widget__title">{{ next.title }}</h2>
-                                    <h4 class="title-italic-serif magazine-next-prev-widget__subtitle">{{ next.subtitle }}</h4>
-                                    <p class="text-center magazine-next-prev-widget__excerpt">{{ next.excerpt }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </figure>
-            {% endif %}
-        </div>
+                    </div>
+                </a>
+            </figure>
+        {% endif %}
     </div>
 </div>

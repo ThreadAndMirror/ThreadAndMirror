@@ -1,25 +1,42 @@
 .magazine-next-prev-widget {
-    background: white;
+    padding-bottom: 30px;
 }
 
 .magazine-next-prev-widget__article {
-    padding: 30px 0;
+    padding: 0;
+    color: white;
+    position: relative;
 }
 
-.magazine-next-prev-widget__intro {
-    opacity: 0.3;
+.magazine-next-prev-widget__background {
+    -webkit-filter: blur(7px);
+    -moz-filter: blur(7px);
+    -o-filter: blur(7px);
+    -ms-filter: blur(7px);
+    filter: blur(7px);
+    opacity: .7;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
 }
 
 .magazine-next-prev-widget__link {
     display: block;
+    color: white;
+    position: relative;
+    margin: 0 15px;
+    overflow: hidden;
+    background: #000000;
 }
 
 .magazine-next-prev-widget__link:hover {
-    color: black;
+    color: white;
 }
 
 .magazine-next-prev-widget__title {
-    font-size: 28px;
+    font-size: 32px;
     letter-spacing: -1.5px;
 }
 
@@ -27,6 +44,7 @@
     height: 240px;
     display: table;
     width: 100%;
+    position: relative;
 }
 
 .magazine-next-prev-widget__title-align {
@@ -55,17 +73,26 @@
 
 @media only screen and (max-width : 960px) {
 
+    .magazine-next-prev-widget {
+        background: #eee;
+        padding-bottom: 0;
+    }
+
+    .magazine-next-prev-widget__article {
+        margin: 0;
+    }
+
     .magazine-next-prev-widget__title-block {
-        padding: 10vw 0 0;
-        height: auto;
+        padding: 10vw;
+        height: 100vw;
+        width: 100vw;
     }
 
     .magazine-next-prev-widget__image {
-        margin-left: 0;
-        margin-top: 0;
-        height: 80vw;
-        width: 80vw;
+        height: 40vw;
+        width: 40vw;
         border-radius: 100%;
+        margin: 4vw auto;
     }
 
     .magazine-next-prev-widget__excerpt {
@@ -77,12 +104,16 @@
     }
 
     .magazine-next-prev-widget__link {
-        background: none;
-        padding: 30px 0;
+        margin: 0;
     }
 
-    .magazine-next-prev-widget__title--invert, .magazine-next-prev-widget__subtitle--invert, .magazine-next-prev-widget__excerpt--invert, .magazine-next-prev-widget__read-more--invert {
-        color: white;
+    .magazine-next-prev-widget__link--invert {
+        background: white;
+        color: black;
+    }
+
+    .magazine-next-prev-widget__link--invert:hover {
+        color: black;
     }
 
     .magazine-next-prev-widget__read-more--invert {
