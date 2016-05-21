@@ -1,5 +1,12 @@
 services:
 
+    threadandmirror.blog.repository.section:
+        class:           ThreadAndMirror\BlogBundle\Repository\SectionRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method:  getRepository
+        arguments:
+            - ThreadAndMirror\BlogBundle\Entity\Section
+
     threadandmirror.product.parser:
         class: ThreadAndMirror\ProductsBundle\Service\ProductParser
         arguments:
