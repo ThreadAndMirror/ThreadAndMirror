@@ -1,0 +1,11 @@
+<div class="tool">
+    {% if link.pinned %}
+        <a title="Unpin Section" class="unpin-section" data-id="{{ link.id }}">
+            <i class="fa fa-chain-broken"></i>
+        </a>
+    {% else %}
+        <a title="Pin Section" class="pin-section" data-id="{{ link.id }}">
+            <i class="fa fa-thumb-tack"></i>
+        </a>
+    {% endif %}
+</div>
