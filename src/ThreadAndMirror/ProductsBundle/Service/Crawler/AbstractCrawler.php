@@ -4,39 +4,46 @@ namespace ThreadAndMirror\ProductsBundle\Service\Crawler;
 
 use Buzz\Browser;
 use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\DomCrawler\Crawler;
 use ThreadAndMirror\ProductsBundle\Entity\Product;
 use ThreadAndMirror\ProductsBundle\Definition\CrawlerInterface;
 use ThreadAndMirror\ProductsBundle\Exception\ProductParseException;
 
 abstract class AbstractCrawler implements CrawlerInterface
 {
-	/** @var Browser */
-	protected $client;
-
 	/**
-	 * @var Headers to add to each request
+	 * @var Browser
 	 */
-	protected $headers = array(
-		'User-Agent' 		=> 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
-		'Accept' 			=> 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-		'Accept-Language' 	=> 'en-gb,en;q=0.5',
-		'Accept-Charset' 	=> 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-		'Keep-Alive' 		=> '115',
-		'Connection' 		=> 'keep-alive'
-	);
+	protected $client;
 
 	/**
 	 * @var Logger
 	 */
 	protected $logger;
 
+	/**
+	 * Headers to add to each request
+	 *
+	 * @var array
+	 */
+	protected $headers = [
+		'User-Agent' 		=> 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
+		'Accept' 			=> 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+		'Accept-Language' 	=> 'en-gb,en;q=0.5',
+		'Accept-Charset' 	=> 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+		'Keep-Alive' 		=> '115',
+		'Connection' 		=> 'keep-alive'
+	];
+
 	public function crawl($url) 
 	{
 		$product = new Product();
 		$product->setUrl($url);
 
+		$headers = array_replace($this->headers, $this->getCustomHeaders());
+
 		$crawler = new DomCrawler();
-		$crawler->addHTMLContent($this->client->get($url, $this->headers)->getContent(), 'UTF-8');
+		$crawler->addHTMLContent($this->client->get($url, $headers)->getContent(), 'UTF-8');
 
 		// Check if a page is no longer available before crawling
 		if ($this->getExpired($crawler)) {
@@ -144,6 +151,16 @@ abstract class AbstractCrawler implements CrawlerInterface
 		}
 
 		return $product;
+	}
+
+	/**
+	 * Override to add http headers for the crawler
+	 *
+	 * @return array
+	 */
+	protected function getCustomHeaders()
+	{
+		return [];
 	}
 
 	protected function getExpired(DomCrawler $crawler) 
@@ -260,6 +277,7 @@ abstract class AbstractCrawler implements CrawlerInterface
 	 * @param  string 	$second				The selector of the second element, set to null to catch exception
 	 * @param  string 	$eqFirst			The position of the first element to find
 	 * @param  string 	$eqSecond			The position of the second element
+	 *
 	 * @return string 						The text contained within the found element
 	 */
 	protected function getTextFromAlternatingElements(DomCrawler $crawler, $first, $second, $eqFirst = 0, $eqSecond = 0)
@@ -281,6 +299,7 @@ abstract class AbstractCrawler implements CrawlerInterface
 	 *
 	 * @param  Crawler 	$crawler 			The crawler object for the product page
 	 * @param  string 	$selector			The selector for the list items
+	 *
 	 * @return string 						The text contained within the found element
 	 */
 	protected function getTextFromList(DomCrawler $crawler, $selector)
@@ -299,6 +318,7 @@ abstract class AbstractCrawler implements CrawlerInterface
 	 *
 	 * @param  Crawler 	$crawler 			The crawler object for the product page
 	 * @param  string 	$selector			The selector for the list items
+	 *
 	 * @return string 						The attribute value on the found element
 	 */
 	protected function getAttributesFromList(DomCrawler $crawler, $selector, $attr)
@@ -342,6 +362,7 @@ abstract class AbstractCrawler implements CrawlerInterface
 
 	public function setClient(Browser $client) 
 	{
+		// @todo use guzzle
 		$this->client = $client;
 	}
 }

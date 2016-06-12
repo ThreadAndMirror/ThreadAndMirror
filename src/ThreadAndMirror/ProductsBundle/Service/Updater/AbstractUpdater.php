@@ -20,66 +20,82 @@ use ThreadAndMirror\ProductsBundle\Service\ProductService;
 
 abstract class AbstractUpdater implements UpdaterInterface
 {
-	/** @var AbstractCrawler */
+	/**
+	 * @var AbstractCrawler
+	 */
 	protected $crawler;
 
-	/** @var AbstractFormatter */
+	/**
+	 * @var AbstractFormatter
+	 */
 	protected $formatter;
 
-	/** @var EventDispatcherInterface */
+	/**
+	 * @var EventDispatcherInterface
+	 */
 	protected $dispatcher;
 
-	/** @var AffiliateInterface */
+	/**
+	 * @var AffiliateInterface
+	 */
 	protected $affiliate;
 
-	/** @var EntityManager */
+	/**
+	 * @var EntityManager
+	 */
 	protected $em;
 
-	/** @var array */
+	/**
+	 * @var array
+	 */
 	protected $cachedCategories = [];
 
-	/** @var ProductService */
+	/**
+	 * @var ProductService
+	 */
 	protected $productService;
 
-	/** @var CategoryService */
+	/**
+	 * @var CategoryService
+	 */
 	protected $categoryService;
 
 	public function __construct(
 		AbstractCrawler $crawler,
-        AbstractFormatter $formatter,
-        EventDispatcherInterface $dispatcher,
-        EntityManager $em,
-        AffiliateInterface $affiliate,
-        ProductService $productService,
+		AbstractFormatter $formatter,
+		EventDispatcherInterface $dispatcher,
+		EntityManager $em,
+		AffiliateInterface $affiliate,
+		ProductService $productService,
 		CategoryService $categoryService
 	) {
-		$this->crawler         = $crawler;
-		$this->formatter       = $formatter;
-		$this->dispatcher      = $dispatcher;
-		$this->affiliate       = $affiliate;
-		$this->em 		       = $em;
-		$this->productService  = $productService;
+		$this->crawler = $crawler;
+		$this->formatter = $formatter;
+		$this->dispatcher = $dispatcher;
+		$this->affiliate = $affiliate;
+		$this->em = $em;
+		$this->productService = $productService;
 		$this->categoryService = $categoryService;
 	}
 
 	/**
 	 * For updating an existing product by crawling it's url crawled
 	 *
-	 * @param Product 	$product 	The original product	
+	 * @param Product $product The original product
 	 */
-	public function updateProductFromCrawl(Product $product) 
-	{ 
+	public function updateProductFromCrawl(Product $product)
+	{
 		// Run the product crawler
-        $new = $this->crawler->crawl($product->getUrl());
+		$new = $this->crawler->crawl($product->getUrl());
 
-        // Don't crawl the product if it has now expired
-        if ($new->getExpired() !== null) {
-        	$product->setExpired(new \DateTime());
-        	return;
-        }
+		// Don't crawl the product if it has now expired
+		if ($new->getExpired() !== null) {
+			$product->setExpired(new \DateTime());
+			return;
+		}
 
-        // Tidy up the crawled data
-        $this->formatter->cleanupCrawledProduct($new);
+		// Tidy up the crawled data
+		$this->formatter->cleanupCrawledProduct($new);
 
 		// Static properties
 		// $this->updateStyleWith($new, $product);
@@ -102,10 +118,11 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * For creating a new product from a crawl
 	 *
-	 * @param  string 	    $url 		The product's url
+	 * @param  string $url The product's url
+	 *
 	 * @throws ProductParseException
 	 */
-	public function createProductFromCrawl($url) 
+	public function createProductFromCrawl($url)
 	{
 		// Find the shop
 		$shop = $this->em->getRepository('ThreadAndMirrorProductsBundle:Shop')->getShopFromUrl($url);
@@ -123,7 +140,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 		$product->setShop($shop);
 
 		// Tidy up the crawled data
-        $this->formatter->cleanupCrawledProduct($product);
+		$this->formatter->cleanupCrawledProduct($product);
 
 		// Check if the product exists after cleanup
 		$existing = $this->em->getRepository('ThreadAndMirrorProductsBundle:Product')->findOneBy(['pid' => $product->getPid(), 'shop' => $shop]);
@@ -132,22 +149,22 @@ abstract class AbstractUpdater implements UpdaterInterface
 			return $existing;
 		}
 
-        // Add the affiliate url
-        $product->setAffiliateUrl($this->affiliate->getAffiliateLink($url));
+		// Add the affiliate url
+		$product->setAffiliateUrl($this->affiliate->getAffiliateLink($url));
 
 		// Set the brand and categories from their names
 		$this->productService->updateBrandFromBrandName($product);
 		$this->productService->updateCategoryFromCategoryName($product);
 		$this->productService->createProduct($product);
 
-        return $product;
+		return $product;
 	}
 
 	/**
 	 * For creating a new product from parsed feed data
 	 *
-	 * @param  array 	$data  		The product data
-	 * @param  Shop     $data       The shop the data belongs to
+	 * @param  array $data The product data
+	 * @param  Shop $data The shop the data belongs to
 	 */
 	public function createProductFromFeed($data, $shop)
 	{
@@ -172,7 +189,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 		$product->setShop($shop);
 
 		// Tidy up the feed data
-        $this->formatter->cleanupFeedProduct($product);
+		$this->formatter->cleanupFeedProduct($product);
 
 		// Set the brand and categories from their names
 		$this->productService->updateBrandFromBrandName($product);
@@ -184,11 +201,11 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update sizes for the product
 	 *
-	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product	
+	 * @param Product $new The new product
+	 * @param Product $product The original product
 	 */
-	protected function updateSizes(Product $new, Product $product) 
-	{ 
+	protected function updateSizes(Product $new, Product $product)
+	{
 		// Update the available sizes if they haven't been already
 		if (count($new->getAvailableSizes()) > count($product->getAvailableSizes())) {
 			$product->setAvailableSizes($new->getAvailableSizes());
@@ -201,8 +218,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 			foreach ($new->getStockedSizes() as $size) {
 				if (is_array($product->getStockedSizes()) && !in_array($size, $product->getStockedSizes())) {
 					$sizes[] = $size;
-				} 
-			}	
+				}
+			}
 		}
 
 		// Fire an event if new sizes are in stock
@@ -210,7 +227,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 			$event = new ProductNewSizesInStockEvent($product, $sizes);
 			$this->dispatcher->dispatch('product.new_sizes_in_stock', $event);
 		}
-		
+
 		// Update the stocked sizes
 		$product->setStockedSizes($new->getStockedSizes());
 	}
@@ -218,8 +235,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update the prices and sale status of the product
 	 *
-	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product	
+	 * @param Product $new The new product
+	 * @param Product $product The original product
 	 */
 	protected function updatePrices(Product $new, Product $product)
 	{
@@ -249,8 +266,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update the style recommendations for the product
 	 *
-	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product	
+	 * @param Product $new The new product
+	 * @param Product $product The original product
 	 */
 	protected function updateStyleWith(Product $new, Product $product)
 	{
@@ -273,8 +290,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update the brand for the product
 	 *
-	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product	
+	 * @param Product $new The new product
+	 * @param Product $product The original product
 	 */
 	protected function updateBrand(Product $new, Product $product)
 	{
@@ -287,8 +304,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update the pid for the product
 	 *
-	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product
+	 * @param Product $new The new product
+	 * @param Product $product The original product
 	 */
 	protected function updatePid(Product $new, Product $product)
 	{
@@ -300,8 +317,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update the name of the product
 	 *
-	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product
+	 * @param Product $new The new product
+	 * @param Product $product The original product
 	 */
 	protected function updateName(Product $new, Product $product)
 	{
@@ -313,8 +330,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update the category
 	 *
-	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product
+	 * @param Product $new The new product
+	 * @param Product $product The original product
 	 */
 	protected function updateCategory(Product $new, Product $product)
 	{
@@ -327,8 +344,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update the area
 	 *
-	 * @param Product 	$new 		The new product
-	 * @param Product 	$product 	The original product
+	 * @param Product $new The new product
+	 * @param Product $product The original product
 	 */
 	protected function updateArea(Product $new, Product $product)
 	{
@@ -340,8 +357,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update a product category based on the affiliate category id
 	 *
-	 * @param  Product 		$product  			The product to update
-	 * @param  string 		$affiliateField  	The field of the category id to match
+	 * @param  Product $product The product to update
+	 * @param  string $affiliateField The field of the category id to match
 	 *
 	 */
 	public function updateCategoryFromAffiliateCategoryId(Product $product, $affiliateField)
@@ -362,7 +379,7 @@ abstract class AbstractUpdater implements UpdaterInterface
 			$product->setCategory($category);
 		} else {
 			$category = new Category();
-			$setter = 'set'.ucfirst($affiliateField);
+			$setter = 'set' . ucfirst($affiliateField);
 			$category->$setter($id);
 			$this->em->persist($category);
 			$this->em->flush();
@@ -374,8 +391,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update the description for the product
 	 *
-	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product	
+	 * @param Product $new The new product
+	 * @param Product $product The original product
 	 */
 	protected function updateDescription(Product $new, Product $product)
 	{
@@ -387,8 +404,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update the images for the product
 	 *
-	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product	
+	 * @param Product $new The new product
+	 * @param Product $product The original product
 	 */
 	protected function updateImages(Product $new, Product $product)
 	{
@@ -404,8 +421,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Update the product url
 	 *
-	 * @param Product 	$new 		The new product 
-	 * @param Product 	$product 	The original product
+	 * @param Product $new The new product
+	 * @param Product $product The original product
 	 */
 	protected function updateUrl(Product $new, Product $product)
 	{
@@ -418,7 +435,8 @@ abstract class AbstractUpdater implements UpdaterInterface
 	/**
 	 * Generate the unique cache key for the product, defaulting to shop slug & product id
 	 *
-	 * @param  Product  $product
+	 * @param  Product $product
+	 *
 	 * @return string
 	 */
 	public function getProductCacheKey(Product $product)

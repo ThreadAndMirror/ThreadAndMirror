@@ -73,12 +73,43 @@ class AsosFormatter extends AbstractFormatter
 	 * {@inheritdoc}
 	 */
 	protected function cleanupFeedThumbnails(Product $product)
-	{ 
+	{
 		$result = $this
 			->format($product->getImages()[0])
 			->replace('image1xl.jpg', 'image1s.jpg')
 			->result();
 
 		$product->setThumbnails(array($result));
+	}
+
+	protected function cleanupCrawledDescription(Product $product)
+	{
+		$result = $this
+			->format($product->getDescription())
+			->implode()
+			->append('.')
+			->result();
+
+		$product->setDescription($result);
+	}
+
+	protected function cleanupCrawledImages(Product $product)
+	{
+		$result = $this
+			->format($product->getImages())
+			->replace('s.jpg', 'xl.jpg')
+			->result();
+
+		$product->setImages($result);
+	}
+
+	protected function cleanupCrawledPortraits(Product $product)
+	{
+		$result = $this
+			->format($product->getPortraits())
+			->replace('s.jpg', 'xxl.jpg')
+			->result();
+
+		$product->setPortraits($result);
 	}
 }

@@ -10,7 +10,8 @@ class DomCrawler extends Crawler
 	 * Single encompassing method for value based position selecting
 	 *
 	 * @param  mixed 		$position 		The position of the element(s)
-	 * @return Crawler 						The crawler object containing the desired nodes
+	 *
+	 * @return Crawler 						A new crawler object containing the desired nodes
 	 */
 	public function position($position) 
 	{

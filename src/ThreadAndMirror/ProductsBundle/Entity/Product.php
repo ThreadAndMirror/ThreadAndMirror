@@ -1265,9 +1265,11 @@ class Product
 	/**
 	 * Get JSON object of the product
 	 *
+	 * @param boolean $encode
+	 *
 	 * @return string
 	 */
-	public function getJSON()
+	public function getJSON($encode = true)
 	{
 		$json = [
 			'url'               => $this->getUrl(),
@@ -1286,11 +1288,11 @@ class Product
 			'meta_keywords'     => $this->getMetaKeywords(),
 			'available_sizes'   => $this->getAvailableSizes(),
 			'stocked_sizes'     => $this->getStockedSizes(),
-			'merchant_id'       => $this->getShop()->getAffiliateId(),
+			'merchant_id'       => $this->getMerchantId(),
 			'meta_data'         => json_decode($this->getMetaData(), true)
 		];
 
-		return json_encode($json);
+		return $encode ? json_encode($json) : $json;
 	}
 
 	/**
@@ -1326,5 +1328,13 @@ class Product
 	public function getMetaData()
 	{
 		return $this->metaData;
+	}
+
+	/**
+	 * Get the affiliate merchant id
+	 */
+	public function getMerchantId()
+	{
+		return $this->getShop() !== null ? $this->getShop()->getAffiliateId() : null;
 	}
 }
