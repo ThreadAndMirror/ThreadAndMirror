@@ -212,14 +212,14 @@ $(document).ready(function() {
 	 * Update text sections on update
 	 */
 	$('.layout-editor').on('keyup', '.section-text textarea', function() {
-		$(this).siblings('p').html($(this).val());
+		$(this).siblings('p').html($(this).val()).html($(this).val().replace(/\n/g, '<br/>'));
 	});
 
     /**
      * Update wysiwig sections on change
      */
     $('.layout-editor').on('keyup', '.wysiwig-editor', function() {
-        $(this).siblings('.wysiwig-preview').html($(this).val());
+        $(this).siblings('.wysiwig-preview').html($(this).val().replace(/\n/g, '<br/>'));
     });
 
     /**
