@@ -23,7 +23,7 @@
                         {{ share.shareFacebook(post.sharer('facebook')) }}
                     </div>
                     <p class="magazine-layout-inset__date">{{ post.published|date('jS F Y') }}</p>
-                    <p class="magazine-layout-inset__accreditation">{{ getMediaImage(post.image).accreditation }}</p>
+                    <p class="magazine-layout-inset__accreditation">{{ getMediaImage(post.image).accreditation|raw }}</p>
                     <h1 class="magazine-layout-inset__title">{{ post.title }}<span class="magazine-layout-inset__subtitle">{{ post.subtitle }}</span></h1>
                     <hr class="magazine-layout-inset__hr">
                     <p class="magazine-layout-inset__caption">{{ post.excerpt }}</p>
