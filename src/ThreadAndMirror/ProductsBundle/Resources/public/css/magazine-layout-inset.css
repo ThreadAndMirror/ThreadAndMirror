@@ -127,8 +127,17 @@
     top: -20px;
     right: 0;
     color: #FFF;
-    opacity: 0.5;
+    color: rgba(255,255,255,0.6);
     font-size: 10px;
+    z-index: 5;
+}
+
+.magazine-layout-inset__accreditation > a {
+    color: rgba(255,255,255,0.8);
+}
+
+.magazine-layout-inset__accreditation > a:hover {
+    color: rgba(255,255,255,1);
 }
 
 .magazine-layout-inset__thumbnail {
