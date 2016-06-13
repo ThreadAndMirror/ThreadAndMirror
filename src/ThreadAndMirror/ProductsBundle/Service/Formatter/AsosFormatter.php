@@ -82,6 +82,29 @@ class AsosFormatter extends AbstractFormatter
 		$product->setThumbnails(array($result));
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function cleanupCrawledName(Product $product)
+	{
+		$result = $this
+			->format($product->getName())
+			->remove('ASOS CURVE')
+			->remove('ASOS MATERNITY')
+			->remove('ASOS PETITE')
+			->remove('ASOS TALL')
+			->remove('ASOS WHITE')
+			->remove('ASOS')
+			->replace($product->getBrandName().' ', '')
+			->trim()
+			->result();
+
+		$product->setName($result);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledDescription(Product $product)
 	{
 		$result = $this
@@ -93,6 +116,9 @@ class AsosFormatter extends AbstractFormatter
 		$product->setDescription($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledImages(Product $product)
 	{
 		$result = $this
@@ -103,6 +129,9 @@ class AsosFormatter extends AbstractFormatter
 		$product->setImages($result);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function cleanupCrawledPortraits(Product $product)
 	{
 		$result = $this
