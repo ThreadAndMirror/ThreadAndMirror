@@ -26,11 +26,21 @@
     width: 450px;
 }
 
+.section-image__image--squared--col-1 {
+    height: 210px;
+    width: 210px;
+}
+
 @media (max-width : 960px) {
 
     .section-image__image--squared--col-2 {
         height: 80vw;
         width: 80vw;
+    }
+
+    .section-image__image--squared--col-1 {
+        height: 40vw;
+        width: 40vw;
     }
 
     .section-image__caption--squared {
