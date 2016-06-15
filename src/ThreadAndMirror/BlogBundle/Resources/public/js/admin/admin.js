@@ -208,6 +208,13 @@ $(document).ready(function() {
 		$(this).siblings().last().html($(this).val());
 	});
 
+    /**
+     * Convert all nl to br for previews
+     */
+    $('.layout-editor .section-text textarea').each(function() {
+        $(this).siblings('p').html($(this).val()).html($(this).val().replace(/\n/g, '<br/>'));
+    });
+
 	/**
 	 * Update text sections on update
 	 */
