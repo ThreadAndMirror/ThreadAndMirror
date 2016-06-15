@@ -160,6 +160,7 @@ assetic:
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product-gallery.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product.css'
                 - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-product-gallery-feature.css'
+                - '@ThreadAndMirrorProductsBundle/Resources/public/css/section-image.css'
         frontend_vendor_js:
             inputs:
                 - '@StemsCoreBundle/Resources/public/js/front/vendor/*'
