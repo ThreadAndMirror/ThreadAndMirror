@@ -9,7 +9,7 @@
     font-size: 13px;
 }
 
-.section-image__caption--squared {
+.section-image__caption--squared, .section-image__caption--portrait {
     width: 100%;
     color: black;
     font-weight: 600;
@@ -17,7 +17,7 @@
     margin: 0;
 }
 
-.section-image__image--squared {
+.section-image__image--squared, .section-image__image--portrait {
     object-fit: cover;
 }
 
@@ -28,6 +28,16 @@
 
 .section-image__image--squared--col-1 {
     height: 210px;
+    width: 210px;
+}
+
+.section-image__image--portrait--col-2 {
+    height: 960px;
+    width: 450px;
+}
+
+.section-image__image--portrait--col-1 {
+    height: 450px;
     width: 210px;
 }
 
@@ -43,7 +53,17 @@
         width: 40vw;
     }
 
-    .section-image__caption--squared {
+    .section-image__image--portrait--col-2 {
+        height: 160vw;
+        width: 80vw;
+    }
+
+    .section-image__image--portrait--col-1 {
+        height: 80vw;
+        width: 40vw;
+    }
+
+    .section-image__caption--squared, .section-image__caption--portrait {
         padding: 5vw 0 0;
         font-size: 3vw;
         line-height: 150%;
