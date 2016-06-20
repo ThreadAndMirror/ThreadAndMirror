@@ -49,7 +49,7 @@ class SpaceNKFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getImages())
-			->replace('?sw=750&sh=750', '')
+			->sheer('?', false)
 			->result();
 
 		$product->setImages($result);
@@ -61,8 +61,8 @@ class SpaceNKFormatter extends AbstractFormatter
 	protected function cleanupCrawledPortraits(Product $product)
 	{
 		$result = $this
-			->format($product->getPortraits())
-			->replace('?sw=750&sh=750', 'sw=300&sh=300')
+			->format($product->getImages())
+			->append('?sw=300&sh=300')
 			->result();
 
 		$product->setPortraits($result);
@@ -74,8 +74,8 @@ class SpaceNKFormatter extends AbstractFormatter
 	protected function cleanupCrawledThumbnails(Product $product) 
 	{
 		$result = $this
-			->format($product->getThumbnails())
-			->replace('?sw=750&sh=750', 'sw=150&sh=150')
+			->format($product->getImages())
+			->append('?sw=150&sh=150')
 			->result();
 
 		$product->setThumbnails($result);
