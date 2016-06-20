@@ -4,74 +4,84 @@ namespace ThreadAndMirror\ProductsBundle\Service\Crawler;
 
 class SpaceNKCrawler extends AbstractCrawler
 {
-	protected function getExpired(DomCrawler $crawler) 
-	{
-		// Page not found
-		// try {
-		// 	if ($this->getTextFromElement($crawler, '#breadcrumb > ul > li > a', 'last') === 'Page Not Found') {
-		// 		return true;
-		// 	} else {
-		// 		return false;
-		// 	}
-		// } catch (\Exception $e) { }
-		
-		// // Redirected back to category page
-		// try {
-		// 	if ($this->getTextFromElement($crawler, '.filteroptions') !== null) {
-		// 		return true;
-		// 	}
-		// } catch (\Exception $e) {
-			return false;
-		// }
-	}
-
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function getName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromElement($crawler, 'h1.productname');
+		return $this->getTextFromElement($crawler, '#pdpMain .product-name');
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function getBrandName(DomCrawler $crawler) 
 	{
-		return $this->getTextFromAlternatingElements($crawler, '.product_brand a', '.product_brand');
+		return $this->getTextFromElement($crawler, '#pdpMain .product-name');
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function getCategoryName(DomCrawler $crawler) 
 	{
 		return null;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function getPid(DomCrawler $crawler) 
 	{
-		return $this->getValueFromElement($crawler, '.cm_productid');
+		return $this->getTextFromElement($crawler, '#pdpMain .product-number span');
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function getDescription(DomCrawler $crawler)
 	{
-		return $this->getTextFromElement($crawler, '#pp_prod_expandables p', 0);
+		return $this->getTextFromAlternatingElements($crawler, '#pdp-accordion .pdp-accordion-text', '#pdp-accordion .pdp-accordion-description');
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function getNow(DomCrawler $crawler) 
 	{
-		return $this->getTextFromAlternatingElements($crawler, 'h2.salesprice span', 'h2.salesprice span');
+		return $this->getTextFromAlternatingElements($crawler, '#pdpMain .product-price .price-sales', null);
 	}
 
-	protected function getWas(DomCrawler $crawler) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getWas(DomCrawler $crawler)
 	{
+		return null;
 //		return $this->getTextFromAlternatingElements($crawler, '#product_price .sale_price .sale', null);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function getImages(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '.productimage img');
+		return $this->getSrcFromList($crawler, '.primary-image');
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function getPortraits(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '.productimage img');
+		return $this->getSrcFromList($crawler, '.primary-image');
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function getThumbnails(DomCrawler $crawler) 
 	{
-		return $this->getSrcFromList($crawler, '.productimage img');
+		return $this->getSrcFromList($crawler, '.primary-image');
 	}
 }
