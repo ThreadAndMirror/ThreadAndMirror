@@ -65,22 +65,11 @@ class UrbanRetreatBeautiqueFormatter extends AbstractFormatter
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function cleanupCrawledUrl(Product $product)
-	{
-		$result = $this
-			->format($product->getUrl())
-			->result();
-
-		$product->setUrl($result);
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
 	protected function cleanupCrawledName(Product $product)
 	{
 		$result = $this
 			->format($product->getName())
+			->replace($product->getBrandName() . ' ', '')
 			->trim()
 			->result();
 
@@ -107,7 +96,6 @@ class UrbanRetreatBeautiqueFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getDescription())
-			->implode(' ')
 			->result();
 
 		$product->setDescription($result);
@@ -120,7 +108,6 @@ class UrbanRetreatBeautiqueFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getImages())
-			->prepend('http://www.urbanretreat.co.uk')
 			->result();
 
 		$product->setImages($result);
@@ -133,7 +120,7 @@ class UrbanRetreatBeautiqueFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getPortraits())
-			->prepend('http://www.urbanretreat.co.uk')
+			->replace('480/480', '300/300')
 			->result();
 
 		$product->setPortraits($result);
@@ -146,7 +133,7 @@ class UrbanRetreatBeautiqueFormatter extends AbstractFormatter
 	{
 		$result = $this
 			->format($product->getThumbnails())
-			->prepend('http://www.urbanretreat.co.uk')
+			->replace('480/480', '120/120')
 			->result();
 
 		$product->setThumbnails($result);

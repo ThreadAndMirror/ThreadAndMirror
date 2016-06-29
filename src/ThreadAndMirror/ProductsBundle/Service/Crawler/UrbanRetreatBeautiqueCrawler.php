@@ -4,74 +4,83 @@ namespace ThreadAndMirror\ProductsBundle\Service\Crawler;
 
 class UrbanRetreatBeautiqueCrawler extends AbstractCrawler
 {
-	protected function getExpired(DomCrawler $crawler) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getName(DomCrawler $crawler)
 	{
-		// Page not found
-		// try {
-		// 	if ($this->getTextFromElement($crawler, '#breadcrumb > ul > li > a', 'last') === 'Page Not Found') {
-		// 		return true;
-		// 	} else {
-		// 		return false;
-		// 	}
-		// } catch (\Exception $e) { }
-		
-		// // Redirected back to category page
-		// try {
-		// 	if ($this->getTextFromElement($crawler, '.filteroptions') !== null) {
-		// 		return true;
-		// 	}
-		// } catch (\Exception $e) {
-			return false;
-		// }
+		return $this->getTextFromElement($crawler, 'h1.product-title');
 	}
 
-	protected function getName(DomCrawler $crawler) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getBrandName(DomCrawler $crawler)
 	{
-		return $this->getTextFromElement($crawler, 'h1.brand-product');
+		return $this->getAttributeFromElement($crawler, '.product-logo-img', 'title');
 	}
 
-	protected function getBrandName(DomCrawler $crawler) 
-	{
-		return $this->getTextFromElement($crawler, 'h2.brand a');
-	}
-
-	protected function getCategoryName(DomCrawler $crawler) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getCategoryName(DomCrawler $crawler)
 	{
 		return null;
 	}
 
-	protected function getPid(DomCrawler $crawler) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getPid(DomCrawler $crawler)
 	{
-		return $this->getValueFromElement($crawler, '#UR_Product_hProductId');
+		return $this->getValueFromElement($crawler, 'input[name=prodId]');
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function getDescription(DomCrawler $crawler)
 	{
-		return $this->getTextFromList($crawler, '#UR_Product_lblProductDescription p');
+		return $this->getTextFromElement($crawler, '.product-details-wrapper .product-info');
 	}
 
-	protected function getNow(DomCrawler $crawler) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getNow(DomCrawler $crawler)
 	{
-		return $this->getTextFromAlternatingElements($crawler, 'h3.price .integer', 'h3.price .price');
+		return $this->getTextFromAlternatingElements($crawler, '.product-price .price', '.product-price .price');
 	}
 
-	protected function getWas(DomCrawler $crawler) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getWas(DomCrawler $crawler)
 	{
-//		return $this->getTextFromAlternatingElements($crawler, '#product_price .sale_price .sale', null);
+		return null;
 	}
 
-	protected function getImages(DomCrawler $crawler) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getImages(DomCrawler $crawler)
 	{
-		return $this->getSrcFromList($crawler, '#imgMain');
+		return $this->getSrcFromList($crawler, '.main-product-image img');
 	}
 
-	protected function getPortraits(DomCrawler $crawler) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getPortraits(DomCrawler $crawler)
 	{
-		return $this->getSrcFromList($crawler, '#imgMain');
+		return $this->getSrcFromList($crawler, '.main-product-image img');
 	}
 
-	protected function getThumbnails(DomCrawler $crawler) 
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getThumbnails(DomCrawler $crawler)
 	{
-		return $this->getSrcFromList($crawler, '#imgMain');
+		return $this->getSrcFromList($crawler, '.main-product-image img');
 	}
 }
