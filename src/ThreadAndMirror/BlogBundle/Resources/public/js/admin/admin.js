@@ -234,8 +234,9 @@ $(document).ready(function() {
      */
     $('.layout-editor').on('click', '.section-list .add-list-item', function() {
         var section = $(this).closest('section');
-        var index = section.find('li').length - 1;
-        var item = $('<li><textarea id="section_list_type_items_'+index+'" name="420_section_list_type[items]['+index+']" class="wysiwig-editor"></textarea> <p class="wysiwig-preview"></p></li>');
+        var index = section.find('.preview li').length;
+        var id = section.data('id');
+        var item = $('<li><textarea id="section_list_type_items_'+index+'" name="'+id+'_section_list_type[items]['+index+']" class="wysiwig-editor"></textarea> <p class="wysiwig-preview"></p></li>');
 
         section.find('.preview ul').append(item);
     });
