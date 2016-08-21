@@ -28,6 +28,30 @@ class PostService
 	}
 
 	/**
+	 * @param  integer 	$limit
+	 * @param  integer 	$offset
+	 *
+	 * @return Post[]
+	 */
+	public function getPosts($limit = 5, $offset = 0)
+	{
+		return $this->repository->findPosts($limit, $offset);
+	}
+
+	/**
+	 * Get the latest published posts for a category
+	 *
+	 * @param  integer 	$limit
+	 * @param  integer 	$offset
+	 *
+	 * @return Post[]
+	 */
+	public function getPublishedPosts($limit = 5, $offset = 0)
+	{
+		return $this->repository->findPublishedPosts($limit, $offset);
+	}
+
+	/**
 	 * Get the latest published posts for a category
 	 *
 	 * @param  string 	$category       Category slug

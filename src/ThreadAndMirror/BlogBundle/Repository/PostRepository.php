@@ -10,7 +10,7 @@ use ThreadAndMirror\BlogBundle\Entity\Post;
 class PostRepository extends EntityRepository
 {
 	/** 
-	 * Get the latest posts
+	 * Get the posts
 	 *
 	 * @param  integer 	$limit
 	 * @param  integer 	$offset
@@ -18,7 +18,7 @@ class PostRepository extends EntityRepository
 	 *
 	 * @return array 					The resulting posts
 	 */
-	public function findLatest($limit = 5, $offset = 0, $forWidget = false) 
+	public function findPosts($limit = 5, $offset = 0)
 	{
 		$qb = $this->getEntityManager()->createQueryBuilder();
 		$qb->addSelect('post');
@@ -30,14 +30,39 @@ class PostRepository extends EntityRepository
 		$qb->setParameter('deleted', '0');
 		$qb->setParameter('status', 'Published');
 
-		// Filter those hidden for widget, if specified
-		if ($forWidget) {
-			$qb->andWhere('post.hideFromWidgets = :hideFromWidgets');
-			$qb->setParameter('hideFromWidgets', false);
-		}
+		// Execute the query
+		return $qb
+			->setMaxResults($limit)
+			->setFirstResult($offset)
+			->getQuery()
+			// ->setResultCacheDriver($redis = $this->loadRedis())
+			// ->setResultCacheLifetime(86400)
+			->getResult();
+	}
 
-		// Order by most recently publishsed
-		$qb->orderBy('post.created', 'DESC');
+	/**
+	 * Get the latest published posts
+	 *
+	 * @param  integer 	$limit
+	 * @param  integer 	$offset
+	 *
+	 * @return Post[]
+	 */
+	public function findPublishedPosts($limit = 5, $offset = 0)
+	{
+		$qb = $this->getEntityManager()->createQueryBuilder();
+		$qb->addSelect('post');
+		$qb->from('ThreadAndMirrorBlogBundle:Post', 'post');
+
+		// Set parameters
+		$qb->where('post.deleted = :deleted');
+		$qb->andWhere('post.status = :status');
+		$qb->andWhere('category.slug = :category');
+		$qb->setParameter('deleted', '0');
+		$qb->setParameter('status', 'Published');
+
+		// Order by most recently published
+		$qb->orderBy('post.published', 'DESC');
 
 		// Execute the query
 		return $qb
@@ -121,11 +146,6 @@ class PostRepository extends EntityRepository
 			// ->setResultCacheDriver($redis = $this->loadRedis())
 			// ->setResultCacheLifetime(86400)
 			->getSingleResult();
-	}
-
-	public function findLatestForWidget($limit, $offset = 0)
-	{
-		return $this->findLatest($limit, $offset, true);
 	}
 
 	protected function loadRedis() 

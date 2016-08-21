@@ -2,11 +2,10 @@
 
 namespace ThreadAndMirror\BlogBundle\Controller;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use ThreadAndMirror\BlogBundle\Entity\Post;
 use Stems\CoreBundle\Controller\BaseFrontController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use ThreadAndMirror\BlogBundle\Entity\Comment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -18,12 +17,12 @@ class FrontController extends BaseFrontController
 	 * @Route("/magazine", name="thread_blog_front_index")
 	 * @Template()
 	 */
-	public function indexAction(Request $request)
+	public function indexAction()
 	{
 		$chunk = $this->container->getParameter('threadandmirror.blog.index.chunk_size');
 
 		// Get posts for the view
-		$posts = $this->em->getRepository('ThreadAndMirrorBlogBundle:Post')->findLatest($chunk);
+		$posts = $this->get('threadandmirror.blog.service.post')->getPost($chunk);
 
 		return [
 			'posts' => $posts
@@ -77,41 +76,22 @@ class FrontController extends BaseFrontController
 	/**
 	 * Preview a blog post that isn't published yet
 	 *
-	 * @param  $slug 	string 		The slug of the requested blog post
+	 * @Route("/blog/preview/{slug}", name="thread_blog_front_preview")
+	 * @Template("ThreadAndMirrorBlogBundle:Front:article.html.twig")
 	 */
-	public function previewAction($slug)
+	public function previewAction(Post $post)
 	{
-		// Redirect if the user isn't at least an admin
 		if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-			return $this->redirect('/');
+			throw new NotFoundHttpException();
 		}
 
-		// Get the requested post
-		$post = $this->em->getRepository('ThreadAndMirrorBlogBundle:Post')->findPublishedPost($slug);
+		$sections = $this->get('stems.core.sections.manager')->setBundle('blog')->renderSections($post);
 
-		// Set the dynamic page values
-		$this->page->setTitle($post->getTitle());
-		$this->page->setWindowTitle($post->getTitle().' - '.$post->getExcerpt());
-		$this->page->setmetaKeywords($post->getMetaKeywords());
-		$this->page->setMetaDescription($post->getMetaDescription());
-		$this->page->setDisableAnalytics(true);
-
-		// Pre-render the sections, as referencing twig within itself causes a circular reference
-		$sections = array();
-
-		foreach ($post->getSections() as $link) {
-			$sections[] = $this->get('stems.core.sections.manager')->setBundle('blog')->renderSection($link);
-		}
-
-		// Build the comment form
-		$form = $this->createForm('blog_comment_type', new Comment());
-
-		return $this->render('ThreadAndMirrorBlogBundle:Front:post.html.twig', array(
-//			'page'		=> $this->page,
-			'post' 		=> $post,
-			'sections' 	=> $sections,
-			'form' 		=> $form->createView(),
-		));
+		return [
+			'post'             => $post,
+			'sections'         => $sections,
+			'disableAnalytics' => true
+		];
 	}
 
 	/**
@@ -120,7 +100,7 @@ class FrontController extends BaseFrontController
 	public function rssAction()
 	{
 		// get all of the blog posts for the feed
-		$posts = $this->em->getRepository('ThreadAndMirrorBlogBundle:Post')->findBy(array('deleted' => false, 'status' => 'Published'), array('published' => 'DESC'));
+		$posts = $this->get('threadandmirror.blog.service.post')->getPublishedPosts();
 
 		// doctype
 		$xml = '<?xml version="1.0" encoding="UTF-8"?>';
