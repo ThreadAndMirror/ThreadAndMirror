@@ -13,6 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+	const ARTICLES = 'articles';
+
+	const EDITORS_PICKS = 'editors-picks';
+
     /** 
      * @ORM\Id
      * @ORM\Column(type="integer")

@@ -4,6 +4,7 @@ namespace ThreadAndMirror\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use ThreadAndMirror\BlogBundle\Entity\Category;
 use ThreadAndMirror\BlogBundle\Entity\Post;
 
 class WidgetController extends Controller
@@ -14,12 +15,11 @@ class WidgetController extends Controller
 	public function latestPostAction()
 	{
 		// Get the latest blog post
-		$em    = $this->getDoctrine()->getManager();
-		$posts = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findPublishedPostsByCategory('articles', 1);
+		$post = $this->get('threadandmirror.blog.service.post')->getLatestPublishedPostForCategory(Category::ARTICLES);
 
-		return $this->render('ThreadAndMirrorBlogBundle:Widget:latestPost.html.twig', array(
-			'post' 	=> reset($posts),
-		));
+		return $this->render('ThreadAndMirrorBlogBundle:Widget:latestPost.html.twig', [
+			'post' => $post
+		]);
 	}
 
 	/**
@@ -28,12 +28,11 @@ class WidgetController extends Controller
 	public function latestPostsSidebarAction($limit = 4)
 	{
 		// Get the latest blog post
-		$em    = $this->getDoctrine()->getManager();
-		$posts = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findPublishedPostsByCategory('articles', $limit);
+		$posts = $this->get('threadandmirror.blog.service.post')->getPublishedPostsForCategory(Category::ARTICLES, $limit);
 
-		return $this->render('ThreadAndMirrorBlogBundle:Widget:latestPostsSidebar.html.twig', array(
-			'posts' 	=> $posts,
-		));
+		return $this->render('ThreadAndMirrorBlogBundle:Widget:latestPostsSidebar.html.twig', [
+			'posts' => $posts
+		]);
 	}
 
 	/**
@@ -42,12 +41,11 @@ class WidgetController extends Controller
 	public function featurePostAction($id)
 	{
 		// Get the blog post
-		$em   = $this->getDoctrine()->getManager();
-		$post = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->find($id);
+		$post = $this->get('threadandmirror.blog.service.post')->getPost($id);
 
-		return $this->render('ThreadAndMirrorBlogBundle:Widget:latestPost.html.twig', array(
-			'post' 	=> $post,
-		));
+		return $this->render('ThreadAndMirrorBlogBundle:Widget:latestPost.html.twig', [
+			'post' => $post
+		]);
 	}
 
 	/**
@@ -56,12 +54,11 @@ class WidgetController extends Controller
 	public function featuredInAction($id)
 	{
 		// Get the blog post
-		$em   = $this->getDoctrine()->getManager();
-		$post = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->find($id);
+		$post = $this->get('threadandmirror.blog.service.post')->getPost($id);
 
-		return $this->render('ThreadAndMirrorBlogBundle:Widget:featuredIn.html.twig', array(
-			'post' 	=> $post,
-		));
+		return $this->render('ThreadAndMirrorBlogBundle:Widget:featuredIn.html.twig', [
+			'post' => $post
+		]);
 	}
 
 	/**
@@ -70,12 +67,11 @@ class WidgetController extends Controller
 	public function homepageFeatureAction()
 	{
 		// Get the latest blog post
-		$em    = $this->getDoctrine()->getManager();
-		$posts = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findPublishedPostsByCategory('articles', 5);
+		$posts = $this->get('threadandmirror.blog.service.post')->getPublishedPostsForCategory(Category::ARTICLES, 5);
 
-		return $this->render('ThreadAndMirrorBlogBundle:Widget:homepageFeature.html.twig', array(
-			'posts' 	=> $posts,
-		));
+		return $this->render('ThreadAndMirrorBlogBundle:Widget:homepageFeature.html.twig', [
+			'posts' => $posts
+		]);
 	}
 
 	/**

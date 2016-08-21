@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use ThreadAndMirror\BlogBundle\Entity\Category;
+use ThreadAndMirror\BlogBundle\Entity\Post;
 
 class WidgetController extends Controller
 {
@@ -20,9 +22,8 @@ class WidgetController extends Controller
 	public function editorsPicksAction()
 	{
 		// Get the latest editors pick article and it's products
-		$em       = $this->getDoctrine()->getManager();
-		$posts    = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findPublishedPostsByCategory('editors-picks', 1);
-		$post     = reset($posts);
+		$em = $this->getDoctrine()->getManager();
+		$post = $this->get('threadandmirror.blog.service.post')->getLatestPublishedPostForCategory(Category::EDITORS_PICKS);
 
 		$products = [];
 

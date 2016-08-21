@@ -15,6 +15,7 @@ class PostRepository extends EntityRepository
 	 * @param  integer 	$limit
 	 * @param  integer 	$offset
 	 * @param  boolean 	$forWidget
+	 *
 	 * @return array 					The resulting posts
 	 */
 	public function findLatest($limit = 5, $offset = 0, $forWidget = false) 
@@ -54,6 +55,7 @@ class PostRepository extends EntityRepository
 	 * @param  string 	$category       Category slug
 	 * @param  integer 	$limit
 	 * @param  integer 	$offset
+	 *
 	 * @return Post[]
 	 */
 	public function findPublishedPostsByCategory($category, $limit = 5, $offset = 0)
@@ -71,8 +73,8 @@ class PostRepository extends EntityRepository
 		$qb->setParameter('status', 'Published');
 		$qb->setParameter('category', $category);
 
-		// Order by most recently publishsed
-		$qb->orderBy('post.created', 'DESC');
+		// Order by most recently published
+		$qb->orderBy('post.published', 'DESC');
 
 		// Execute the query
 		return $qb
@@ -89,6 +91,7 @@ class PostRepository extends EntityRepository
 	 *
 	 * @param  string 	$slug           Post slug
 	 * @param  string 	$category       Category slug
+	 *
 	 * @return Post
 	 */
 	public function findPublishedPost($slug, $category = null)
