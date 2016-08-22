@@ -172,7 +172,7 @@ class PostRepository extends EntityRepository
 		$qb->innerJoin('post.category', 'category');
 		$qb->where('post.deleted = :deleted');
 		$qb->andWhere('post.status = :status');
-		$qb->andWhere('post.published > :published');
+		$qb->andWhere('post.published < :published');
 		$qb->andWhere('category = :category');
 		$qb->orderBy('post.published', 'ASC');
 
@@ -202,7 +202,7 @@ class PostRepository extends EntityRepository
 		$qb->innerJoin('post.category', 'category');
 		$qb->where('post.deleted = :deleted');
 		$qb->andWhere('post.status = :status');
-		$qb->andWhere('post.published < :published');
+		$qb->andWhere('post.published > :published');
 		$qb->andWhere('category = :category');
 		$qb->orderBy('post.published', 'DESC');
 
