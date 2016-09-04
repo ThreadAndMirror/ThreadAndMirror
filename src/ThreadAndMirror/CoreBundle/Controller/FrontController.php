@@ -12,7 +12,7 @@ class FrontController extends BaseFrontController
 	/**
 	 * Home page
 	 *
-	 * @Route("/", name="thread_core_home")
+	 * @Route("/", name="thread_core_home", options={"sitemap" = {"changefreq" = "daily" }})
 	 * @Template()
 	 */
 	public function indexAction()
@@ -37,7 +37,7 @@ class FrontController extends BaseFrontController
 	/**
 	 * About us page
 	 *
-	 * @Route("/about", name="thread_core_about")
+	 * @Route("/about", name="thread_core_about", options={"sitemap" = {"changefreq" = "yearly" }})
 	 * @Template()
 	 */
 	public function aboutAction()
@@ -48,7 +48,7 @@ class FrontController extends BaseFrontController
 	/**
 	 * Privacy policy page
 	 *
-	 * @Route("/privacy-policy", name="thread_core_privacy_policy")
+	 * @Route("/privacy-policy", name="thread_core_privacy_policy", options={"sitemap" = {"changefreq" = "yearly" }})
 	 * @Template()
 	 */
 	public function privacyAction()
@@ -59,7 +59,7 @@ class FrontController extends BaseFrontController
 	/**
 	 * Contact us page
 	 *
-	 * @Route("/contact", name="thread_core_contact")
+	 * @Route("/contact", name="thread_core_contact", options={"sitemap" = {"changefreq" = "yearly" }})
 	 * @Template()
 	 */
 	public function contactAction()

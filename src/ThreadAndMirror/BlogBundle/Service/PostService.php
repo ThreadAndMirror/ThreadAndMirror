@@ -33,7 +33,7 @@ class PostService
 	 *
 	 * @return Post[]
 	 */
-	public function getPosts($limit = 5, $offset = 0)
+	public function getPosts($limit = null, $offset = 0)
 	{
 		return $this->repository->findPosts($limit, $offset);
 	}
@@ -46,7 +46,7 @@ class PostService
 	 *
 	 * @return Post[]
 	 */
-	public function getPublishedPosts($limit = 5, $offset = 0)
+	public function getPublishedPosts($limit = null, $offset = 0)
 	{
 		return $this->repository->findPublishedPosts($limit, $offset);
 	}
@@ -60,7 +60,7 @@ class PostService
 	 *
 	 * @return Post[]
 	 */
-	public function getPublishedPostsForCategory($category, $limit = 5, $offset = 0)
+	public function getPublishedPostsForCategory($category, $limit = null, $offset = 0)
 	{
 		return $this->repository->findPublishedPostsByCategory($category, $limit, $offset);
 	}

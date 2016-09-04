@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
 	        new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
             new ThreadAndMirror\BlogBundle\ThreadAndMirrorBlogBundle(),
+	        new Presta\SitemapBundle\PrestaSitemapBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

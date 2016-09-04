@@ -18,7 +18,7 @@ class PostRepository extends EntityRepository
 	 *
 	 * @return array 					The resulting posts
 	 */
-	public function findPosts($limit = 5, $offset = 0)
+	public function findPosts($limit = null, $offset = 0)
 	{
 		$qb = $this->getEntityManager()->createQueryBuilder();
 		$qb->addSelect('post');
@@ -30,9 +30,12 @@ class PostRepository extends EntityRepository
 		$qb->setParameter('deleted', '0');
 		$qb->setParameter('status', 'Published');
 
+		if ($limit !== null) {
+			$qb->setMaxResults($limit);
+		}
+
 		// Execute the query
 		return $qb
-			->setMaxResults($limit)
 			->setFirstResult($offset)
 			->getQuery()
 			// ->setResultCacheDriver($redis = $this->loadRedis())
@@ -48,25 +51,28 @@ class PostRepository extends EntityRepository
 	 *
 	 * @return Post[]
 	 */
-	public function findPublishedPosts($limit = 5, $offset = 0)
+	public function findPublishedPosts($limit = null, $offset = 0)
 	{
 		$qb = $this->getEntityManager()->createQueryBuilder();
 		$qb->addSelect('post');
 		$qb->from('ThreadAndMirrorBlogBundle:Post', 'post');
+		$qb->innerJoin('post.category', 'category');
 
 		// Set parameters
 		$qb->where('post.deleted = :deleted');
 		$qb->andWhere('post.status = :status');
-		$qb->andWhere('category.slug = :category');
 		$qb->setParameter('deleted', '0');
 		$qb->setParameter('status', 'Published');
 
 		// Order by most recently published
 		$qb->orderBy('post.published', 'DESC');
 
+		if ($limit !== null) {
+			$qb->setMaxResults($limit);
+		}
+
 		// Execute the query
 		return $qb
-			->setMaxResults($limit)
 			->setFirstResult($offset)
 			->getQuery()
 			// ->setResultCacheDriver($redis = $this->loadRedis())
@@ -83,7 +89,7 @@ class PostRepository extends EntityRepository
 	 *
 	 * @return Post[]
 	 */
-	public function findPublishedPostsByCategory($category, $limit = 5, $offset = 0)
+	public function findPublishedPostsByCategory($category, $limit = null, $offset = 0)
 	{
 		$qb = $this->getEntityManager()->createQueryBuilder();
 		$qb->addSelect('post');
@@ -101,9 +107,12 @@ class PostRepository extends EntityRepository
 		// Order by most recently published
 		$qb->orderBy('post.published', 'DESC');
 
+		if ($limit !== null) {
+			$qb->setMaxResults($limit);
+		}
+
 		// Execute the query
 		return $qb
-			->setMaxResults($limit)
 			->setFirstResult($offset)
 			->getQuery()
 			// ->setResultCacheDriver($redis = $this->loadRedis())
@@ -124,7 +133,7 @@ class PostRepository extends EntityRepository
 		$qb = $this->getEntityManager()->createQueryBuilder();
 		$qb->addSelect('post');
 		$qb->from('ThreadAndMirrorBlogBundle:Post', 'post');
-		$qb->innerJoin('post.category', 'category');
+
 
 		// Set parameters
 		$qb->where('post.deleted = :deleted');
@@ -132,6 +141,11 @@ class PostRepository extends EntityRepository
 		$qb->andWhere('post.slug = :slug');
 		$qb->setParameter('deleted', '0');
 		$qb->setParameter('status', 'Published');
+
+		if (null !== $category) {
+			$qb->innerJoin('post.category', 'category');
+			$qb->setParameter('category', $category);
+		}
 
 		$qb->setParameter('slug', $slug);
 

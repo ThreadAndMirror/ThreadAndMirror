@@ -1,3 +1,7 @@
+PrestaSitemapBundle:
+    resource: "@PrestaSitemapBundle/Resources/config/routing.yml"
+    prefix:   /
+
 thread_blog:
     resource: "@ThreadAndMirrorBlogBundle/Resources/config/routing.yml"
     prefix:   /

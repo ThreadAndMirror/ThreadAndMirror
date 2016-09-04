@@ -30,7 +30,8 @@
         "white-october/pagerfanta-bundle": "~1.0",
         "doctrine/doctrine-cache-bundle": "dev-master",
         "oldsound/rabbitmq-bundle": "^1.7",
-        "twbs/bootstrap": "^3.3"
+        "twbs/bootstrap": "^3.3",
+        "presta/sitemap-bundle": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

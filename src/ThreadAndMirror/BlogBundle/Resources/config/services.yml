@@ -31,3 +31,11 @@ services:
         class: ThreadAndMirror\BlogBundle\Service\PostService
         arguments:
             - @threadandmirror.blog.repository.post
+
+    # Event Listeners
+
+    threadandmirror.blog.listener.sitemap:
+            class: ThreadAndMirror\BlogBundle\EventListener\SitemapListener
+            arguments: ['@router', '@threadandmirror.blog.service.post']
+            tags:
+                - { name: 'presta.sitemap.listener' }
