@@ -2,18 +2,18 @@
 
 {% block content %}
     <div class="section-product__wrapper section-product__wrapper--{{ section.position }}--col-{{ link.span }}" itemscope itemtype="http://schema.org/Product">
-        <a class="section-product__link section-product__link--{{ section.position }}--col-{{ link.span }}" href="{{ section.url }}" itemprop="url">
-            <h3 class="section-product__name section-product__name--col-{{ link.span }}"><span class="section-product__brand">{{ section.designer }}</span> {{ section.name }}</h3>
+        <a itemprop="url" class="section-product__link section-product__link--{{ section.position }}--col-{{ link.span }}" href="{{ section.url }}" itemprop="url">
+            <h3 class="section-product__name section-product__name--col-{{ link.span }}"><span itemprop="brand" class="section-product__brand">{{ section.designer }}</span> <span itemprop="name">{{ section.name }}</span></h3>
             <span class="section-product__buy-icon section-product__buy-icon--col-{{ link.span }} fa-stack fa-lg">
               <i class="fa fa-circle-thin fa-stack-2x"></i>
               <i class="fa fa-shopping-bag fa-stack-1x"></i>
             </span>
-            <p class="section-product__description section-product__description--col-{{ link.span }}" >{{ section.description }}</p>
+            <p itemscope itemtype="http://schema.org/Store" class="section-product__description section-product__description--col-{{ link.span }}" ><span itemprop="name">{{ section.description }}</span></p>
             {% if section.image is not empty %}
                 {% if section.effect == 'cutout' %}
-                    <img class="section-product__image section-product__image--{{ section.position }}" src="{{ getImageFromUrl(section.image).src|transparentColor }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
+                    <img itemprop="image" itemscope itemtype="http://schema.org/ImageObject" class="section-product__image section-product__image--{{ section.position }}" src="{{ getImageFromUrl(section.image).src|transparentColor }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
                 {% else %}
-                    <img class="{% if section.effect != 'none' %}css-filter-{{ section.effect }}{% endif %} section-product__image section-product__image--{{ section.position }}" src="{{ getImageFromUrl(section.image).src|imagine_filter('section_image_large') }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
+                    <img itemprop="image" itemscope itemtype="http://schema.org/ImageObject" class="{% if section.effect != 'none' %}css-filter-{{ section.effect }}{% endif %} section-product__image section-product__image--{{ section.position }}" src="{{ getImageFromUrl(section.image).src|imagine_filter('section_image_large') }}" alt="{{ section.fullName }}" title="{{ section.fullName }}" />
                 {% endif %}
             {% endif %}
         </a>
