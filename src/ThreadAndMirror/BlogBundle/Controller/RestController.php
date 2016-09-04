@@ -5,12 +5,12 @@ namespace ThreadAndMirror\BlogBundle\Controller;
 use Stems\CoreBundle\Controller\BaseRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use ThreadAndMirror\BlogBundle\Entity\Category;
 use ThreadAndMirror\BlogBundle\Entity\Post;
 use ThreadAndMirror\BlogBundle\Entity\Section;
 use ThreadAndMirror\BlogBundle\Entity\SectionProductGalleryProduct;
 use ThreadAndMirror\BlogBundle\Form\SectionProductGalleryProductType;
 use Stems\MediaBundle\Entity\Image;
-use Stems\MediaBundle\Form\ImageType;
 use ThreadAndMirror\BlogBundle\Entity\Comment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -29,9 +29,7 @@ class RestController extends BaseRestController
 	 */
 	public function getMorePostsAction($offset = 6, $chunk = 6)
 	{
-		// Get more of the blog posts for the view
-		$em    = $this->getDoctrine()->getManager();
-		$posts = $em->getRepository('ThreadAndMirrorBlogBundle:Post')->findLatest($chunk, $offset);
+		$posts = $this->get('threadandmirror.blog.service.post')->getPublishedPostsForCategory(Category::ARTICLES, $chunk, $offset);
 
 		// Render the html for the posts
 		$html = '';

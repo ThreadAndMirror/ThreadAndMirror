@@ -3,6 +3,7 @@
 namespace ThreadAndMirror\BlogBundle\Controller;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use ThreadAndMirror\BlogBundle\Entity\Category;
 use ThreadAndMirror\BlogBundle\Entity\Post;
 use Stems\CoreBundle\Controller\BaseFrontController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +20,7 @@ class FrontController extends BaseFrontController
 	 */
 	public function indexAction()
 	{
-		$chunk = $this->container->getParameter('threadandmirror.blog.index.chunk_size');
-
-		// Get posts for the view
-		$posts = $this->get('threadandmirror.blog.service.post')->getPost($chunk);
+		$posts = $this->get('threadandmirror.blog.service.post')->getPublishedPostsForCategory(Category::ARTICLES, 6);
 
 		return [
 			'posts' => $posts
