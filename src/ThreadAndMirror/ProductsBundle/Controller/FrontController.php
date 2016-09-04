@@ -4,6 +4,7 @@ namespace ThreadAndMirror\ProductsBundle\Controller;
 
 use Stems\PageBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,6 +36,8 @@ class FrontController extends BaseFrontController
 	 */
 	public function productAction($slug)
 	{
+		throw new NotFoundHttpException();
+
 		// Get the id from the slug
 		$id = explode('-', $slug);
 		$id = end($id);
