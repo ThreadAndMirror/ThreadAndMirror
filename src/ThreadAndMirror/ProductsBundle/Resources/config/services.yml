@@ -179,7 +179,7 @@ services:
             - @threadandmirror.products.formatter.net_a_porter
             - @event_dispatcher
             - @doctrine.orm.entity_manager
-            - @threadandmirror.affiliate.affiliate_window
+            - @threadandmirror.affiliate.linkshare
             - @threadandmirror.products.service.product
             - @threadandmirror.products.service.category
 
