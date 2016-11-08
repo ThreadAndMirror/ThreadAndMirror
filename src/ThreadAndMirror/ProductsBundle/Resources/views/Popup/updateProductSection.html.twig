@@ -10,6 +10,7 @@
 			<form action="{{ path('thread_products_rest_update_product_section', { id: section.id }) }}" method="post">
 				{{ form_row(form.designer) }}
 				{{ form_row(form.name) }}
+                {{ form_row(form.description) }}
 				{{ form_row(form.url) }}
 				{{ form_row(form.image) }}
                 <div style="visibility:hidden;">
