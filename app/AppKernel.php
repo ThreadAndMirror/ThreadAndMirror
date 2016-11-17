@@ -40,6 +40,7 @@ class AppKernel extends Kernel
 	        new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
             new ThreadAndMirror\BlogBundle\ThreadAndMirrorBlogBundle(),
 	        new Presta\SitemapBundle\PrestaSitemapBundle(),
+            new ThreadAndMirror\InstaInspoBundle\ThreadAndMirrorInstaInspoBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

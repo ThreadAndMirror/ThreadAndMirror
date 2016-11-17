@@ -1,0 +1,7 @@
+thread_instainspo_front:
+    resource: "@ThreadAndMirrorInstaInspoBundle/Controller/FrontController.php"
+    type:     annotation
+
+thread_instainspo_admin:
+    resource: "@ThreadAndMirrorInstaInspoBundle/Controller/AdminController.php"
+    type:     annotation

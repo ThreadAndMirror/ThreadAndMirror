@@ -1,3 +1,7 @@
+thread_instainspo:
+    resource: "@ThreadAndMirrorInstaInspoBundle/Resources/config/routing.yml"
+    prefix:   /
+
 PrestaSitemapBundle:
     resource: "@PrestaSitemapBundle/Resources/config/routing.yml"
     prefix:   /

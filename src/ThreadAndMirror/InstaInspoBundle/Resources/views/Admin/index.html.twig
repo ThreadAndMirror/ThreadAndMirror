@@ -1,0 +1,58 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Insta Inspo Overview{% endblock %}
+
+{% block content %}
+    <h1 class="pages">Insta Inspo Posts</h1>
+    <div class="controls">
+        <a href="{{ path('thread_instainspo_admin_create') }}" class="btn btn-primary right">
+            <i class="fa faw-fw fa-plus"></i>
+            Add New Post
+        </a>
+        <br class="clear"/>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th><a>Image</a></th>
+            <th><a>Caption</a></th>
+            <th><a>Instagram ID</a></th>
+            <th><a>Created</a></th>
+            <th width="100px">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td><img src="{{ post.image }}" height="100"/></td>
+                <td>{{ post.caption }}</td>
+                <td>{{ post.pid }}</td>
+                <td><p>{{ post.created|date('d/m/Y') }}</p></td>
+                <td>
+                    {#<a href="/blog/preview/{{ post.slug }}" class="btn btn-circle btn-small" target="_blank"#}
+                    {#title="Preview"><i class="fa fa-fw fa-eye"></i></a>#}
+                    {#<a href="/admin/blog/{{ post.id }}/edit" class="btn btn-circle btn-small" title="Edit"><i#}
+                    {#class="fa fa-fw fa-pencil"></i></a>#}
+                    {#{% if post.status == 'Published' %}#}
+                    {#<a href="{{ path('thread_blog_admin_publish', { 'id' : post.id }) }}"#}
+                    {#class="btn btn-success btn-circle btn-small" title="Unpublish"><i#}
+                    {#class="fa fa-fw fa-globe"></i></a>#}
+                    {#{% else %}#}
+                    {#<a href="{{ path('thread_blog_admin_publish', { 'id' : post.id }) }}"#}
+                    {#class="btn btn-warning btn-circle btn-small" title="Publish"><i#}
+                    {#class="fa fa-fw fa-globe"></i></a>#}
+                    {#{% endif %}#}
+                    {#<a href="/admin/blog/{{ post.id }}/delete" class="btn btn-danger btn-circle btn-small"#}
+                    {#title="Delete" onclick="return confirm('Are you sure you want to delete this post?');"><i#}
+                    {#class="fa fa-fw fa-times"></i></a>#}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6"><p>There are no posts</p></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

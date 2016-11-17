@@ -1,0 +1,4 @@
+services:
+#    thread_and_mirror_insta_inspo.example:
+#        class: ThreadAndMirror\InstaInspoBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
