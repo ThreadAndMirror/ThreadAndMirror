@@ -77,3 +77,6 @@ services:
         class: Doctrine\Common\Cache\RedisCache
         calls:
             - [setRedis, [@redis.service]]
+
+    emoji.converter:
+        class: Oh\EmojiBundle\Service\EmojiConverter

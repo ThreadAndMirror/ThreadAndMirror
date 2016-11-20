@@ -1,0 +1,14 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Add New Post{% endblock %}
+
+{% block content %}
+	<h1 class="pages">Add New Post</h1>
+	<form method="post">
+		<div class="admin-editor">
+            {{ form_widget(form) }}
+		    <br class="clear">
+			<input class="btn btn-success" type="submit" value="Add Post">
+		</div>
+	</form>
+{% endblock %}

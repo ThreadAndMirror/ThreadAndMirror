@@ -1,0 +1,20 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block content %}
+    <h1 class="pages">Edit Post <span>(Instagram ID: {{ post.pid }})</span></h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <a href="{{ path('thread_instainspo_admin_create') }}">
+                    <img src="{{ post.image }}" width="100%" />
+                </a>
+                <p>{{ post.caption|raw }}</p>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            products....
+        </div>
+    </div>
+{% endblock %}

@@ -3,9 +3,11 @@
 namespace ThreadAndMirror\InstaInspoBundle\Controller;
 
 use Stems\CoreBundle\Controller\BaseAdminController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
 use ThreadAndMirror\InstaInspoBundle\Entity\Post;
 use ThreadAndMirror\InstaInspoBundle\Form\CreatePostType;
 
@@ -19,6 +21,8 @@ class AdminController extends BaseAdminController
      *
      * @Route("/", name="thread_instainspo_admin_index")
      * @Template()
+     *
+     * @return array
      */
     public function indexAction()
     {
@@ -32,26 +36,47 @@ class AdminController extends BaseAdminController
     /**
      * @Route("/create", name="thread_instainspo_admin_create")
      * @Template()
+     *
+     * @param Request $request
+     *
+     * @return array|RedirectResponse
      */
     public function createAction(Request $request)
     {
         $post = new Post();
-        $form = new CreatePostType();
 
-        $post->setAuthor($this->getUser()->getId());
-        $category = $this->em->getRepository('ThreadAndMirrorBlogBundle:Category')->find(1);
-        $post->setCategory($category);
+        $form = $this->createForm(new CreatePostType(), $post);
 
-        $this->em->persist($post);
+        $form->handleRequest($request);
 
-        // If a title was posted then use it
-        $request->get('title') and $post->setTitle($request->get('title'));
-        $this->em->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        // Save all the things
-        $this->em->flush();
+            $url = $form->getData()->getUrl();
+            $post = $this->get('threadandmirror.insta_inspo.manager.post')->createPostFromUrl($url);
 
-        // Redirect to the edit page for the new post
-        return $this->redirect($this->generateUrl('thread_blog_admin_edit', array('id' => $post->getId())));
+            return $this->redirect($this->generateUrl('thread_instainspo_admin_edit', [
+                'id' => $post->getId()
+            ]));
+        }
+
+        return [
+            'form' => $form->createView()
+        ];
+    }
+
+    /**
+     * @Route("/edit/{id}", name="thread_instainspo_admin_edit")
+     * @Template()
+     *
+     * @param Request $request
+     * @param Post $post
+     *
+     * @return array
+     */
+    public function editAction(Request $request, Post $post)
+    {
+        return [
+            'post' => $post
+        ];
     }
 }

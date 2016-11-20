@@ -1,4 +1,15 @@
 services:
-#    thread_and_mirror_insta_inspo.example:
-#        class: ThreadAndMirror\InstaInspoBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+
+    threadandmirror.insta_inspo.manager.post:
+        class: ThreadAndMirror\InstaInspoBundle\Service\Manager\PostManager
+        arguments:
+            - '@threadandmirror.social.feeds'
+            - '@threadandmirror.insta_inspo.repository.post'
+            - '@emoji.converter'
+
+    threadandmirror.insta_inspo.repository.post:
+            class:           ThreadAndMirror\InstaInspoBundle\Repository\PostRepository
+            factory_service: doctrine.orm.entity_manager
+            factory_method:  getRepository
+            arguments:
+                - ThreadAndMirror\InstaInspoBundle\Entity\Post

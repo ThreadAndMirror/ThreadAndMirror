@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b5d2495318e2a78aaf571dad9bb844f4",
-    "content-hash": "27a9b9f0d2a66568e1fb0ee883af63e6",
+    "hash": "4b0490a3631f8bda4daaf78f8bcf1d90",
+    "content-hash": "752eb5f80975beb60ab6d6f1d793c64f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1466,6 +1466,52 @@
             "time": "2014-09-30 13:30:58"
         },
         {
+            "name": "oh/emoji-bundle",
+            "version": "dev-master",
+            "target-dir": "Oh/EmojiBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ollieLtd/OhEmojiBundle.git",
+                "reference": "534bbff587fa53173c36cdb20af6d1304536c92b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ollieLtd/OhEmojiBundle/zipball/534bbff587fa53173c36cdb20af6d1304536c92b",
+                "reference": "534bbff587fa53173c36cdb20af6d1304536c92b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Oh\\EmojiBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ollie Harridge",
+                    "email": "code@oll.ie"
+                },
+                {
+                    "name": "Cal Henderson",
+                    "email": "cal@iamcal.com"
+                }
+            ],
+            "description": "Translates emoji characters to HTML/CSS",
+            "homepage": "https://github.com/ollieLtd/OhEmojiBundle",
+            "keywords": [
+                "emoji"
+            ],
+            "time": "2016-06-17 15:26:15"
+        },
+        {
             "name": "oldsound/rabbitmq-bundle",
             "version": "v1.7.0",
             "source": {
@@ -2751,7 +2797,8 @@
         "gedmo/doctrine-extensions": 20,
         "liip/imagine-bundle": 20,
         "ekino/newrelic-bundle": 20,
-        "doctrine/doctrine-cache-bundle": 20
+        "doctrine/doctrine-cache-bundle": 20,
+        "oh/emoji-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

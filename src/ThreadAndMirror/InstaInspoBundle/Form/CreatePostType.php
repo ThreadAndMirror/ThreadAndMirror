@@ -5,8 +5,6 @@ namespace ThreadAndMirror\InstaInspoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Url;
 
 class CreatePostType extends AbstractType
 {
@@ -17,11 +15,7 @@ class CreatePostType extends AbstractType
     {
         $builder->add('url', null, [
             'label'       => 'Instagram Post Url',
-            'required'    => true,
-            'constraints' => [
-                new Url(),
-                new NotBlank()
-            ]
+            'required'    => true
         ]);
     }
 
@@ -31,7 +25,8 @@ class CreatePostType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'ThreadAndMirror\InstaInspoBundle\Entity\Post',
+            'data_class'        => 'ThreadAndMirror\InstaInspoBundle\Entity\Post',
+            'validation_groups' => ['create']
         ]);
     }
 

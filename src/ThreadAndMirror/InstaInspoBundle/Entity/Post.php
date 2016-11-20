@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="ThreadAndMirror\InstaInspoBundle\Repository\PostRepository")
  * @ORM\Table(name="tam_instainspo_post")
  */
 class Post
@@ -39,7 +39,7 @@ class Post
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      */
-    protected $created;
+    private $created;
 
     /**
      * Instagram post id
@@ -57,7 +57,8 @@ class Post
      * @var string
      *
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"create"})
+     * @Assert\Url(groups={"create"})
      */
     private $url;
 
@@ -65,7 +66,6 @@ class Post
      * @var string
      *
      * @ORM\Column(type="string", length=512)
-     * @Assert\NotBlank
      */
     private $caption;
 
@@ -73,9 +73,15 @@ class Post
      * @var string
      *
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
      */
     private $image;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\Column(type="array")
+     */
+    private $tags = [];
 
     /**
      * @var ArrayCollection|Post[]
@@ -87,6 +93,7 @@ class Post
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -191,5 +198,37 @@ class Post
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param ArrayCollection $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
     }
 }

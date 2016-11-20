@@ -31,7 +31,8 @@
         "doctrine/doctrine-cache-bundle": "dev-master",
         "oldsound/rabbitmq-bundle": "^1.7",
         "twbs/bootstrap": "^3.3",
-        "presta/sitemap-bundle": "^1.5"
+        "presta/sitemap-bundle": "^1.5",
+        "oh/emoji-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

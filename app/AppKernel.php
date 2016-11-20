@@ -22,7 +22,7 @@ class AppKernel extends Kernel
             new Stems\SocialBundle\StemsSocialBundle(),
             new Stems\MediaBundle\StemsMediaBundle(),
             new Stems\PollBundle\StemsPollBundle(),
-	        new ThreadAndMirror\CoreBundle\ThreadAndMirrorCoreBundle(),
+            new ThreadAndMirror\CoreBundle\ThreadAndMirrorCoreBundle(),
             new ThreadAndMirror\AlertBundle\ThreadAndMirrorAlertBundle(),
             new ThreadAndMirror\EditorsPicksBundle\ThreadAndMirrorEditorsPicksBundle(),
             new ThreadAndMirror\StreetChicBundle\ThreadAndMirrorStreetChicBundle(),
@@ -37,10 +37,11 @@ class AppKernel extends Kernel
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
-	        new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+            new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
             new ThreadAndMirror\BlogBundle\ThreadAndMirrorBlogBundle(),
-	        new Presta\SitemapBundle\PrestaSitemapBundle(),
+            new Presta\SitemapBundle\PrestaSitemapBundle(),
             new ThreadAndMirror\InstaInspoBundle\ThreadAndMirrorInstaInspoBundle(),
+            new Oh\EmojiBundle\OhEmojiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -54,6 +55,6 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
     }
 }
