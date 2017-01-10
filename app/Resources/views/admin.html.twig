@@ -6,7 +6,7 @@
         <script type="text/javascript" src="http://fast.fonts.net/jsapi/5d90cee9-3c49-45f3-ab44-db38581300cd.js"></script>
         {% stylesheets '@admin_css' filter="cssrewrite" filter='uglifycss' output='css/admin.css' %}<link rel="stylesheet" href="{{ asset_url }}" />{% endstylesheets %}
         <link rel="stylesheet" href="/css/font-awesome.min.css?nocache=250116">
-        <link rel="stylesheet" href="{{asset('bundles/ohemoji/css/emoji.css')}}">
+        <link rel="stylesheet" href="{{ asset('bundles/ohemoji/css/emoji.css') }}">
     </head>
     <body>
         <div id="header">
@@ -53,7 +53,7 @@
         </div>
         {% block javascripts %}
             
-            {% javascripts '@admin_js' filter='?uglifyjs2' output='js/admin.js' %}<script src="{{ asset_url }}"></script>{% endjavascripts %}
+            {% javascripts '@admin_js' filter='?uglifyjs2' output='js/admin.js' %}<script src="{{ asset_url }}?nocache=230116"></script>{% endjavascripts %}
             <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
             <script src="/js/plugins/packery/packery.pkgd.min.js"></script>
             <script type="text/javascript">

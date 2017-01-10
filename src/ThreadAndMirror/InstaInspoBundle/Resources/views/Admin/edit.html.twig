@@ -1,4 +1,6 @@
-{% extends 'admin.html.twig' %}
+{% extends '::admin.html.twig' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block title %}Edit Post{% endblock %}
 
@@ -13,8 +15,9 @@
                 <p>{{ post.caption|raw }}</p>
             </div>
         </div>
+        <h3>Products</h3>
         <div class="col-sm-12">
-            products....
+            {{ form(form) }}
         </div>
     </div>
 {% endblock %}

@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use ThreadAndMirror\InstaInspoBundle\Entity\Post;
 use ThreadAndMirror\InstaInspoBundle\Form\CreatePostType;
+use ThreadAndMirror\InstaInspoBundle\Form\EditPostType;
 
 /**
  * @Route("/admin/insta-inspo", name="thread_instainspo_admin")
@@ -75,8 +76,11 @@ class AdminController extends BaseAdminController
      */
     public function editAction(Request $request, Post $post)
     {
+        $form = $this->createForm(new EditPostType(), $post);
+
         return [
-            'post' => $post
+            'post' => $post,
+            'form' => $form->createView()
         ];
     }
 }
