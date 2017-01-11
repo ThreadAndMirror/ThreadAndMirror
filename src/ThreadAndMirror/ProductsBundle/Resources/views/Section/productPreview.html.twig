@@ -16,7 +16,7 @@
         <div class="button-holder">
             <div>
                 <div class="add-product">
-                    <a class="btn btn-small btn-primary from-link"><i class="fa fa-plus"></i> Add Product From Link</a>
+                    <a href="{{ path('thread_products_rest_add_product_to_section', { id : section.id }) }}" class="btn btn-small btn-primary from-link"><i class="fa fa-plus"></i> Add Product From Link</a>
                     <input type="text" placeholder="Product Link">
                     {#<label>or</label>#}
                     {#<a href="/admin/products/popup/add-product-gallery-product/{{ form.vars.value.id }}" class="btn btn-small btn-primary rest-get-popup"><i class="fa fa-plus"></i> Add Product Manually</a>#}

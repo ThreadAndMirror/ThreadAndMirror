@@ -5,58 +5,91 @@ namespace ThreadAndMirror\ProductsBundle\Service\Crawler;
 class TopshopCrawler extends AbstractCrawler
 {
 
-	protected function getName(DomCrawler $crawler) 
-	{
-		return $this->getTextFromElement($crawler, 'h1');
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getName(DomCrawler $crawler)
+    {
+        return $this->getTextFromElement($crawler, 'h1');
+    }
 
-	protected function getBrandName(DomCrawler $crawler) 
-	{
-		return 'Topshop';
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getBrandName(DomCrawler $crawler)
+    {
+        return 'Topshop';
+    }
 
-	protected function getCategoryName(DomCrawler $crawler)
-	{
-		return null;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getCategoryName(DomCrawler $crawler)
+    {
+        return null;
+    }
 
-	protected function getPid(DomCrawler $crawler) 
-	{
-		return $this->getTextFromElement($crawler, '#product_tab_1 .product_code span');
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getPid(DomCrawler $crawler)
+    {
+        return $this->getTextFromElement($crawler, '#productInfo li.product_code span');
+    }
 
-	protected function getDescription(DomCrawler $crawler) 
-	{
-		return $this->getTextFromElement($crawler, '#product_tab_1 .product_description');
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDescription(DomCrawler $crawler)
+    {
+        return $this->getTextFromElement($crawler, '#productInfo p');
+    }
 
-	protected function getNow(DomCrawler $crawler) 
-	{
-		return $this->getTextFromAlternatingElements($crawler, 'li.now_price > span', 'li.product_price');
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getNow(DomCrawler $crawler)
+    {
+        return $this->getTextFromAlternatingElements($crawler, '#product-detail .now_price', '#product-detail .product_price');
+    }
 
-	protected function getWas(DomCrawler $crawler) 
-	{
-		return $this->getTextFromAlternatingElements($crawler, 'li.was_price > span', null);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getWas(DomCrawler $crawler)
+    {
+        return $this->getTextFromAlternatingElements($crawler, '#product-detail .was_price', null);
+    }
 
-	protected function getImages(DomCrawler $crawler) 
-	{
-		return $this->getSrcFromList($crawler, '#product_view_full > img');
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getImages(DomCrawler $crawler)
+    {
+        return $this->getSrcFromList($crawler, '#product-detail .hero_image_link img');
+    }
 
-	protected function getAvailableSizes(DomCrawler $crawler) 
-	{
-		return $this->getTextFromList($crawler, '.wrapper_product_size #product_size_full option');
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getAvailableSizes(DomCrawler $crawler)
+    {
+        return $this->getTextFromList($crawler, '.wrapper_product_size_grid .product_size_buttons label.btn');
+    }
 
-	protected function getStockedSizes(DomCrawler $crawler)
-	{
-		return $this->getTextFromList($crawler, '.wrapper_product_size #product_size_full option:not(.stock_zero)');
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getStockedSizes(DomCrawler $crawler)
+    {
+        return $this->getTextFromList($crawler, '.wrapper_product_size_grid .product_size_buttons label.btn:not(.disabled)');
+    }
 
-	protected function getStyleWith(DomCrawler $crawler) 
-	{
-		return null;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getStyleWith(DomCrawler $crawler)
+    {
+        return null;
+    }
 }

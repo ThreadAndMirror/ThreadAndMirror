@@ -38,6 +38,32 @@ services:
         tags:
            - { name: monolog.logger, channel: product_feeds }
 
+    # Repositories
+
+    threadandmirror.products.repository.product:
+        class: ThreadAndMirror\ProductsBundle\Repository\ProductRepository
+        factory: ['@doctrine', getRepository]
+        arguments:
+            -  ThreadAndMirror\ProductsBundle\Entity\Product
+
+    threadandmirror.products.repository.brand:
+        class: ThreadAndMirror\ProductsBundle\Repository\BrandRepository
+        factory: ['@doctrine', getRepository]
+        arguments:
+            - ThreadAndMirror\ProductsBundle\Entity\Brand
+
+    threadandmirror.products.repository.category:
+        class: ThreadAndMirror\ProductsBundle\Repository\CategoryRepository
+        factory: ['@doctrine', getRepository]
+        arguments:
+            -  ThreadAndMirror\ProductsBundle\Entity\Category
+
+    threadandmirror.products.repository.shop:
+        class: ThreadAndMirror\ProductsBundle\Repository\ShopRepository
+        factory: ['@doctrine', getRepository]
+        arguments:
+            -  ThreadAndMirror\ProductsBundle\Entity\Shop
+
     # Manager Services
 
     threadandmirror.products.service.product:
@@ -108,36 +134,6 @@ services:
             - @threadandmirror.products.service.brand
         tags:
             - { name: kernel.event_subscriber }
-
-    # Repositories
-
-    threadandmirror.products.repository.product:
-        class:           ThreadAndMirror\ProductsBundle\Repository\ProductRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method:  getRepository
-        arguments:
-            - ThreadAndMirror\ProductsBundle\Entity\Product
-
-    threadandmirror.products.repository.brand:
-        class:           ThreadAndMirror\ProductsBundle\Repository\BrandRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method:  getRepository
-        arguments:
-            - ThreadAndMirrorProductsBundle:Brand
-
-    threadandmirror.products.repository.category:
-        class:           ThreadAndMirror\ProductsBundle\Repository\CategoryRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method:  getRepository
-        arguments:
-            - ThreadAndMirrorProductsBundle:Category
-
-    threadandmirror.products.repository.shop:
-        class:           ThreadAndMirror\ProductsBundle\Repository\ShopRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method:  getRepository
-        arguments:
-            - ThreadAndMirrorProductsBundle:Shop
 
     # Consumers
 

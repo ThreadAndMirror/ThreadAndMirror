@@ -6,10 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use ThreadAndMirror\ProductsBundle\Util\Slugifier;
 use ThreadAndMirror\ProductsBundle\Util\StringSanitizer;
 
-/** 
+/**
  * @ORM\Table(name="tam_brand", indexes={
  *    @ORM\Index(name="name_index", columns={"name"}),
  *    @ORM\Index(name="slug_index", columns={"slug"}),
@@ -19,67 +18,67 @@ use ThreadAndMirror\ProductsBundle\Util\StringSanitizer;
  */
 class Brand
 {
-    /** 
+    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
-    /** 
+    /**
      * @ORM\Column(type="string", length=63)
      */
     protected $name;
 
-	/**
-	 * @ORM\Column(type="string", length=511, nullable=true)
-	 */
-	protected $description;
+    /**
+     * @ORM\Column(type="string", length=511, nullable=true)
+     */
+    protected $description;
 
-    /** 
+    /**
      * @Gedmo\Slug(fields={"name"}, updatable=true, separator="-")
      * @ORM\Column(type="string")
      */
     protected $slug;
 
-    /** 
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $affiliateWindowId = null; 
+    protected $affiliateWindowId = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Product", mappedBy="brand")
      */
-    protected $products; 
+    protected $products;
 
-    /** 
+    /**
      * @ORM\Column(type="boolean")
      */
     protected $hasFashion = false;
 
-    /** 
+    /**
      * @ORM\Column(type="boolean")
      */
     protected $hasBeauty = false;
 
-	/**
-	 * @ORM\Column(type="array")
-	 */
-	protected $aliases = [];
+    /**
+     * @ORM\Column(type="array")
+     */
+    protected $aliases = [];
 
     public function __construct($name = null)
     {
-        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->products = new ArrayCollection();
 
-	    if ($name !== null) {
-		    $this->name = $name;
-	    }
+        if ($name !== null) {
+            $this->name = $name;
+        }
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -102,7 +101,7 @@ class Brand
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -125,22 +124,22 @@ class Brand
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
         return $this->slug;
     }
 
-	/**
-	 * What the brands slug is expected to be like, based on it's name
-	 *
-	 * @return string
-	 */
-	public function guessSlug()
-	{
-		return StringSanitizer::slugify($this->getName());
-	}
+    /**
+     * What the brands slug is expected to be like, based on it's name
+     *
+     * @return string
+     */
+    public function guessSlug()
+    {
+        return StringSanitizer::slugify($this->getName());
+    }
 
     /**
      * Set hasBeauty
@@ -151,14 +150,14 @@ class Brand
     public function setHasBeauty($hasBeauty)
     {
         $this->hasBeauty = $hasBeauty;
-    
+
         return $this;
     }
 
     /**
      * Get hasBeauty
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHasBeauty()
     {
@@ -174,14 +173,14 @@ class Brand
     public function setHasFashion($hasFashion)
     {
         $this->hasFashion = $hasFashion;
-    
+
         return $this;
     }
 
     /**
      * Get hasFashion
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHasFashion()
     {
@@ -204,7 +203,7 @@ class Brand
     /**
      * Get affiliateWindowId
      *
-     * @return integer 
+     * @return integer
      */
     public function getAffiliateWindowId()
     {
@@ -214,10 +213,10 @@ class Brand
     /**
      * Add products
      *
-     * @param \ThreadAndMirror\ProductsBundle\Entity\Product $products
+     * @param Product $products
      * @return Brand
      */
-    public function addProduct(\ThreadAndMirror\ProductsBundle\Entity\Product $products)
+    public function addProduct(Product $products)
     {
         $this->products[] = $products;
 
@@ -227,9 +226,9 @@ class Brand
     /**
      * Remove products
      *
-     * @param \ThreadAndMirror\ProductsBundle\Entity\Product $products
+     * @param Product $products
      */
-    public function removeProduct(\ThreadAndMirror\ProductsBundle\Entity\Product $products)
+    public function removeProduct(Product $products)
     {
         $this->products->removeElement($products);
     }
@@ -237,38 +236,38 @@ class Brand
     /**
      * Get products
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return ArrayCollection
      */
     public function getProducts()
     {
         return $this->products;
     }
 
-	/**
-	 * Get aliases
-	 *
-	 * @return array
-	 */
-	public function getAliases()
-	{
-		return $this->aliases;
-	}
+    /**
+     * Get aliases
+     *
+     * @return array
+     */
+    public function getAliases()
+    {
+        return $this->aliases;
+    }
 
-	/**
-	 * Get the brand data in json format
-	 *
-	 * @return string|array
-	 */
-	public function getJson($encoded = false)
-	{
-		$json = [
-			'id'          => $this->id,
-			'name'        => $this->name,
-			'description' => $this->description,
-			'hasFashion'  => $this->hasFashion,
-			'hasBeauty'   => $this->hasBeauty
-		];
+    /**
+     * Get the brand data in json format
+     *
+     * @return string|array
+     */
+    public function getJson($encoded = false)
+    {
+        $json = [
+            'id'          => $this->id,
+            'name'        => $this->name,
+            'description' => $this->description,
+            'hasFashion'  => $this->hasFashion,
+            'hasBeauty'   => $this->hasBeauty
+        ];
 
-		return $encoded ? json_encode($json) : $json;
-	}
+        return $encoded ? json_encode($json) : $json;
+    }
 }
